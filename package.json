@@ -1,0 +1,38 @@
+{
+  "name": "react-matterkit",
+  "version": "0.0.0",
+  "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
+  "main": "./lib/index.js",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^2.4.0",
+    "gulp": "^3.8.11",
+    "browserify": "^9.0.3",
+    "reactify": "^1.1.0",
+    "browser-sync": "^2.2.4",
+    "babelify": "^5.0.4",
+    "urify": "^1.0.6",
+    "gulp-util": "^3.0.4"
+  },
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/azazdeaz/react-matterkit.git"
+  },
+  "keywords": [
+    "react",
+    "matterkit",
+    "gui",
+    "ui",
+    "input"
+  ],
+  "author": "Polgár András",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azazdeaz/react-matterkit/issues"
+  },
+  "homepage": "https://github.com/azazdeaz/react-matterkit"
+}
