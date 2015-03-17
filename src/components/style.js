@@ -1,7 +1,7 @@
 var _ = require('lodash');
-var datauri = require('datauri');
-var uriBorder = datauri(__dirname+'/assets/border.png');
-var uriCheck = datauri(__dirname+'/assets/check.png');
+// var datauri = require('datauri');
+var uriBorder = '';//datauri(__dirname+'/assets/border.png');
+var uriCheck = '';//datauri(__dirname+'/assets/check.png');
 
 var style = {
     lineHeight: 34,

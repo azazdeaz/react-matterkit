@@ -2,10 +2,10 @@ var React = require('react');
 var _ = require('lodash');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('../style');
-var Icon = require('../Icon.jsx');
-var Label = require('../Label.jsx');
-var Toolbar = require('../Toolbar.jsx');
-var ToolbarGroup = require('../ToolbarGroup.jsx');
+var Icon = require('../Icon');
+var Label = require('../Label');
+var Toolbar = require('../Toolbar');
+var ToolbarGroup = require('../ToolbarGroup');
 
 var AccordionTab = React.createClass({
 

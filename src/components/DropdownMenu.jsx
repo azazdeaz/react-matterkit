@@ -1,7 +1,7 @@
 var style = require('./style');
 var assign = require('lodash');
 var React = require('react');
-var List = require('./List.jsx');
+var List = require('./List');
 var _ = require('lodash');
 
 

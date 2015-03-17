@@ -1,5 +1,4 @@
 var style = require('./style');
-var assign = require('lodash');
 var React = require('react');
 var _ = require('lodash');
 

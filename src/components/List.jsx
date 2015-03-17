@@ -1,5 +1,5 @@
 var React = require('react');
-var ListItem = require('./ListItem.jsx');
+var ListItem = require('./ListItem');
 var style = require('./style');
 
 var List = React.createClass({

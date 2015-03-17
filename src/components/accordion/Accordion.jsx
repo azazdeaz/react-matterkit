@@ -1,7 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
 var style = require('../style');
-var AccordionTab = require('./AccordionTab.jsx');
+var AccordionTab = require('./AccordionTab');
 
 var Accordion = React.createClass({
   selecteds: [],

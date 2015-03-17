@@ -2,8 +2,8 @@ var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var _ = require('lodash');
 var style = require('./style');
-var Icon = require('./Icon.jsx');
-var Base = require('./Base.jsx');
+var Icon = require('./Icon');
+var Base = require('./Base');
 
 var Button = React.createClass({
 

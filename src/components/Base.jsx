@@ -1,6 +1,6 @@
 var React = require('react');
-var Tooltip = require('./Tooltip.jsx');
-var DropdownMenu = require('./DropdownMenu.jsx');
+var Tooltip = require('./Tooltip');
+var DropdownMenu = require('./DropdownMenu');
 var _ = require('lodash');
 
 var Base = React.createClass({

@@ -1,7 +1,7 @@
 var React = require('react');
-var Input = require('./Input.jsx');
-var Icon = require('./Icon.jsx');
-var ListItem = require('./ListItem.jsx');
+var Input = require('./Input');
+var Icon = require('./Icon');
+var ListItem = require('./ListItem');
 var style = require('./style');
 var _ = require('lodash');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');

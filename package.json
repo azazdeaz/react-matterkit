@@ -4,19 +4,25 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
+    "lodash": "^3.5.0",
+    "radium": "^0.10.0"
+  },
+  "peerDependencies": {
+    "react": ">=0.12.2 <0.14.0"
   },
   "devDependencies": {
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^2.4.0",
-    "gulp": "^3.8.11",
+    "babel": "^4.7.13",
     "browserify": "^9.0.3",
-    "reactify": "^1.1.0",
-    "browser-sync": "^2.2.4",
-    "babelify": "^5.0.4",
-    "urify": "^1.0.6",
-    "gulp-util": "^3.0.4"
+    "exorcist": "^0.1.6",
+    "babelify": "^5.0.4"
   },
   "scripts": {
+    "dev": "node_modules/.bin/babel src --out-dir lib --watch",
+    "prebuild": "rm -rf lib && rm -rf browser && mkdir browser",
+    "build:lib": "node_modules/.bin/babel src --out-dir lib",
+    "build:browser": "node_modules/.bin/browserify lib/index.js --standalone matterkit --debug | exorcist browser/matterkit.js.map > browser/matterkit.js",
+    "build": "npm run build:lib && npm run build:browser",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,5 @@
 var React = require('react');
-var Input = require('./Input.jsx');
+var Input = require('./Input');
 var CustomDrag = require('./CustomDrag');
 var _ = require('lodash');
 

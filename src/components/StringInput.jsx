@@ -1,5 +1,5 @@
 var React = require('react');
-var Input = require('./Input.jsx');
+var Input = require('./Input');
 
 var StringInput = React.createClass({
   render() {
