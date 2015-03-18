@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "prebuild": "rm -rf build && mkdir build",
-    "build": "node_modules/.bin/browserify src/index.js --debug | exorcist build/index.js.map > build/index.js"
+    "prebuild": "rm -rf build && node_modules/.bin/copyfiles index.html build",
+    "build": "node_modules/.bin/browserify src/index.js --debug | exorcist build/index.js.map > build/index.js",
+    "serve": "node_modules/.bin/browser-sync start --server build --files 'build/index.js'",
+    "postbuild": "npm run serve"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^9.0.3"
+    "browserify": "^9.0.3",
+    "copyfiles": "^0.1.0",
+    "watchify": "^2.4.0"
   },
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^0.12.2",
+    "babelify": "^5.0.4"
   }
 }
