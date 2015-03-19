@@ -17,10 +17,10 @@
     "babelify": "^5.0.4"
   },
   "scripts": {
-    "dev": "node_modules/.bin/babel src --out-dir lib --watch",
+    "dev": "babel src --out-dir lib --watch",
     "prebuild": "rm -rf lib && rm -rf browser && mkdir browser",
-    "build:lib": "node_modules/.bin/babel src --out-dir lib",
-    "build:browser": "node_modules/.bin/browserify lib/index.js --standalone matterkit --debug | exorcist browser/matterkit.js.map > browser/matterkit.js",
+    "build:lib": "babel src --out-dir lib",
+    "build:browser": "browserify lib/index.js --standalone matterkit --debug | exorcist browser/matterkit.js.map > browser/matterkit.js",
     "build": "npm run build:lib && npm run build:browser",
     "prepublish": "npm run build"
   },
