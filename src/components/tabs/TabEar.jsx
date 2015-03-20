@@ -35,6 +35,7 @@ var Button = React.createClass({
       style={this.buildStyles(style.button, {
         disabled: this.props.disabled,
         kind: this.props.kind,
+        active: this.props.kind,
       })}
 
       tooltip={this.props.tooltip}

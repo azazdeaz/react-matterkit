@@ -340,24 +340,34 @@ style.panel = {
 };
 
 //Tab
-style.tab = {
-  normal: {
-    color: style.fontColor.normal,
-    backgroundColor: style.grey.normal,
-    border: 'solid 1px ' + style.palette.grey4,
-  },
+style.tabEar = {
+  color: style.fontColor.normal,
+  backgroundColor: style.grey.normal,
+  backgroundImage: 'none',
+  border: 'solid 1px ' + style.palette.grey4,
+  borderBottomRightRadius: 0,
+  borderBottomLeftRadius: 0,
+  margin: 0,
+
+  states: [
+    {hover: {
+      color: style.fontColor.hover,
+      backgroundColor: style.grey.hover,
+    }},
+    {active: {
+      color: style.fontColor.active,
+      backgroundColor: style.grey.active,
+      borderBottom: 'none',
+    }}
+  ]
 };
 
-style.tab.hover = _.assign({}, style.tab.normal, {
-  color: style.fontColor.hover,
-  backgroundColor: style.grey.hover,
-});
+style.tabHeader = {
+  width: '100%',
+  height: style.lineHeight,
+  display: 'flex',
+};
 
-style.tab.active = _.assign({}, style.tab.normal, {
-  color: style.fontColor.active,
-  backgroundColor: style.grey.active,
-  borderBottom: 'none',
-});
 
 //Accordion
 style.accordion = _.assign({}, style.font, {

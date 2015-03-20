@@ -18,28 +18,43 @@ var Tabs = React.createClass({
 
     var currTab;
 
-    var head = <div style={{width: '100%', height: style.lineHeight}}>
-      {Ract.Children.map(props.children, child, idx => {
-        return <Button
+    var head = <div style={style.tabHeader}>
+      {React.Children.map(this.props.children, (child, idx) => {
+        return <TabEar
+          selected={this.state.currTabIdx === idx}
           label={child.props.label}
           onClick={() => this.setState({currTabIdx: idx})}/>;
       })}
     </div>;
 
-    React.children.forEach(this.props.children, child, idx => {
-      if(idx === this.props.currTabIdx) currTab = child;
+    React.Children.forEach(this.props.children, (child, idx) => {
+
+      if(this.state.currTabIdx === idx) {
+
+        currTab = child;
+      }
     });
 
-    var icon;
-    if (this.props.icon) {
-      icon = <Icon icon={this.props.icon}
-        style={{marginRight:this.props.text ? 4 : 0}}/>;
-    }
-
-    return <div>
+    return <div style={style.panel}>
       {head}
       {currTab}
     </div>;
+  }
+});
+
+var TabEar = React.createClass({
+  getDefaultProps() {
+    return {
+      selected: false,
+    };
+  },
+
+  willReciveProps(nextProps) {
+
+  },
+
+  render() {
+    return <Button {...this.props} style={style.tabEar}/>;
   }
 });
 
