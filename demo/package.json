@@ -4,20 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "rm -rf build && node_modules/.bin/copyfiles index.html build",
-    "build": "node_modules/.bin/browserify src/index.js --debug | exorcist build/index.js.map > build/index.js",
-    "serve": "node_modules/.bin/browser-sync start --server build --files 'build/index.js'",
+    "dev": "npm run prebuild && watchify src/index.jsx -t babelify --debug -o build/index.js",
+    "prebuild": "rm -rf build && copyfiles -f ./src/index.html ./src/react-live-edit/static/** build",
+    "build": "browserify src/index.js -t babelify --debug | exorcist build/index.js.map > build/index.js",
+    "serve": "browser-sync start --server build --files 'build/index.js'",
     "postbuild": "npm run serve"
   },
   "author": "",
   "license": "ISC",
-  "devDependencies": {
+  "dependencies": {
+    "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "copyfiles": "^0.1.0",
-    "watchify": "^2.4.0"
-  },
-  "dependencies": {
-    "react": "^0.12.2",
-    "babelify": "^5.0.4"
+    "watchify": "^2.4.0",
+    "react-live-edit": "git://github.com/joelburget/react-live-editor"
   }
 }

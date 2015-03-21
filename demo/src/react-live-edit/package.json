@@ -1,0 +1,38 @@
+{
+  "name": "react-live-edit",
+  "version": "0.1.0",
+  "description": "Live editor for React components",
+  "main": "edit.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joelburget/react-live-editor"
+  },
+  "keywords": [
+    "react-component",
+    "react",
+    "editor",
+    "component"
+  ],
+  "author": {
+    "name": "Joel Burget"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "react": "^0.12.2",
+    "browserify": "^5.12.0",
+    "reactify": "0.17.1"
+  },
+  "readme": "# live coding react components\n\nThis repo provides one webpage and three components.\n\n## jsx-compiler.html\n\nA simple example of `<LiveEditor>` in use.\n\n## code-mirror-editor.jsx\n\nA code mirror react component (called `<CodeMirrorEditor>` since code mirror took the name `CodeMirror`).\n\n## live-compile.jsx\n\nDynamic compilation of react components.\n\n## live-editor.jsx\n\nCombination of `<CodeMirrorEditor>` and `<ComponentPreview>` which live-compiles what you type!\n\n# Running the demo\n\n* run `make`\n* run `python -m SimpleHTTPServer`\n* visit `http://localhost:8000/jsx-compiler.html`\n\nYou should see something like this:\n\n![](live-editor.gif)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/joelburget/react-live-editor/issues"
+  },
+  "homepage": "https://github.com/joelburget/react-live-editor",
+  "_id": "react-live-edit@0.1.0",
+  "_shasum": "822934e27820c2a1da0cd96d2de6a25a08f2a758",
+  "_resolved": "git://github.com/joelburget/react-live-editor#f28534309e9d12a3e8f0d7fc619808adf3e2ba71",
+  "_from": "react-live-edit@git://github.com/joelburget/react-live-editor"
+}
