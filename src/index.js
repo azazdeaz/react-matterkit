@@ -4,6 +4,7 @@ module.exports = global.Matter = {
 
   Base: require('./components/Base'),
   Button: require('./components/Button'),
+  ButtonGroup: require('./components/ButtonGroup'),
   Checkbox: require('./components/Checkbox'),
   Dropdown: require('./components/Dropdown'),
   DropdownMenu: require('./components/DropdownMenu'),

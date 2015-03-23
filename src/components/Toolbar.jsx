@@ -1,5 +1,4 @@
 var React = require('react');
-var Input = require('./Input');
 var style = require('./style');
 
 var Toolbar = React.createClass({

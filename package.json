@@ -5,7 +5,9 @@
   "main": "./lib/index.js",
   "dependencies": {
     "lodash": "^3.5.0",
-    "radium": "^0.10.0"
+    "radium": "^0.10.0",
+    "lodash.merge": "^3.0.3",
+    "lodash.has": "^3.0.0"
   },
   "peerDependencies": {
     "react": ">=0.12.2 <0.14.0"

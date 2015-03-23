@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "watchify src/index.jsx -t babelify --debug -o build/index.js",
-    "prebuild": "rm -rf build && copyfiles -f ./src/index.html ./src/routes/react-live-edit/static/** build",
+    "dev": "npm run prebuild && watchify src/index.jsx -t babelify --debug -o build/index.js",
+    "prebuild": "rm -rf build && copyfiles -f ./src/index.html ./src/routes/react-live-edit/static/**.* build",
     "build": "browserify src/index.js -t babelify --debug | exorcist build/index.js.map > build/index.js",
     "serve": "browser-sync start --server build --files 'build/**'",
     "postbuild": "npm run serve"
