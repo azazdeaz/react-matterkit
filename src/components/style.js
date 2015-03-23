@@ -337,6 +337,8 @@ style.panel = {
   backgroundColor: style.grey.active,
   border: 'solid 1px ' + style.palette.grey4,
   borderRadius: 2,
+  width: '100%',
+  height: '100%',
 };
 
 //Tab
@@ -362,10 +364,26 @@ style.tabEar = {
   ]
 };
 
+style.tabBase = _.merge({}, style.panel, {
+  display: 'flex',
+  flexDirection: 'column',
+});
+
 style.tabHeader = {
   width: '100%',
-  height: style.lineHeight,
+  height: style.itemHeight,
   display: 'flex',
+};
+
+style.tabCont = {
+  flex: '1',
+  position: 'relative',
+};
+
+style.tabContNest = {
+  width: '100%',
+  height: '100%',
+  position: 'absolute',
 };
 
 

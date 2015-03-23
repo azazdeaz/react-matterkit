@@ -35,12 +35,18 @@ var Tabs = React.createClass({
       }
     });
 
-    return <div style={style.panel}>
+    return <div style={style.tabBase}>
       {head}
-      {currTab}
+      <div style={style.tabCont}>
+        <div style={style.tabContNest}>
+          {currTab}
+        </div>
+      </div>
     </div>;
   }
 });
+
+
 
 var TabEar = React.createClass({
   getDefaultProps() {
