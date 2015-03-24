@@ -16,7 +16,7 @@ module.exports = global.Matter = {
   NumberInput: require('./components/NumberInput'),
   Slider: require('./components/Slider'),
   StringInput: require('./components/StringInput'),
-  Tabs: require('./components/Tabs'),
+  Tabs: require('./components/tabs/Tabs'),
   Toolbar: require('./components/Toolbar'),
   ToolbarGroup: require('./components/ToolbarGroup'),
   Tooltip: require('./components/Tooltip'),

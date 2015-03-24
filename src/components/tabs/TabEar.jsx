@@ -1,9 +1,7 @@
 var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
-var Icon = require('./Icon');
-var Base = require('./Base');
+var style = require('../style');
+var Icon = require('../Icon');
 
 var Button = React.createClass({
 
@@ -11,14 +9,7 @@ var Button = React.createClass({
 
   getDefaultProps() {
     return {
-      label: '',
-    };
-  },
-
-  getInitialState() {
-    return {
-      toggled: false,
-      disabled: false,
+      selected: false,
     };
   },
 
@@ -32,14 +23,9 @@ var Button = React.createClass({
 
     return <div
       {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.button, {
-        disabled: this.props.disabled,
-        kind: this.props.kind,
-        active: this.props.kind,
+      style={this.buildStyles(style.tabEar, {
+        selected: this.props.selected,
       })}
-
-      tooltip={this.props.tooltip}
-      dropdownMenu={this.props.dropdownMenu}
       onClick={this.props.onClick}>
       {icon}
       {this.props.label}

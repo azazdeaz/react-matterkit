@@ -1,8 +1,7 @@
 var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
-var Button = require('./Button');
+var style = require('../style');
+var TabEar = require('./TabEar');
 
 var Tabs = React.createClass({
 
@@ -20,6 +19,7 @@ var Tabs = React.createClass({
 
     var head = <div style={style.tabHeader}>
       {React.Children.map(this.props.children, (child, idx) => {
+
         return <TabEar
           selected={this.state.currTabIdx === idx}
           label={child.props.label}
@@ -43,24 +43,6 @@ var Tabs = React.createClass({
         </div>
       </div>
     </div>;
-  }
-});
-
-
-
-var TabEar = React.createClass({
-  getDefaultProps() {
-    return {
-      selected: false,
-    };
-  },
-
-  willReciveProps(nextProps) {
-
-  },
-
-  render() {
-    return <Button {...this.props} style={style.tabEar}/>;
   }
 });
 

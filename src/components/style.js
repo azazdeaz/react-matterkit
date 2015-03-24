@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var merge = require('lodash.merge');
 // var datauri = require('datauri');
 var uriBorder = '';//datauri(__dirname+'/assets/border.png');
 var uriCheck = '';//datauri(__dirname+'/assets/check.png');
@@ -47,6 +48,7 @@ style.fontColor = {
 style.font = {
   fontFamily: style.fontFamily,
   fontWeight: style.fontWeight,
+  fontSize: '12.9px',
   color: style.fontColor.normal,
 };
 
@@ -75,7 +77,7 @@ style.lineGroup = _.defaults({
 
 //Button
 
-style.button = _.assign({}, style.font, {
+style.button = merge({}, style.font, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
@@ -86,8 +88,6 @@ style.button = _.assign({}, style.font, {
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   border: 'solid 1px rgba(26,29,33,.75)',
   boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
-  fontFamily: 'Open Sans',
-  fontSize: '13px',
   margin: '1px 3px',
   padding: '0 8px',
   userSelect: 'none',
@@ -342,13 +342,16 @@ style.panel = {
 };
 
 //Tab
-style.tabEar = {
+style.tabEar = merge({}, style.font, {
+  height: style.itemHeight,
+  lineHeight: style.itemHeightPX,
   color: style.fontColor.normal,
   backgroundColor: style.grey.normal,
   backgroundImage: 'none',
   border: 'solid 1px ' + style.palette.grey4,
   borderBottomRightRadius: 0,
   borderBottomLeftRadius: 0,
+  padding: '0 8px',
   margin: 0,
 
   states: [
@@ -359,10 +362,17 @@ style.tabEar = {
     {active: {
       color: style.fontColor.active,
       backgroundColor: style.grey.active,
+    }}
+  ],
+
+  modifiers: [
+    {selected: {
+      color: style.fontColor.active,
+      backgroundColor: style.grey.active,
       borderBottom: 'none',
     }}
-  ]
-};
+  ],
+});
 
 style.tabBase = _.merge({}, style.panel, {
   display: 'flex',
