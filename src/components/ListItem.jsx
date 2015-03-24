@@ -1,27 +1,25 @@
 var React = require('react');
+var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('./style');
+var has = require('lodash.has');
 
 var ListItem = React.createClass({
 
-  getInitialState() {
-    return { hover: false };
-  },
+  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
-  onMouseEnter() { this.setState({hover: true}); },
-  onMouseLeave() { this.setState({hover: false}); },
+  getDefaultProps() {
+    return {selected: false};
+  },
   render() {
 
-    var s;
-    if (this.state.hover) s = style.listItemHover;
-    else s = style.listItem;
+    var label = has(this.props, 'label') ? this.props.label:this.props.children;
 
     return <div
-      style = {s}
-      onMouseEnter = {this.onMouseEnter}
-      onMouseLeave = {this.onMouseLeave}
-      onClick={this.props.onClick}
-    >
-      {this.props.value}
+      {...this.getBrowserStateEvents()}
+      style={this.buildStyles(style.listItem, {selected: this.props.selected})}
+      onClick={this.props.onClick}>
+
+      {label}
     </div>;
   }
 });

@@ -146,7 +146,14 @@ style.button = merge({}, style.font, {
 });
 
 
-
+//Panel
+style.panel = {
+  backgroundColor: style.grey.active,
+  border: 'solid 1px ' + style.palette.grey4,
+  borderRadius: 2,
+  width: '100%',
+  height: '100%',
+};
 
 //Input
 style.input = {
@@ -262,19 +269,28 @@ style.dropdown = {
 
 
 //List
-style.list = _.defaults({
-    baorderColor: '#1a1d21',
-}, style.dropdownOpen);
+style.list = merge({} , style.panel, {
+    borderColor: '#1a1d21',
+});
 
 //ListItem
-style.listItem = {
+style.listItem = merge({}, style.font, {
     height: style.itemHeight,
+    lineHeight: style.itemHeightPX,
     padding: '0 8px',
-};
 
-style.listItemHover = _.defaults({
-    backgroundColor: 'rgba(226,231,235,.05)',
-}, style.listItem);
+    states: [
+      {hover: {
+        backgroundColor: 'rgba(226,231,235,.05)',
+      }}
+    ],
+
+    modifiers: [
+      {selected: {
+        color: style.fontColor.active,
+      }}
+    ],
+});
 
 
 
@@ -330,16 +346,6 @@ style.sliderBarProgress = {
 	backgroundColor: '#6bb6c4',
 };
 
-
-
-//Panel
-style.panel = {
-  backgroundColor: style.grey.active,
-  border: 'solid 1px ' + style.palette.grey4,
-  borderRadius: 2,
-  width: '100%',
-  height: '100%',
-};
 
 //Tab
 style.tabEar = merge({}, style.font, {
