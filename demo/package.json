@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm run prebuild && watchify src/index.jsx -t babelify --debug -o build/index.js",
-    "prebuild": "rm -rf build && copyfiles -f ./src/index.html ./src/routes/react-live-edit/static/**.* build",
+    "prebuild": "rm -rf build && copyfiles -f ./src/index.html ./src/componentPages/react-live-edit/static/**.* build",
     "build": "browserify src/index.js -t babelify --debug | exorcist build/index.js.map > build/index.js",
     "serve": "browser-sync start --server build --files 'build/**'",
     "postbuild": "npm run serve"
@@ -16,10 +16,12 @@
     "babelify": "^5.0.4",
     "browserify": "^9.0.3",
     "copyfiles": "^0.1.0",
-    "marked": "^0.3.3",
-    "react": "^0.13.1",
     "react-live-edit": "git://github.com/joelburget/react-live-editor",
     "react-router": "^0.13.1",
-    "watchify": "^2.4.0"
+    "watchify": "^2.4.0",
+    "marked": "^0.3.3"
+  },
+  "peerDependencies": {
+    "react": "^0.13.1"
   }
 }
