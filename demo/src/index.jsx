@@ -1,6 +1,6 @@
 var React = require('react');
 var Matter = require('../../');
-var {List, ListItem} = Matter;
+var {List, ListItem, style} = Matter;
 var merge = require('lodash.merge');
 
 var Router = require('react-router');
@@ -50,12 +50,20 @@ var App = React.createClass({
 
     var {router} = this.context;
 
+    var styleCont = merge({}, style.font, {
+      width: 920,
+      padding: '0 20px',
+      margin: '12px auto',
+      display: 'flex',
+      color: style.palette.grey3,
+    });
+
     return (
-      <div style={{width: 920, padding: '0 20px', margin: '0 auto', display: 'flex'}}>
+      <div style={styleCont}>
         <div style={{width: 270}}>
-          <List width={210}>
+          <List style={{width: 210}}>
             {Object.keys(componentPages).map(name => {
-              
+
               return <ListItem
                 label={name}
                 onClick={()=>router.transitionTo(name)}

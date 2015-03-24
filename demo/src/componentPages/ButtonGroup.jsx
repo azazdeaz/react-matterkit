@@ -1,8 +1,7 @@
 var React = require('react');
-var Matter = require('../../../');
-var Template = require('./Template.jsx');
+var Template = require('./utils/Template.jsx');
 
-var description = `#ButtonGroup
+var description = `
 label: String`;
 
 var code = `return <ButtonGroup>
@@ -16,6 +15,7 @@ module.exports = React.createClass({
   render() {
 
     return <Template
+      title='ButtonGroup'
       description={description}
       code={code}/>;
   },

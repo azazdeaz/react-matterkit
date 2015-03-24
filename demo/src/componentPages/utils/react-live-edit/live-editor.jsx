@@ -19,14 +19,14 @@ var ReactPlayground = React.createClass({
   },
 
   render: function() {
-    return <div className="playground">
-      <div className="playgroundCode">
+    return <div style={{display:'flex'}} className="playground">
+      <div style={{flex:'1'}}  className="playgroundCode">
         <CodeMirrorEditor key="jsx"
                           onChange={this.handleCodeChange}
                           className="playgroundStage"
                           codeText={this.state.code} />
       </div>
-      <div className="playgroundPreview">
+      <div style={{flex:'1'}} className="playgroundPreview">
         <ComponentPreview code={this.state.code} />
       </div>
     </div>;
