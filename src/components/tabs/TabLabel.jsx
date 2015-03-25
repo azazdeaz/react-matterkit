@@ -23,8 +23,11 @@ var Button = React.createClass({
 
     return <div
       {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.tabEar, {
+      style={this.buildStyles(style.tabLabel, {
         selected: this.props.selected,
+        first: this.props.first,
+        notFirst: !this.props.first,
+        last: this.props.last,
       })}
       onClick={this.props.onClick}>
       {icon}

@@ -1,11 +1,17 @@
 var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('../style');
-var TabEar = require('./TabEar');
+var TabLabel = require('./TabLabel');
 
 var Tabs = React.createClass({
 
   mixins: [ StyleResolverMixin, BrowserStateMixin ],
+
+  getDefaultProps() {
+    return {
+      stretchLabels: true,
+    };
+  },
 
   getInitialState() {
     return {
@@ -17,10 +23,24 @@ var Tabs = React.createClass({
 
     var currTab;
 
-    var head = <div style={style.tabHeader}>
+    var sTabLabel = {};
+    if (this.props.stretchLabels) {
+      sTabLabel.flex = 1;
+    }
+
+    var childCount = React.Children.count(this.props.children);
+
+    var head = <div
+      style={this.buildStyles(style.tabHeader, {
+        stretchLabels: this.props.stretchLabels,
+      })}>
       {React.Children.map(this.props.children, (child, idx) => {
 
-        return <TabEar
+
+        return <TabLabel
+          style={sTabLabel}
+          first={idx === 0}
+          last={idx === childCount - 1}
           selected={this.state.currTabIdx === idx}
           label={child.props.label}
           onClick={() => this.setState({currTabIdx: idx})}/>;
@@ -38,9 +58,7 @@ var Tabs = React.createClass({
     return <div style={style.tabBase}>
       {head}
       <div style={style.tabCont}>
-        <div style={style.tabContNest}>
-          {currTab}
-        </div>
+        {currTab}
       </div>
     </div>;
   }

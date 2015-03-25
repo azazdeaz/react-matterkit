@@ -38,7 +38,7 @@ module.exports = React.createClass({
 
     if (code instanceof Array) {
 
-      return <Tabs>
+      return <Tabs stretchLabels={false}>
         {code.map((c, idx) => {
 
           if (typeof(c) === 'string') {

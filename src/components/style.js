@@ -81,7 +81,9 @@ style.button = merge({}, style.font, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
+  display: 'inline-block',
   boxSizing: 'border-box',
+  textAlign: 'center',
   color: '#96a6ad',
   borderRadius: 2,
   backgroundColor: '#363c43',
@@ -151,8 +153,6 @@ style.panel = {
   backgroundColor: style.grey.active,
   border: 'solid 1px ' + style.palette.grey4,
   borderRadius: 2,
-  width: '100%',
-  height: '100%',
 };
 
 //Input
@@ -348,15 +348,19 @@ style.sliderBarProgress = {
 
 
 //Tab
-style.tabEar = merge({}, style.font, {
+style.tabLabel = merge({}, style.font, {
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
+  boxSizing: 'border-box',
+  textAlign: 'center',
   color: style.fontColor.normal,
   backgroundColor: style.grey.normal,
   backgroundImage: 'none',
-  border: 'solid 1px ' + style.palette.grey4,
-  borderBottomRightRadius: 0,
-  borderBottomLeftRadius: 0,
+  // border: 'solid 1px ' + style.palette.grey4,
+  borderTop: 'solid 1px ' + style.palette.grey4,
+  borderLeft: 'solid 1px ' + style.palette.grey4,
+  borderBottom: 'solid 1px ' + style.palette.grey4,
+  borderRight: 'solid 1px ' + style.palette.grey4,
   padding: '0 8px',
   margin: 0,
 
@@ -376,31 +380,39 @@ style.tabEar = merge({}, style.font, {
       color: style.fontColor.active,
       backgroundColor: style.grey.active,
       borderBottom: 'none',
-    }}
+    }},
+    {first: {
+      borderTopLeftRadius: 2,
+    }},
+    {last: {
+      borderTopRightRadius: 2,
+    }},
+    {notFirst: {
+      borderLeft: 'none',
+    }},
   ],
 });
 
-style.tabBase = _.merge({}, style.panel, {
-  display: 'flex',
-  flexDirection: 'column',
-});
-
 style.tabHeader = {
+  position: 'relative',
+  top: 1,
   width: '100%',
   height: style.itemHeight,
   display: 'flex',
 };
 
-style.tabCont = {
-  flex: '1',
-  position: 'relative',
+style.tabBase = {
 };
 
-style.tabContNest = {
-  width: '100%',
-  height: '100%',
-  position: 'absolute',
-};
+style.tabCont = _.merge({}, style.panel, {
+  borderTopLeftRadius: 0,
+
+  modifiers:[
+    {stretchLabels: {
+      borderTopRightRadius: 0,
+    }}
+  ],
+});
 
 
 //Accordion
