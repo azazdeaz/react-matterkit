@@ -19,6 +19,15 @@ var Tabs = React.createClass({
     };
   },
 
+  _selectTab(idx) {
+    this.setState({currTabIdx: idx});
+
+    if (this.props.onChangeSelectedTab) {
+
+      this.props.onChangeSelectedTab(idx);
+    }
+  },
+
   render() {
 
     var currTab;
@@ -43,7 +52,7 @@ var Tabs = React.createClass({
           last={idx === childCount - 1}
           selected={this.state.currTabIdx === idx}
           label={child.props.label}
-          onClick={() => this.setState({currTabIdx: idx})}/>;
+          onClick={() => this._selectTab(idx)}/>;
       })}
     </div>;
 

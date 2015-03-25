@@ -82,7 +82,7 @@ var App = React.createClass({
 var routes = (
   <Route name="app" path="/" handler={App}>
     {Object.keys(componentPages).map(name => {
-      return <Route name={name} handler={componentPages[name]}/>;
+      return <Route name={name + '/:ex'} handler={componentPages[name]}/>;
     })}
     <DefaultRoute handler={componentPages.Button}/>
   </Route>

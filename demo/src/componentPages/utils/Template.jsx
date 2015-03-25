@@ -6,6 +6,9 @@ var Prop = require('./Prop.jsx');
 var has = require('lodash.has');
 
 module.exports = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func,
+  },
   getDefaultProps() {
       return {
         code: 'return <Matter.Button label="button"/>;',
@@ -38,7 +41,15 @@ module.exports = React.createClass({
 
     if (code instanceof Array) {
 
-      return <Tabs stretchLabels={false}>
+      let { router } = this.context;
+
+      return <Tabs
+        stretchLabels={false}
+      defaultTab={router.getCurrentQuery().ex}
+        onChangeSelectedTab={idx => {
+          console.log(router.getCurrentPathname(), {ex: idx});
+          router.transitionTo(router.getCurrentPathname(), {ex: idx});
+        }}>
         {code.map((c, idx) => {
 
           if (typeof(c) === 'string') {
