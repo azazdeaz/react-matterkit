@@ -381,6 +381,9 @@ style.tabLabel = merge({}, style.font, {
       backgroundColor: style.grey.active,
       borderBottom: 'none',
     }},
+    {stretch: {
+      flex: 1,
+    }},
     {first: {
       borderTopLeftRadius: 2,
     }},
@@ -402,11 +405,13 @@ style.tabHeader = {
 };
 
 style.tabBase = {
+  display: 'flex',
+  flexDirection: 'column',
 };
 
 style.tabCont = _.merge({}, style.panel, {
   borderTopLeftRadius: 0,
-
+  flex: 1,
   modifiers:[
     {stretchLabels: {
       borderTopRightRadius: 0,

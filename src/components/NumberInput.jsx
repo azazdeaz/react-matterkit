@@ -1,6 +1,6 @@
 var React = require('react');
 var Input = require('./Input');
-var CustomDrag = require('./CustomDrag');
+var CustomDrag = require('../utils/CustomDrag');
 var _ = require('lodash');
 
 var NumberInput = React.createClass({

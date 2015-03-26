@@ -1,7 +1,7 @@
 var React = require('react');
 var _ = require('lodash');
 var style = require('./style');
-var CustomDrag = require('./CustomDrag');
+var CustomDrag = require('../utils/CustomDrag');
 
 var Slider = React.createClass({
   getDefaultProps() {

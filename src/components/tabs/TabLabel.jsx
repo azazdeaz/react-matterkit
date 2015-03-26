@@ -25,6 +25,7 @@ var Button = React.createClass({
       {...this.getBrowserStateEvents()}
       style={this.buildStyles(style.tabLabel, {
         selected: this.props.selected,
+        stretch: this.props.stretch,
         first: this.props.first,
         notFirst: !this.props.first,
         last: this.props.last,

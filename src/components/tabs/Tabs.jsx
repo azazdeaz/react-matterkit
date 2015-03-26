@@ -1,8 +1,7 @@
 var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('../style');
-var TabLabel = require('./TabLabel');
-var TabLabel = require('./TabLabel');
+var TabHeader = require('./TabHeader');
 
 var Tabs = React.createClass({
 
@@ -17,7 +16,7 @@ var Tabs = React.createClass({
 
   getInitialState() {
     return {
-      currTabIdx: 0,
+      currTabIdx: 123,
     };
   },
 
@@ -30,13 +29,11 @@ var Tabs = React.createClass({
     }
   },
 
-  componentWillMount(nextProps) {
-console.log('componentWillMount,this.props', this.props)
+  componentWillMount() {
     this.setState({currTabIdx: this.props.defaultTab});
   },
 
   componentWillReciveProps(nextProps) {
-console.log('componentWillReciveProps,nextProps', nextProps)
     this.setState({currTabIdx: nextProps.defaultTab});
   },
 
@@ -44,29 +41,6 @@ console.log('componentWillReciveProps,nextProps', nextProps)
 
     var currTab;
 
-    var sTabLabel = {};
-    if (this.props.stretchLabels) {
-      sTabLabel.flex = 1;
-    }
-
-    var childCount = React.Children.count(this.props.children);
-
-    var head = <div
-      style={this.buildStyles(style.tabHeader, {
-        stretchLabels: this.props.stretchLabels,
-      })}>
-      {React.Children.map(this.props.children, (child, idx) => {
-
-
-        return <TabLabel
-          style={sTabLabel}
-          first={idx === 0}
-          last={idx === childCount - 1}
-          selected={this.state.currTabIdx === idx}
-          label={child.props.label}
-          onClick={() => this._selectTab(idx)}/>;
-      })}
-    </div>;
 
     React.Children.forEach(this.props.children, (child, idx) => {
 
@@ -76,8 +50,8 @@ console.log('componentWillReciveProps,nextProps', nextProps)
       }
     });
 
-    return <div style={style.tabBase}>
-      {head}
+    return <div style={this.buildStyles(style.tabBase)}>
+      <TabHeader children={this.props.children}/>
       <div style={style.tabCont}>
         {currTab}
       </div>
