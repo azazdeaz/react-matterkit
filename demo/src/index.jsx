@@ -2,6 +2,7 @@ var React = require('react');
 var Matter = require('../../');
 var {List, ListItem, style} = Matter;
 var merge = require('lodash.merge');
+var kebabCase = require('lodash.kebabcase');
 
 var Router = require('react-router');
 
@@ -82,7 +83,12 @@ var App = React.createClass({
 var routes = (
   <Route name="app" path="/" handler={App}>
     {Object.keys(componentPages).map(name => {
-      return <Route name={name + '/:ex'} handler={componentPages[name]}/>;
+
+      return <Route
+        key={name}
+        name={name}
+        path={kebabCase(name) + '/?:ex?'}
+        handler={componentPages[name]}/>;
     })}
     <DefaultRoute handler={componentPages.Button}/>
   </Route>

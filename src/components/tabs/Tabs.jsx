@@ -2,6 +2,7 @@ var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('../style');
 var TabLabel = require('./TabLabel');
+var TabLabel = require('./TabLabel');
 
 var Tabs = React.createClass({
 
@@ -10,6 +11,7 @@ var Tabs = React.createClass({
   getDefaultProps() {
     return {
       stretchLabels: true,
+      defaultTab: 0,
     };
   },
 
@@ -26,6 +28,16 @@ var Tabs = React.createClass({
 
       this.props.onChangeSelectedTab(idx);
     }
+  },
+
+  componentWillMount(nextProps) {
+console.log('componentWillMount,this.props', this.props)
+    this.setState({currTabIdx: this.props.defaultTab});
+  },
+
+  componentWillReciveProps(nextProps) {
+console.log('componentWillReciveProps,nextProps', nextProps)
+    this.setState({currTabIdx: nextProps.defaultTab});
   },
 
   render() {

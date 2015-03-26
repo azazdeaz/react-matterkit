@@ -35,6 +35,9 @@ module.exports = React.createClass({
       });
     }
   },
+  componentWillReceiveProps(props) {
+    console.log('componentWillReceiveProps', props);
+  },
   renderCode() {
 
     var { code } = this.props;
@@ -45,10 +48,16 @@ module.exports = React.createClass({
 
       return <Tabs
         stretchLabels={false}
-      defaultTab={router.getCurrentQuery().ex}
+      defaultTab={parseInt(router.getCurrentParams().ex || 0)}
         onChangeSelectedTab={idx => {
-          console.log(router.getCurrentPathname(), {ex: idx});
-          router.transitionTo(router.getCurrentPathname(), {ex: idx});
+          console.log('getCurrentRoutes', router.getCurrentRoutes());
+          console.log('getCurrentParams', router.getCurrentParams());
+            // console.log('getRoutes', router.getRoutes());
+            // console.log('getParams', router.getParams());
+          var routes = router.getCurrentRoutes();
+          var name = routes[routes.length-1].name;
+          console.log(name, {ex: idx});
+          router.transitionTo(name, {ex: idx});
         }}>
         {code.map((c, idx) => {
 

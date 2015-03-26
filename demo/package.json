@@ -19,7 +19,8 @@
     "react-live-edit": "git://github.com/joelburget/react-live-editor",
     "react-router": "^0.13.1",
     "watchify": "^2.4.0",
-    "marked": "^0.3.3"
+    "marked": "^0.3.3",
+    "lodash.kebabcase": "^3.0.1"
   },
   "peerDependencies": {
     "react": "^0.13.1"
