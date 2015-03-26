@@ -23,12 +23,12 @@ var Button = React.createClass({
       {React.Children.map(this.props.children, (child, idx) => {
 
         return <TabLabel
-          stretch={this.props.stretchLabels}
-          first={idx === 0}
-          last={idx === childCount - 1}
-          selected={this.state.currTabIdx === idx}
-          label={child.props.label}
-          onClick={() => this._selectTab(idx)}/>;
+          stretch = {this.props.stretchLabels}
+          first = {idx === 0}
+          last = {idx === childCount - 1}
+          selected = {this.state.currTabIdx === idx}
+          label = {child.props.label}
+          onClick = {() => this.props.onSelectTab(idx)}/>;
       })}
     </div>;
   }
