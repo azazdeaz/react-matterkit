@@ -52,6 +52,7 @@ var Tabs = React.createClass({
 
     return <div style={this.buildStyles(style.tabBase)}>
       <TabHeader
+        currTabIdx = {this.state.currTabIdx}
         onSelectTab = {idx => this._selectTab(idx)}
         children = {this.props.children}
         stretchLabels = {this.props.stretchLabels}/>

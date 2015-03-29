@@ -353,6 +353,7 @@ style.tabLabel = merge({}, style.font, {
   lineHeight: style.itemHeightPX,
   boxSizing: 'border-box',
   textAlign: 'center',
+  overflow: 'hidden',
   color: style.fontColor.normal,
   backgroundColor: style.grey.normal,
   backgroundImage: 'none',

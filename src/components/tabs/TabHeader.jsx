@@ -26,7 +26,7 @@ var Button = React.createClass({
           stretch = {this.props.stretchLabels}
           first = {idx === 0}
           last = {idx === childCount - 1}
-          selected = {this.state.currTabIdx === idx}
+          selected = {this.props.currTabIdx === idx}
           label = {child.props.label}
           onClick = {() => this.props.onSelectTab(idx)}/>;
       })}
