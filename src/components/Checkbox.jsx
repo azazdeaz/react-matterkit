@@ -16,13 +16,12 @@ var Checkbox = React.createClass({
       hover: false,
     };
   },
-  onMouseUp() {
-    this.setState({down: false});
-  },
-  componentDidMount() {
+  onMouseDown() {
+    this.setState({down: true});
     window.addEventListener('mouseup', this.onMouseUp);
   },
-  componentDidUnmount() {
+  onMouseUp() {
+    this.setState({down: false});
     window.removeEventListener('mouseup', this.onMouseUp);
   },
   render: function () {
@@ -43,7 +42,7 @@ var Checkbox = React.createClass({
       onClick = {e => this.props.onChange(!this.props.value)}
       onMouseEnter={() => this.setState({hover: true})}
       onMouseLeave={() => this.setState({hover: false})}
-      onMouseDown={() => this.setState({down: true})}
+      onMouseDown={() => this.onMouseDown}
       disabled = {this.state.disabled}
     ></div>;
   }
