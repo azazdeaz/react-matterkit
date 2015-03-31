@@ -10,6 +10,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
+var Redirect = Router.Redirect;
 
 
 var componentPages = {
@@ -56,7 +57,7 @@ var App = React.createClass({
       padding: '0 20px',
       margin: '12px auto',
       display: 'flex',
-      color: style.palette.grey3,
+      color: style.fontColor.normal,
     });
 
     return (
@@ -81,7 +82,7 @@ var App = React.createClass({
 });
 
 var routes = (
-  <Route name="app" path="/" handler={App}>
+  <Route handler={App}>
     {Object.keys(componentPages).map(name => {
 
       return <Route
@@ -90,10 +91,10 @@ var routes = (
         path={kebabCase(name) + '/?:ex?'}
         handler={componentPages[name]}/>;
     })}
-    <DefaultRoute handler={componentPages.Button}/>
+    <Redirect from='' to='Button' />
   </Route>
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.body);
+  React.render(<Handler/>, document.querySelector('#react-mount'));
 });

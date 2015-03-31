@@ -31,6 +31,7 @@ var style = {
         grey2: '#96a6ad',
         grey3: '#3b424a',
         grey4: '#1a1d21',
+        bg: '#262A2E'
     },
     grey: {
       normal: '#282c30',

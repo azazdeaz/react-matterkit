@@ -19,7 +19,7 @@ var ReactPlayground = React.createClass({
   },
 
   render: function() {
-    return <div style={{display:'flex'}} className="playground">
+    return <div style={{display:'flex', padding: 14}} className="playground">
       <div style={{flex:'1'}}  className="playgroundCode">
         <CodeMirrorEditor key="jsx"
                           onChange={this.handleCodeChange}
