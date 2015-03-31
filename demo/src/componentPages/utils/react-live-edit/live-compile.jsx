@@ -36,9 +36,9 @@ var ComponentPreview = React.createClass({
 
     compileCode: function() {
       return JSXTransformer.transform(
-          '(function() {' +
-              this.props.code +
-          '\n})();',
+          `(function() {
+              return ${this.props.code}
+          })();`,
       { harmony: true }
       ).code;
     },

@@ -4,12 +4,12 @@ var Template = require('./utils/Template.jsx');
 var description = `
 label: String`;
 
-var code = `return <ButtonGroup>
+var codes = [`<ButtonGroup>
   <Button label='first'/>
   <Button label='secound'/>
   <Button label='third' kind='colored'/>
   <Button label='fourth'/>
-</ButtonGroup>;`;
+</ButtonGroup>;`];
 
 module.exports = React.createClass({
   render() {
@@ -17,6 +17,6 @@ module.exports = React.createClass({
     return <Template
       title='ButtonGroup'
       description={description}
-      code={code}/>;
+      codes={codes}/>;
   },
 });

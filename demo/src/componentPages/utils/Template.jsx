@@ -40,10 +40,14 @@ module.exports = React.createClass({
   },
   renderCode() {
 
-    var { code } = this.props;
+    var { codes } = this.props;
 
-    if (code instanceof Array) {
-
+    if (true) {
+      return codes.map((code, idx) => {
+        return <LiveEditor codeText={code} key={idx}/>;
+      });
+    }
+    else {
       let { router } = this.context;
 
       return <Tabs
@@ -75,10 +79,8 @@ module.exports = React.createClass({
         })}
       </Tabs>;
     }
-    else {
-      return <LiveEditor codeText={code}/>;
-    }
   },
+
   render() {
 
     var rawMarkup = marked(this.props.description);

@@ -2,6 +2,7 @@ var React = require("react");
 
 var CodeMirrorEditor = require("./code-mirror-editor.jsx");
 var ComponentPreview = require("./live-compile.jsx");
+var {Panel} = require("../../../../../");
 
 var ReactPlayground = React.createClass({
   propTypes: {
@@ -20,13 +21,20 @@ var ReactPlayground = React.createClass({
 
   render: function() {
     return <div style={{display:'flex', padding: 14}} className="playground">
-      <div style={{flex:'1'}}  className="playgroundCode">
+      <Panel style={{flex:'1'}}  className="playgroundCode">
         <CodeMirrorEditor key="jsx"
                           onChange={this.handleCodeChange}
                           className="playgroundStage"
                           codeText={this.state.code} />
-      </div>
-      <div style={{flex:'1'}} className="playgroundPreview">
+      </Panel>
+      <div
+      style={{
+          flex:'1',
+          display:'flex',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }} 
+        className="playgroundPreview">
         <ComponentPreview code={this.state.code} />
       </div>
     </div>;

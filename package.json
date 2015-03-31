@@ -4,7 +4,7 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
-    "lodash": "^3.5.0",
+    "lodash": "^3.6.0",
     "lodash.merge": "^3.0.3",
     "lodash.has": "^3.0.0",
     "react": "^0.13.1",

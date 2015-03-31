@@ -5,15 +5,15 @@ var description = `
 label: String`;
 
 var codes = [
-  '<Button label="button"/>;',
-  '<Button label="button" kind=\'colored\'/>;',
+  `<Icon icon='bug'/>`,
+  `<Button label='button' icon='bug' kind='colored'/>`,
 ];
 
 module.exports = React.createClass({
   render() {
 
     return <Template
-      title='Button'
+      title='Icon'
       description={description}
       codes={codes}
       props={[
