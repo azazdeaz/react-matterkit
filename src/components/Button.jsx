@@ -12,13 +12,14 @@ var Button = React.createClass({
   getDefaultProps() {
     return {
       label: '',
+      kind: 'normal',
+      disabled: false,
     };
   },
 
   getInitialState() {
     return {
       toggled: false,
-      disabled: false,
     };
   },
 
@@ -32,10 +33,7 @@ var Button = React.createClass({
 
     return <div
       {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.button, {
-        disabled: this.props.disabled,
-        kind: this.props.kind,
-      })}
+      style={this.buildStyles(style.button)}
 
       tooltip={this.props.tooltip}
       dropdownMenu={this.props.dropdownMenu}

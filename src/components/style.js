@@ -10,6 +10,8 @@ var style = {
     itemHeight: 32,
     itemHeightPX: '32px',
 
+    borderRadius: 2,
+
     uri: {
       check: uriCheck,
     },
@@ -53,6 +55,13 @@ style.font = {
   color: style.fontColor.normal,
 };
 
+style.roundedCorners = {
+  borderRadiusTopLeft: style.borderRadius,
+  borderRadiusTopRight: style.borderRadius,
+  borderRadiusBottomLeft: style.borderRadius,
+  borderRadiusBottomRight: style.borderRadius,
+};
+
 
 
 module.exports = style;
@@ -78,7 +87,7 @@ style.lineGroup = _.defaults({
 
 //Button
 
-style.button = merge({}, style.font, {
+style.button = merge({}, style.roundedCorners, style.font, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
@@ -86,7 +95,6 @@ style.button = merge({}, style.font, {
   boxSizing: 'border-box',
   textAlign: 'center',
   color: '#96a6ad',
-  borderRadius: 2,
   backgroundColor: '#363c43',
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   border: 'solid 1px rgba(26,29,33,.75)',
@@ -157,18 +165,19 @@ style.panel = {
 };
 
 //Input
-style.input = {
+style.input = merge({}, style.roundedCorners, {
   color: '#96a6ad',
-  background: 'none',
+  background: style.palette.grey4,
   fontSize: 'inherit',
   fontFamily: 'inherit',
   padding: '0',
   paddingLeft: '2px',
   borderRadius: '2px',
   height: style.itemHeight,
+  lineHeight: style.itemHeightPX,
   margin: '1px 3px',
   boxSizing: 'border-box',
-  border: 'solid 1px rgba(0,0,0,0)',
+  border: 'solid 1px transparent',
   outline: 'none',
 
   states: [
@@ -188,9 +197,13 @@ style.input = {
     {error:{
       border: 'solid 1px #aa4353',
     }}
+  ],
+  modifiers: [
+    {transparent: {
+      background: 'none',
+    }}
   ]
-};
-
+});
 //Checkbox
 (() => {
 
