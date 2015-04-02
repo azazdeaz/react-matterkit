@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react/addons');
+var { PureRenderMixin } = React;
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var merge = require('lodash/object/merge');
 var has = require('lodash/object/has');
@@ -17,6 +18,7 @@ var Input = React.createClass({
   getInitialState() {
     return {
       value: this.props.value,
+      error: false,
     };
   },
   componentWillReciveProps(nextProps) {
@@ -26,14 +28,28 @@ var Input = React.createClass({
       this.setState({value: nextProps.value});
     }
   },
+  componentWillMount() {
+console.log('componentWillMount', this.state.value)
+    this._validate(this.state.value);
+  },
   _onChange(e) {
 
     var value = e.target.value;
 
     this.setState({value});
 
+    this._validate(value);
+
     if (this.props.onChange) {
       this.props.onChange(value);
+    }
+  },
+
+  _validate(value) {
+
+    if (typeof(this.props.validate) === 'function') {
+
+      this.setState({error: !this.props.validate(value)});
     }
   },
   // render: function () {

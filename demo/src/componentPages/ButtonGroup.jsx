@@ -21,8 +21,9 @@ var codes = [
 </ButtonGroup>`,
 
 `<Input
-  value={44}
+  value={4}
   addonLabel='px'
+  validate={v => parseInt(v) !== 4}
   onChange={v=>console.log(v)}/>`,
 
 `(() => {
