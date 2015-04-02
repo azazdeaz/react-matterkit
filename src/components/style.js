@@ -165,11 +165,31 @@ style.panel = {
 };
 
 //Input
-style.input = merge({}, style.roundedCorners, {
-  color: '#96a6ad',
-  background: style.palette.grey4,
+style.inputReset = {
   fontSize: 'inherit',
   fontFamily: 'inherit',
+  color: 'inherit',
+  lineHeight: 'inherit',
+  outline: 'none',
+  backgroundColor: 'transparent',
+  border: 'none',
+};
+
+style.inputAddon = {
+  height: '100%',
+  right: 0,
+  padding: '0 5px',
+  backgroundColor: style.grey.normal,
+  borderRadiusTopLeft: style.borderRadius,
+  borderRadiusBottomLeft: style.borderRadius,
+  userSelect: 'none',
+};
+
+style.input = merge({}, style.font, style.roundedCorners, {
+  display: 'flex',
+  alignItems: 'stretch',
+  color: '#96a6ad',
+  background: style.palette.grey4,
   padding: '0',
   paddingLeft: '2px',
   borderRadius: '2px',
@@ -178,7 +198,6 @@ style.input = merge({}, style.roundedCorners, {
   margin: '1px 3px',
   boxSizing: 'border-box',
   border: 'solid 1px transparent',
-  outline: 'none',
 
   states: [
     {hover:{

@@ -1,7 +1,9 @@
 var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var merge = require('lodash/object/merge');
+var has = require('lodash/object/has');
 var style = require('./style');
+var Icon = require('./Icon');
 
 var Input = React.createClass({
 
@@ -14,51 +16,112 @@ var Input = React.createClass({
   },
   getInitialState() {
     return {
-      error: false,
+      value: this.props.value,
     };
   },
-  _onChange(e) {
-    if (this.props.onChange) {
-      this.props.onChange(e);
+  componentWillReciveProps(nextProps) {
+
+    if(has(nextProps, 'value')) {
+
+      this.setState({value: nextProps.value});
     }
   },
+  _onChange(e) {
+
+    var value = e.target.value;
+
+    this.setState({value});
+
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
+  },
+  // render: function () {
+  //
+  //   var addonStyle = {
+  //     height: '100%',
+  //     position: 'absolute',
+  //     right: 0,
+  //     padding: '0 5px',
+  //     backgroundColor: style.grey.normal,
+  //     borderRadiusTopLeft: style.borderRadius,
+  //     borderRadiusBottomLeft: style.borderRadius,
+  //   };
+  //
+  //   var childCount = React.Children.count(this.props.children);
+  //   var addons;
+  //   if (false) {
+  //
+  //   addon = <span contentEditable={false} style={addonStyle}>
+  //     add
+  //   </span>;
+  //   }
+  //
+  //   var addStyle=merge({
+  //     position:'relative',
+  //     minWidth: 170,
+  //     whiteSpace:'nowarp',
+  //     overflow:'hidden'}, style.input);
+  //
+  //   return <div
+  //     contentEditable = {true}
+  //     tabindex = {0}
+  //     {...this.getBrowserStateEvents()}
+  //     style = {this.buildStyles(addStyle, {disabled: this.props.disabled})}
+  //     value = {this.props.value}
+  //     palceholder = {this.props.palceholder}
+  //     type = {this.props.type}
+  //     onChange = {this._onChange}
+  //     disabled = {this.props.disabled}>
+  //
+  //     {this.props.value}
+  //   </div>;
+  // },
   render: function () {
 
-    var addonStyle = {
-      height: '100%',
-      position: 'absolute',
-      right: 0,
-      padding: '0 5px',
-      backgroundColor: style.grey.normal,
-      borderRadiusTopLeft: style.borderRadius,
-      borderRadiusBottomLeft: style.borderRadius,
-    };
-
-    var childCount = React.Children.count(this.props.children);
-    var addons = <span contentEditable={false} style={addonStyle}>
-      add
-    </span>;
-    var addStyle=merge({
-      position:'relative',
-      minWidth: 170,
-      whiteSpace:'nowarp',
-      overflow:'hidden'}, style.input);
-
     return <div
-      contentEditable = {true}
-      tabindex = {0}
-      {...this.getBrowserStateEvents()}
-      style = {this.buildStyles(addStyle, {disabled: this.props.disabled})}
-      value = {this.props.value}
-      palceholder = {this.props.palceholder}
-      type = {this.props.type}
-      onChange = {this._onChange}
-      disabled = {this.props.disabled}>
+      style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>
 
-      fsdfsd
-      {addons}
+      <input
+        {...this.getBrowserStateEvents()}
+        style = {style.inputReset}
+        value = {this.state.value}
+        palceholder = {this.props.palceholder}
+        type = {this.props.type}
+        onChange = {this._onChange}
+        disabled = {this.props.disabled}/>
+
+      <Addon
+        icon={this.props.addonIcon}
+        label={this.props.addonLabel}
+        onClick={this.props.addonOnClick}/>
+
     </div>;
   }
+});
+
+var Addon = React.createClass({
+
+  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+
+  render() {
+
+    if (!this.props.label && !this.props.icon) {
+      return <div hidden={true}/>;
+    }
+
+    var icon = this.props.icon ? <Icon icon={this.props.icon}/> : undefined;
+
+    return <span
+      {...this.getBrowserStateEvents()}
+      style = {this.buildStyles(style.inputAddon)}
+      onClick={this.props.onClick}>
+
+      {this.props.label}
+      {icon}
+
+    </span>;
+  },
 });
 
 module.exports = Input;
