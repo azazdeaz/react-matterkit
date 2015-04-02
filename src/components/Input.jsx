@@ -3,8 +3,10 @@ var { PureRenderMixin } = React;
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var merge = require('lodash/object/merge');
 var has = require('lodash/object/has');
+var _isFinite = require('lodash/lang/isFinite');
 var style = require('./style');
 var Icon = require('./Icon');
+var CustomDrag = require('../utils/CustomDrag');
 
 var Input = React.createClass({
 
@@ -13,14 +15,55 @@ var Input = React.createClass({
   getDefaultProps() {
     return {
       disabled: false,
+      draggable: true,
+      precision: 0,
+      dragSpeed: 1,
+      defaultValue: 0,
+      min: undefined,
+      max: undefined,
     };
   },
+
   getInitialState() {
     return {
       value: this.props.value,
       error: false,
     };
   },
+
+  componentWillMount() {
+    this._validate(this.state.value);
+  },
+
+  componentDidMount() {
+
+    new CustomDrag({
+      deTarget: this.getDOMNode(),
+      onDown: (e) => {
+
+        if (this.props.type !== 'number' || !this.props.draggable) {
+
+          return false;
+        }
+
+        return {
+          value: this.props.value,
+          moved: false,
+        };
+      },
+      onDrag: (md) => {
+
+        md.moved = true;
+
+        var value = md.value + md.dx * this.props.dragSpeed;
+        this._onChange(value);
+      },
+      onUp: (md) => {
+        if (!md.moved) this.getDOMNode().focus();
+      }
+    });
+  },
+
   componentWillReciveProps(nextProps) {
 
     if(has(nextProps, 'value')) {
@@ -28,12 +71,13 @@ var Input = React.createClass({
       this.setState({value: nextProps.value});
     }
   },
-  componentWillMount() {
-    this._validate(this.state.value);
-  },
-  _onChange(e) {
 
-    var value = e.target.value;
+  _onChange(value) {
+
+    if (this.props.type === 'number') {
+
+      value = this._formatNumber(value);
+    }
 
     this.setState({value});
 
@@ -44,6 +88,20 @@ var Input = React.createClass({
     }
   },
 
+  _formatNumber(value) {
+
+    var min = this.props.min,
+      max = this.props.max,
+      precision = this.props.precision;
+
+    if (_isFinite(min)) value = Math.max(min, value);
+    if (_isFinite(max)) value = Math.min(max, value);
+
+    value = parseFloat(value.toFixed(precision));
+
+    return value;
+  },
+
   _validate(value) {
 
     if (typeof(this.props.validate) === 'function') {
@@ -51,48 +109,12 @@ var Input = React.createClass({
       this.setState({error: !this.props.validate(value)});
     }
   },
-  // render: function () {
-  //
-  //   var addonStyle = {
-  //     height: '100%',
-  //     position: 'absolute',
-  //     right: 0,
-  //     padding: '0 5px',
-  //     backgroundColor: style.grey.normal,
-  //     borderRadiusTopLeft: style.borderRadius,
-  //     borderRadiusBottomLeft: style.borderRadius,
-  //   };
-  //
-  //   var childCount = React.Children.count(this.props.children);
-  //   var addons;
-  //   if (false) {
-  //
-  //   addon = <span contentEditable={false} style={addonStyle}>
-  //     add
-  //   </span>;
-  //   }
-  //
-  //   var addStyle=merge({
-  //     position:'relative',
-  //     minWidth: 170,
-  //     whiteSpace:'nowarp',
-  //     overflow:'hidden'}, style.input);
-  //
-  //   return <div
-  //     contentEditable = {true}
-  //     tabindex = {0}
-  //     {...this.getBrowserStateEvents()}
-  //     style = {this.buildStyles(addStyle, {disabled: this.props.disabled})}
-  //     value = {this.props.value}
-  //     palceholder = {this.props.palceholder}
-  //     type = {this.props.type}
-  //     onChange = {this._onChange}
-  //     disabled = {this.props.disabled}>
-  //
-  //     {this.props.value}
-  //   </div>;
-  // },
+
   render: function () {
+
+    var type = this.props.type;
+
+    if (type === 'number') type = 'tel';
 
     return <div
       style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>
@@ -102,8 +124,10 @@ var Input = React.createClass({
         style = {style.inputReset}
         value = {this.state.value}
         palceholder = {this.props.palceholder}
-        type = {this.props.type}
-        onChange = {this._onChange}
+        type = {type}
+        name = {this.props.name}
+        pattern = {this.props.pattern}
+        onChange = {e => this._onChange(e.target.value)}
         disabled = {this.props.disabled}/>
 
       <Addon
@@ -115,6 +139,9 @@ var Input = React.createClass({
     </div>;
   }
 });
+
+
+
 
 var Addon = React.createClass({
 

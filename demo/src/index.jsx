@@ -17,6 +17,7 @@ var componentPages = {
   Button: require('./componentPages/Button.jsx'),
   ButtonGroup: require('./componentPages/ButtonGroup.jsx'),
   Icon: require('./componentPages/Icon.jsx'),
+  Input: require('./componentPages/Input.jsx'),
 };
 
 global.Matter = Matter;
