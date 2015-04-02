@@ -29,7 +29,6 @@ var Input = React.createClass({
     }
   },
   componentWillMount() {
-console.log('componentWillMount', this.state.value)
     this._validate(this.state.value);
   },
   _onChange(e) {
@@ -110,6 +109,7 @@ console.log('componentWillMount', this.state.value)
       <Addon
         icon={this.props.addonIcon}
         label={this.props.addonLabel}
+        background={this.props.addonBackground}
         onClick={this.props.addonOnClick}/>
 
     </div>;

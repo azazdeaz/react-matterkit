@@ -150,6 +150,12 @@ style.button = merge({}, style.roundedCorners, style.font, {
           backgroundColor: 'none',
           border: 'none',
           boxShadow: 'none',
+          states: [
+            {hover:{backgroundColor: 'none'}},
+            {active:{backgroundColor: 'none'}},
+            {focus:{backgroundColor: 'none'}},
+            {disabled:{backgroundColor: 'none'}},
+          ],
         }
       },
     }
@@ -183,6 +189,34 @@ style.inputAddon = {
   borderRadiusTopLeft: style.borderRadius,
   borderRadiusBottomLeft: style.borderRadius,
   userSelect: 'none',
+
+  states: [
+    {hover:{
+      color: '#e2e7eb',
+      backgroundColor: style.grey.hover,
+    }},
+    {active:{
+      color: '#6bb6c4',
+      backgroundColor: style.grey.active,
+    }},
+    {disabled:{
+      color: '#96a6ad',
+    }},
+  ],
+
+  modifiers: [
+    {background: {
+      transparent: {
+        backgroundColor: 'none',
+        states: [
+          {hover:{backgroundColor: 'none'}},
+          {active:{backgroundColor: 'none'}},
+          {focus:{backgroundColor: 'none'}},
+          {disabled:{backgroundColor: 'none'}},
+        ],
+      },
+    }}
+  ],
 };
 
 style.input = merge({}, style.font, style.roundedCorners, {
@@ -218,10 +252,18 @@ style.input = merge({}, style.font, style.roundedCorners, {
     }}
   ],
   modifiers: [
-    {transparent: {
-      background: 'none',
+    {background: {
+      transparent: {
+        backgroundColor: 'none',
+        states: [
+          {hover:{backgroundColor: 'none'}},
+          {active:{backgroundColor: 'none'}},
+          {focus:{backgroundColor: 'none'}},
+          {disabled:{backgroundColor: 'none'}},
+        ],
+      },
     }}
-  ]
+  ],
 });
 //Checkbox
 (() => {

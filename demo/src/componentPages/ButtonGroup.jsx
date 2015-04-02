@@ -22,7 +22,8 @@ var codes = [
 
 `<Input
   value={4}
-  addonLabel='px'
+  addonIcon='github'
+  addonBackground='transparent'
   validate={v => parseInt(v) !== 4}
   onChange={v=>console.log(v)}/>`,
 
