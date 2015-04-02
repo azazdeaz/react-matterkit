@@ -20,6 +20,10 @@ var codes = [
   value={4}
   type='number'/>`,
 
+`<Input
+  placeholder='typeahead'
+  hints={fakeNames}/>`,
+
 `(() => {
 var App = React.createClass({
   getInitialState() {

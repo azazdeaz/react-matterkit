@@ -1,3 +1,5 @@
+var has = require('lodash/object/has');
+
 'use strict';
 
 function CustomDrag(opt) {
@@ -26,10 +28,6 @@ function CustomDrag(opt) {
             return;
         }
 
-        // e.stopPropagation();//ex. prevent to drag the parent if that's draggable too
-        // - prevent to set the down state on the dragged item
-        e.preventDefault();//ex. prevent selecting text
-
         isDrag = true;
 
         var custom = call('onDown', [e]);
@@ -38,6 +36,11 @@ function CustomDrag(opt) {
 
             return;
         }
+
+        // e.stopPropagation();//ex. prevent to drag the parent if that's draggable too
+        // - prevent to set the down state on the dragged item
+
+        e.preventDefault();//ex. prevent selecting text
 
         md = custom || {};
 

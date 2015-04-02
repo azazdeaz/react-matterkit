@@ -15,7 +15,14 @@ var List = React.createClass({
     if (this.props.items) {
 
       children = this.props.items.map((item, idx) => {
-        return <ListItem {...item} key={has(item, 'key') ? item.key : idx}/>;
+
+        if (typeof(item) === 'string') {
+            item = {label: item};
+        }
+        
+        return <ListItem
+          {...item}
+          key={has(item, 'key') ? item.key : idx}/>;
       });
     }
     else {

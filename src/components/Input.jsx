@@ -4,9 +4,12 @@ var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var merge = require('lodash/object/merge');
 var has = require('lodash/object/has');
 var _isFinite = require('lodash/lang/isFinite');
+var isArray = require('lodash/lang/isArray');
 var style = require('./style');
 var Icon = require('./Icon');
+var List = require('./List');
 var CustomDrag = require('../utils/CustomDrag');
+var levenshtein = require('fast-levenshtein');
 
 var Input = React.createClass({
 
@@ -21,6 +24,8 @@ var Input = React.createClass({
       defaultValue: 0,
       min: undefined,
       max: undefined,
+      hints: undefined,
+      maxVisibleHints: 12,
     };
   },
 
@@ -59,7 +64,7 @@ var Input = React.createClass({
         this._onChange(value);
       },
       onUp: (md) => {
-        if (!md.moved) this.getDOMNode().focus();
+        if (!md.moved) this.refs.input.getDOMNode().focus();
       }
     });
   },
@@ -110,6 +115,49 @@ var Input = React.createClass({
     }
   },
 
+  renderHints() {
+
+    var value = this.state.value;
+    var hintsProp = this.props.hints;
+    var hints = [];
+
+    if (!value || !hintsProp) {
+      return null;
+    }
+
+    if (typeof(hintsProp) === 'function') {
+
+      hints = hints(value);
+    }
+    else if (isArray(hintsProp)) {
+
+      let matches = [];
+
+      hintsProp.forEach(hint => {
+
+        var dist = levenshtein.get(value, hint);
+
+        if (dist < 32) {
+          matches.push({hint, dist});
+        }
+      });
+
+      matches.sort((a, b) => a.dist - b.dist);
+
+      let l = Math.min(matches.length, this.props.maxVisibleHints);
+      for (let i = 0; i < l; ++i) {
+
+        hints.push(matches[i].hint);
+      }
+    }
+
+    if (hints.length === 0) {
+      return null;
+    }
+console.log(hints)
+    return <List items={hints}/>;
+  },
+
   render: function () {
 
     var type = this.props.type;
@@ -120,6 +168,7 @@ var Input = React.createClass({
       style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>
 
       <input
+        ref='input'
         {...this.getBrowserStateEvents()}
         style = {style.inputReset}
         value = {this.state.value}
@@ -136,6 +185,8 @@ var Input = React.createClass({
         background={this.props.addonBackground}
         onClick={this.props.addonOnClick}/>
 
+
+      {this.renderHints()}
     </div>;
   }
 });

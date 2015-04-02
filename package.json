@@ -8,7 +8,8 @@
     "lodash.merge": "^3.0.3",
     "lodash.has": "^3.0.0",
     "react": "^0.13.1",
-    "radium": "^0.10.1"
+    "radium": "^0.10.1",
+    "fast-levenshtein": "^1.0.6"
   },
   "peerDependencies": {
     "react": ">=0.12.2 <0.14.0"

@@ -1,11 +1,12 @@
-var React = require('react');
+var React = require('react/addons');
+var { PureRenderMixin } = React;
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('./style');
 var has = require('lodash.has');
 
 var ListItem = React.createClass({
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  mixins: [ PureRenderMixin, StyleResolverMixin, BrowserStateMixin ],
 
   getDefaultProps() {
     return {selected: false};

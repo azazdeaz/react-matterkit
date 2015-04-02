@@ -69,6 +69,7 @@ var App = React.createClass({
             {Object.keys(componentPages).map(name => {
 
               return <ListItem
+                key={name}
                 label={name}
                 onClick={()=>router.transitionTo(name)}
                 selected={router.isActive(name)}/>;
