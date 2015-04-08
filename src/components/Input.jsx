@@ -19,9 +19,9 @@ var Input = React.createClass({
     return {
       disabled: false,
       draggable: true,
-      precision: 0,
+      precision: 1,
       dragSpeed: 1,
-      defaultValue: 0,
+      value: '',
       min: undefined,
       max: undefined,
       hints: undefined,
@@ -31,7 +31,7 @@ var Input = React.createClass({
 
   getInitialState() {
     return {
-      value: this.props.value,
+      value: this._formatValue(this.props.value),
       error: false,
     };
   },
@@ -69,20 +69,19 @@ var Input = React.createClass({
     });
   },
 
-  componentWillReciveProps(nextProps) {
-
+  componentWillReceiveProps(nextProps) {
+console.log('componentWillReciveProps', nextProps)
     if(has(nextProps, 'value')) {
 
-      this.setState({value: nextProps.value});
+      this.setState({
+        value: this._formatValue(nextProps.value),
+      });
     }
   },
 
   _onChange(value) {
 
-    if (this.props.type === 'number') {
-
-      value = this._formatNumber(value);
-    }
+    value = this._formatValue(value);
 
     this.setState({value});
 
@@ -93,11 +92,24 @@ var Input = React.createClass({
     }
   },
 
+  _formatValue(value) {
+
+    if (this.props.type === 'number') {
+      return this._formatNumber(value);
+    }
+    else if (this.props.type === 'text') {
+      return value + '';
+    }
+
+  },
+
   _formatNumber(value) {
 
     var min = this.props.min,
       max = this.props.max,
       precision = this.props.precision;
+
+    value = parseFloat(value);
 
     if (_isFinite(min)) value = Math.max(min, value);
     if (_isFinite(max)) value = Math.min(max, value);
@@ -159,7 +171,7 @@ console.log(hints)
   },
 
   render: function () {
-
+console.log('renderInput', this.state.value, this.props.value);
     var type = this.props.type;
 
     if (type === 'number') type = 'tel';
