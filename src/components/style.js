@@ -42,6 +42,8 @@ var style = {
     },
 };
 
+export default style;
+
 style.fontColor = {
   normal: style.palette.grey2,
   hover: style.palette.grey1,
@@ -265,25 +267,45 @@ style.input = merge({}, style.font, style.roundedCorners, {
     }}
   ],
 });
-//Checkbox
-(() => {
 
-  var cb = {
-    width: 18,
-    height: 18,
-    margin: 'auto 3px',
-    backgroundColor: style.palette.grey4,
-    backgroundPosition: '1px 1px',
-    backgroundRepeat: 'no-repeat',
-  };
+style.checkbox = merge({}, style.roundedCorners, {
+  width: 18,
+  height: 18,
+  margin: 'auto 3px',
+  backgroundColor: style.palette.grey4,
+  backgroundPosition: '1px 1px',
+  backgroundRepeat: 'no-repeat',
 
-  style.checkbox = {
-    normal: _.assign({}, style.input, cb),
-    hover: _.assign({}, style.inputHover, cb),
-    active: _.assign({}, style.inputActive, cb),
-    disabled: _.assign({}, style.inputDisabled, cb),
-  };
-})();
+  states: [
+    {hover:{
+      color: '#e2e7eb',
+      border: 'solid 1px rgba(68,79,88,.5)',
+    }},
+    {focus:{
+      color: '#6bb6c4',
+      boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
+      border: 'solid 1px rgba(93,169,167,1)',
+    }},
+    {disabled:{
+      color: '#96a6ad',
+      backgroundColor: 'rgba(26,29,33,.6)',
+    }},
+    {error:{
+      border: 'solid 1px #aa4353',
+    }},
+    {value: {
+      backgroundColor: style.palette.green,
+      states: [
+        {hover:{backgroundColor: style.palette.green}},
+        {active:{backgroundColor: style.palette.green}},
+        {focus:{backgroundColor: style.palette.green}},
+        {disabled:{backgroundColor: style.palette.green}},
+      ],
+    }}
+  ],
+  modifiers: [
+  ],
+});
 
 //Tooltip
 style.tooltip = {

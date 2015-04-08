@@ -1,51 +1,49 @@
-var React = require('react');
-var _ = require('lodash');
+var React = require('react/addons');
+var {PureRenderMixin} = React.addons;
+var has = require('lodash/object/has');
 var style = require('./style');
+var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 
-module.exports = Checkbox;
+export default React.createClass({
 
-var Checkbox = React.createClass({
+  mixins: [PureRenderMixin, StyleResolverMixin, BrowserStateMixin],
 
   getDefaultProps() {
-    return {value: false};
+    return {
+      value: false,
+    };
   },
+
   getInitialState() {
     return {
       disabled: false,
-      down: false,
-      hover: false,
+      value: this.props.value,
     };
   },
-  onMouseDown() {
-    this.setState({down: true});
-    window.addEventListener('mouseup', this.onMouseUp);
+
+  componentWillReceiveProps(nextProps) {
+    if (has(nextProps, 'value')) {
+      this.setState({value: nextProps.value});
+    }
   },
-  onMouseUp() {
-    this.setState({down: false});
-    window.removeEventListener('mouseup', this.onMouseUp);
+
+  _onClick() {
+
+    var value = !this.state.value;
+
+    this.setState({value});
+
+    if (this.props.onChange) {
+      this.props.onChange(value);
+    }
   },
+
   render: function () {
 
-    var s = style.checkbox.normal;
-    if (this.state.disabled) s = style.checkbox.disabled;
-    else if (this.state.down) s = style.checkbox.active;
-    else if (this.state.hover) s = style.checkbox.hover;
-
-    if (this.props.value && !this.state.disabled) {
-      s = _.assign({backgroundImage: `url('${style.uri.check}')`}, s);
-    }
-
     return <div
-      style = {s}
-      value = {this.props.value}
-      type={this.props.type}
-      onClick = {e => this.props.onChange(!this.props.value)}
-      onMouseEnter={() => this.setState({hover: true})}
-      onMouseLeave={() => this.setState({hover: false})}
-      onMouseDown={() => this.onMouseDown}
-      disabled = {this.state.disabled}
+      {...this.getBrowserStateEvents()}
+      style = {this.buildStyles(style.checkbox)}
+      onClick = {this._onClick}
     ></div>;
   }
 });
-
-module.exports = Checkbox;

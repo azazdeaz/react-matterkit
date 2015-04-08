@@ -19,7 +19,7 @@ var Input = React.createClass({
     return {
       disabled: false,
       draggable: true,
-      precision: 1,
+      precision: 12,
       dragSpeed: 1,
       value: '',
       min: undefined,
@@ -70,7 +70,7 @@ var Input = React.createClass({
   },
 
   componentWillReceiveProps(nextProps) {
-console.log('componentWillReciveProps', nextProps)
+
     if(has(nextProps, 'value')) {
 
       this.setState({
@@ -172,9 +172,6 @@ console.log(hints)
 
   render: function () {
 console.log('renderInput', this.state.value, this.props.value);
-    var type = this.props.type;
-
-    if (type === 'number') type = 'tel';
 
     return <div
       style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>
@@ -185,7 +182,7 @@ console.log('renderInput', this.state.value, this.props.value);
         style = {style.inputReset}
         value = {this.state.value}
         palceholder = {this.props.palceholder}
-        type = {type}
+        type = 'text'
         name = {this.props.name}
         pattern = {this.props.pattern}
         onChange = {e => this._onChange(e.target.value)}
