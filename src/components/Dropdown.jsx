@@ -54,7 +54,7 @@ var Dropdown = React.createClass({
       {this.props.options.map(value => {
         return <ListItem
           key={value}
-          value={value}
+          label={value}
           onClick={()=>{
             this.props.onChange(value);
             this.getDOMNode().blur();

@@ -13,7 +13,8 @@ var ListItem = React.createClass({
   },
   render() {
 
-    var label = has(this.props, 'label') ? this.props.label:this.props.children;
+    var label = has(this.props, 'label') ?
+      this.props.label : this.props.children;
 
     return <div
       {...this.getBrowserStateEvents()}
