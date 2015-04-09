@@ -15,10 +15,21 @@
     "react": ">=0.12.2 <0.14.0"
   },
   "devDependencies": {
-    "babel": "^4.7.13",
-    "browserify": "^9.0.3",
+    "babelify": "^6.0.2",
+    "browser-sync": "^2.5.3",
+    "browserify": "^9.0.8",
     "exorcist": "^0.1.6",
-    "babelify": "^5.0.4"
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-sourcemaps": "^1.5.1",
+    "gulp-util": "^3.0.4",
+    "lodash": "^3.6.0",
+    "marked": "^0.3.3",
+    "react-router": "^0.13.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.1.0"
   },
   "scripts": {
     "dev": "babel src --out-dir lib --watch",

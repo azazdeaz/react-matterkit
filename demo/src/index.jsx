@@ -1,8 +1,8 @@
 var React = require('react');
 var Matter = require('../../');
 var {List, ListItem, style} = Matter;
-var merge = require('lodash.merge');
-var kebabCase = require('lodash.kebabcase');
+var merge = require('lodash/object/merge');
+var kebabCase = require('lodash/string/kebabCase');
 
 var Router = require('react-router');
 
