@@ -5,9 +5,6 @@
   "main": "./lib/index.js",
   "dependencies": {
     "lodash": "^3.6.0",
-    "lodash.merge": "^3.0.3",
-    "lodash.has": "^3.0.0",
-    "react": "^0.13.1",
     "radium": "^0.10.1",
     "fast-levenshtein": "^1.0.6"
   },
@@ -21,10 +18,10 @@
     "exorcist": "^0.1.6",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
-    "gulp-clean": "^0.3.1",
+    "gulp-filesize": "0.0.6",
+    "gulp-rimraf": "^0.1.1",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-util": "^3.0.4",
-    "lodash": "^3.6.0",
     "marked": "^0.3.3",
     "react-router": "^0.13.2",
     "vinyl-buffer": "^1.0.0",
@@ -32,12 +29,7 @@
     "watchify": "^3.1.0"
   },
   "scripts": {
-    "dev": "babel src --out-dir lib --watch",
-    "prebuild": "rm -rf lib && rm -rf browser && mkdir browser",
-    "build:lib": "babel src --out-dir lib",
-    "build:browser": "browserify lib/index.js --standalone matterkit --debug | exorcist browser/matterkit.js.map > browser/matterkit.js",
-    "build": "npm run build:lib && npm run build:browser",
-    "prepublish": "npm run build"
+    "_prepublish": "gulp build"
   },
   "repository": {
     "type": "git",

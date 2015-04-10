@@ -8,7 +8,7 @@ var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
-var clean = require('gulp-clean');
+var rimraf = require('gulp-rimraf');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash/object/assign');
 var browserSync = require('browser-sync');
@@ -27,7 +27,7 @@ gulp.task('watch-build', function () {
 
 gulp.task('clean', function () {
     return gulp.src('demo/build/*')
-        .pipe(clean({force: true}));
+        .pipe(rimraf({force: true}));
 });
 
 gulp.task('copy-index-html', ['clean'], function() {
