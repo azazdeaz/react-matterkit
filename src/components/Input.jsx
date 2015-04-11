@@ -64,7 +64,12 @@ var Input = React.createClass({
         this._onChange(value);
       },
       onUp: (md) => {
-        if (!md.moved) this.refs.input.getDOMNode().focus();
+        if (!md.moved) {
+
+          let node = this.refs.input.getDOMNode();
+          node.focus();
+          node.select();
+        }
       }
     });
   },
