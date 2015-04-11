@@ -14,15 +14,17 @@ var assign = require('lodash/object/assign');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
+var SOURCES = './src/**/*.{js,jsx}';
+
 gulp.task('build', function () {
-    return gulp.src('./src/**/*.jsx')
+    return gulp.src(SOURCES)
         .pipe(size())
         .pipe(babel())
         .pipe(gulp.dest('lib'));
 });
 
 gulp.task('watch-build', function () {
-  gulp.watch('./src', ['build']);
+  gulp.watch(SOURCES, ['build']);
 });
 
 gulp.task('clean', function () {
@@ -30,7 +32,7 @@ gulp.task('clean', function () {
         .pipe(rimraf({force: true}));
 });
 
-gulp.task('copy-index-html', ['clean'], function() {
+gulp.task('copy-demo-statics', ['clean'], function() {
     gulp.src(['./demo/src/index.html', './demo/src/componentPages/utils/react-live-edit/static/**.*'])
     .pipe(gulp.dest('./demo/build'));
 });
@@ -73,4 +75,4 @@ gulp.task('browser-sync', function() {
     });
 });
 
-gulp.task('default', ['build', 'watch-build', 'copy-index-html', 'js', 'browser-sync']);
+gulp.task('default', ['build', 'watch-build', 'copy-demo-statics', 'js', 'browser-sync']);
