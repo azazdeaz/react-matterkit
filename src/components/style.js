@@ -44,6 +44,13 @@ var style = {
 
 export default style;
 
+var noSelect = {
+  userSelect: 'none',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+};
+
 style.fontColor = {
   normal: style.palette.grey2,
   hover: style.palette.grey1,
@@ -89,7 +96,7 @@ style.lineGroup = _.defaults({
 
 //Button
 
-style.button = merge({}, style.roundedCorners, style.font, {
+style.button = merge({}, style.roundedCorners, style.font, noSelect, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
@@ -103,7 +110,6 @@ style.button = merge({}, style.roundedCorners, style.font, {
   boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
   margin: '1px 3px',
   padding: '0 8px',
-  userSelect: 'none',
 
   states: [
     {
@@ -183,14 +189,13 @@ style.inputReset = {
   border: 'none',
 };
 
-style.inputAddon = {
+style.inputAddon = merge({}, noSelect, {
   height: '100%',
   right: 0,
   padding: '0 5px',
   backgroundColor: style.grey.normal,
   borderRadiusTopLeft: style.borderRadius,
   borderRadiusBottomLeft: style.borderRadius,
-  userSelect: 'none',
 
   states: [
     {hover:{
@@ -219,7 +224,7 @@ style.inputAddon = {
       },
     }}
   ],
-};
+});
 
 style.input = merge({}, style.font, style.roundedCorners, {
   display: 'flex',
@@ -571,7 +576,7 @@ style.toolbarGroup = _.assign({}, {
 
   var knobWidth = 32;
 
-  style.toggleBase = merge({}, style.roundedCorners, {
+  style.toggleBase = merge({}, style.roundedCorners, noSelect, {
     height: style.itemHeight,
     display: 'inline-block',
     backgroundColor: style.palette.grey4,
