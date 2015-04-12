@@ -574,7 +574,8 @@ style.toolbarGroup = _.assign({}, {
 
 (()=>{
 
-  var knobWidth = 32;
+  const knobWidth = 32;
+  const anim = '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)';
 
   style.toggleBase = merge({}, style.roundedCorners, noSelect, {
     height: style.itemHeight,
@@ -583,26 +584,28 @@ style.toolbarGroup = _.assign({}, {
   });
 
   style.toggleSide = merge({}, style.font, {
+    transition: `opacity ${anim}`,
     height: 0,
     paddingLeft: 12,
     paddingRight: 12,
     lineHeight: style.lineHeightPX,
     textAlign: 'center',
-    modifiers: [{
-      left:{
-        marginLeft: knobWidth,
-        opacity: 0,
-        states: [{left: {opacity: 1}}],
-      },
-      right:{
+    modifiers: [
+      {left:{
         marginRight: knobWidth,
         opacity: 1,
         states: [{left: {opacity: 0}}],
-      }
-    }],
+      }},
+      {right:{
+        marginLeft: knobWidth,
+        opacity: 0,
+        states: [{left: {opacity: 1}}],
+      }}
+    ],
   });
 
   style.toggleKnob = merge({}, style.roundedCorners, {
+    transition: `left ${anim}`,
     position: 'relative',
     height: style.itemHeight,
     width: knobWidth,

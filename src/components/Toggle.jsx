@@ -12,7 +12,7 @@ var Toggle = React.createClass({
     return {
       labelLeft: 'OFF',
       valueLeft: false,
-      labelRight: 'ONN',
+      labelRight: 'ON',
       valueRight: true,
     };
   },
@@ -35,7 +35,9 @@ var Toggle = React.createClass({
     this.setState({left});
   },
 
+
   render() {
+  console.log("this.buildStyles(style.toggleSide, {right: true})", this.buildStyles(style.toggleSide, {right: true}));
     return <div
       {...this.getBrowserStateEvents()}
       style={style.toggleBase}
