@@ -193,8 +193,8 @@ style.inputAddon = merge({}, noSelect, {
   right: 0,
   padding: '0 5px',
   backgroundColor: style.grey.normal,
-  borderTopLeftRadius: style.borderRadius,
-  borderBottomLeftRadius: style.borderRadius,
+  borderTopRightRadius: style.borderRadius,
+  borderBottomRightRadius: style.borderRadius,
 
   states: [
     {hover:{
@@ -226,6 +226,7 @@ style.inputAddon = merge({}, noSelect, {
 });
 
 style.input = merge({}, style.font, style.roundedCorners, {
+  position: 'relative',
   display: 'flex',
   alignItems: 'stretch',
   color: '#96a6ad',

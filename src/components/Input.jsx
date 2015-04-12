@@ -22,6 +22,7 @@ var Input = React.createClass({
       precision: 12,
       dragSpeed: 1,
       value: '',
+      type: 'text',
       min: undefined,
       max: undefined,
       hints: undefined,
@@ -138,7 +139,7 @@ var Input = React.createClass({
     var hintsProp = this.props.hints;
     var hints = [];
 
-    if (!value || !hintsProp) {
+    if (!this.state.focus || !value || !hintsProp) {
       return null;
     }
 
@@ -164,14 +165,28 @@ var Input = React.createClass({
       let l = Math.min(matches.length, this.props.maxVisibleHints);
       for (let i = 0; i < l; ++i) {
 
-        hints.push(matches[i].hint);
+        let hint = matches[i].hint;
+
+        hints.push({
+          label: hint,
+          onClick: ()=> {
+          console.log('hint', hint);
+            this.setState({value: this._formatValue(hint)});
+          },
+        });
       }
     }
 
     if (hints.length === 0) {
       return null;
     }
-    return <List items={hints}/>;
+    return <List items={hints} style={{
+      position: 'absolute',
+      zIndex: 1,
+      top: '100%',
+      left: 0,
+      width: '100%',
+    }}/>;
   },
 
   render: function () {
