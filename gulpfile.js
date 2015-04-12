@@ -10,7 +10,7 @@ var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var rimraf = require('gulp-rimraf');
 var watch = require('gulp-watch');
-var debug = require('gulp-debug');
+var plumber = require('gulp-plumber');
 var gcallback = require('gulp-callback');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash/object/assign');
@@ -32,14 +32,18 @@ gulp.task('copy-demo-statics', ['clean'], function() {
 gulp.task('build', function () {
   return gulp.src(SOURCES)
     .pipe(size())
+    .pipe(plumber())
     .pipe(babel())
+    .pipe(plumber.stop())
     .pipe(gulp.dest('lib'));
 });
 
 gulp.task('watch-build', function () {
   return watch(SOURCES,{base: 'src' })
     .pipe(size())
+    .pipe(plumber())
     .pipe(babel())
+    .pipe(plumber.stop())
     .pipe(gulp.dest('lib'));
 });
 
@@ -61,7 +65,6 @@ gulp.task('watch-build', function () {
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('index.js'))
-      .pipe(debug({title: 'bundle runs'}))
       // optional, remove if you don't need to buffer file contents
       .pipe(buffer())
       // optional, remove if you dont want sourcemaps
