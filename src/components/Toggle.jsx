@@ -49,7 +49,13 @@ var Toggle = React.createClass({
       <div style={this.buildStyles(style.toggleSide, {right: true})}>
         {this.props.labelRight}
       </div>
-      <div style={this.buildStyles(style.toggleKnob)}/>
+      <div style={this.buildStyles(style.toggleKnob)}>
+        <svg width='32' height='32'>
+          <line x1='7.5' y1='2' x2='7.5' y2='28' stroke='black' stroke-width='1'/>
+          <line x1='16.5' y1='2' x2='16.5' y2='28' stroke='black' stroke-width='1'/>
+          <line x1='25.5' y1='2' x2='25.5' y2='28' stroke='black' stroke-width='1'/>
+        </svg>
+      </div>
     </div>;
   }
 });
