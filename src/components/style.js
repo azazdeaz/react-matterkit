@@ -65,10 +65,10 @@ style.font = {
 };
 
 style.roundedCorners = {
-  borderRadiusTopLeft: style.borderRadius,
-  borderRadiusTopRight: style.borderRadius,
-  borderRadiusBottomLeft: style.borderRadius,
-  borderRadiusBottomRight: style.borderRadius,
+  borderTopLeftRadius: style.borderRadius,
+  borderTopRightRadius: style.borderRadius,
+  borderBottomLeftRadius: style.borderRadius,
+  borderBottomRightRadius: style.borderRadius,
 };
 
 
@@ -172,11 +172,10 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
 
 
 //Panel
-style.panel = {
+style.panel = merge({}, style.roundedCorners, {
   backgroundColor: style.grey.active,
   border: 'solid 1px ' + style.palette.grey4,
-  borderRadius: 2,
-};
+});
 
 //Input
 style.inputReset = {
@@ -194,8 +193,8 @@ style.inputAddon = merge({}, noSelect, {
   right: 0,
   padding: '0 5px',
   backgroundColor: style.grey.normal,
-  borderRadiusTopLeft: style.borderRadius,
-  borderRadiusBottomLeft: style.borderRadius,
+  borderTopLeftRadius: style.borderRadius,
+  borderBottomLeftRadius: style.borderRadius,
 
   states: [
     {hover:{
@@ -233,7 +232,6 @@ style.input = merge({}, style.font, style.roundedCorners, {
   background: style.palette.grey4,
   padding: '0',
   paddingLeft: '2px',
-  borderRadius: '2px',
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
   margin: '1px 3px',
@@ -313,19 +311,18 @@ style.checkbox = merge({}, style.roundedCorners, {
 });
 
 //Tooltip
-style.tooltip = {
+style.tooltip = merge({}, style.roundedCorners, {
   position: 'fixed',
   fontFamily: style.fontFamily,
   fontWeight: style.fontWeight,
   color: '#6bb6c4',
-  borderRadius: 2,
   padding: '5px',
   backgroundColor: '#363c43',
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   boxSizing: 'border-box',
   boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
   border: 'solid 1px rgba(93,169,167,1)',
-};
+});
 
 style.tooltipTriangle = {
   position: 'absolute',
@@ -340,10 +337,9 @@ style.tooltipTriangle = {
 
 
 //Dropdown
-style.dropdown = {
+style.dropdown = merge({}, style.roundedCorners, {
     height: style.itemHeight,
     lineHeight: style.itemHeightPX,
-    borderRadius: 2,
     backgroundColor: 'rgba(59,66,74,.75)',
     boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
     border: 'solid 1px rgba(26,29,33,.75)',
@@ -367,7 +363,7 @@ style.dropdown = {
         backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
       }}
     ],
-};
+});
 
 
 //List
@@ -436,7 +432,7 @@ style.sliderBarBg = {
 	margin: '13px 5px',
   overflow: 'auto',
 	height: 6,
-	borderRadius: '2px',
+	borderRadius: 2,
 	backgroundColor: '#1a1d21',
 };
 
@@ -444,7 +440,7 @@ style.sliderBarProgress = {
   // width: '100%',
   margin: 1,
 	height: 4,
-	borderRadius: '1px',
+	borderRadius: 1,
 	backgroundColor: '#6bb6c4',
 };
 
@@ -524,12 +520,11 @@ style.tabCont = _.merge({}, style.panel, {
 
 
 //Accordion
-style.accordion = _.assign({}, style.font, {
+style.accordion = _.assign({}, style.font, style.roundedCorners, {
   width: '100%',
   maxHeight: '100%',
   backgroundColor: style.palette.grey4,
   border: 'solid 1px rgba(26,29,33,.75)',
-  borderRadius: 2,
   overflow: 'hidden',
   display: 'flex',
   flexDirection: 'column',
