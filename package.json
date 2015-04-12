@@ -18,19 +18,22 @@
     "exorcist": "^0.1.6",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
+    "gulp-callback": "0.0.3",
+    "gulp-debug": "^2.0.1",
     "gulp-filesize": "0.0.6",
+    "gulp-plumber": "^1.0.0",
+    "gulp-print": "^1.1.0",
     "gulp-rimraf": "^0.1.1",
     "gulp-sourcemaps": "^1.5.1",
     "gulp-util": "^3.0.4",
+    "gulp-watch": "^4.2.4",
     "marked": "^0.3.3",
     "react-router": "^0.13.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.1.0"
   },
-  "scripts": {
-    "_prepublish": "gulp build"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git://github.com/azazdeaz/react-matterkit.git"

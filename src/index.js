@@ -23,6 +23,7 @@ module.exports = global.Matter = {
   Slider: require('./components/Slider'),
   // StringInput: require('./components/StringInput'),
   Tabs: require('./components/tabs/Tabs'),
+  Toggle: require('./components/Toggle'),
   Toolbar: require('./components/Toolbar'),
   ToolbarGroup: require('./components/ToolbarGroup'),
   Tooltip: require('./components/Tooltip'),

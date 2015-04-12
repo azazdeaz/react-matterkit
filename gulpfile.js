@@ -9,6 +9,9 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
 var rimraf = require('gulp-rimraf');
+var watch = require('gulp-watch');
+var debug = require('gulp-debug');
+var gcallback = require('gulp-callback');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash/object/assign');
 var browserSync = require('browser-sync');
@@ -16,25 +19,28 @@ var reload = browserSync.reload;
 
 var SOURCES = './src/**/*.{js,jsx}';
 
-gulp.task('build', function () {
-    return gulp.src(SOURCES)
-        .pipe(size())
-        .pipe(babel())
-        .pipe(gulp.dest('lib'));
-});
-
-gulp.task('watch-build', function () {
-  gulp.watch(SOURCES, ['build']);
-});
-
 gulp.task('clean', function () {
-    return gulp.src('demo/build/*')
-        .pipe(rimraf({force: true}));
+  return gulp.src('demo/build/*')
+    .pipe(rimraf({force: true}));
 });
 
 gulp.task('copy-demo-statics', ['clean'], function() {
-    gulp.src(['./demo/src/index.html', './demo/src/componentPages/utils/react-live-edit/static/**.*'])
+  return gulp.src(['./demo/src/index.html', './demo/src/componentPages/utils/react-live-edit/static/**.*'])
     .pipe(gulp.dest('./demo/build'));
+});
+
+gulp.task('build', function () {
+  return gulp.src(SOURCES)
+    .pipe(size())
+    .pipe(babel())
+    .pipe(gulp.dest('lib'));
+});
+
+gulp.task('watch-build', function () {
+  return watch(SOURCES,{base: 'src' })
+    .pipe(size())
+    .pipe(babel())
+    .pipe(gulp.dest('lib'));
 });
 
 (function () {
@@ -46,7 +52,7 @@ gulp.task('copy-demo-statics', ['clean'], function() {
   var opts = assign({}, watchify.args, customOpts);
   var b = watchify(browserify(opts).transform(babelify));
 
-  gulp.task('js', ['clean'], bundle); // so you can run `gulp js` to build the file
+  gulp.task('js', ['copy-demo-statics', 'build'], bundle); // so you can run `gulp js` to build the file
   b.on('update', bundle); // on any dep update, runs the bundler
   b.on('log', gutil.log); // output build logs to terminal
 
@@ -55,12 +61,14 @@ gulp.task('copy-demo-statics', ['clean'], function() {
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('index.js'))
+      .pipe(debug({title: 'bundle runs'}))
       // optional, remove if you don't need to buffer file contents
       .pipe(buffer())
       // optional, remove if you dont want sourcemaps
       .pipe(sourcemaps.init({loadMaps: true})) // loads map from browserify file
          // Add transformation tasks to the pipeline here.
       .pipe(sourcemaps.write('./')) // writes .map file
+      .pipe(size())
       .pipe(gulp.dest('./demo/build'))
       .pipe(reload({stream: true}));
   }
@@ -68,11 +76,43 @@ gulp.task('copy-demo-statics', ['clean'], function() {
 
 // Static server
 gulp.task('browser-sync', function() {
-    browserSync({
-        server: {
-            baseDir: './demo/build'
-        }
-    });
+  browserSync({
+    server: {
+      baseDir: './demo/build'
+    }
+  });
 });
+//
+gulp.task('default', ['watch-build', 'js', 'browser-sync']);
 
-gulp.task('default', ['build', 'watch-build', 'copy-demo-statics', 'js', 'browser-sync']);
+
+
+
+
+
+
+// var gulp = require('gulp'),
+//     babel = require('gulp-babel'),
+//     watch = require('gulp-watch'),
+//     plumber = require('gulp-plumber'),
+//
+// path = {
+//     src: {
+//         js: SOURCES,
+//     },
+//     dist: {
+//         js: "lib/"
+//     }
+// };
+//
+// gulp.task('6to5', function () {
+//     gulp.src(SOURCES)
+//         // .pipe(plumber())
+//         .pipe(babel())
+//         // .pipe(plumber.stop())
+//         .pipe(gulp.dest(path.dist.js));
+// });
+//
+// gulp.task('watchez', ['6to5'], function (){
+//     gulp.watch([SOURCES], [babel]);
+// });

@@ -1,5 +1,5 @@
 var React = require('react');
-var Matter = require('../../');
+var Matter = require('../../lib/index');
 var {List, ListItem, style} = Matter;
 var merge = require('lodash/object/merge');
 var kebabCase = require('lodash/string/kebabCase');
@@ -18,6 +18,7 @@ var componentPages = {
   ButtonGroup: require('./componentPages/ButtonGroup.jsx'),
   Icon: require('./componentPages/Icon.jsx'),
   Input: require('./componentPages/Input.jsx'),
+  Toggle: require('./componentPages/Toggle.jsx'),
 };
 
 global.Matter = Matter;

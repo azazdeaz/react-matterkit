@@ -171,12 +171,10 @@ var Input = React.createClass({
     if (hints.length === 0) {
       return null;
     }
-console.log(hints)
     return <List items={hints}/>;
   },
 
   render: function () {
-console.log('renderInput', this.state.value, this.props.value);
 
     return <div
       style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>

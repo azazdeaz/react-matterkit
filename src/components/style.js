@@ -5,7 +5,7 @@ var uriBorder = '';//datauri(__dirname+'/assets/border.png');
 var uriCheck = '';//datauri(__dirname+'/assets/check.png');
 
 var style = {
-    lineHeight: 34,
+    lineHeight: 32,
     lineHeightPX: '34px',
     itemHeight: 32,
     itemHeightPX: '32px',
@@ -564,3 +564,46 @@ style.toolbarGroup = _.assign({}, {
   height: style.lineHeight,
   display: 'flex',
 });
+
+//Toggle
+
+(()=>{
+
+  var knobWidth = 32;
+
+  style.toggleBase = merge({}, style.roundedCorners, {
+    height: style.itemHeight,
+    display: 'inline-block',
+    backgroundColor: style.palette.grey4,
+  });
+
+  style.toggleSide = merge({}, style.font, {
+    height: 0,
+    paddingLeft: 12,
+    paddingRight: 12,
+    lineHeight: style.lineHeightPX,
+    textAlign: 'center',
+    modifiers: [{
+      left:{
+        marginLeft: knobWidth,
+        opacity: 0,
+        states: [{left: {opacity: 1}}],
+      },
+      right:{
+        marginRight: knobWidth,
+        opacity: 1,
+        states: [{left: {opacity: 0}}],
+      }
+    }],
+  });
+
+  style.toggleKnob = merge({}, style.roundedCorners, {
+    position: 'relative',
+    height: style.itemHeight,
+    width: knobWidth,
+    display: 'inline-block',
+    backgroundColor: style.palette.grey3,
+    left: `calc(100% - ${knobWidth}px)`,
+    states: [{left: {left: 0}}],
+  });
+})();
