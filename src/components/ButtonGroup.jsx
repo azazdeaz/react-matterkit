@@ -1,6 +1,6 @@
 var React = require('react/addons');
-var merge = require('lodash.merge');
-var has = require('lodash.has');
+var merge = require('lodash/object/merge');
+var has = require('lodash/object/has');
 
 var ButtonGroup = React.createClass({
 

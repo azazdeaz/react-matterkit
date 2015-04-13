@@ -1,5 +1,5 @@
 var _ = require('lodash');
-var merge = require('lodash.merge');
+var merge = require('lodash/object/merge');
 // var datauri = require('datauri');
 var uriBorder = '';//datauri(__dirname+'/assets/border.png');
 var uriCheck = '';//datauri(__dirname+'/assets/check.png');
@@ -586,6 +586,7 @@ style.toolbarGroup = _.assign({}, {
     paddingRight: 12,
     lineHeight: style.lineHeightPX,
     textAlign: 'center',
+    cursor: 'default',
     modifiers: [
       {left:{
         marginRight: knobWidth,

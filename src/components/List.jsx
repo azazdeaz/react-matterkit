@@ -2,7 +2,7 @@ var React = require('react/addons');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var ListItem = require('./ListItem');
 var style = require('./style');
-var has = require('lodash.has');
+var has = require('lodash/object/has');
 
 var List = React.createClass({
 
@@ -19,7 +19,7 @@ var List = React.createClass({
         if (typeof(item) === 'string') {
             item = {label: item};
         }
-        
+
         return <ListItem
           {...item}
           key={has(item, 'key') ? item.key : idx}/>;

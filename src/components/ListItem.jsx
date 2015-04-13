@@ -2,7 +2,7 @@ var React = require('react/addons');
 var { PureRenderMixin } = React;
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('./style');
-var has = require('lodash.has');
+var has = require('lodash/object/has');
 
 var ListItem = React.createClass({
 

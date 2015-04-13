@@ -3,7 +3,7 @@ var {Tabs} = require('../../../../');
 var LiveEditor = require('./react-live-edit/live-editor.jsx');
 var marked = require('marked');
 var Prop = require('./Prop.jsx');
-var has = require('lodash.has');
+var has = require('lodash/object/has');
 
 module.exports = React.createClass({
   contextTypes: {
