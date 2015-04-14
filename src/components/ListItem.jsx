@@ -11,6 +11,7 @@ var ListItem = React.createClass({
   getDefaultProps() {
     return {selected: false};
   },
+
   render() {
 
     var label = has(this.props, 'label') ?

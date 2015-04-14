@@ -135,11 +135,11 @@ var Input = React.createClass({
 
   renderHints() {
 
-    var value = this.state.value;
+    var {value, lastlySelectedHint} = this.state;
     var hintsProp = this.props.hints;
     var hints = [];
 
-    if (!this.state.focus || !value || !hintsProp) {
+    if (value === lastlySelectedHint || !value || !hintsProp) {
       return null;
     }
 
@@ -170,8 +170,8 @@ var Input = React.createClass({
         hints.push({
           label: hint,
           onClick: ()=> {
-          console.log('hint', hint);
-            this.setState({value: this._formatValue(hint)});
+            var value = this._formatValue(hint);
+            this.setState({value, lastlySelectedHint: value});
           },
         });
       }
