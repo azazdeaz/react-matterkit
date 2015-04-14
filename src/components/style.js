@@ -153,16 +153,16 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
             }
           ]
         },
-        empty: {
+        stamp: {
           backgroundImage: 'none',
           backgroundColor: 'none',
           border: 'none',
           boxShadow: 'none',
           states: [
-            {hover:{backgroundColor: 'none'}},
-            {active:{backgroundColor: 'none'}},
-            {focus:{backgroundColor: 'none'}},
-            {disabled:{backgroundColor: 'none'}},
+            {hover:{backgroundImage: 'none', backgroundColor: 'none'}},
+            {active:{backgroundImage: 'none', backgroundColor: 'none'}},
+            {focus:{backgroundImage: 'none', backgroundColor: 'none'}},
+            {disabled:{backgroundImage: 'none', backgroundColor: 'none'}},
           ],
         }
       },

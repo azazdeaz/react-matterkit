@@ -10,13 +10,13 @@ var Tabs = React.createClass({
   getDefaultProps() {
     return {
       stretchLabels: true,
-      defaultTab: 0,
+      defaultTabIdx: 0,
     };
   },
 
   getInitialState() {
     return {
-      currTabIdx: 123,
+      currTabIdx: this.props.defaultTabIdx,
     };
   },
 
@@ -29,12 +29,8 @@ var Tabs = React.createClass({
     }
   },
 
-  componentWillMount() {
-    this.setState({currTabIdx: this.props.defaultTab});
-  },
-
   componentWillReciveProps(nextProps) {
-    this.setState({currTabIdx: nextProps.defaultTab});
+    this.setState({currTabIdx: nextProps.defaultTabIdx});
   },
 
   render() {
