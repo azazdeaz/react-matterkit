@@ -96,6 +96,33 @@ style.lineGroup = _.defaults({
 
 //Button
 
+style.buttonBg = merge({}, style.roundedCorners, {
+  backgroundColor: '#363c43',
+  backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
+  border: 'solid 1px rgba(26,29,33,.75)',
+  boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
+  boxSizing: 'border-box',
+
+  states: [
+    {
+      hover: {
+        backgroundColor: '#3b424a',
+      },
+    }, {
+      active: {
+        backgroundColor: '#363c43',
+        boxShadow: 'inset 0 -1px rgba(255,255,255,.02)',
+        backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
+      },
+    }, {
+      disabled: {
+        backgroundColor: '#2c3136',
+        border: 'solid 1px rgba(26,29,33,.32)',
+      }
+    },
+  ],
+});
+
 style.button = merge({}, style.roundedCorners, style.font, noSelect, {
 
   height: style.itemHeight,
@@ -108,8 +135,12 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   border: 'solid 1px rgba(26,29,33,.75)',
   boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
-  margin: '1px 3px',
-  padding: '0 8px',
+  marginTop: 1,
+  marginLeft: 3,
+  marginBottom: 1,
+  marginRight: 3,
+  paddingLeft: 8,
+  paddingRight: 8,
 
   states: [
     {
@@ -571,6 +602,7 @@ style.toolbarGroup = _.assign({}, {
 (()=>{
 
   const knobWidth = 32;
+  const labelOffset = '7px';
   const anim = '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)';
 
   style.toggleBase = merge({}, style.roundedCorners, noSelect, {
@@ -580,7 +612,7 @@ style.toolbarGroup = _.assign({}, {
   });
 
   style.toggleSide = merge({}, style.font, {
-    transition: `opacity ${anim}`,
+    transition: `all ${anim}`,
     height: 0,
     paddingLeft: 12,
     paddingRight: 12,
@@ -591,24 +623,33 @@ style.toolbarGroup = _.assign({}, {
       {left:{
         marginRight: knobWidth,
         opacity: 1,
-        states: [{left: {opacity: 0}}],
+        transform: `translateX(0px)`,
+        states: [{left: {
+          opacity: 0,
+          transform: `translateX(-${labelOffset})`,
+        }}],
       }},
       {right:{
         marginLeft: knobWidth,
         opacity: 0,
-        states: [{left: {opacity: 1}}],
+        transform: `translateX(${labelOffset})`,
+        states: [{left: {
+          opacity: 1,
+          transform: `translateX(0px)`,
+        }}],
       }}
     ],
   });
 
-  style.toggleKnob = merge({}, style.roundedCorners, {
+  style.toggleKnob = merge({}, style.buttonBg, {
     transition: `left ${anim}`,
     position: 'relative',
     height: style.itemHeight,
     width: knobWidth,
     display: 'inline-block',
     backgroundColor: style.palette.grey3,
-    left: `calc(100% - ${knobWidth}px)`,
-    states: [{left: {left: 0}}],
+    left: `calc(100% - ${knobWidth-2}px)`,
   });
+
+  style.toggleKnob.states.push({left: {left: 0}});
 })();

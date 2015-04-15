@@ -35,9 +35,19 @@ var Toggle = React.createClass({
     this.setState({left});
   },
 
+  renderGrip() {
+
+    var grey = style.grey.hover;
+
+    return <svg width='32' height='32'>
+      <line x1='13.5' y1='12' x2='13.5' y2='20' stroke={grey} stroke-width='1'/>
+      <line x1='15.5' y1='12' x2='15.5' y2='20' stroke={grey} stroke-width='1'/>
+      <line x1='17.5' y1='12' x2='17.5' y2='20' stroke={grey} stroke-width='1'/>
+    </svg>;
+  },
 
   render() {
-  console.log("this.buildStyles(style.toggleSide, {right: true})", this.buildStyles(style.toggleSide, {right: true}));
+  console.log("this.buildStyles(style.toggleKnob)", style.toggleKnob);
     return <div
       {...this.getBrowserStateEvents()}
       style={style.toggleBase}
@@ -50,11 +60,7 @@ var Toggle = React.createClass({
         {this.props.labelRight}
       </div>
       <div style={this.buildStyles(style.toggleKnob)}>
-        <svg width='32' height='32'>
-          <line x1='7.5' y1='2' x2='7.5' y2='28' stroke='black' stroke-width='1'/>
-          <line x1='16.5' y1='2' x2='16.5' y2='28' stroke='black' stroke-width='1'/>
-          <line x1='25.5' y1='2' x2='25.5' y2='28' stroke='black' stroke-width='1'/>
-        </svg>
+        {this.renderGrip()}
       </div>
     </div>;
   }
