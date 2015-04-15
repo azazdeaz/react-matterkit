@@ -38,12 +38,31 @@ export default React.createClass({
     }
   },
 
-  render: function () {
+  renderCheck() {
+
+    if (!this.state.value) {
+      return null;
+    }
+
+    var {start, end} = style.gardient;
+
+    return <svg width="18" height="18">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style={{stopColor: start, stopOpacity:1}} />
+          <stop offset="100%" style={{stopColor: end, stopOpacity:1}} />
+        </linearGradient>
+      </defs>
+      <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z"  fill="url(#grad1)"/>
+    </svg>;
+  },
+
+  render() {
 
     return <div
       {...this.getBrowserStateEvents()}
       style = {this.buildStyles(style.checkbox)}
       onClick = {this._onClick}
-    ></div>;
+    >{this.renderCheck()}</div>;
   }
 });

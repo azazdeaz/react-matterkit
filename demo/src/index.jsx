@@ -16,6 +16,7 @@ var Redirect = Router.Redirect;
 var componentPages = {
   Button: require('./componentPages/Button.jsx'),
   ButtonGroup: require('./componentPages/ButtonGroup.jsx'),
+  Checkbox: require('./componentPages/Checkbox.jsx'),
   Icon: require('./componentPages/Icon.jsx'),
   Input: require('./componentPages/Input.jsx'),
   Toggle: require('./componentPages/Toggle.jsx'),

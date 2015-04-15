@@ -16,10 +16,17 @@ var style = {
       check: uriCheck,
     },
 
-    gardient: {
-        normal: 'linear-gradient(135deg, #6bb6c4 0%,#6b9ad3 100%)',
-        backward: 'linear-gradient(-45deg, #6bb6c4 0%,#6b9ad3 100%)',
-    },
+    gardient: (()=>{
+      var start = '#6bb6c4';
+      var end = '#6b9ad3';
+
+      return {
+        start,
+        end,
+        normal: `linear-gradient(135deg, ${start} 0%, ${end} 100%)`,
+        backward: `linear-gradient(-45deg, ${start} 0%, ${end} 100%)`,
+      };
+    })(),
 
     fontFamily: 'Open Sans',
     fontWeight: '300',
@@ -33,7 +40,7 @@ var style = {
         grey2: '#96a6ad',
         grey3: '#3b424a',
         grey4: '#1a1d21',
-        bg: '#262A2E'
+        bg: '#262A2E',
     },
     grey: {
       normal: '#282c30',
@@ -123,18 +130,13 @@ style.buttonBg = merge({}, style.roundedCorners, {
   ],
 });
 
-style.button = merge({}, style.roundedCorners, style.font, noSelect, {
+style.button = merge({}, style.buttonBg, style.font, noSelect, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
   display: 'inline-block',
-  boxSizing: 'border-box',
   textAlign: 'center',
   color: '#96a6ad',
-  backgroundColor: '#363c43',
-  backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
-  border: 'solid 1px rgba(26,29,33,.75)',
-  boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
   marginTop: 1,
   marginLeft: 3,
   marginBottom: 1,
@@ -146,20 +148,14 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
     {
       hover: {
         color: '#e2e7eb',
-        backgroundColor: '#3b424a',
       },
     }, {
       active: {
         color: '#6bb6c4',
-        backgroundColor: '#363c43',
-        boxShadow: 'inset 0 -1px rgba(255,255,255,.02)',
-        backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
       },
     }, {
       disabled: {
         color: 'rgba(150,166,173,.2)',
-        backgroundColor: '#2c3136',
-        border: 'solid 1px rgba(26,29,33,.32)',
       }
     },
   ],
@@ -256,7 +252,31 @@ style.inputAddon = merge({}, noSelect, {
   ],
 });
 
-style.input = merge({}, style.font, style.roundedCorners, {
+style.inputBorder = merge({}, style.font, style.roundedCorners, {
+  border: 'solid 1px transparent',
+
+  states: [
+    {hover:{
+      border: 'solid 1px rgba(68,79,88,.5)',
+    }},
+    {focus:{
+      boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
+      border: 'solid 1px rgba(93,169,167,1)',
+    }},
+    {active:{
+      boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
+      border: 'solid 1px rgba(93,169,167,1)',
+    }},
+    {disabled:{
+      backgroundColor: 'rgba(26,29,33,.6)',
+    }},
+    {error:{
+      border: 'solid 1px #aa4353',
+    }}
+  ],
+});
+
+style.input = merge({}, style.inputBorder, style.font, style.roundedCorners, {
   position: 'relative',
   display: 'flex',
   alignItems: 'stretch',
@@ -268,24 +288,29 @@ style.input = merge({}, style.font, style.roundedCorners, {
   lineHeight: style.itemHeightPX,
   margin: '1px 3px',
   boxSizing: 'border-box',
-  border: 'solid 1px transparent',
+  // border: 'solid 1px transparent',
 
   states: [
     {hover:{
       color: '#e2e7eb',
-      border: 'solid 1px rgba(68,79,88,.5)',
+      // border: 'solid 1px rgba(68,79,88,.5)',
     }},
     {focus:{
       color: '#6bb6c4',
-      boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
-      border: 'solid 1px rgba(93,169,167,1)',
+      // boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
+      // border: 'solid 1px rgba(93,169,167,1)',
+    }},
+    {active:{
+      color: '#6bb6c4',
+      // boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
+      // border: 'solid 1px rgba(93,169,167,1)',
     }},
     {disabled:{
       color: '#96a6ad',
-      backgroundColor: 'rgba(26,29,33,.6)',
+      // backgroundColor: 'rgba(26,29,33,.6)',
     }},
     {error:{
-      border: 'solid 1px #aa4353',
+      // border: 'solid 1px #aa4353',
     }}
   ],
   modifiers: [
@@ -303,43 +328,14 @@ style.input = merge({}, style.font, style.roundedCorners, {
   ],
 });
 
-style.checkbox = merge({}, style.roundedCorners, {
+style.checkbox = merge({}, style.inputBorder, style.roundedCorners, noSelect, {
   width: 18,
   height: 18,
-  margin: 'auto 3px',
+  marginLeft: 3,
+  marginRight: 3,
   backgroundColor: style.palette.grey4,
   backgroundPosition: '1px 1px',
   backgroundRepeat: 'no-repeat',
-
-  states: [
-    {hover:{
-      color: '#e2e7eb',
-      border: 'solid 1px rgba(68,79,88,.5)',
-    }},
-    {focus:{
-      color: '#6bb6c4',
-      boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
-      border: 'solid 1px rgba(93,169,167,1)',
-    }},
-    {disabled:{
-      color: '#96a6ad',
-      backgroundColor: 'rgba(26,29,33,.6)',
-    }},
-    {error:{
-      border: 'solid 1px #aa4353',
-    }},
-    {value: {
-      backgroundColor: style.palette.green,
-      states: [
-        {hover:{backgroundColor: style.palette.green}},
-        {active:{backgroundColor: style.palette.green}},
-        {focus:{backgroundColor: style.palette.green}},
-        {disabled:{backgroundColor: style.palette.green}},
-      ],
-    }}
-  ],
-  modifiers: [
-  ],
 });
 
 //Tooltip
