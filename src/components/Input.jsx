@@ -9,7 +9,7 @@ var style = require('./style');
 var Icon = require('./Icon');
 var List = require('./List');
 var CustomDrag = require('../utils/CustomDrag');
-var levenshtein = require('fast-levenshtein');
+var fuzzy = require('fuzzy');
 
 var Input = React.createClass({
 
@@ -136,46 +136,27 @@ var Input = React.createClass({
   renderHints() {
 
     var {value, lastlySelectedHint} = this.state;
-    var hintsProp = this.props.hints;
-    var hints = [];
 
-    if (value === lastlySelectedHint || !value || !hintsProp) {
+    if (value === lastlySelectedHint || !value || !this.props.hints) {
       return null;
     }
 
-    if (typeof(hintsProp) === 'function') {
+    var hints = fuzzy.filter(value, this.props.hints, {
+      pre: '<strong>',
+      post:'</strong>',
+    });
 
-      hints = hints(value);
-    }
-    else if (isArray(hintsProp)) {
+    hints.splice(12);
 
-      let matches = [];
-
-      hintsProp.forEach(hint => {
-
-        var dist = levenshtein.get(value, hint);
-
-        if (dist < 32) {
-          matches.push({hint, dist});
-        }
-      });
-
-      matches.sort((a, b) => a.dist - b.dist);
-
-      let l = Math.min(matches.length, this.props.maxVisibleHints);
-      for (let i = 0; i < l; ++i) {
-
-        let hint = matches[i].hint;
-
-        hints.push({
-          label: hint,
-          onClick: ()=> {
-            var value = this._formatValue(hint);
-            this.setState({value, lastlySelectedHint: value});
-          },
-        });
-      }
-    }
+    hints = hints.map(hint => {
+      return {
+        label: <span dangerouslySetInnerHTML={{__html: hint.string}}/>,
+        onClick: ()=> {
+          var value = this._formatValue(hint.original);
+          this.setState({value, lastlySelectedHint: value});
+        },
+      };
+    });
 
     if (hints.length === 0) {
       return null;

@@ -4,12 +4,9 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
+    "fuzzy": "^0.1.0",
     "lodash": "^3.6.0",
-    "radium": "^0.10.1",
-    "fast-levenshtein": "^1.0.6"
-  },
-  "peerDependencies": {
-    "react": ">=0.12.2 <0.14.0"
+    "radium": "^0.10.1"
   },
   "devDependencies": {
     "babelify": "^6.0.2",
