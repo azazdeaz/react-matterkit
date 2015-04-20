@@ -130,10 +130,11 @@ style.buttonBg = merge({}, style.roundedCorners, {
   ],
 });
 
-style.button = merge({}, style.buttonBg, style.font, noSelect, {
+style.button = merge({}, style.roundedCorners, style.font, noSelect, {
 
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
+  boxSizing: 'border-box',
   display: 'inline-block',
   textAlign: 'center',
   color: '#96a6ad',
@@ -162,6 +163,7 @@ style.button = merge({}, style.buttonBg, style.font, noSelect, {
   modifiers: [
     {
       kind: {
+        normal: style.buttonBg,
         colored: {
           color: '#191c1f',
           backgroundColor: '#262a2e',
@@ -366,31 +368,31 @@ style.tooltipTriangle = {
 
 //Dropdown
 style.dropdown = merge({}, style.roundedCorners, {
-    height: style.itemHeight,
-    lineHeight: style.itemHeightPX,
-    backgroundColor: 'rgba(59,66,74,.75)',
-    boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
-    border: 'solid 1px rgba(26,29,33,.75)',
-    backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
-    overflow: 'hidden',
-    boxSizing: 'border-box',
-    margin: '1px 0',
-    outline: 'none',
+  height: style.itemHeight,
+  lineHeight: style.itemHeightPX,
+  backgroundColor: 'rgba(59,66,74,.75)',
+  boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
+  border: 'solid 1px rgba(26,29,33,.75)',
+  backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
+  overflow: 'hidden',
+  boxSizing: 'border-box',
+  margin: '1px 0',
+  outline: 'none',
 
-    states: [
-      {hover: {
-        color: '#e2e7eb',
-        backgroundColor: '#3b424a',
-      }},
-      {open: {
-        zIndex: 1,
-        height: 'auto',
-        position: 'relative',
-        color: '#6bb6c4',
-        backgroundColor: '#3b424a',
-        backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
-      }}
-    ],
+  states: [
+    {hover: {
+      color: '#e2e7eb',
+      backgroundColor: '#3b424a',
+    }},
+    {open: {
+      zIndex: 1,
+      height: 'auto',
+      position: 'relative',
+      color: '#6bb6c4',
+      backgroundColor: '#3b424a',
+      backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
+    }}
+  ],
 });
 
 
