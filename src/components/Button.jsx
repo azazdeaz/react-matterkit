@@ -3,11 +3,11 @@ var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var _ = require('lodash');
 var style = require('./style');
 var Icon = require('./Icon');
-var Base = require('./Base');
+var BasicMixin = require('../utils/BasicMixin');
 
 var Button = React.createClass({
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
 
   getDefaultProps() {
     return {
@@ -33,6 +33,7 @@ var Button = React.createClass({
 
     return <div
       {...this.getBrowserStateEvents()}
+      {...this.getBasics()}
       style={this.buildStyles(style.button)}
 
       tooltip={this.props.tooltip}
