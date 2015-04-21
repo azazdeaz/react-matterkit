@@ -31,11 +31,9 @@ var Button = React.createClass({
         style={{marginRight:this.props.text ? 4 : 0}}/>;
     }
 
-    console.log('bs',this.buildStyles(style.button))
-
     return <div
-      {...this.getBrowserStateEvents()}
       {...this.getBasics()}
+      {...this.getBrowserStateEvents()}
       style={this.buildStyles(style.button)}
 
       tooltip={this.props.tooltip}

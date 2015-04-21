@@ -10,17 +10,36 @@ var Toggle = React.createClass({
 
   getDefaultProps() {
     return {
-      labelLeft: 'OFF',
-      valueLeft: false,
-      labelRight: 'ON',
-      valueRight: true,
+      labelLeft: 'ON',
+      valueLeft: true,
+      labelRight: 'OFF',
+      valueRight: false,
     };
   },
 
   getInitialState() {
+
+    var {defaultValue, valueRight} = this.props;
+
     return {
-      left: true,
+      left: defaultValue === valueRight ? false : true,
     };
+  },
+
+  componentWillReciveProps(nextProps) {
+
+    if (has(nextProps, 'defaultValue')) {
+
+      let {defaultValue, valueLeft, valueRight} = this.props;
+      let left;
+
+      if (defaultValue === valueLeft) left = true;
+      else if (defaultValue === valueRight) left = false;
+
+      if (left !== undefined) {
+        this.setState({left});
+      }
+    }
   },
 
   onClick() {
@@ -40,14 +59,14 @@ var Toggle = React.createClass({
     var grey = style.grey.hover;
 
     return <svg width='32' height='32'>
-      <line x1='13.5' y1='12' x2='13.5' y2='20' stroke={grey} stroke-width='1'/>
-      <line x1='15.5' y1='12' x2='15.5' y2='20' stroke={grey} stroke-width='1'/>
-      <line x1='17.5' y1='12' x2='17.5' y2='20' stroke={grey} stroke-width='1'/>
+      <line x1='13.5' y1='12' x2='13.5' y2='20' stroke={grey} strokeWidth='1'/>
+      <line x1='15.5' y1='12' x2='15.5' y2='20' stroke={grey} strokeWidth='1'/>
+      <line x1='17.5' y1='12' x2='17.5' y2='20' stroke={grey} strokeWidth='1'/>
     </svg>;
   },
 
   render() {
-  console.log("this.buildStyles(style.toggleKnob)", style.toggleKnob);
+  console.log("this.buildStyles(style.toggleKnob)", this.buildStyles(style.toggleKnob).left);
     return <div
       {...this.getBrowserStateEvents()}
       style={style.toggleBase}

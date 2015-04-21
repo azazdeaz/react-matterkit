@@ -108,7 +108,6 @@ style.buttonBg = merge({}, style.roundedCorners, {
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   border: 'solid 1px rgba(26,29,33,.75)',
   boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
-  boxSizing: 'border-box',
 
   states: [
     {
@@ -619,27 +618,28 @@ style.toolbarGroup = _.assign({}, {
     cursor: 'default',
     modifiers: [
       {left:{
-        marginRight: knobWidth,
-        opacity: 1,
-        transform: `translateX(0px)`,
-        states: [{left: {
-          opacity: 0,
-          transform: `translateX(-${labelOffset})`,
-        }}],
-      }},
-      {right:{
         marginLeft: knobWidth,
         opacity: 0,
         transform: `translateX(${labelOffset})`,
         states: [{left: {
           opacity: 1,
           transform: `translateX(0px)`,
-        }}],
+        }}]
+      }},
+      {right:{
+        marginRight: knobWidth,
+        opacity: 1,
+        transform: `translateX(0px)`,
+        states: [{left: {
+          opacity: 0,
+          transform: `translateX(-${labelOffset})`,
+        }}]
       }}
     ],
   });
 
   style.toggleKnob = merge({}, style.buttonBg, {
+    boxSizing: 'border-box',
     transition: `left ${anim}`,
     position: 'relative',
     height: style.itemHeight,
