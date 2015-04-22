@@ -43,8 +43,10 @@ var Dropdown = React.createClass({
       onBlur = {this.onBlur}
       onFocus = {this.onFocus}
     >
-      <div style={{padding: '0 8px'}}>
-        {this.props.value}
+      <div style={{padding: '0 8px', display: 'flex'}}>
+        <span style={{flex: 1}}>
+          {this.props.value}
+        </span>
         <Icon
           style={{marginLeft: 4}}
           lineHeight={style.itemHeightPX}
