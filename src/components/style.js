@@ -617,23 +617,21 @@ style.toolbarGroup = _.assign({}, {
     textAlign: 'center',
     cursor: 'default',
     modifiers: [
-      {left:{
-        marginLeft: knobWidth,
-        opacity: 0,
-        transform: `translateX(${labelOffset})`,
-        states: [{left: {
-          opacity: 1,
-          transform: `translateX(0px)`,
-        }}]
-      }},
-      {right:{
-        marginRight: knobWidth,
-        opacity: 1,
-        transform: `translateX(0px)`,
-        states: [{left: {
+      {side: {
+        left:{
+          marginLeft: knobWidth,
+          opacity: 0,
+          transform: `translateX(${labelOffset})`,
+        },
+        right:{
+          marginRight: knobWidth,
           opacity: 0,
           transform: `translateX(-${labelOffset})`,
-        }}]
+        }
+      }},
+      {on: {
+        opacity: 1,
+        transform: 'translateX(0px)',
       }}
     ],
   });

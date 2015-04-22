@@ -60,18 +60,26 @@ var Toggle = React.createClass({
       style={this.buildStyles(style.toggleBase)}
       onClick={this.onClick}>
 
-      <div style={this.buildStyles(style.toggleSide, {left: true})}>
-        {this.props.labelLeft}
-      </div>
-      <div style={this.buildStyles(style.toggleSide, {right: true})}>
-        {this.props.labelRight}
-      </div>
+      <Side side='left' label={this.props.labelLeft} on={this.state.left}/>
+      <Side side='right' label={this.props.labelRight} on={!this.state.left}/>
       <Knob left={this.state.left}/>
     </div>;
   }
 });
 
 
+
+
+var Side = React.createClass({
+
+  mixins: [StyleResolverMixin, BrowserStateMixin],
+
+  render() {
+    return <div style={this.buildStyles(style.toggleSide)}>
+      {this.props.label}
+    </div>;
+  },
+});
 
 
 var Knob = React.createClass({
