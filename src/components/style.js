@@ -647,7 +647,6 @@ style.toolbarGroup = _.assign({}, {
     display: 'inline-block',
     backgroundColor: style.palette.grey3,
     left: `calc(100% - ${knobWidth-2}px)`,
+    modifiers: [{left: {left: 0}}],
   });
-
-  style.toggleKnob.states.push({left: {left: 0}});
 })();

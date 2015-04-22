@@ -32,7 +32,7 @@ var Input = React.createClass({
 
   getInitialState() {
     return {
-      value: this._formatValue(this.props.value),
+      value: this._formatValueWithEvent(this.props.value),
       error: false,
     };
   },
@@ -53,12 +53,11 @@ var Input = React.createClass({
         }
 
         return {
-          value: this.props.value,
+          value: this.state.value,
           moved: false,
         };
       },
       onDrag: (md) => {
-
         md.moved = true;
 
         var value = md.value + md.dx * this.props.dragSpeed;
@@ -80,7 +79,7 @@ var Input = React.createClass({
     if(has(nextProps, 'value')) {
 
       this.setState({
-        value: this._formatValue(nextProps.value),
+        value: this._formatValue(nextProps.value, nextProps),
       });
     }
   },
@@ -98,15 +97,37 @@ var Input = React.createClass({
     }
   },
 
-  _formatValue(value) {
+  _formatValueWithEvent(value, props) {
 
-    if (this.props.type === 'number') {
-      return this._formatNumber(value);
-    }
-    else if (this.props.type === 'text') {
-      return value + '';
+    var formattedValue = this._formatValue(value, props);
+
+    if (this.props.prepareExportValue) {
+      formattedValue = this.props.prepareExportValue(formattedValue);
     }
 
+    if (formattedValue !== value && this.props.onInitialFormat) {
+      this.props.onInitialFormat(formattedValue);
+    }
+
+    return formattedValue;
+  },
+
+  _formatValue(value, props) {
+
+    props = props || this.props;
+
+    if (props.type === 'number') {
+      value =  this._formatNumber(value);
+    }
+    else if (props.type === 'text') {
+      value += '';
+    }
+
+    if (props.formatValue) {
+      value = props.formatValue(value);
+    }
+
+    return value;
   },
 
   _formatNumber(value) {

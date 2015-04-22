@@ -6,7 +6,7 @@ var assign = require('lodash/object/assign');
 
 var Toggle = React.createClass({
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  mixins: [ StyleResolverMixin ],
 
   getDefaultProps() {
     return {
@@ -54,6 +54,30 @@ var Toggle = React.createClass({
     this.setState({left});
   },
 
+  render() {
+
+    return <div
+      style={this.buildStyles(style.toggleBase)}
+      onClick={this.onClick}>
+
+      <div style={this.buildStyles(style.toggleSide, {left: true})}>
+        {this.props.labelLeft}
+      </div>
+      <div style={this.buildStyles(style.toggleSide, {right: true})}>
+        {this.props.labelRight}
+      </div>
+      <Knob left={this.state.left}/>
+    </div>;
+  }
+});
+
+
+
+
+var Knob = React.createClass({
+
+  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+
   renderGrip() {
 
     var grey = style.grey.hover;
@@ -66,23 +90,16 @@ var Toggle = React.createClass({
   },
 
   render() {
-  console.log("this.buildStyles(style.toggleKnob)", this.buildStyles(style.toggleKnob).left);
+
     return <div
       {...this.getBrowserStateEvents()}
-      style={style.toggleBase}
-      onClick={this.onClick}>
+      style={this.buildStyles(style.toggleKnob)}>
 
-      <div style={this.buildStyles(style.toggleSide, {left: true})}>
-        {this.props.labelLeft}
-      </div>
-      <div style={this.buildStyles(style.toggleSide, {right: true})}>
-        {this.props.labelRight}
-      </div>
-      <div style={this.buildStyles(style.toggleKnob)}>
-        {this.renderGrip()}
-      </div>
+      {this.renderGrip()}
     </div>;
-  }
+  },
 });
+
+
 
 module.exports = Toggle;

@@ -3,10 +3,11 @@ var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var ListItem = require('./ListItem');
 var style = require('./style');
 var has = require('lodash/object/has');
+var BasicMixin = require('../utils/BasicMixin');
 
 var List = React.createClass({
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  mixins: [ BasicMixin, StyleResolverMixin, BrowserStateMixin ],
 
   render() {
 
@@ -37,7 +38,10 @@ var List = React.createClass({
       });
     }
 
-    return <div style={this.buildStyles(style.list)}>
+    return <div
+      style={this.buildStyles(style.list)}
+      {...this.getBasics()}>
+
       {children}
     </div>;
   }
