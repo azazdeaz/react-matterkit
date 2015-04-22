@@ -282,7 +282,7 @@ style.input = merge({}, style.inputBorder, style.font, style.roundedCorners, {
   display: 'flex',
   alignItems: 'stretch',
   color: '#96a6ad',
-  background: style.palette.grey4,
+  backgroundColor: style.palette.grey4,
   padding: '0',
   paddingLeft: '2px',
   height: style.itemHeight,

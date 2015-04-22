@@ -194,7 +194,7 @@ var Input = React.createClass({
   render: function () {
 
     return <div
-      style = {this.buildStyles(style.input, {disabled: this.props.disabled})}>
+      style = {this.buildStyles(style.input)}>
 
       <input
         ref='input'

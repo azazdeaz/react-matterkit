@@ -24,7 +24,11 @@ var ListItem = React.createClass({
     return <div
       {...this.getBrowserStateEvents()}
       style={this.buildStyles(style.listItem, {selected: this.props.selected})}
-      onClick={() => this.props.onClick(value)}>
+      onClick={() => {
+        if (this.props.onClick) {
+          this.props.onClick(value);
+        }
+      }}>
 
       {label}
     </div>;
