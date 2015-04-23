@@ -69,11 +69,14 @@ return <App/>
     {
       type: 'number',
       addonLabel: 'px',
+      precision: 0,
     },
     {
       type: 'number',
       addonLabel: '%',
       prepareExportValue: value => value + '%',
+      dragSpeed: 0.25,
+      precision: 2,
     },
     {
       type: 'string',
@@ -87,7 +90,7 @@ return <App/>
     else if (_.endsWith(value, '%')) return 1;
     else return 2;
   }}
-  onChange = {value => console.log(value)}/>`,
+  onChange = {value => console.log(value, typeof(value))}/>`,
 ];
 
 module.exports = React.createClass({

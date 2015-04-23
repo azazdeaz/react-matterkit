@@ -32,13 +32,13 @@ var Input = React.createClass({
 
   getInitialState() {
     return {
-      value: this._formatValueWithEvent(this.props.value),
+      value: undefined,
       error: false,
     };
   },
 
   componentWillMount() {
-    this._validate(this.state.value);
+    this.handleValue(this.props.value);
   },
 
   componentDidMount() {
@@ -61,7 +61,7 @@ var Input = React.createClass({
         md.moved = true;
 
         var value = md.value + md.dx * this.props.dragSpeed;
-        this._onChange(value);
+        this.handleValue(value);
       },
       onUp: (md) => {
         if (!md.moved) {
@@ -76,40 +76,31 @@ var Input = React.createClass({
 
   componentWillReceiveProps(nextProps) {
 
-    if(has(nextProps, 'value')) {
+    this.handleValue(nextProps.value, nextProps);
+  },
 
-      this.setState({
-        value: this._formatValue(nextProps.value, nextProps),
-      });
+  componentDidUpdate(prevProps, prevState) {
+
+    var {exportValue} = this.state;
+
+    if (exportValue !== prevState.exportValue && this.props.onChange) {
+
+      this.props.onChange(exportValue);
     }
   },
 
-  _onChange(value) {
+  handleValue(value, props) {
 
-    value = this._formatValue(value);
+    props = props || this.props;
 
-    this.setState({value});
+    value = this._formatValue(value, props);
+
+    var {prepareExportValue} = props;
+    var exportValue = prepareExportValue ? prepareExportValue(value) : value;
+
+    this.setState({value, exportValue});
 
     this._validate(value);
-
-    if (this.props.onChange) {
-      this.props.onChange(value);
-    }
-  },
-
-  _formatValueWithEvent(value, props) {
-
-    var formattedValue = this._formatValue(value, props);
-
-    if (this.props.prepareExportValue) {
-      formattedValue = this.props.prepareExportValue(formattedValue);
-    }
-
-    if (formattedValue !== value && this.props.onInitialFormat) {
-      this.props.onInitialFormat(formattedValue);
-    }
-
-    return formattedValue;
   },
 
   _formatValue(value, props) {
@@ -143,7 +134,7 @@ var Input = React.createClass({
 
     value = parseFloat(value.toFixed(precision));
 
-    return value;
+    return _isFinite(value) ? value : 0;
   },
 
   _validate(value) {
@@ -205,7 +196,7 @@ var Input = React.createClass({
         type = 'text'
         name = {this.props.name}
         pattern = {this.props.pattern}
-        onChange = {e => this._onChange(e.target.value)}
+        onChange = {e => this.handleValue(e.target.value)}
         disabled = {this.props.disabled}/>
 
       <Addon

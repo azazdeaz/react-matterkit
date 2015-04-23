@@ -2,7 +2,7 @@ var React = require('react');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var _ = require('lodash');
 var style = require('./style');
-var Icon = require('./Icon');
+var Input = require('./Input');
 var BasicMixin = require('../utils/BasicMixin');
 
 var MultiTypeInput = React.createClass({
@@ -12,31 +12,36 @@ var MultiTypeInput = React.createClass({
   getDefaultProps() {
     return {
       types: [],
-      defaultTypeIdx: 0,
+      typeIdx: 0,
     };
   },
 
   getInitialState() {
 
-    var {defaultTypeIdx, chooseType, value, types} = this.props;
-    var currTypeIdx = chooseType ? chooseType(value) : defaultTypeIdx;
+    return {currTypeIdx: this.getCurrTypeIdx()};
+  },
 
-    return {
-      currType: types[currTypeIdx],
-      value: value,
-    };
+  componentWillReceiveProps(nextProps) {
+
+    this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)});
+  },
+
+  getCurrTypeIdx(props) {
+
+    props = props || this.props;
+
+    var {typeIdx, chooseType, value} = props;
+    return chooseType ? chooseType(value) : defaultTypeIdx;
   },
 
   handleAddonClick() {
     var {types} = this.props;
-    var currTypeIdx = types.indexOf(this.state.currType);
+    var {currTypeIdx} = this.state;
     currTypeIdx = (currTypeIdx + 1) % types.length;
-    this.setState({currType: types[currTypeIdx]});
+    this.setState({currTypeIdx});
   },
 
   handleChange(value) {
-
-    this.setState({value});
 
     if (this.props.onChange) {
       this.props.onChange(value);
@@ -46,11 +51,11 @@ var MultiTypeInput = React.createClass({
   render() {
 
     return <Input
+      {...this.getBasics()}
       {...this.props}
-      {...this.state.currType}
+      {...this.props.types[this.state.currTypeIdx]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
-      value = {this.state.value}
       addonOnClick={this.handleAddonClick}/>;
   }
 });
