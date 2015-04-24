@@ -83,7 +83,9 @@ var Input = React.createClass({
 
     var {exportValue} = this.state;
 
-    if (exportValue !== prevState.exportValue && this.props.onChange) {
+    if (exportValue !== prevState.exportValue &&
+      exportValue !== this.props.value && 
+      this.props.onChange) {
 
       this.props.onChange(exportValue);
     }
