@@ -223,6 +223,7 @@ style.inputAddon = merge({}, noSelect, {
   backgroundColor: style.grey.normal,
   borderTopRightRadius: style.borderRadius,
   borderBottomRightRadius: style.borderRadius,
+  fontWeight: 'bold',
 
   states: [
     {hover:{

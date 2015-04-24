@@ -84,7 +84,7 @@ var Input = React.createClass({
     var {exportValue} = this.state;
 
     if (exportValue !== prevState.exportValue &&
-      exportValue !== this.props.value && 
+      exportValue !== this.props.value &&
       this.props.onChange) {
 
       this.props.onChange(exportValue);
@@ -149,9 +149,9 @@ var Input = React.createClass({
 
   renderHints() {
 
-    var {value, lastlySelectedHint} = this.state;
+    var {value, lastlySelectedHint, focus} = this.state;
 
-    if (value === lastlySelectedHint || !value || !this.props.hints) {
+    if (!focus || value === lastlySelectedHint || !value || !this.props.hints) {
       return null;
     }
 
