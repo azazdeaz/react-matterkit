@@ -10,7 +10,7 @@ var style = {
     itemHeight: 32,
     itemHeightPX: '32px',
 
-    borderRadius: 2,
+    borderRadius: 3,
 
     uri: {
       check: uriCheck,
@@ -165,6 +165,8 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
         normal: style.buttonBg,
         colored: {
           color: '#191c1f',
+          border: 'solid 1px rgba(26,29,33,.75)',
+          // boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
           backgroundColor: '#262a2e',
           backgroundImage: 'linear-gradient(135deg, rgba(107,182,196,.75) 0%,rgba(107,154,211,.75) 100%)',
 
@@ -331,8 +333,11 @@ style.input = merge({}, style.inputBorder, style.font, style.roundedCorners, {
 });
 
 style.checkbox = merge({}, style.inputBorder, style.roundedCorners, noSelect, {
+  position: 'relative',
   width: 18,
   height: 18,
+  marginTop: (style.lineHeight - 18) / 2,
+  marginBottom: (style.lineHeight - 18) / 2,
   marginLeft: 3,
   marginRight: 3,
   backgroundColor: style.palette.grey4,

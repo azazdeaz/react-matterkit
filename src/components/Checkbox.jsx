@@ -46,7 +46,7 @@ export default React.createClass({
 
     var {start, end} = style.gardient;
 
-    return <svg width="18" height="18">
+    return <svg width="18" height="18" style={{position: 'absolute'}}>
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" style={{stopColor: start, stopOpacity:1}} />
