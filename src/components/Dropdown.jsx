@@ -3,7 +3,7 @@ var Input = require('./Input');
 var Icon = require('./Icon');
 var ListItem = require('./ListItem');
 var style = require('./style');
-var _ = require('lodash');
+var has = require('lodash/object/has');
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 
 var Dropdown = React.createClass({
@@ -53,14 +53,29 @@ var Dropdown = React.createClass({
           icon={this.state.open ? 'chevron-up' : 'chevron-down'}/>
       </div>
 
-      {this.props.options.map(value => {
+      {this.props.options.map(option => {
+
+        if (typeof(option) === 'string') {
+          option = {label: option};
+        }
+
+        var value = has(option, 'value') ? option.value : option.label;
+
         return <ListItem
-          key={value}
-          label={value}
+          key={option.label}
+          label={option.label}
           onClick={()=>{
-            this.props.onChange(value);
+
+            if (this.props.onChange) {
+              this.props.onChange(value);
+            }
+
+            if (option.onClick) {
+              option.onClick(value);
+            }
+
             this.getDOMNode().blur();
-            }}/>;
+          }}/>;
       })}
     </div>;
   }

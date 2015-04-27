@@ -372,17 +372,16 @@ style.tooltipTriangle = {
 
 
 //Dropdown
-style.dropdown = merge({}, style.roundedCorners, {
+style.dropdown = merge({}, style.font, style.roundedCorners, {
   height: style.itemHeight,
   lineHeight: style.itemHeightPX,
-  backgroundColor: 'rgba(59,66,74,.75)',
+  backgroundColor: '#363c43',
   boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
   border: 'solid 1px rgba(26,29,33,.75)',
   backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
   overflow: 'hidden',
   boxSizing: 'border-box',
   margin: '1px 0',
-  outline: 'none',
 
   states: [
     {hover: {

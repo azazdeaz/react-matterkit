@@ -10,10 +10,11 @@ var Icon = require('./Icon');
 var List = require('./List');
 var CustomDrag = require('../utils/CustomDrag');
 var fuzzy = require('fuzzy');
+var BasicMixin = require('../utils/BasicMixin');
 
 var Input = React.createClass({
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin ],
 
   getDefaultProps() {
     return {
@@ -191,6 +192,7 @@ var Input = React.createClass({
 
       <input
         ref='input'
+        {...this.getBasics()}
         {...this.getBrowserStateEvents()}
         style = {style.inputReset}
         value = {this.state.value}
