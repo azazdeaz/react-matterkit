@@ -66,7 +66,7 @@ var Handle = React.createClass({
   componentDidMount() {
     window.addEventListener('mouseup', this.onMouseUp);
   },
-  componentDidUnmount() {
+  componentWillUnmount() {
     window.removeEventListener('mouseup', this.onMouseUp);
   },
   render() {
