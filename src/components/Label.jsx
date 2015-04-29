@@ -1,8 +1,11 @@
 var React = require('react');
+var style = require('./style');
 
 var Label = React.createClass({
   render() {
-    return <span>{this.props.children}</span>;
+    return <span style={style.label}>
+      {this.props.children}
+    </span>;
   }
 });
 

@@ -200,6 +200,11 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
   ]
 });
 
+//Label
+style.label = merge({}, style.font, {
+  lineHeight: style.lineHeightPX,
+});
+
 
 //Panel
 style.panel = merge({}, style.roundedCorners, {
