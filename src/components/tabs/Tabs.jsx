@@ -23,9 +23,9 @@ var Tabs = React.createClass({
   _selectTab(idx) {
     this.setState({currTabIdx: idx});
 
-    if (this.props.onChangeSelectedTab) {
+    if (this.props.onChangeTabIdx) {
 
-      this.props.onChangeSelectedTab(idx);
+      this.props.onChangeTabIdx(idx);
     }
   },
 
