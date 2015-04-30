@@ -3,7 +3,7 @@ var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var style = require('../style');
 var TabLabel = require('./TabLabel');
 
-var Button = React.createClass({
+var TabHeader = React.createClass({
 
   mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
@@ -28,10 +28,10 @@ var Button = React.createClass({
           last = {idx === childCount - 1}
           selected = {this.props.currTabIdx === idx}
           label = {child.props.label}
-          onClick = {() => this.props.onSelectTab(idx)}/>;
+          onSelect = {() => this.props.onSelectTab(idx)}/>;
       })}
     </div>;
   }
 });
 
-module.exports = Button;
+module.exports = TabHeader;

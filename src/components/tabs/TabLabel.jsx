@@ -30,7 +30,9 @@ var Button = React.createClass({
         notFirst: !this.props.first,
         last: this.props.last,
       })}
-      onClick={this.props.onClick}>
+      onClick={this.props.onSelect}
+      onDragEnter={this.props.onSelect}>
+      
       {icon}
       {this.props.label}
     </div>;
