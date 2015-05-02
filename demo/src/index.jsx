@@ -17,8 +17,10 @@ var componentPages = {
   Button: require('./componentPages/Button.jsx'),
   ButtonGroup: require('./componentPages/ButtonGroup.jsx'),
   Checkbox: require('./componentPages/Checkbox.jsx'),
+  ColorInput: require('./componentPages/ColorInput.jsx'),
   Icon: require('./componentPages/Icon.jsx'),
   Input: require('./componentPages/Input.jsx'),
+  MultiTypeInput: require('./componentPages/MultiTypeInput.jsx'),
   Toggle: require('./componentPages/Toggle.jsx'),
 };
 

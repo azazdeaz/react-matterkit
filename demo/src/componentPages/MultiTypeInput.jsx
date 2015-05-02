@@ -9,20 +9,32 @@ label: String`;
 
 var codes = [
 
-`<Input
-  value={4}
-  addonIcon='github'
-  addonBackground='transparent'
-  validate={v => parseInt(v) !== 4}
-  onChange={v=>console.log(v)}/>`,
-
-`<Input
-  value={4}
-  type='number'/>`,
-
-`<Input
-  placeholder='typeahead'
-  hints={fakeNames}/>`
+`<MultiTypeInput types={[
+    {
+      type: 'number',
+      addonLabel: 'px',
+      precision: 0,
+    },
+    {
+      type: 'number',
+      addonLabel: '%',
+      prepareExportValue: value => value + '%',
+      dragSpeed: 0.25,
+      precision: 2,
+    },
+    {
+      type: 'string',
+      addonIcon: 'quote-right',
+      hints: ['auto', 'inherits'],
+    },
+  ]}
+  value='32'
+  chooseType = {value => {
+    if (_.isFinite(value) || _.endsWith(value, 'px')) return 0;
+    else if (_.endsWith(value, '%')) return 1;
+    else return 2;
+  }}
+  onChange = {value => console.log(value, typeof(value))}/>`,
 ];
 
 module.exports = React.createClass({

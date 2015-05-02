@@ -11,6 +11,7 @@ module.exports = global.Matter = {
   Button: require('./components/Button'),
   ButtonGroup: require('./components/ButtonGroup'),
   Checkbox: require('./components/Checkbox'),
+  ColorInput: require('./components/ColorInput'),
   Dropdown: require('./components/Dropdown'),
   DropdownMenu: require('./components/DropdownMenu'),
   Icon: require('./components/Icon'),

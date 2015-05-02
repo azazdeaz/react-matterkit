@@ -8,28 +8,14 @@ var description = `
 label: String`;
 
 var codes = [
-
-`<Input
-  value={4}
-  addonIcon='github'
-  addonBackground='transparent'
-  validate={v => parseInt(v) !== 4}
-  onChange={v=>console.log(v)}/>`,
-
-`<Input
-  value={4}
-  type='number'/>`,
-
-`<Input
-  placeholder='typeahead'
-  hints={fakeNames}/>`
+`<ColorInput value='#b64d65'/>`,
 ];
 
 module.exports = React.createClass({
   render() {
 
     return <Template
-      title='ButtonGroup'
+      title='ColorInput'
       description={description}
       codes={codes}/>;
   },
