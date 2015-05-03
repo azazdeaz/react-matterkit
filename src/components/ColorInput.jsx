@@ -59,39 +59,35 @@ var MultiTypeInput = React.createClass({
     this.setState({value, format});
   },
 
-  showSelector() {
-
-    this.setState({oprened: true});
-  },
-
   renderSelector() {
 
-    if (!this.state.focus) return null;
+    // if (!this.state.focus) return null;
 
     return <div style={{
       position: 'absolute',
       zIndex: 1,
-      top: '100%',
+      top: 32,
       left: 0,
       width: '100%',
     }}>
       <ColorCircle
-        {...tinyColor(this.state.value).toHsl()}
-        width={32}
-        radius={256}/>
+        {...tinycolor(this.state.value).toHsl()}
+        width={28}
+        radius={64}/>
     </div>;
   },
 
   render() {
 
-    return <Input
-      {...this.getBasics()}
-      {...this.props}
-      {...this.props.types[this.state.currTypeIdx]}
-      addonIcon = 'adjust'
-      addonOnClick = {this.showSelector()}
-      onChange = {this.handleChange}
-      onInitialFormat = {this.handleChange}/>;
+    return <span>
+      <Input
+        {...this.getBasics()}
+        {...this.props}
+        addonIcon = 'adjust'
+        onChange = {this.handleChange}
+        onInitialFormat = {this.handleChange}/>
+      {this.renderSelector()}
+    </span>;
   }
 });
 

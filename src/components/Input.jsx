@@ -14,7 +14,7 @@ var BasicMixin = require('../utils/BasicMixin');
 
 var Input = React.createClass({
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin ],
+  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
 
   getDefaultProps() {
     return {

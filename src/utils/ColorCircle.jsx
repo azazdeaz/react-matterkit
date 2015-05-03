@@ -68,7 +68,7 @@ export default ColorCircle = React.createClass({
     var getG = getChannel.bind(null, [0, 0, 0, 1, 1, 1, 0]);
     var getB = getChannel.bind(null, [0, 1, 1, 1, 0, 0, 0]);
 
-    var canvas = ths.refs.range.getDOMNode(),
+    var canvas = this.refs.range.getDOMNode(),
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,
@@ -97,7 +97,7 @@ export default ColorCircle = React.createClass({
   renderTri() {
 
     var canvas = this.refs.tri.getDOMNode(),
-      ctx = canvas.getContex('2d'),
+      ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,
       {h} = this.state;
@@ -119,7 +119,7 @@ export default ColorCircle = React.createClass({
 
     return <div style={this.props.style}>
       <canvas ref='range'/>
-      <canvas ref='tri' style={{position: 'absolute'}}/>
+      <canvas ref='tri' style={{position: 'absolute', left: 0}}/>
     </div>;
   }
 });
