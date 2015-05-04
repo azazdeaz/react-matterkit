@@ -16,6 +16,8 @@ var style = {
       check: uriCheck,
     },
 
+    anim: '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+
     gardient: (()=>{
       var start = '#6bb6c4';
       var end = '#6b9ad3';
@@ -610,7 +612,7 @@ style.toolbarGroup = _.assign({}, {
 
   const knobWidth = 32;
   const labelOffset = '7px';
-  const anim = '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)';
+  const anim = style.anim;
 
   style.toggleBase = merge({}, style.roundedCorners, noSelect, {
     height: style.itemHeight,
