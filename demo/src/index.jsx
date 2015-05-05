@@ -81,6 +81,7 @@ var App = React.createClass({
           </List>
         </div>
         <div style={{width: 650}}>
+          <Matter.ColorInput value='#123123'/>
           <RouteHandler/>
         </div>
       </div>

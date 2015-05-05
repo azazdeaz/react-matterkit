@@ -30,7 +30,11 @@ var MultiTypeInput = React.createClass({
 
   componentWillReceiveProps(nextProps) {
 
-    this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)});
+    var {value} = nextProps;
+    this.setState({
+      value,
+      format: tinycolor(value).getFormat(),
+    });
   },
 
   getCurrTypeIdx(props) {
@@ -42,6 +46,11 @@ var MultiTypeInput = React.createClass({
   },
 
   handleChange(value) {
+
+    this.setState({
+      value,
+      format: tinycolor(value).getFormat(),
+    });
 
     if (this.props.onChange) {
       this.props.onChange(value);
@@ -63,6 +72,8 @@ var MultiTypeInput = React.createClass({
 
     // if (!this.state.focus) return null;
 
+    var hsl = tinycolor(this.state.value).toHsl();
+
     return <div style={{
       position: 'absolute',
       zIndex: 1,
@@ -71,7 +82,7 @@ var MultiTypeInput = React.createClass({
       width: '100%',
     }}>
       <ColorCircle
-        {...tinycolor(this.state.value).toHsl()}
+        {...hsl}
         width={28}
         radius={64}/>
     </div>;
@@ -83,6 +94,7 @@ var MultiTypeInput = React.createClass({
       <Input
         {...this.getBasics()}
         {...this.props}
+        value = {this.state.value}
         addonIcon = 'adjust'
         onChange = {this.handleChange}
         onInitialFormat = {this.handleChange}/>
