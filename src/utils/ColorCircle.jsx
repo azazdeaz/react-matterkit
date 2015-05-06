@@ -1,6 +1,7 @@
 import React from 'react/addons';
 import tinycolor from 'tinycolor2';
 var {PureRenderMixin} = React.addons;
+var CustomDrag = require('../utils/CustomDrag');
 
 var ColorCircle;
 export default ColorCircle = React.createClass({
@@ -28,8 +29,50 @@ export default ColorCircle = React.createClass({
 
   componentDidMount() {
 
+    var node = this.getDOMNode();
+
+    this._customDrag = new CustomDrag({
+      deTarget: node,
+      onDown: (e) => {
+
+        var {radius, width} = this.props;
+        var md = {
+          centerX: e.clientX - e.offsetX + radius,
+          centerY: e.clientY - e.offsetY + radius,
+        };
+        var xFromCenter = e.offsetX - radius;
+        var yFromCenter = e.offsetY - radius;
+        var r = Math.sqrt(xFromCenter*xFromCenter + yFromCenter*yFromCenter);
+
+        if (r <= radius) {
+          if (r < radius - width) {
+            md.mode = 'tri';
+          }
+          else {
+            md.mode = 'range';
+          }
+        }
+        console.log(md);
+        return md;
+      },
+      onMove(md, mx, my) {
+
+        var x = mx - md.centerX;
+        var y = my - md.centerY;
+        var rad = Math.atan2(y, x);
+        var deg = rad / Math.PI * 180;
+
+        console.log(x, y, deg);
+      }
+    });
+
     this.renderRange();
     this.renderTri();
+  },
+
+  componentWillUnmount() {
+
+    this._customDrag.destroy();
   },
 
   componentWillReceiveProps(nextProps) {

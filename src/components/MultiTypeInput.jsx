@@ -56,7 +56,7 @@ var MultiTypeInput = React.createClass({
       {...this.props.types[this.state.currTypeIdx]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
-      addonOnClick={this.handleAddonClick}/>;
+      addonOnClick = {this.handleAddonClick}/>;
   }
 });
 
