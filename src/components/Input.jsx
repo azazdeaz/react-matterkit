@@ -166,9 +166,11 @@ var Input = React.createClass({
     hints = hints.map(hint => {
       return {
         label: <span dangerouslySetInnerHTML={{__html: hint.string}}/>,
-        onClick: ()=> {
-          var value = this._formatValue(hint.original);
-          this.setState({value, lastlySelectedHint: value});
+        onClick: () => {
+
+          var value = hint.original;
+          this.setState({lastlySelectedHint: value});
+          this.handleValue(value);
         },
       };
     });
@@ -188,6 +190,15 @@ var Input = React.createClass({
   render: function () {
 
     return <div
+      onMouseDown = {e=>{
+        var inputNode = this.refs.input.getDOMNode();
+        if (inputNode.ownerDocument.activeElement === inputNode &&
+          e.target !== inputNode)
+        {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }}
       style = {this.buildStyles(style.input)}>
 
       <input
@@ -230,10 +241,12 @@ var Addon = React.createClass({
 
     var icon = this.props.icon ? <Icon icon={this.props.icon}/> : undefined;
 
+    var s = this.buildStyles(style.inputAddon);
+
     return <span
       {...this.getBrowserStateEvents()}
-      style = {this.buildStyles(style.inputAddon)}
-      onClick={this.props.onClick}>
+      style = {s}
+      onClick = {this.props.onClick}>
 
       {this.props.label}
       {icon}
