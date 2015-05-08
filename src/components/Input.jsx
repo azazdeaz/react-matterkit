@@ -206,8 +206,8 @@ var Input = React.createClass({
         {...this.getBasics()}
         {...this.getBrowserStateEvents()}
         style = {style.inputReset}
-        value = {this.state.value}
         palceholder = {this.props.palceholder}
+        value = {this.state.value}
         type = 'text'
         name = {this.props.name}
         pattern = {this.props.pattern}
