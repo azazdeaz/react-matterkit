@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react/addons');
+var {PureRenderMixin} = React;
 var { StyleResolverMixin, BrowserStateMixin } = require('radium');
 var _ = require('lodash');
 var style = require('./style');
@@ -36,8 +37,6 @@ var Button = React.createClass({
       {...this.getBrowserStateEvents()}
       style={this.buildStyles(style.button)}
 
-      tooltip={this.props.tooltip}
-      dropdownMenu={this.props.dropdownMenu}
       onClick={this.props.onClick}>
       {icon}
       {this.props.label}

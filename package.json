@@ -1,12 +1,13 @@
 {
   "name": "react-matterkit",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
     "fuzzy": "^0.1.0",
     "lodash": "^3.6.0",
     "radium": "^0.10.1",
+    "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
   },
   "peerDependencies": {
