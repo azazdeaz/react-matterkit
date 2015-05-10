@@ -41,7 +41,7 @@ module.exports = React.createClass({
   render() {
 
     return <Template
-      title='ButtonGroup'
+      title='ItemGroup'
       description={description}
       codes={codes}/>;
   },

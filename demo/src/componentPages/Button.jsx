@@ -5,8 +5,8 @@ var description = `
 label: String`;
 
 var codes = [
-  '<Button label="button"/>;',
-  '<Button label="button" kind=\'colored\'/>;',
+  '<Button label="button"/>',
+  '<Button label="button" kind=\'colored\'/>',
 ];
 
 module.exports = React.createClass({

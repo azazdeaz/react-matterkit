@@ -1,12 +1,14 @@
 var React = require('react/addons');
 var { PureRenderMixin } = React;
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('./style');
+var Radium = require('radium');
+var assign = require('lodash/object/assign');
+var BasicMixin = require('../utils/BasicMixin');
 var has = require('lodash/object/has');
+var assign = require('lodash/object/assign');
 
-var ListItem = React.createClass({
+var ListItem = React.createClass(Radium.wrap({
 
-  mixins: [ PureRenderMixin, StyleResolverMixin, BrowserStateMixin ],
+  mixins: [BasicMixin, PureRenderMixin],
 
   getDefaultProps() {
     return {selected: false};
@@ -14,25 +16,23 @@ var ListItem = React.createClass({
 
   render() {
 
-    var label = has(this.props, 'label') ?
-      this.props.label : this.props.children;
+    var {mod, style, selected, label, children, value} = this.props;
 
-    var value = has(this.props, 'value') ? this.props.value : label;
-
-    if (label) label = value;
+    mod = assign({selected}, mod);
+    value = value || label;
+    label = label || children || value;
 
     return <div
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.listItem, {selected: this.props.selected})}
+      {...this.getBasics()}
+      style={this.getStyle('listItem', mod, style)}
       onClick={() => {
         if (this.props.onClick) {
           this.props.onClick(value);
         }
       }}>
-
       {label}
     </div>;
   }
-});
+}));
 
 module.exports = ListItem;

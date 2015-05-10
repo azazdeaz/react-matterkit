@@ -1,20 +1,37 @@
 var React = require('react/addons');
 var {PureRenderMixin} = React;
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
+var Radium = require('radium');
+var assign = require('lodash/object/assign');
 var Icon = require('./Icon');
 var BasicMixin = require('../utils/BasicMixin');
 
-var Button = React.createClass({
+var Button = React.createClass(Radium.wrap({
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+  mixins: [BasicMixin],
+  // 
+  // propTypes: {
+  //   label: React.PropTypes.string,
+  //   disabled: React.PropTypes.bool,
+  // },
+
+  propTypes: {
+    codeText: React.PropTypes.string.isRequired,
+    scope: React.PropTypes.object.isRequired,
+    collapsableCode: React.PropTypes.bool,
+    docClass: React.PropTypes.renderable,
+    propDescriptionMap: React.PropTypes.string,
+    theme: React.PropTypes.string,
+    noRender: React.PropTypes.bool,
+    es6Console: React.PropTypes.bool
+  },
 
   getDefaultProps() {
     return {
       label: '',
-      kind: 'normal',
       disabled: false,
+      mod: {
+        kind: 'normal',
+      }
     };
   },
 
@@ -26,22 +43,24 @@ var Button = React.createClass({
 
   render() {
 
-    var icon;
-    if (this.props.icon) {
+    var {mod, style, icon, onClick, label, disabled} = this.props;
+
+    mod = assign({disabled}, mod);
+
+    if (icon) {
       icon = <Icon icon={this.props.icon}
         style={{marginRight:this.props.text ? 4 : 0}}/>;
     }
 
     return <div
       {...this.getBasics()}
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.button)}
+      style={this.getStyle('button', mod, style)}
+      onClick={onClick}>
 
-      onClick={this.props.onClick}>
       {icon}
-      {this.props.label}
+      {label}
     </div>;
   }
-});
+}));
 
 module.exports = Button;

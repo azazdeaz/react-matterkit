@@ -1,21 +1,22 @@
 var React = require('react/addons');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
+var Radium = require('radium');
 var ListItem = require('./ListItem');
 var style = require('./style');
 var has = require('lodash/object/has');
 var BasicMixin = require('../utils/BasicMixin');
 
-var List = React.createClass({
+var List = React.createClass(Radium.wrap({
 
-  mixins: [ BasicMixin, StyleResolverMixin, BrowserStateMixin ],
+  mixins: [ BasicMixin],
 
   render() {
 
+    var {mod, style, items} = this.props;
     var children;
 
-    if (this.props.items) {
+    if (items) {
 
-      children = this.props.items.map((item, idx) => {
+      children = items.map((item, idx) => {
 
         if (typeof(item) === 'string') {
             item = {label: item};
@@ -39,12 +40,12 @@ var List = React.createClass({
     }
 
     return <div
-      style={this.buildStyles(style.list)}
-      {...this.getBasics()}>
+      {...this.getBasics()}
+      style={this.getStyle('list', mod, style)}>
 
       {children}
     </div>;
   }
-});
+}));
 
 module.exports = List;

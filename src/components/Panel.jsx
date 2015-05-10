@@ -1,22 +1,23 @@
 var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
+var Radium = require('radium');
 var style = require('./style');
 var BasicMixin = require('../utils/BasicMixin');
 
-var Panel = React.createClass({
+var Panel = React.createClass(Radium.wrap({
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+  mixins: [BasicMixin],
 
   render() {
 
+    var {mod, style} = this.props;
+
     return <div
       {...this.getBasics()}
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.panel)}>
+      style = {this.getStyle('panel', mod, style)}>
 
       {this.props.children}
     </div>;
   }
-});
+}));
 
 module.exports = Panel;

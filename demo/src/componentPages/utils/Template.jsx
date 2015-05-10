@@ -1,20 +1,22 @@
 var React = require('react');
 var {Tabs} = require('../../../../');
-var LiveEditor = require('./react-live-edit/live-editor.jsx');
+var Playground = require('component-playground');
 var marked = require('marked');
 var Prop = require('./Prop.jsx');
 var has = require('lodash/object/has');
+var scope = require('../../scope');
 
-module.exports = React.createClass({
+var Radium = require('radium');
+
+var Template = React.createClass({
   contextTypes: {
     router: React.PropTypes.func,
   },
   getDefaultProps() {
       return {
-        code: 'return <Matter.Button label="button"/>;',
+        codes: ['<Button label="button"/>;'],
         description: '',
         title: 'Title',
-        props: [],
       };
   },
   renderProps(props) {
@@ -35,50 +37,29 @@ module.exports = React.createClass({
       });
     }
   },
-  componentWillReceiveProps(props) {
-    console.log('componentWillReceiveProps', props);
-  },
   renderCode() {
 
     var { codes } = this.props;
 
-    if (true) {
-      return codes.map((code, idx) => {
-        return <LiveEditor codeText={code} key={idx}/>;
-      });
-    }
-    else {
-      let { router } = this.context;
+    return codes.map(code => {
 
-      return <Tabs
-        stretchLabels={false}
-      defaultTab={parseInt(router.getCurrentParams().ex || 0)}
-        onChangeSelectedTab={idx => {
-          console.log('getCurrentRoutes', router.getCurrentRoutes());
-          console.log('getCurrentParams', router.getCurrentParams());
-            // console.log('getRoutes', router.getRoutes());
-            // console.log('getParams', router.getParams());
-          var routes = router.getCurrentRoutes();
-          var name = routes[routes.length-1].name;
-          console.log(name, {ex: idx});
-          router.transitionTo(name, {ex: idx});
-        }}>
-        {code.map((c, idx) => {
+      var CCC = React.createClass(Radium.wrap({propTypes: {
+        codeText: React.PropTypes.string.isRequired,
+        scope: React.PropTypes.object.isRequired,
+        collapsableCode: React.PropTypes.bool,
+        docClass: React.PropTypes.renderable,
+        propDescriptionMap: React.PropTypes.string,
+        theme: React.PropTypes.string,
+        noRender: React.PropTypes.bool,
+        es6Console: React.PropTypes.bool
+      }, render() {return <div/>;}}));
 
-          if (typeof(c) === 'string') {
-            c = {code: c};
-          }
-
-          if (!has(c, 'label')) {
-            c.label = idx;
-          }
-
-          return <div label={c.label} key={c.label}>
-            <LiveEditor codeText={c.code}/>
-          </div>;
-        })}
-      </Tabs>;
-    }
+      return <Playground
+        codeText = {code}
+        scope = {scope}
+        docClass = {CCC}
+        noRender = {true}/>;
+    });
   },
 
   render() {
@@ -99,3 +80,5 @@ module.exports = React.createClass({
     </div>;
   },
 });
+
+module.exports = Template;

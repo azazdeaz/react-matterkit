@@ -4,9 +4,14 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
+    "bulk-require": "^0.2.1",
+    "bulkify": "^1.1.1",
+    "component-playground": "0.0.10",
     "fuzzy": "^0.1.0",
     "lodash": "^3.6.0",
-    "radium": "^0.10.1",
+    "radium": "^0.11.1",
+    "react": "^0.13.3",
+    "react-router": "^0.13.3",
     "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
   },
@@ -14,10 +19,13 @@
     "react": "^0.13.2"
   },
   "devDependencies": {
+    "babel-core": "^5.2.17",
+    "babel-loader": "^5.0.0",
     "babelify": "^6.0.2",
     "browser-sync": "^2.5.3",
     "browserify": "^9.0.8",
     "exorcist": "^0.1.6",
+    "file-loader": "^0.8.1",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-callback": "0.0.3",
@@ -30,10 +38,14 @@
     "gulp-util": "^3.0.4",
     "gulp-watch": "^4.2.4",
     "marked": "^0.3.3",
+    "node-libs-browser": "^0.5.0",
     "react-router": "^0.13.2",
+    "transform-loader": "^0.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.1.0"
+    "watchify": "^3.1.0",
+    "webpack": "^1.9.2",
+    "webpack-dev-server": "^1.8.2"
   },
   "scripts": {},
   "repository": {
