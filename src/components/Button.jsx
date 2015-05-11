@@ -8,21 +8,10 @@ var BasicMixin = require('../utils/BasicMixin');
 var Button = React.createClass(Radium.wrap({
 
   mixins: [BasicMixin],
-  // 
-  // propTypes: {
-  //   label: React.PropTypes.string,
-  //   disabled: React.PropTypes.bool,
-  // },
 
   propTypes: {
-    codeText: React.PropTypes.string.isRequired,
-    scope: React.PropTypes.object.isRequired,
-    collapsableCode: React.PropTypes.bool,
-    docClass: React.PropTypes.renderable,
-    propDescriptionMap: React.PropTypes.string,
-    theme: React.PropTypes.string,
-    noRender: React.PropTypes.bool,
-    es6Console: React.PropTypes.bool
+    label: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
   },
 
   getDefaultProps() {

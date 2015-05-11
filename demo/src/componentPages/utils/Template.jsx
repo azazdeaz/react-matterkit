@@ -20,22 +20,21 @@ var Template = React.createClass({
       };
   },
   renderProps(props) {
-
-    if (props instanceof Array) {
-
-      return props.map(prop => {
-        return <Prop {...prop} key={prop.name}/>;
-      });
-    }
-    else {
-      return Object.keys(props).map(groupName => {
-
-        return <div>
-          <h3>{groupName}</h3>
-          {this.renderProps(props[groupName])}
-        </div>;
-      });
-    }
+    // if (props instanceof Array) {
+    //
+    //   return props.map(prop => {
+    //     return <Prop {...prop} key={prop.name}/>;
+    //   });
+    // }
+    // else {
+    //   return Object.keys(props).map(groupName => {
+    //
+    //     return <div>
+    //       <h3>{groupName}</h3>
+    //       {this.renderProps(props[groupName])}
+    //     </div>;
+    //   });
+    // }
   },
   renderCode() {
 
@@ -43,21 +42,21 @@ var Template = React.createClass({
 
     return codes.map(code => {
 
-      var CCC = React.createClass(Radium.wrap({propTypes: {
-        codeText: React.PropTypes.string.isRequired,
-        scope: React.PropTypes.object.isRequired,
-        collapsableCode: React.PropTypes.bool,
-        docClass: React.PropTypes.renderable,
-        propDescriptionMap: React.PropTypes.string,
-        theme: React.PropTypes.string,
-        noRender: React.PropTypes.bool,
-        es6Console: React.PropTypes.bool
-      }, render() {return <div/>;}}));
+      // var CCC = React.createClass(Radium.wrap({propTypes: {
+      //   codeText: React.PropTypes.string.isRequired,
+      //   scope: React.PropTypes.object.isRequired,
+      //   collapsableCode: React.PropTypes.bool,
+      //   docClass: React.PropTypes.renderable,
+      //   propDescriptionMap: React.PropTypes.string,
+      //   theme: React.PropTypes.string,
+      //   noRender: React.PropTypes.bool,
+      //   es6Console: React.PropTypes.bool
+      // }, render() {return <div/>;}}));
 
       return <Playground
         codeText = {code}
         scope = {scope}
-        docClass = {CCC}
+        docClass = {scope.Button}
         noRender = {true}/>;
     });
   },

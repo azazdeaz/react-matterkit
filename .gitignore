@@ -1,5 +1,6 @@
 browser
 lib
 build
+dist
 node_modules
 *.log

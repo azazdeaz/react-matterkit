@@ -1,11 +1,14 @@
 module.exports = {
   context: __dirname + "/demo",
   entry: "./src/index.jsx",
-  packageMains: ['main'],
   output: {
-    publicPath:"/dist/",
-    path: __dirname + "/dist",
+    publicPath:"/demo/dist/",
+    path: __dirname + "/demo/dist",
     filename: 'index.js'
+  },
+  resolve: {
+    packageMains: ['main'],
+    extensions: ['', '.js', '.jsx'],
   },
   module: {
     loaders: [
