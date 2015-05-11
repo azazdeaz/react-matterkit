@@ -1,5 +1,6 @@
 var React = require('react');
 var Template = require('./utils/Template.jsx');
+var Matter = require('matterkit');
 
 var description = `
 label: String`;
@@ -14,6 +15,7 @@ module.exports = React.createClass({
 
     return <Template
       title='Button'
+      Class={Matter.Button}
       description={description}
       codes={codes}
       props={[

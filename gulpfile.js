@@ -164,7 +164,6 @@ gulp.task("webpack-dev-server", function(callback) {
 	var myConfig = Object.create(webpackConfig);
 	myConfig.devtool = "eval";
 	myConfig.debug = true;
-  myConfig.publicPath = "/demo/dist/";
 
 	// Start a webpack-dev-server
 	new WebpackDevServer(webpack(myConfig), {

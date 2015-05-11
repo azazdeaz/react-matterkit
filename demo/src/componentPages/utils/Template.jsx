@@ -1,5 +1,5 @@
 var React = require('react');
-var {Tabs} = require('../../../../');
+var {Tabs} = require('../../../../src/index');
 var Playground = require('component-playground');
 var marked = require('marked');
 var Prop = require('./Prop.jsx');
@@ -38,26 +38,17 @@ var Template = React.createClass({
   },
   renderCode() {
 
-    var { codes } = this.props;
+    var { codes, Class } = this.props;
 
-    return codes.map(code => {
+    return codes.map((code, idx) => {
 
-      // var CCC = React.createClass(Radium.wrap({propTypes: {
-      //   codeText: React.PropTypes.string.isRequired,
-      //   scope: React.PropTypes.object.isRequired,
-      //   collapsableCode: React.PropTypes.bool,
-      //   docClass: React.PropTypes.renderable,
-      //   propDescriptionMap: React.PropTypes.string,
-      //   theme: React.PropTypes.string,
-      //   noRender: React.PropTypes.bool,
-      //   es6Console: React.PropTypes.bool
-      // }, render() {return <div/>;}}));
-
-      return <Playground
-        codeText = {code}
-        scope = {scope}
-        docClass = {scope.Button}
-        noRender = {true}/>;
+      return <div style = {{marginBottom: 12}}>
+        <Playground
+          codeText = {code}
+          scope = {scope}
+          docClass = {idx === 0 ? Class : null}
+          noRender = {true}/>
+      </div>;
     });
   },
 

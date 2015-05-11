@@ -1,7 +1,7 @@
 require('./index.html');//for the webpack build
 
 var React = require('react');
-var Matter = require('../../src/index');
+var Matter = require('matterkit');
 var {List, ListItem, style} = Matter;
 var merge = require('lodash/object/merge');
 var kebabCase = require('lodash/string/kebabCase');
