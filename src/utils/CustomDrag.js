@@ -56,6 +56,8 @@ function CustomDrag(opt) {
 
     function onMove(e) {
 
+        md.__moved = true;
+
         waitingMoveEvent = e;
 
         if (!waitingMoveRaf) {
@@ -97,6 +99,11 @@ function CustomDrag(opt) {
         }
 
         call('onUp', [md, e.clientX, e.clientY, e]);
+
+        if (!md.__moved) {
+
+          call('onClick', [e]);
+        }
     }
 
     function onEnter() {
