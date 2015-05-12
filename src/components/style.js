@@ -552,6 +552,7 @@ style.tabBase = {
 style.tabCont = _.merge({}, style.panel, {
   borderTopLeftRadius: 0,
   flex: 1,
+  overflow: 'auto',
   modifiers:[
     {stretchLabels: {
       borderTopRightRadius: 0,
