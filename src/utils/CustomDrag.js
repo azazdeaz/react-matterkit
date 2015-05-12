@@ -34,6 +34,8 @@ function CustomDrag(opt) {
 
         if (custom === false) {//prevent dragging
 
+            window.addEventListener('mouseup', onUpWithoutDrag);
+
             return;
         }
 
@@ -104,6 +106,13 @@ function CustomDrag(opt) {
 
           call('onClick', [e]);
         }
+    }
+
+    function onUpWithoutDrag(e) {
+
+        window.removeEventListener('mouseup', onUpWithoutDrag);
+
+        call('onClick', [e]);
     }
 
     function onEnter() {
