@@ -12,15 +12,14 @@ var gutil = require('gulp-util');
 var rimraf = require('gulp-rimraf');
 var watch = require('gulp-watch');
 var plumber = require('gulp-plumber');
-var gcallback = require('gulp-callback');
 var sourcemaps = require('gulp-sourcemaps');
 var assign = require('lodash/object/assign');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
 
-var webpack = require("webpack");
-var WebpackDevServer = require("webpack-dev-server");
-var webpackConfig = require("./webpack.config.js");
+var webpack = require('webpack');
+var WebpackDevServer = require('webpack-dev-server');
+var webpackConfig = require('./webpack.config.js');
 
 var SOURCES = './src/**/*.{js,jsx}';
 

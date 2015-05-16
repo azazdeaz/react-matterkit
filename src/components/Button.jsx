@@ -5,30 +5,32 @@ var assign = require('lodash/object/assign');
 var Icon = require('./Icon');
 var BasicMixin = require('../utils/BasicMixin');
 
-var Button = React.createClass(Radium.wrap({
+@Radium.Enhancer
+export default class Button extends React.Component {
 
-  mixins: [BasicMixin],
-
-  propTypes: {
+  static propTypes = {
     label: React.PropTypes.string,
     disabled: React.PropTypes.bool,
-  },
+  }
 
-  getDefaultProps() {
-    return {
-      label: '',
-      disabled: false,
-      mod: {
-        kind: 'normal',
-      }
-    };
-  },
+  static defaultProps = {
+    label: '',
+    disabled: false,
+    mod: {
+      kind: 'normal',
+    }
+  }
+
+  constructor(props) {
+
+    super(props);
+  }
 
   getInitialState() {
     return {
       toggled: false,
     };
-  },
+  }
 
   render() {
 
@@ -50,6 +52,4 @@ var Button = React.createClass(Radium.wrap({
       {label}
     </div>;
   }
-}));
-
-module.exports = Button;
+};
