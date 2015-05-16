@@ -8,7 +8,7 @@ module.exports = global.Matter = {
   // Accordion: require('./components/accordion/Accordion'),
   // AccordionTab: require('./components/accordion/AccordionTab'),
   Button: require('./components/Button'),
-  // Checkbox: require('./components/Checkbox'),
+  Checkbox: require('./components/Checkbox'),
   // ColorInput: require('./components/ColorInput'),
   // Dropdown: require('./components/Dropdown'),
   // DropdownMenu: require('./components/DropdownMenu'),

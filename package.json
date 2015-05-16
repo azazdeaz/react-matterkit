@@ -8,7 +8,9 @@
     "bulkify": "^1.1.1",
     "fuzzy": "^0.1.0",
     "lodash": "^3.6.0",
+    "pure-render-decorator": "^0.1.0",
     "radium": "formidablelabs/radium",
+    "react": "^0.13.3",
     "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
   },
