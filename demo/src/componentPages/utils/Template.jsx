@@ -47,6 +47,7 @@ var Template = React.createClass({
           codeText = {code}
           scope = {scope}
           docClass = {idx === 0 ? Class : null}
+          es6Console = {false}
           noRender = {true}/>
       </div>;
     });

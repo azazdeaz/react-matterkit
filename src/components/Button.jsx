@@ -3,10 +3,19 @@ var {PureRenderMixin} = React;
 var Radium = require('radium');
 var assign = require('lodash/object/assign');
 var Icon = require('./Icon');
-var BasicMixin = require('../utils/BasicMixin');
+var MatterBasics = require('../utils/MatterBasics');
 
 @Radium.Enhancer
+@MatterBasics
 export default class Button extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      toggled: false,
+    };
+  }
 
   static propTypes = {
     label: React.PropTypes.string,
@@ -26,10 +35,8 @@ export default class Button extends React.Component {
     super(props);
   }
 
-  getInitialState() {
-    return {
-      toggled: false,
-    };
+  componentWillUnmount() {
+    console.log('btn componentWillUnmount')
   }
 
   render() {

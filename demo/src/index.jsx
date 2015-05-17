@@ -56,6 +56,7 @@ var App = React.createClass({
     return (
       <div style={styleCont}>
         <div style={{width: 270}}>
+            <Matter.Button label='dasist'/>
           <List style={{width: 210}}>
             {Object.keys(componentPages).map(name => {
 

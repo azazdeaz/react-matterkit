@@ -4,9 +4,11 @@ var has = require('lodash/object/has');
 var style = require('./style');
 var Radium = require('radium');
 import pureRender from 'pure-render-decorator';
+var MatterBasics = require('../utils/MatterBasics');
 
 @Radium.Enhancer
 @pureRender
+@MatterBasics
 export default class Checkbox extends React.Component {
 
   static propTypes = {
@@ -37,7 +39,7 @@ export default class Checkbox extends React.Component {
     var value = !this.state.value;
 
     this.setState({value});
-
+    
     if (this.props.onChange) {
       this.props.onChange(value);
     }
@@ -64,9 +66,12 @@ export default class Checkbox extends React.Component {
 
   render() {
 
+    var {mod, style} = this.props;
+
     return <div
-      style = {this.buildStyles(style.checkbox)}
-      onClick = {this._onClick}>
+      {...this.getBasics()}
+      style={this.getStyle('checkbox', mod, style)}
+      onClick = {() => this.handleClick()}>
 
       {this.renderCheck()}
     </div>;
