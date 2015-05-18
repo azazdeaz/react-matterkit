@@ -4,13 +4,21 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';
 
-var Button = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Button extends React.Component {
 
-  getDefaultProps() {
-    return {
-      selected: false,
-    };
-  },
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    selected: false,
+  }
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 

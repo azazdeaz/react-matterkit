@@ -10,6 +10,10 @@ import MatterBasics from '../utils/MatterBasics';
 @MatterBasics
 var List = React.createClass(Radium.wrap({
 
+  constructor(props) {
+    super(props);
+  }
+
   render() {
 
     var {mod, style, items} = this.props;

@@ -4,13 +4,21 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';
 
-var TabHeader = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class TabHeader extends React.Component {
 
-  getDefaultProps() {
-    return {
-      stretchLabels: true,
-    };
-  },
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    stretchLabels: true,
+  }
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 
@@ -31,6 +39,4 @@ var TabHeader = React.createClass({
       })}
     </div>;
   }
-});
-
-module.exports = TabHeader;
+}

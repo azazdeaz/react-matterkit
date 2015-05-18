@@ -12,9 +12,11 @@ import MatterBasics from '../utils/MatterBasics';
 @MatterBasics
 var ListItem = React.createClass(Radium.wrap({
 
-  getDefaultProps() {
-    return {selected: false};
-  },
+  constructor(props) {
+    super(props);
+
+    this.state = {selected: false};
+  }
 
   render() {
 

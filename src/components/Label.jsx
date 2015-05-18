@@ -6,7 +6,12 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Label = React.createClass({
+export default class Label extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return <span style={style.label}>
       {this.props.children}

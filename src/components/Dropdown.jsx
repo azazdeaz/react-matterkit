@@ -11,13 +11,24 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Dropdown = React.createClass({
+export default class Dropdown extends React.Component {
 
-  getInitialState() {
-    return {
+  static propTypes = {
+
+  }
+
+  static defaultProps = {
+
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       open: false,
     };
-  },
+  }
+  
   onFocus() {
     this.setState({open: true});
     // setTimeout(() => {//!hack

@@ -4,20 +4,26 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';
 
-var Tabs = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Tabs extends React.Component {
 
-  getDefaultProps() {
-    return {
-      stretchLabels: true,
-      defaultTabIdx: 0,
-    };
-  },
+  static propTypes = {
+  }
 
-  getInitialState() {
-    return {
-      currTabIdx: this.props.defaultTabIdx,
+  static defaultProps = {
+    stretchLabels: true,
+    defaultTabIdx: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currTabIdx: props.defaultTabIdx,
     };
-  },
+  }
 
   _selectTab(idx) {
     this.setState({currTabIdx: idx});

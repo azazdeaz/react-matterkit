@@ -8,25 +8,27 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Toggle = React.createClass({
+export default class Toggle extends React.Component {
 
-  getDefaultProps() {
-    return {
-      labelLeft: 'ON',
-      valueLeft: true,
-      labelRight: 'OFF',
-      valueRight: false,
-    };
-  },
+  static propTypes = {
+  }
 
-  getInitialState() {
+  static defaultProps = {
+    labelLeft: 'ON',
+    valueLeft: true,
+    labelRight: 'OFF',
+    valueRight: false,
+  }
 
-    var {defaultValue, valueRight} = this.props;
+  constructor(props) {
+    super(props);
 
-    return {
+    var {defaultValue, valueRight} = props;
+
+    this.state = {
       left: defaultValue === valueRight ? false : true,
     };
-  },
+  }
 
   componentWillReciveProps(nextProps) {
 
@@ -72,7 +74,7 @@ var Toggle = React.createClass({
 
 
 
-var Side = React.createClass({
+export default class Side extends React.Component {
 
   render() {
     return <div style={this.buildStyles(style.toggleSide)}>
@@ -82,7 +84,7 @@ var Side = React.createClass({
 });
 
 
-var Knob = React.createClass({
+export default class Knob extends React.Component {
 
   renderGrip() {
 

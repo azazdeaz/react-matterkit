@@ -6,14 +6,21 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Tooltip = React.createClass({
+export default class Tooltip extends React.Component {
 
-  getDefaultProps() {
-    return {width: 231};
-  },
-  getInitialState() {
-    return {show: false, style: {}};
-  },
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    width: 231
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {show: false};
+  }
+  
   showDelayed() {
     clearTimeout(this._showSetT);
     this._showSetT = setTimeout(() => this.show(), 1234);

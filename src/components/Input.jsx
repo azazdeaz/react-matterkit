@@ -18,29 +18,32 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Input = React.createClass({
+export default class Input extends React.Component {
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-      draggable: true,
-      precision: 12,
-      dragSpeed: 1,
-      value: '',
-      type: 'text',
-      min: undefined,
-      max: undefined,
-      hints: undefined,
-      maxVisibleHints: 12,
-    };
-  },
+  static propTypes = {
+  }
 
-  getInitialState() {
-    return {
+  static defaultProps = {
+    disabled: false,
+    draggable: true,
+    precision: 12,
+    dragSpeed: 1,
+    value: '',
+    type: 'text',
+    min: undefined,
+    max: undefined,
+    hints: undefined,
+    maxVisibleHints: 12,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       value: undefined,
       error: false,
     };
-  },
+  }
 
   componentWillMount() {
     this.handleValue(this.props.value);
@@ -233,7 +236,7 @@ var Input = React.createClass({
 
 
 
-var Addon = React.createClass({
+export default class Addon extends React.Component {
 
   render() {
 

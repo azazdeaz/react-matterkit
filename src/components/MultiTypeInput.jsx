@@ -7,24 +7,28 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var MultiTypeInput = React.createClass({
+export default class MultiTypeInput extends React.Component {
 
-  getDefaultProps() {
-    return {
-      types: [],
-      typeIdx: 0,
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    types: [],
+    typeIdx: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currTypeIdx: this.getCurrTypeIdx(),
     };
-  },
-
-  getInitialState() {
-
-    return {currTypeIdx: this.getCurrTypeIdx()};
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
     this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)});
-  },
+  }
 
   getCurrTypeIdx(props) {
 
@@ -32,21 +36,21 @@ var MultiTypeInput = React.createClass({
 
     var {typeIdx, chooseType, value} = props;
     return chooseType ? chooseType(value) : defaultTypeIdx;
-  },
+  }
 
   handleAddonClick() {
     var {types} = this.props;
     var {currTypeIdx} = this.state;
     currTypeIdx = (currTypeIdx + 1) % types.length;
     this.setState({currTypeIdx});
-  },
+  }
 
   handleChange(value) {
 
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }
 
   render() {
 

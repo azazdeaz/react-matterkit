@@ -6,7 +6,11 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Toolbar = React.createClass({
+export default class Toolbar extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 

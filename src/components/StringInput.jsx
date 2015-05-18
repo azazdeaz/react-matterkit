@@ -7,7 +7,19 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var StringInput = React.createClass({
+export default class StringInput extends React.Component {
+
+  static propTypes = {
+  }
+
+  static defaultProps =
+
+  constructor(props) {
+    super(props);
+
+    this.state = ;
+  }
+
   render() {
     return <Input type='text' {...this.props}/>;
   }

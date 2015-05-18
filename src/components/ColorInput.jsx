@@ -15,7 +15,18 @@ var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
 @MatterBasics
 var MultiTypeInput = React.createClass({
 
-  getDefaultProps() {
+  static propTypes = {
+  }
+
+  static defaultProps =
+
+  constructor(props) {
+    super(props);
+
+    this.state = ;
+  }
+
+  static defaultProps =
     return {
       value: '#000000',
     };

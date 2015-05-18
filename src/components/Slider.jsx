@@ -7,17 +7,23 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Slider = React.createClass({
-  getDefaultProps() {
-    return {
-      min: -100,
-      max: 100,
-      value: 0,
-    };
-  },
-  getInitialState() {
-    return {dragging: false};
-  },
+export default class Slider extends React.Component {
+
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    min: -100,
+    max: 100,
+    value: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {dragging: false};
+  }
+  
   componentDidMount() {
     new CustomDrag({
       deTarget: this.refs.handle.getDOMNode(),
@@ -56,7 +62,7 @@ var Slider = React.createClass({
   },
 });
 
-var Handle = React.createClass({
+export default class Handle extends React.Component {
 
   getInitialState() {
     return {

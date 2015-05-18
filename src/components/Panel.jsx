@@ -7,6 +7,17 @@ import MatterBasics from '../utils/MatterBasics';
 @MatterBasics
 var Panel = React.createClass(Radium.wrap({
 
+  static propTypes = {
+  }
+
+  static defaultProps =
+
+  constructor(props) {
+    super(props);
+
+    this.state = ;
+  }
+
   render() {
 
     var {mod, style} = this.props;

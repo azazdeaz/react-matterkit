@@ -7,11 +7,17 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';;
 
-var AccordionTab = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class AccordionTab extends React.Component {
 
-  getInitialState() {
-    return {opened: true};
-  },
+  constructor(props) {
+    super(props);
+
+    this.state = {opened: true};
+  }
+
   onClick() {
     this.setState({opened: !this.state.opened});
   },

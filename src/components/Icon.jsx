@@ -6,7 +6,18 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var Icon = React.createClass({
+export default class Icon extends React.Component {
+
+  static propTypes = {
+  }
+
+  static defaultProps = {
+
+  }
+
+  constructor(props) {
+    super(props);
+  }
 
   render: function () {
     return <i className = {`fa fa-${this.props.icon}`}

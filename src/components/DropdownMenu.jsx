@@ -8,11 +8,17 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var DropdownMenu = React.createClass({
+export default class DropdownMenu extends React.Component {
 
-  getInitialState() {
-    return {show: false, style: {}};
-  },
+  static propTypes = {
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {show: false, style: {}};
+  }
+
   show() {
 
     var domNode = this.getDOMNode(),

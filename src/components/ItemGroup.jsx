@@ -9,7 +9,11 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var ItemGroup = React.createClass({
+export default class ItemGroup extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
 
