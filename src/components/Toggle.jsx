@@ -1,12 +1,14 @@
-var React = require('react/addons');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('./style');
-var has = require('lodash/object/has');
-var assign = require('lodash/object/assign');
+import React from 'react';
+import has from 'lodash/object/has';
+import assign from 'lodash/object/assign';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Toggle = React.createClass({
-
-  mixins: [ StyleResolverMixin ],
 
   getDefaultProps() {
     return {
@@ -72,8 +74,6 @@ var Toggle = React.createClass({
 
 var Side = React.createClass({
 
-  mixins: [StyleResolverMixin, BrowserStateMixin],
-
   render() {
     return <div style={this.buildStyles(style.toggleSide)}>
       {this.props.label}
@@ -83,8 +83,6 @@ var Side = React.createClass({
 
 
 var Knob = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   renderGrip() {
 

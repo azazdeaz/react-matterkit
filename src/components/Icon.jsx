@@ -1,7 +1,11 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('./style');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Icon = React.createClass({
 
   render: function () {

@@ -1,11 +1,12 @@
-var React = require('react/addons');
-var {PureRenderMixin} = React;
-var Radium = require('radium');
-var assign = require('lodash/object/assign');
-var Icon = require('./Icon');
-var MatterBasics = require('../utils/MatterBasics');
+import React from 'react';
+import assign from 'lodash/object/assign';
+import Icon from './Icon';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
+@pureRender
 @MatterBasics
 export default class Button extends React.Component {
 

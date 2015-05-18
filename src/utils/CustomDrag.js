@@ -1,4 +1,4 @@
-var has = require('lodash/object/has');
+import has from 'lodash/object/has';
 
 'use strict';
 

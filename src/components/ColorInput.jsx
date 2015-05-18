@@ -1,16 +1,19 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var tinycolor = require('tinycolor2');
-var style = require('./style');
-var Input = require('./Input');
-var BasicMixin = require('../utils/BasicMixin');
-var ColorCircle = require('../utils/ColorCircle');
+import React from 'react';
+import tinycolor from 'tinycolor2';
+import style from './style';
+import Input from './Input';
+import ColorCircle from '../utils/ColorCircle';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
 var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
 //TODO customiseable formats
-var MultiTypeInput = React.createClass({
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+var MultiTypeInput = React.createClass({
 
   getDefaultProps() {
     return {

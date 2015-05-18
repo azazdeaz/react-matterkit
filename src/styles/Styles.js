@@ -1,7 +1,7 @@
 import merge from 'lodash/object/merge';
 import forIn from 'lodash/object/forIn';
 // import bulk from 'bulk-require';
-var bulk = require('bulk-require');
+import bulk from 'bulk-require';
 var sources = bulk(__dirname, 'sources/*.js').sources;
 console.log(sources);
 

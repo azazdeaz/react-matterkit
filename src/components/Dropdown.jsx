@@ -1,14 +1,17 @@
-var React = require('react');
-var Input = require('./Input');
-var Icon = require('./Icon');
-var ListItem = require('./ListItem');
-var style = require('./style');
-var has = require('lodash/object/has');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
+import React from 'react';
+import Input from './Input';
+import Icon from './Icon';
+import ListItem from './ListItem';
+import has from 'lodash/object/has';
 
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
+
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Dropdown = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   getInitialState() {
     return {

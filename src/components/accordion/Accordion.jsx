@@ -1,7 +1,8 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('../style');
-var AccordionTab = require('./AccordionTab');
+import React from 'react';
+import AccordionTab from './AccordionTab';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
 
 var Accordion = React.createClass({
   selecteds: [],

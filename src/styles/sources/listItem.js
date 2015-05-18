@@ -3,8 +3,6 @@ export default function (styles, mod) {
   var config = styles.get('config', mod);
 
   return {
-    mixins: ['font'],
-
     height: config.itemHeight,
     lineHeight: config.itemHeightPX,
     padding: '0 8px',

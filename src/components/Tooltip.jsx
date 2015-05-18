@@ -1,8 +1,11 @@
-var style = require('./style');
-var React = require('react');
-var _ = require('lodash');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Tooltip = React.createClass({
 
   getDefaultProps() {

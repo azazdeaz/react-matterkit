@@ -1,10 +1,13 @@
-var style = require('./style');
-var assign = require('lodash');
-var React = require('react');
-var List = require('./List');
-var _ = require('lodash');
+import assign from 'lodash/object/assign';
+import React from 'react';
+import List from './List';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var DropdownMenu = React.createClass({
 
   getInitialState() {

@@ -1,11 +1,15 @@
-var React = require('react/addons');
-var BasicMixin = require('../utils/BasicMixin');
-var merge = require('lodash/object/merge');
-var has = require('lodash/object/has');
+import React from 'react';
+import BasicMixin from '../utils/BasicMixin';
+import merge from 'lodash/object/merge';
+import has from 'lodash/object/has';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var ItemGroup = React.createClass({
-
-  mixins: [BasicMixin],
 
   render() {
 

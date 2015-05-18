@@ -1,11 +1,10 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var TabHeader = require('./TabHeader');
+import React from 'react';
+import TabHeader from './TabHeader';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
 
 var Tabs = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   getDefaultProps() {
     return {

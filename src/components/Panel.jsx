@@ -1,11 +1,11 @@
-var React = require('react');
-var Radium = require('radium');
-var style = require('./style');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@MatterBasics
 var Panel = React.createClass(Radium.wrap({
-
-  mixins: [BasicMixin],
 
   render() {
 

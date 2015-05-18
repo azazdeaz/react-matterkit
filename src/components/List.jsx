@@ -1,13 +1,14 @@
-var React = require('react/addons');
-var Radium = require('radium');
-var ListItem = require('./ListItem');
-var style = require('./style');
-var has = require('lodash/object/has');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import ListItem from './ListItem';
+import style from './style';
+import has from 'lodash/object/has';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@MatterBasics
 var List = React.createClass(Radium.wrap({
-
-  mixins: [ BasicMixin],
 
   render() {
 

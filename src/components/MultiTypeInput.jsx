@@ -1,13 +1,13 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
-var Input = require('./Input');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import Input from './Input';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var MultiTypeInput = React.createClass({
-
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
 
   getDefaultProps() {
     return {

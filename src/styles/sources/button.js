@@ -4,8 +4,6 @@ export default function (styles, mod) {
 
   return {
     
-    mixins: ['buttonBase', 'font'],
-
     height: config.itemHeight,
     lineHeight: config.itemHeightPX,
     boxSizing: 'border-box',

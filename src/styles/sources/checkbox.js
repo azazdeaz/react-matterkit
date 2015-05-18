@@ -3,8 +3,6 @@ export default function (styles, mod) {
   var config = styles.get('config', mod);
 
   return {
-    mixins: ['inputBorder', 'roundedCorners', 'noSelect'],
-
     position: 'relative',
     width: 18,
     height: 18,

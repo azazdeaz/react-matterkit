@@ -1,12 +1,10 @@
-import React from 'react/addons';
+import React from 'react';
 import tinycolor from 'tinycolor2';
-var {PureRenderMixin} = React.addons;
-var CustomDrag = require('../utils/CustomDrag');
+import pureRender from 'pure-render-decorator';
+import CustomDrag from '../utils/CustomDrag';
 
 var ColorCircle;
 export default ColorCircle = React.createClass({
-
-  mixins: [PureRenderMixin],
 
   getDefaultProps() {
     return {

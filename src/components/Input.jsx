@@ -1,20 +1,24 @@
-var React = require('react/addons');
+import React from 'react';
 var { PureRenderMixin } = React;
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var merge = require('lodash/object/merge');
-var has = require('lodash/object/has');
-var _isFinite = require('lodash/lang/isFinite');
-var isArray = require('lodash/lang/isArray');
-var style = require('./style');
-var Icon = require('./Icon');
-var List = require('./List');
-var CustomDrag = require('../utils/CustomDrag');
-var fuzzy = require('fuzzy');
-var BasicMixin = require('../utils/BasicMixin');
 
+import merge from 'lodash/object/merge';
+import has from 'lodash/object/has';
+import _isFinite from 'lodash/lang/isFinite';
+import isArray from 'lodash/lang/isArray';
+import style from './style';
+import Icon from './Icon';
+import List from './List';
+import CustomDrag from '../utils/CustomDrag';
+import fuzzy from 'fuzzy';
+import BasicMixin from '../utils/BasicMixin';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
+
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Input = React.createClass({
-
-  mixins: [BasicMixin, PureRenderMixin, StyleResolverMixin, BrowserStateMixin],
 
   getDefaultProps() {
     return {
@@ -230,8 +234,6 @@ var Input = React.createClass({
 
 
 var Addon = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   render() {
 

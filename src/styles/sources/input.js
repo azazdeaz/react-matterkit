@@ -4,8 +4,6 @@ export default function (styles, mods) {
 
   return {
     
-    mixins: ['inputResetCss', 'inputBorder'],
-
     position: 'relative',
     display: 'flex',
     alignItems: 'stretch',

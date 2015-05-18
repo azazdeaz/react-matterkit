@@ -1,15 +1,13 @@
-var React = require('react');
-var _ = require('lodash');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var Icon = require('../Icon');
-var Label = require('../Label');
-var Toolbar = require('../Toolbar');
-var ToolbarGroup = require('../ToolbarGroup');
+import React from 'react';;
+import Icon from '../Icon';
+import Label from '../Label';
+import Toolbar from '../Toolbar';
+import ToolbarGroup from '../ToolbarGroup';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';;
 
 var AccordionTab = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   getInitialState() {
     return {opened: true};

@@ -2,8 +2,6 @@ export default function () {
 
   return {
 
-    mixins: ['roundedCorners', 'noSelect'],
-
     backgroundColor: '#363c43',
     backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
     border: 'solid 1px rgba(26,29,33,.75)',

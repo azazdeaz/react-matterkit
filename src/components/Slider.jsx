@@ -1,8 +1,12 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('./style');
-var CustomDrag = require('../utils/CustomDrag');
+import React from 'react';
+import CustomDrag from '../utils/CustomDrag';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
 var Slider = React.createClass({
   getDefaultProps() {
     return {

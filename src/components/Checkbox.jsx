@@ -1,10 +1,8 @@
-var React = require('react/addons');
-var {PureRenderMixin} = React.addons;
-var has = require('lodash/object/has');
-var style = require('./style');
-var Radium = require('radium');
+import React from 'react';
+import has from 'lodash/object/has';
+import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
-var MatterBasics = require('../utils/MatterBasics');
+import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
 @pureRender
@@ -39,7 +37,7 @@ export default class Checkbox extends React.Component {
     var value = !this.state.value;
 
     this.setState({value});
-    
+
     if (this.props.onChange) {
       this.props.onChange(value);
     }

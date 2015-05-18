@@ -1,11 +1,14 @@
-var React = require('react');
-var style = require('./style');
-var BasicMixin = require('../utils/BasicMixin');
-var assign = require('lodash/object/assign');
+import React from 'react';
+import style from './style';
+import BasicMixin from '../utils/BasicMixin';
+import assign from 'lodash/object/assign';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@MatterBasics
 var Toolbar = React.createClass({
-
-  mixins: [BasicMixin],
 
   render() {
     return <div

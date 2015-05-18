@@ -1,11 +1,10 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var Icon = require('../Icon');
+import React from 'react';
+import Icon from '../Icon';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
 
 var Button = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
 
   getDefaultProps() {
     return {
@@ -32,7 +31,7 @@ var Button = React.createClass({
       })}
       onClick={this.props.onSelect}
       onDragEnter={this.props.onSelect}>
-      
+
       {icon}
       {this.props.label}
     </div>;
