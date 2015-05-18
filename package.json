@@ -26,6 +26,7 @@
     "browserify": "^9.0.8",
     "component-playground": "0.0.10",
     "eslint": "^0.21.1",
+    "eslint-plugin-react": "^2.3.0",
     "exorcist": "^0.1.6",
     "file-loader": "^0.8.1",
     "gulp": "^3.8.11",

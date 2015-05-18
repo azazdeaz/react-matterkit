@@ -1,5 +1,4 @@
 import React from 'react';
-import AccordionTab from './AccordionTab';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';
@@ -13,7 +12,6 @@ export default class Accordion extends React.Component {
     super(props);
   }
 
-  selecteds: [],
   onSelect(index) {
     console.log('select tab', index);
   }
