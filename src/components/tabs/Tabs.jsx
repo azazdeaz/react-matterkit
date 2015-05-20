@@ -29,7 +29,7 @@ var Tabs = React.createClass({
     }
   },
 
-  componentWillReciveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({currTabIdx: nextProps.defaultTabIdx});
   },
 

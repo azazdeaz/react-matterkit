@@ -27,8 +27,10 @@ var Button = React.createClass({
   render() {
 
     var icon;
-    if (this.props.icon) {
-      icon = <Icon icon={this.props.icon}
+    if (this.props.icon || this.props.iconClassName) {
+      icon = <Icon
+        icon={this.props.icon}
+        className={this.props.iconClassName}
         style={{marginRight:this.props.text ? 4 : 0}}/>;
     }
 

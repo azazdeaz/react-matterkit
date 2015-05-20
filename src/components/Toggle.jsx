@@ -26,7 +26,7 @@ var Toggle = React.createClass({
     };
   },
 
-  componentWillReciveProps(nextProps) {
+  componentWillReceiveProps(nextProps) {
 
     if (has(nextProps, 'defaultValue')) {
 
