@@ -17,7 +17,7 @@ export default class Style {
   }
 
   clone() {
-    
+
     return new Style(cloceDeep(this.src));
   }
 
@@ -75,16 +75,16 @@ export default class Style {
 
           if (value) {
 
-            let modStyle = this.resolveMod(styleSrc[key]);
-            merge(styleSrc, modStyle);
+            let modStyle = this.resolveMod(styleSrc[key], mod);
+            merge(modStyle, styleSrc);
           }
         }
         else if (typeof(value) === 'string') {
 
           if (styleSrc[key][value]) {
 
-            let modStyle = this.resolveMod(styleSrc[key][value]);
-            merge(styleSrc, modStyle);
+            let modStyle = this.resolveMod(styleSrc[key][value], mod);
+            merge(modStyle, styleSrc);
           }
         }
       }

@@ -1,7 +1,13 @@
 export default function (styles, mod) {
 
+  var config = styles.get('config', mod);
+
   return {
-    knobWidth: 32,
-    labelOffset: '7px'
+    mixins: ['roundedCorners'],
+
+    userSelect: 'none',
+    height: config.itemHeight,
+    display: 'inline-block',
+    backgroundColor: config.palette.grey4,
   };
 }

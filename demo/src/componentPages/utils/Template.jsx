@@ -33,15 +33,17 @@ var Template = React.createClass({
   },
   renderCode() {
 
-    var { codes, Class } = this.props;
+    var {demos} = this.props;
 
-    return codes.map((code, idx) => {
+    return demos.map((demo, idx) => {
+
+      var {code, docClass} = demo
 
       return <div style = {{marginBottom: 12}}>
         <Playground
           codeText = {code}
           scope = {scope}
-          docClass = {Class}
+          docClass = {docClass}
           es6Console = {false}
           noRender = {true}/>
       </div>;
