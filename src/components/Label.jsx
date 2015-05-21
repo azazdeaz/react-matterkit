@@ -17,6 +17,4 @@ export default class Label extends React.Component {
       {this.props.children}
     </span>;
   }
-});
-
-module.exports = Label;
+}

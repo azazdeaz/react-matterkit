@@ -22,7 +22,7 @@ module.exports = global.Matter = {
   Panel: require('./components/Panel'),
   // Slider: require('./components/Slider'),
   // Tabs: require('./components/tabs/Tabs'),
-  // Toggle: require('./components/Toggle'),
+  Toggle: require('./components/Toggle'),
   // Toolbar: require('./components/Toolbar'),
   // ToolbarGroup: require('./components/ToolbarGroup'),
   // Tooltip: require('./components/Tooltip'),

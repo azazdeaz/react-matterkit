@@ -1,5 +1,5 @@
 import React from 'react';
-import TabLabel from './TabLa   bel';
+import TabLabel from './TabLabel';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';

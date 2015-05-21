@@ -19,16 +19,13 @@ export default class Icon extends React.Component {
     super(props);
   }
 
-  render: function () {
-    return <i className = {`fa fa-${this.props.icon}`}
-      style = {_.assign({
-        lineHeight: this.props.lineHeight || style.itemHeightPX,
-        width: '12px',
-        textAlign: 'center'
-      }, this.props.style)}
-      onClick = {this.props.onClick}
-    ></i>;
-  },
-});
+  render() {
+    var {mod, style} = this.prosp;
 
-module.exports = Icon;
+    return <i
+      {...this.getBasics()}
+      style = {this.getStyle('icon', mod, style)}
+      className = {this.props.className || `fa fa-${this.props.icon}`}
+      onClick = {this.props.onClick}/>;
+  }
+}

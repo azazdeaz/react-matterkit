@@ -6,7 +6,7 @@ import CustomDrag from '../utils/CustomDrag';
 var ColorCircle;
 export default ColorCircle = React.createClass({
 
-  static defaultProps = 
+  static defaultProps =
     return {
       radius: 234,
       width: 32,

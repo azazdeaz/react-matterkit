@@ -6,6 +6,7 @@ var description = `
 label: String`;
 
 var codes = [
+  `<Toggle value={false}/>`,
   `<Checkbox value={false}/>`,
 
   '<Button label="button"/>',

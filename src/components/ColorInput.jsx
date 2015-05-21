@@ -13,7 +13,7 @@ var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var MultiTypeInput = React.createClass({
+export default class ColorInput extends React.Component {
 
   static propTypes = {
   }
@@ -115,6 +115,4 @@ var MultiTypeInput = React.createClass({
       {this.renderSelector()}
     </span>;
   }
-});
-
-module.exports = MultiTypeInput;
+}

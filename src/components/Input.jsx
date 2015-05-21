@@ -196,6 +196,8 @@ export default class Input extends React.Component {
 
   render: function () {
 
+    var {mod, style} = this.props;
+
     return <div
       onMouseDown = {e=>{
         var inputNode = this.refs.input.getDOMNode();
@@ -206,13 +208,13 @@ export default class Input extends React.Component {
           e.preventDefault();
         }
       }}
-      style = {this.buildStyles(style.input)}>
+      style = {this.getStyle('input', mod, style)}>
 
       <input
         ref='input'
         {...this.getBasics()}
         {...this.getBrowserStateEvents()}
-        style = {style.inputReset}
+        style = {this.getStyle('inputReset')}
         palceholder = {this.props.palceholder}
         value = {this.state.value}
         type = 'text'
@@ -226,7 +228,6 @@ export default class Input extends React.Component {
         label={this.props.addonLabel}
         background={this.props.addonBackground}
         onClick={this.props.addonOnClick}/>
-
 
       {this.renderHints()}
     </div>;
@@ -258,6 +259,4 @@ export default class Addon extends React.Component {
 
     </span>;
   },
-});
-
-module.exports = Input;
+}

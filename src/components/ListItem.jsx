@@ -1,7 +1,4 @@
 import React from 'react';
-import Radium from 'radium';
-import assign from 'lodash/object/assign';
-import has from 'lodash/object/has';
 import assign from 'lodash/object/assign';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
@@ -10,7 +7,7 @@ import MatterBasics from '../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-var ListItem = React.createClass(Radium.wrap({
+export default class ListItem extends React.Component {
 
   constructor(props) {
     super(props);
@@ -37,6 +34,4 @@ var ListItem = React.createClass(Radium.wrap({
       {label}
     </div>;
   }
-}));
-
-module.exports = ListItem;
+}

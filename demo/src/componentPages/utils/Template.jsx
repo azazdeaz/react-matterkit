@@ -1,12 +1,7 @@
 var React = require('react');
-var {Tabs} = require('../../../../src/index');
 var Playground = require('component-playground');
 var marked = require('marked');
-var Prop = require('./Prop.jsx');
-var has = require('lodash/object/has');
 var scope = require('../../scope');
-
-var Radium = require('radium');
 
 var Template = React.createClass({
   contextTypes: {
@@ -46,7 +41,7 @@ var Template = React.createClass({
         <Playground
           codeText = {code}
           scope = {scope}
-          docClass = {idx === 0 ? Class : null}
+          docClass = {Class}
           es6Console = {false}
           noRender = {true}/>
       </div>;

@@ -56,6 +56,4 @@ export default class DropdownMenu extends React.Component {
         <List {...this.props} onSelect={this.onSelect}/>
       </div>;
   }
-});
-
-module.exports = DropdownMenu;
+}

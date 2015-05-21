@@ -1,16 +1,18 @@
+var path = require('path');
+
 module.exports = {
-  context: __dirname + "/demo",
-  entry: "./src/index.jsx",
+  context: path.join(__dirname, '/demo'),
+  entry: './src/index.jsx',
   output: {
     publicPath: '/dist/',
-    path: __dirname + "/dist",
+    path: path.join( __dirname, '/dist'),
     filename: 'index.js'
   },
   resolve: {
     packageMains: ['main'],
     extensions: ['', '.js', '.jsx'],
     alias: {
-      matterkit: __dirname + '/src/index.js',
+      matterkit: path.join(__dirname, '/src/index.js'),
     }
   },
   module: {
@@ -22,7 +24,7 @@ module.exports = {
       }, {
         test: /Styles\.js$/,
         exclude: /node_modules/,
-        loader: "transform?bulkify"
+        loader: 'transform?bulkify'
       }, {
         test: /\.html/,
         exclude: /node_modules/,

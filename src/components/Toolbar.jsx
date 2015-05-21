@@ -22,6 +22,4 @@ export default class Toolbar extends React.Component {
       {this.props.children}
     </div>;
   }
-});
-
-module.exports = Toolbar;
+}

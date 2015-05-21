@@ -23,6 +23,4 @@ export default class StringInput extends React.Component {
   render() {
     return <Input type='text' {...this.props}/>;
   }
-});
-
-module.exports = StringInput;
+}

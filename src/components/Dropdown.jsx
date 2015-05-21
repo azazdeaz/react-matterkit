@@ -28,7 +28,7 @@ export default class Dropdown extends React.Component {
       open: false,
     };
   }
-  
+
   onFocus() {
     this.setState({open: true});
     // setTimeout(() => {//!hack
@@ -93,6 +93,4 @@ export default class Dropdown extends React.Component {
       })}
     </div>;
   }
-});
-
-module.exports = Dropdown;
+}

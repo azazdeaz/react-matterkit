@@ -62,6 +62,4 @@ export default class MultiTypeInput extends React.Component {
       onInitialFormat = {this.handleChange}
       addonOnClick = {this.handleAddonClick}/>;
   }
-});
-
-module.exports = MultiTypeInput;
+}

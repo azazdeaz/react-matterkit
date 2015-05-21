@@ -20,7 +20,7 @@ export default class Tooltip extends React.Component {
 
     this.state = {show: false};
   }
-  
+
   showDelayed() {
     clearTimeout(this._showSetT);
     this._showSetT = setTimeout(() => this.show(), 1234);
@@ -59,6 +59,4 @@ export default class Tooltip extends React.Component {
         <div style={style.tooltipTriangle}/>
       </div>;
   }
-});
-
-module.exports = Tooltip;
+}

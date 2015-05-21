@@ -7,7 +7,7 @@ import MatterBasics from '../../utils/MatterBasics';
 @Radium.Enhancer
 @pureRender
 @MatterBasics
-export default class Button extends React.Component {
+export default class TabLabel extends React.Component {
 
   static propTypes = {
   }
@@ -45,5 +45,3 @@ export default class Button extends React.Component {
     </div>;
   }
 }
-
-module.exports = Button;

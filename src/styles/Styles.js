@@ -1,15 +1,24 @@
 import merge from 'lodash/object/merge';
 import forIn from 'lodash/object/forIn';
-// import bulk from 'bulk-require';
-import bulk from 'bulk-require';
-var sources = bulk(__dirname, 'sources/*.js').sources;
-console.log(sources);
+import cloneDeep from 'lodash/lang/cloneDeep';
+var sources = require.context('./sources', false, /^\.\/.*\.js$/);
+console.log(sources.keys());
 
 export default class Style {
 
-  constructor() {
+  constructor(src) {
 
-    this.src = sources;
+    this.src = src || {};
+
+    sources.keys().forEach(fileName => {
+      var name = /(\w+)\.js$/.exec(fileName)[1];
+      this.addSource(name, sources(fileName));
+    });
+  }
+
+  clone() {
+    
+    return new Style(cloceDeep(this.src));
   }
 
   addSource(name, source) {

@@ -8,14 +8,13 @@ import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
 @MatterBasics
-var List = React.createClass(Radium.wrap({
+export default class List extends React.Component {
 
   constructor(props) {
     super(props);
   }
 
   render() {
-
     var {mod, style, items} = this.props;
     var children;
 
@@ -51,6 +50,4 @@ var List = React.createClass(Radium.wrap({
       {children}
     </div>;
   }
-}));
-
-module.exports = List;
+}

@@ -31,6 +31,4 @@ export default class ItemGroup extends React.Component {
       {children}
     </div>;
   }
-});
-
-module.exports = ItemGroup;
+}

@@ -23,7 +23,7 @@ export default class Slider extends React.Component {
 
     this.state = {dragging: false};
   }
-  
+
   componentDidMount() {
     new CustomDrag({
       deTarget: this.refs.handle.getDOMNode(),
@@ -93,6 +93,4 @@ export default class Handle extends React.Component {
       onMouseDown={() => this.setState({down: true})}>
     </div>;
   }
-});
-
-module.exports = Slider;
+}

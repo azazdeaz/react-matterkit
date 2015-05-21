@@ -5,21 +5,13 @@ import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
 @MatterBasics
-var Panel = React.createClass(Radium.wrap({
-
-  static propTypes = {
-  }
-
-  static defaultProps =
+export default class Panel extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = ;
   }
 
   render() {
-
     var {mod, style} = this.props;
 
     return <div
@@ -29,6 +21,4 @@ var Panel = React.createClass(Radium.wrap({
       {this.props.children}
     </div>;
   }
-}));
-
-module.exports = Panel;
+}
