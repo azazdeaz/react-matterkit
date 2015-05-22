@@ -3,7 +3,6 @@ export default function (styles, mod) {
   var config = styles.get('config', mod);
 
   return {
-
     border: 'solid 1px transparent',
 
     ':hover': {

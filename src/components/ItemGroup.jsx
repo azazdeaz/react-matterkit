@@ -1,6 +1,4 @@
 import React from 'react';
-import BasicMixin from '../utils/BasicMixin';
-import merge from 'lodash/object/merge';
 import has from 'lodash/object/has';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
@@ -10,7 +8,6 @@ import MatterBasics from '../utils/MatterBasics';
 @pureRender
 @MatterBasics
 export default class ItemGroup extends React.Component {
-
   constructor(props) {
     super(props);
   }

@@ -22,6 +22,7 @@ export default class AccordionTab extends React.Component {
     this.setState({opened: !this.state.opened});
   },
   render: function () {
+    var {mod, style} = this.props;
 
     // var sBase = {};
     // if (this.state.opened) sBase.backgroundColor = style.grey.active;

@@ -35,17 +35,17 @@ export default class MultiTypeInput extends React.Component {
     props = props || this.props;
 
     var {typeIdx, chooseType, value} = props;
-    return chooseType ? chooseType(value) : defaultTypeIdx;
+    return chooseType ? chooseType(value) : typeIdx;
   }
 
-  handleAddonClick() {
+  handleAddonClick = () => {
     var {types} = this.props;
     var {currTypeIdx} = this.state;
     currTypeIdx = (currTypeIdx + 1) % types.length;
     this.setState({currTypeIdx});
   }
 
-  handleChange(value) {
+  handleChange = (value) => {
 
     if (this.props.onChange) {
       this.props.onChange(value);

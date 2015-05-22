@@ -3,8 +3,8 @@ export default function (styles, mod) {
   var config = styles.get('config', mod);
 
   return {
-    height: config.itemHeight,
-    lineHeight: config.itemHeightPX,
+    height: config.lineHeight,
+    lineHeight: `${config.lineHeight}px`,
     padding: '0 8px',
 
     ':hover': {

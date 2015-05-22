@@ -32,13 +32,14 @@ export default class Tabs extends React.Component {
 
       this.props.onChangeTabIdx(idx);
     }
-  },
+  }
 
   componentWillReciveProps(nextProps) {
     this.setState({currTabIdx: nextProps.defaultTabIdx});
-  },
+  }
 
   render() {
+    var {mod, style} = this.props;
 
     var currTab;
 
@@ -51,13 +52,17 @@ export default class Tabs extends React.Component {
       }
     });
 
-    return <div style={this.buildStyles(style.tabBase)}>
+    return <div
+      {...this.getBasics()}
+      style = {this.getStyle('tabBase', mod, style)}>
+
       <TabHeader
         currTabIdx = {this.state.currTabIdx}
         onSelectTab = {idx => this._selectTab(idx)}
         children = {this.props.children}
         stretchLabels = {this.props.stretchLabels}/>
-      <div style={style.tabCont}>
+
+      <div style={this.getStyle('tabCont', mod)}>
         {currTab}
       </div>
     </div>;

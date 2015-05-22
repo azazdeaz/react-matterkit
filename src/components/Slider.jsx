@@ -26,10 +26,10 @@ export default class Slider extends React.Component {
 
   componentDidMount() {
     new CustomDrag({
-      deTarget: this.refs.handle.getDOMNode(),
+      deTarget: React.findDOMNode(this.refs.handle),
       onDown: () => ({
         value: this.props.value,
-        width: this.getDOMNode().offsetWidth,
+        width: React.findDOMNode(this).offsetWidth,
       }),
       onDrag: md => {
 
@@ -47,7 +47,7 @@ export default class Slider extends React.Component {
   },
   render() {
 
-    var width = this.isMounted() ? this.getDOMNode().offsetWidth : 0,
+    var width = this.isMounted() ? React.finDOMNode(this).offsetWidth : 0,
       range = this.props.max - this.props.min,
       progress = (this.props.value - this.props.min) / range,
       percent = Math.max(0, Math.min(1, progress))*100 + '%';

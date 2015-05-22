@@ -8,19 +8,12 @@ import MatterBasics from '../utils/MatterBasics';
 @MatterBasics
 export default class Icon extends React.Component {
 
-  static propTypes = {
-  }
-
-  static defaultProps = {
-
-  }
-
   constructor(props) {
     super(props);
   }
 
   render() {
-    var {mod, style} = this.prosp;
+    var {mod, style} = this.props;
 
     return <i
       {...this.getBasics()}

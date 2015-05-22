@@ -14,7 +14,7 @@ var codes = [
 
 `<ItemGroup>
   <Button
-  	icon='github'
+    icon='github'
     disabled={true}/>
   <Input placeholder='type here'/>
   <Button label='second'/>

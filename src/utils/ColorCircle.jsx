@@ -27,7 +27,7 @@ export default ColorCircle = React.createClass({
 
   componentDidMount() {
 
-    var node = this.getDOMNode();
+    var node = React.finDOMNode(this);
 
     this._customDrag = new CustomDrag({
       deTarget: node,
@@ -109,7 +109,7 @@ export default ColorCircle = React.createClass({
     var getG = getChannel.bind(null, [0, 0, 0, 1, 1, 1, 0]);
     var getB = getChannel.bind(null, [0, 1, 1, 1, 0, 0, 0]);
 
-    var canvas = this.refs.range.getDOMNode(),
+    var canvas = React.finDOMNode(this.refs.range),
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,
@@ -137,7 +137,7 @@ export default ColorCircle = React.createClass({
 
   renderTri() {
 
-    var canvas = this.refs.tri.getDOMNode(),
+    var canvas = React.finDOMNode(this.refs.tri),
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,

@@ -7,14 +7,22 @@ import MatterBasics from '../utils/MatterBasics';
 @pureRender
 @MatterBasics
 export default class Label extends React.Component {
-
   constructor(props) {
     super(props);
   }
 
   render() {
-    return <span style={style.label}>
-      {this.props.children}
+    var {mod, style, label, children} = this.props;
+
+    if (label === undefined) {
+      label = children;
+    }
+
+    return <span
+      {...this.getBasics()}
+      style={this.getStyle('label', mod, style)}>
+
+      {label}
     </span>;
   }
 }

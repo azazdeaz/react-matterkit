@@ -1,16 +1,9 @@
 import React from 'react';
-var { PureRenderMixin } = React;
-
-import merge from 'lodash/object/merge';
-import has from 'lodash/object/has';
 import _isFinite from 'lodash/lang/isFinite';
-import isArray from 'lodash/lang/isArray';
-import style from './style';
 import Icon from './Icon';
 import List from './List';
 import CustomDrag from '../utils/CustomDrag';
 import fuzzy from 'fuzzy';
-import BasicMixin from '../utils/BasicMixin';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
@@ -47,13 +40,15 @@ export default class Input extends React.Component {
 
   componentWillMount() {
     this.handleValue(this.props.value);
-  },
+  }
 
   componentDidMount() {
 
-    new CustomDrag({
-      deTarget: this.getDOMNode(),
-      onDown: (e) => {
+    var deTarget = React.findDOMNode(this);
+
+    this._customDrag = new CustomDrag({
+      deTarget,
+      onDown: () => {
 
         if (this.props.type !== 'number' || !this.props.draggable) {
 
@@ -74,18 +69,18 @@ export default class Input extends React.Component {
       onUp: (md) => {
         if (!md.moved) {
 
-          let node = this.refs.input.getDOMNode();
+          let node = React.findDOMNode(this.refs.input);
           node.focus();
           node.select();
         }
       }
     });
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
     this.handleValue(nextProps.value, nextProps);
-  },
+  }
 
   componentDidUpdate(prevProps, prevState) {
 
@@ -97,7 +92,7 @@ export default class Input extends React.Component {
 
       this.props.onChange(exportValue);
     }
-  },
+  }
 
   handleValue(value, props) {
 
@@ -111,7 +106,7 @@ export default class Input extends React.Component {
     this.setState({value, exportValue});
 
     this._validate(value);
-  },
+  }
 
   _formatValue(value, props) {
 
@@ -129,7 +124,7 @@ export default class Input extends React.Component {
     }
 
     return value;
-  },
+  }
 
   _formatNumber(value) {
 
@@ -145,7 +140,7 @@ export default class Input extends React.Component {
     value = parseFloat(value.toFixed(precision));
 
     return _isFinite(value) ? value : 0;
-  },
+  }
 
   _validate(value) {
 
@@ -153,7 +148,7 @@ export default class Input extends React.Component {
 
       this.setState({error: !this.props.validate(value)});
     }
-  },
+  }
 
   renderHints() {
 
@@ -192,29 +187,27 @@ export default class Input extends React.Component {
       left: 0,
       width: '100%',
     }}/>;
-  },
+  }
 
-  render: function () {
-
+  render() {
     var {mod, style} = this.props;
 
     return <div
+      style = {this.getStyle('input', mod, style)}
       onMouseDown = {e=>{
-        var inputNode = this.refs.input.getDOMNode();
+        var inputNode = React.findDOMNode(this.refs.input);
         if (inputNode.ownerDocument.activeElement === inputNode &&
           e.target !== inputNode)
         {
           e.stopPropagation();
           e.preventDefault();
         }
-      }}
-      style = {this.getStyle('input', mod, style)}>
+      }}>
 
       <input
         ref='input'
         {...this.getBasics()}
-        {...this.getBrowserStateEvents()}
-        style = {this.getStyle('inputReset')}
+        style = {this.getStyle('inputResetCss', mod)}
         palceholder = {this.props.palceholder}
         value = {this.state.value}
         type = 'text'
@@ -224,6 +217,7 @@ export default class Input extends React.Component {
         disabled = {this.props.disabled}/>
 
       <Addon
+        mod={this.props.mod}
         icon={this.props.addonIcon}
         label={this.props.addonLabel}
         background={this.props.addonBackground}
@@ -232,31 +226,32 @@ export default class Input extends React.Component {
       {this.renderHints()}
     </div>;
   }
-});
+}
 
 
 
-
-export default class Addon extends React.Component {
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+class Addon extends React.Component {
 
   render() {
 
-    if (!this.props.label && !this.props.icon) {
+    var {label, icon, mod, onClick} = this.props;
+
+    if (!label && !icon) {
       return <div hidden={true}/>;
     }
 
-    var icon = this.props.icon ? <Icon icon={this.props.icon}/> : undefined;
-
-    var s = this.buildStyles(style.inputAddon);
+    var icon = icon ? <Icon icon={icon}/> : undefined;
 
     return <span
-      {...this.getBrowserStateEvents()}
-      style = {s}
-      onClick = {this.props.onClick}>
+      {...this.getBasics()}
+      style = {this.getStyle('inputAddon', mod)}
+      onClick = {onClick}>
 
-      {this.props.label}
+      {label}
       {icon}
-
     </span>;
-  },
+  }
 }

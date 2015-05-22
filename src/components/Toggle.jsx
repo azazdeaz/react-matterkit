@@ -59,7 +59,7 @@ export default class Toggle extends React.Component {
   }
 
   renderKnob(left) {
-    var mod = assign({left: left ? 'true' : 'false'}, this.props.mod);
+    var mod = assign({onLeft: left ? 'true' : 'false'}, this.props.mod);
 
     return <div style={this.getStyle('toggleKnob', mod)}>
       {this.renderGrip()}
@@ -92,7 +92,7 @@ export default class Toggle extends React.Component {
     var {mod, style, labelLeft, labelRight} = this.props;
 
     return <div
-      style = {this.getStyle('toggleBase')}
+      style = {this.getStyle('toggleBase', mod, style)}
       onClick = {() => this.handleClick()}>
 
       {this.renderSide(labelLeft, this.state.left, 'left')}

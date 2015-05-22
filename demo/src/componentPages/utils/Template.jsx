@@ -37,9 +37,9 @@ var Template = React.createClass({
 
     return demos.map((demo, idx) => {
 
-      var {code, docClass} = demo
+      var {code, docClass} = demo;
 
-      return <div style = {{marginBottom: 12}}>
+      return <div key={idx} style={{marginBottom: 12}}>
         <Playground
           codeText = {code}
           scope = {scope}

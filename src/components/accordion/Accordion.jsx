@@ -16,6 +16,7 @@ export default class Accordion extends React.Component {
     console.log('select tab', index);
   }
   render() {
+    var {mod, style} = this.props;
 
     return <div style={style.accordion}>
       {this.props.children}

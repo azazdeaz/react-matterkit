@@ -1,4 +1,5 @@
 import defaultStyles from '../defaultStyles';
+import forOwn from 'lodash/object/forOwn';
 
 export default function (Component) {
 
@@ -11,6 +12,12 @@ export default function (Component) {
 
   Component.prototype.getStyle = function (name, mod, style) {
     var styles = this.context.styles || defaultStyles.get();
-    return styles.get(name, mod, style);
+    var ret = styles.get(name, mod, style);
+
+    forOwn(ret, (value, key) => {
+      if (typeof value === 'object') delete ret[key];
+    });
+
+    return ret;
   };
-};
+}

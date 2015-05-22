@@ -1,9 +1,6 @@
 import React from 'react';
 import style from './style';
-import BasicMixin from '../utils/BasicMixin';
-import assign from 'lodash/object/assign';
 import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
@@ -15,9 +12,11 @@ export default class Toolbar extends React.Component {
   }
 
   render() {
+    var {mod, style} = this.props;
+
     return <div
       {...this.getBasics()}
-      style={assign({}, style.toolbar, this.props.style)}
+      style={this.getStyle('toolbar', mod, style)}
       onClick={this.props.onClick}>
       {this.props.children}
     </div>;

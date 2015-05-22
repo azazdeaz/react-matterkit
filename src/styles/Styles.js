@@ -1,8 +1,8 @@
 import merge from 'lodash/object/merge';
-import forIn from 'lodash/object/forIn';
+import assign from 'lodash/object/assign';
+import forOwn from 'lodash/object/forOwn';
 import cloneDeep from 'lodash/lang/cloneDeep';
 var sources = require.context('./sources', false, /^\.\/.*\.js$/);
-console.log(sources.keys());
 
 export default class Style {
 
@@ -18,7 +18,7 @@ export default class Style {
 
   clone() {
 
-    return new Style(cloceDeep(this.src));
+    return new Style(cloneDeep(this.src));
   }
 
   addSource(name, source) {
@@ -28,7 +28,7 @@ export default class Style {
 
   extendSource(name, source) {
 
-    var oriSource = this.src[key];
+    var oriSource = this.src[name];
 
     if (oriSource) {
 
@@ -60,31 +60,36 @@ export default class Style {
 
         merge(styleSrc, this.get(mixinName, mod));
       });
+
+      delete styleSrc.mixins;
     }
 
-    return this.resolveMod(styleSrc, mod);
+    var ret = this.resolveMod(styleSrc, mod);
+    return (assign(ret, additionalStyle));
   }
 
   resolveMod(styleSrc, mod) {
 
-    forIn(mod, (value, key) => {
+    forOwn(mod, (value, key) => {
 
       if (styleSrc[key]) {
 
-        if (typeof(value) === 'boolean') {
+        var modStyleSrc = styleSrc[key];
+
+        if (typeof value === 'boolean') {
 
           if (value) {
 
-            let modStyle = this.resolveMod(styleSrc[key], mod);
-            merge(modStyle, styleSrc);
+            let modStyle = this.resolveMod(modStyleSrc, mod);
+            assign(styleSrc, modStyle);
           }
         }
-        else if (typeof(value) === 'string') {
+        else if (typeof value === 'string') {
 
-          if (styleSrc[key][value]) {
+          if (modStyleSrc[value]) {
 
-            let modStyle = this.resolveMod(styleSrc[key][value], mod);
-            merge(modStyle, styleSrc);
+            let modStyle = this.resolveMod(modStyleSrc[value], mod);
+            assign(styleSrc, modStyle);
           }
         }
       }

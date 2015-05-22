@@ -21,7 +21,7 @@ export default class DropdownMenu extends React.Component {
 
   show() {
 
-    var domNode = this.getDOMNode(),
+    var domNode = React.findDOMNode(this),
       parent = domNode.parentNode,
       br = parent.getBoundingClientRect();
 
@@ -32,20 +32,20 @@ export default class DropdownMenu extends React.Component {
         top: br.top + br.height,
       }
     });
-  },
+  }
   hide() {
     clearTimeout(this._showSetT);
     this.setState({show: false});
-  },
+  }
   onSelect(e) {
     if (this.props.onSelect) this.props.onSelect(e);
     this.hide();
-  },
+  }
   componentDidMount() {
 
-    var parent = this.getDOMNode().parentNode;
+    var parent = React.findDOMNode(this).parentNode;
     parent.addEventListener('click', this.show);
-  },
+  }
   render () {
 
     if (!this.state.show) return <div style={{display:'none'}}/>;

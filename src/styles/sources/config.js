@@ -1,11 +1,21 @@
+const palette = {
+  purple: '#8091c6',
+  blue: '#6bb6c4',
+  right: '#43aa81',
+  wrong: '#b64d65',
+  grey1: '#e2e7eb',
+  grey2: '#96a6ad',
+  grey3: '#3b424a',
+  grey4: '#1a1d21',
+  bg: '#262A2E',
+};
+
 export default function () {
 
   return {
-    lineHeight: 32,
-    lineHeightPX: '34px',
-    itemHeight: 32,
-    itemHeightPX: '32px',
+    palette,
 
+    lineHeight: 32,
     borderRadius: 3,
 
     anim: '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)',
@@ -25,17 +35,6 @@ export default function () {
     fontFamily: 'Open Sans',
     fontWeight: '300',
 
-    palette: {
-      purple: '#8091c6',
-      blue: '#6bb6c4',
-      right: '#43aa81',
-      wrong: '#b64d65',
-      grey1: '#e2e7eb',
-      grey2: '#96a6ad',
-      grey3: '#3b424a',
-      grey4: '#1a1d21',
-      bg: '#262A2E',
-    },
     grey: {
       normal: '#282c30',
       hover: '#2a3035',
@@ -43,9 +42,9 @@ export default function () {
     },
 
     fontColor: {
-      normal: style.palette.grey2,
-      hover: style.palette.grey1,
-      active: style.palette.blue,
+      normal: palette.grey2,
+      hover: palette.grey1,
+      active: palette.blue,
     },
   };
 }

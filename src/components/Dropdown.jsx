@@ -1,12 +1,12 @@
 import React from 'react';
-import Input from './Input';
-import Icon from './Icon';
-import ListItem from './ListItem';
 import has from 'lodash/object/has';
-
+import assign from 'lodash/object/assign';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
+
+import Icon from './Icon';
+import ListItem from './ListItem';
 
 @Radium.Enhancer
 @pureRender
@@ -18,7 +18,7 @@ export default class Dropdown extends React.Component {
   }
 
   static defaultProps = {
-
+    options: [],
   }
 
   constructor(props) {
@@ -29,47 +29,31 @@ export default class Dropdown extends React.Component {
     };
   }
 
-  onFocus() {
+  handleFocus = () => {
     this.setState({open: true});
     // setTimeout(() => {//!hack
-      this.refs.head.getDOMNode().addEventListener('mousedown', this.onCloseClick);
+      var node = React.findDOMNode(this.refs.head);
+      node.addEventListener('mousedown', this.handleCloseClick);
     // });
-  },
-  onBlur() {
+  }
+
+  handleBlur = () => {
     this.setState({open: false});
-    this.refs.head.getDOMNode().removeEventListener('mousedown', this.onCloseClick);
-  },
-  onCloseClick(e) {
-    this.getDOMNode().blur();
-  },
-  render() {
+    var node = React.findDOMNode(this.refs.head);
+    node.removeEventListener('mousedown', this.handleCloseClick);
+  }
 
-    var s = this.buildStyles(style.dropdown);
+  handleCloseClick = () => {
+    React.findDOMNode(this).blur();
+  }
+
+  renderItems() {
+
     if (this.state.open) {
-      s.height = style.itemHeight * (this.props.options.length + 1);
-    }
 
-    return <div
-      {...this.getBrowserStateEvents()}
-      style={s}
-      ref="head"
-      tabIndex = "0"
-      onBlur = {this.onBlur}
-      onFocus = {this.onFocus}
-    >
-      <div style={{padding: '0 8px', display: 'flex'}}>
-        <span style={{flex: 1}}>
-          {this.props.value}
-        </span>
-        <Icon
-          style={{marginLeft: 4}}
-          lineHeight={style.itemHeightPX}
-          icon={this.state.open ? 'chevron-up' : 'chevron-down'}/>
-      </div>
+      return this.props.options.map(option => {
 
-      {this.props.options.map(option => {
-
-        if (typeof(option) === 'string') {
+        if (typeof option === 'string') {
           option = {label: option};
         }
 
@@ -88,9 +72,42 @@ export default class Dropdown extends React.Component {
               option.onClick(value);
             }
 
-            this.getDOMNode().blur();
+            React.findDOMNode(this).blur();
           }}/>;
-      })}
+      });
+    }
+  }
+
+  render() {
+    var {mod, style, value, label} = this.props;
+    var {itemHeight} = this.getStyle('config');
+
+    if (label === undefined) label = value;
+
+    if (this.state.open) {
+      style = assign({
+        height: itemHeight * (this.props.options.length + 1),
+      }, style);
+    }
+
+    return <div
+      {...this.getBasics()}
+      style={this.getStyle('dropdown', mod, style)}
+      ref="head"
+      tabIndex = "0"
+      onBlur = {this.handleBlur}
+      onFocus = {this.handleFocus}>
+
+      <div style={{padding: '0 8px', display: 'flex'}}>
+        <span style={{flex: 1}}>
+          {label}
+        </span>
+        <Icon
+          style={{marginLeft: 4}}
+          icon={this.state.open ? 'chevron-up' : 'chevron-down'}/>
+      </div>
+
+      {this.renderItems()}
     </div>;
   }
 }

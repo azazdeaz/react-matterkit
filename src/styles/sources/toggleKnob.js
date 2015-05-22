@@ -9,13 +9,13 @@ export default function (styles, mod) {
     boxSizing: 'border-box',
     transition: `left ${config.anim}`,
     position: 'relative',
-    height: config.itemHeight,
+    height: config.lineHeight,
     width: knobWidth,
     display: 'inline-block',
     backgroundColor: config.palette.grey3,
-    left: {
-      true: 0,
-      false: `calc(100% - ${knobWidth-2}px)`
+    onLeft: {
+      'true': {left: 0},
+      'false': {left: `calc(100% - ${knobWidth - 2}px)`}
     },
   };
 }

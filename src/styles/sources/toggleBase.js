@@ -6,7 +6,7 @@ export default function (styles, mod) {
     mixins: ['roundedCorners'],
 
     userSelect: 'none',
-    height: config.itemHeight,
+    height: config.lineHeight,
     display: 'inline-block',
     backgroundColor: config.palette.grey4,
   };

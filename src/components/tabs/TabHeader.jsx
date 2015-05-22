@@ -21,11 +21,13 @@ export default class TabHeader extends React.Component {
   }
 
   render() {
+    var {mod, style} = this.props;
 
     var childCount = React.Children.count(this.props.children);
 
     return <div
-      style={this.buildStyles(style.tabHeader)}>
+      {...this.getBasics()}
+      style = {this.getStyle('tabHeader', mod, style)}>
 
       {React.Children.map(this.props.children, (child, idx) => {
 
@@ -34,6 +36,7 @@ export default class TabHeader extends React.Component {
           first = {idx === 0}
           last = {idx === childCount - 1}
           selected = {this.props.currTabIdx === idx}
+          icon = {child.props.icon}
           label = {child.props.label}
           onSelect = {() => this.props.onSelectTab(idx)}/>;
       })}

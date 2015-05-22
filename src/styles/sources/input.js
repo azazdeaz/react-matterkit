@@ -1,18 +1,17 @@
-export default function (styles, mods) {
+export default function (styles, mod) {
 
   var config = styles.get('config', mod);
 
   return {
-    
+    display: 'inline-block',
     position: 'relative',
-    display: 'flex',
     alignItems: 'stretch',
     color: '#96a6ad',
     backgroundColor: config.palette.grey4,
     padding: '0',
     paddingLeft: '2px',
-    height: config.itemHeight,
-    lineHeight: config.itemHeightPX,
+    height: config.lineHeight,
+    lineHeight: `${config.lineHeight}px`,
     margin: '1px 3px',
     boxSizing: 'border-box',
     // border: 'solid 1px transparent',
@@ -32,10 +31,10 @@ export default function (styles, mods) {
     kind: {
       stamp: {
         backgroundColor: 'none',
-        ':hover':{backgroundColor: 'none'},
-        ':active':{backgroundColor: 'none'},
-        ':focus':{backgroundColor: 'none'},
-        disabled:{backgroundColor: 'none'},
+        ':hover': {backgroundColor: 'none'},
+        ':active': {backgroundColor: 'none'},
+        ':focus': {backgroundColor: 'none'},
+        disabled: {backgroundColor: 'none'},
       }
     }
   };
