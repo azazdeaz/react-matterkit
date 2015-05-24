@@ -2,7 +2,7 @@ require('./index.html');//for the webpack build
 
 var React = require('react');
 var Matter = require('matterkit');
-var {List, ListItem, style} = Matter;
+var {List, ListItem} = Matter;
 var merge = require('lodash/object/merge');
 var kebabCase = require('lodash/string/kebabCase');
 
@@ -31,13 +31,11 @@ global.React = React;
 
 merge(global, Matter);
 
-console.log('routes', routes);
 
 
 
 
-
-var App = React.createClass({
+/*var App = React.createClass({
   contextTypes: {
     router: React.PropTypes.func,
   },
@@ -88,9 +86,10 @@ var routes = (
     })}
     <Redirect from='' to='Button' />
   </Route>
-);
+);*/
 
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.querySelector('#react-mount'));
-});
-// React.render(<Matter.Button label='button' items={['foo', 'bar', 'qux']}/>, document.querySelector('#react-mount'));
+// Router.run(routes, function (Handler) {
+//   React.render(<Handler/>, document.querySelector('#react-mount'));
+// });
+import ColorCircle from '../../src/utils/ColorCircle'
+React.render(<ColorCircle/>, document.querySelector('#react-mount'));

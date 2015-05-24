@@ -80,11 +80,14 @@ export default class Dropdown extends React.Component {
 
   render() {
     var {mod, style, value, label} = this.props;
+    var {open} = this.state;
     var {itemHeight} = this.getStyle('config');
 
     if (label === undefined) label = value;
 
-    if (this.state.open) {
+    mod = assign({open}, mod);
+
+    if (open) {
       style = assign({
         height: itemHeight * (this.props.options.length + 1),
       }, style);
@@ -104,7 +107,7 @@ export default class Dropdown extends React.Component {
         </span>
         <Icon
           style={{marginLeft: 4}}
-          icon={this.state.open ? 'chevron-up' : 'chevron-down'}/>
+          icon={open ? 'chevron-up' : 'chevron-down'}/>
       </div>
 
       {this.renderItems()}

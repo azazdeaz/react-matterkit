@@ -1,5 +1,5 @@
 module.exports = global.Matter = {
-  style: require('./components/style'),
+  // style: require('./components/style'),
 
   utils: {
     CustomDrag: require('./utils/CustomDrag'),

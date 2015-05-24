@@ -27,7 +27,7 @@ export default class Tooltip extends React.Component {
   },
   show() {
 
-    var domNode = React.finDOMNode(this),
+    var domNode = React.findDOMNode(this),
       parent = domNode.parentNode,
       br = parent.getBoundingClientRect();
 
@@ -45,7 +45,7 @@ export default class Tooltip extends React.Component {
   },
   componentDidMount() {
 
-    var parent = React.finDOMNode(this).parentNode;
+    var parent = React.findDOMNode(this).parentNode;
     parent.addEventListener('mouseover', this.showDelayed);
     parent.addEventListener('mouseleave', this.hide);
   },

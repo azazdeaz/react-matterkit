@@ -1,6 +1,5 @@
 import React from 'react';
 import ListItem from './ListItem';
-import style from './style';
 import has from 'lodash/object/has';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';

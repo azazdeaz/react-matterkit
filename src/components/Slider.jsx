@@ -47,7 +47,7 @@ export default class Slider extends React.Component {
   },
   render() {
 
-    var width = this.isMounted() ? React.finDOMNode(this).offsetWidth : 0,
+    var width = this.isMounted() ? React.findDOMNode(this).offsetWidth : 0,
       range = this.props.max - this.props.min,
       progress = (this.props.value - this.props.min) / range,
       percent = Math.max(0, Math.min(1, progress))*100 + '%';

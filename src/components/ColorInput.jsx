@@ -1,6 +1,5 @@
 import React from 'react';
 import tinycolor from 'tinycolor2';
-import style from './style';
 import Input from './Input';
 import ColorCircle from '../utils/ColorCircle';
 import Radium from 'radium';

@@ -1,5 +1,4 @@
 import React from 'react';
-import style from './style';
 import Radium from 'radium';
 import MatterBasics from '../utils/MatterBasics';
 
