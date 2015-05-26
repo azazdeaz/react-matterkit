@@ -4,8 +4,6 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
-    "bulk-require": "^0.2.1",
-    "bulkify": "^1.1.1",
     "fuzzy": "^0.1.0",
     "lodash": "^3.6.0",
     "pure-render-decorator": "^0.1.0",
@@ -29,6 +27,7 @@
     "eslint-plugin-react": "^2.3.0",
     "exorcist": "^0.1.6",
     "file-loader": "^0.8.1",
+    "glob": "^5.0.10",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-callback": "0.0.3",

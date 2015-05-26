@@ -17,29 +17,20 @@ export default class ColorInput extends React.Component {
   static propTypes = {
   }
 
-  static defaultProps =
+  static defaultProps ={
+    value: '#000000',
+  }
 
   constructor(props) {
     super(props);
 
-    this.state = ;
-  }
+    var {value} = props;
 
-  static defaultProps =
-    return {
-      value: '#000000',
-    };
-  },
-
-  getInitialState() {
-
-    var {value} = this.props;
-
-    return {
+    this.state = {
       value,
       format: tinycolor(value).getFormat(),
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
@@ -48,7 +39,7 @@ export default class ColorInput extends React.Component {
       value,
       format: tinycolor(value).getFormat(),
     });
-  },
+  }
 
   getCurrTypeIdx(props) {
 
@@ -56,7 +47,7 @@ export default class ColorInput extends React.Component {
 
     var {typeIdx, chooseType, value} = props;
     return chooseType ? chooseType(value) : defaultTypeIdx;
-  },
+  }
 
   handleChange(value) {
 
@@ -68,7 +59,7 @@ export default class ColorInput extends React.Component {
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }
 
   stepFormat() {
 
@@ -79,7 +70,7 @@ export default class ColorInput extends React.Component {
     var value = tinycolor(this.state.value).toString(format);
 
     this.setState({value, format});
-  },
+  }
 
   renderSelector() {
 
@@ -99,7 +90,7 @@ export default class ColorInput extends React.Component {
         width={28}
         radius={64}/>
     </div>;
-  },
+  }
 
   render() {
 

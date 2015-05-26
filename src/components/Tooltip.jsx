@@ -24,7 +24,7 @@ export default class Tooltip extends React.Component {
   showDelayed() {
     clearTimeout(this._showSetT);
     this._showSetT = setTimeout(() => this.show(), 1234);
-  },
+  }
   show() {
 
     var domNode = React.findDOMNode(this),
@@ -38,23 +38,23 @@ export default class Tooltip extends React.Component {
         top: br.top,
       }
     });
-  },
+  }
   hide() {
     clearTimeout(this._showSetT);
     this.setState({show: false});
-  },
+  }
   componentDidMount() {
 
     var parent = React.findDOMNode(this).parentNode;
     parent.addEventListener('mouseover', this.showDelayed);
     parent.addEventListener('mouseleave', this.hide);
-  },
+  }
   render () {
 
     if (!this.state.show) return <div style={{display:'none'}}/>;
 
     return <div
-        style={_.defaults({width: this.props.width}, this.state.style, style.tooltip)}>
+        style={defaults({width: this.props.width}, this.state.style, style.tooltip)}>
         {this.props.content}
         <div style={style.tooltipTriangle}/>
       </div>;

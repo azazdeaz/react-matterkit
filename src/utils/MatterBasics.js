@@ -1,4 +1,4 @@
-import defaultStyles from '../defaultStyles';
+import getStyles from './getStyles';
 import forOwn from 'lodash/object/forOwn';
 
 export default function (Component) {
@@ -11,7 +11,7 @@ export default function (Component) {
   };
 
   Component.prototype.getStyle = function (name, mod, style) {
-    var styles = this.context.styles || defaultStyles.get();
+    var styles = getStyles(this);
     var ret = styles.get(name, mod, style);
 
     forOwn(ret, (value, key) => {

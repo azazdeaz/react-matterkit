@@ -1,6 +1,7 @@
 import React from 'react';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
+import assign from 'lodash/object/assign';
 import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
@@ -13,14 +14,17 @@ export default class Toolbar extends React.Component {
   }
 
   render() {
+    var {mod, style} = this.props;
 
-    var s = _.assign({}, style.toolbarGroup, {
+    style = assign({
       flex: this.props.flex,
       width: this.props.width,
       justifyContent: this.props.justifyContent,
-    });
+    }, style);
 
-    return <div style={s}>
+    return <div
+      {...this.getBasics()}
+      style={this.getStyle('toolbarGroup', mod, style)}>
       {this.props.children}
     </div>;
   }

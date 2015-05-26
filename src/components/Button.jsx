@@ -31,15 +31,6 @@ export default class Button extends React.Component {
     }
   }
 
-  constructor(props) {
-
-    super(props);
-  }
-
-  componentWillUnmount() {
-    console.log('btn componentWillUnmount')
-  }
-
   render() {
 
     var {mod, style, icon, onClick, label, disabled} = this.props;

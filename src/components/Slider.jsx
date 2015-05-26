@@ -44,7 +44,7 @@ export default class Slider extends React.Component {
         this.setState({dragging: false});
       }
     });
-  },
+  }
   render() {
 
     var width = this.isMounted() ? React.findDOMNode(this).offsetWidth : 0,
@@ -59,8 +59,8 @@ export default class Slider extends React.Component {
         <div ref='progress' style={_.defaults({width: percent}, style.sliderBarProgress)}/>
       </div>
     </div>;
-  },
-});
+  }
+}
 
 export default class Handle extends React.Component {
 
@@ -69,16 +69,16 @@ export default class Handle extends React.Component {
       hover: false,
       down: false,
     };
-  },
+  }
   onMouseUp() {
     this.setState({down: false});
-  },
+  }
   componentDidMount() {
     window.addEventListener('mouseup', this.onMouseUp);
-  },
+  }
   componentWillUnmount() {
     window.removeEventListener('mouseup', this.onMouseUp);
-  },
+  }
   render() {
 
     var s;

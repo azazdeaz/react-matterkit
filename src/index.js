@@ -3,6 +3,8 @@ module.exports = global.Matter = {
 
   utils: {
     CustomDrag: require('./utils/CustomDrag'),
+    getStyles: require('./utils/getStyles'),
+    MatterBasics: require('./utils/MatterBasics'),
   },
 
   // Accordion: require('./components/accordion/Accordion'),

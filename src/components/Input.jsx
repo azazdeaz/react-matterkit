@@ -36,10 +36,8 @@ export default class Input extends React.Component {
       value: undefined,
       error: false,
     };
-  }
 
-  componentWillMount() {
-    this.handleValue(this.props.value);
+    this.handleValue(props.value);
   }
 
   componentDidMount() {

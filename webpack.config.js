@@ -2,7 +2,7 @@ var path = require('path');
 
 module.exports = {
   context: path.join(__dirname, '/demo'),
-  entry: './src/index.jsx',
+  entry: './src/index.js',
   output: {
     publicPath: '/dist/',
     path: path.join( __dirname, '/dist'),
@@ -20,11 +20,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader?stage=0'
-      }, {
-        test: /Styles\.js$/,
-        exclude: /node_modules/,
-        loader: 'transform?bulkify'
+        loader: 'babel-loader'
       }, {
         test: /\.html/,
         exclude: /node_modules/,

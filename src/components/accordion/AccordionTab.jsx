@@ -20,8 +20,8 @@ export default class AccordionTab extends React.Component {
 
   onClick() {
     this.setState({opened: !this.state.opened});
-  },
-  render: function () {
+  }
+  render() {
     var {mod, style} = this.props;
 
     // var sBase = {};
@@ -46,12 +46,10 @@ export default class AccordionTab extends React.Component {
           <Label>{this.props.label}</Label>
         </ToolbarGroup>
           <Icon
-            icon={this.state.opened ?  'chevron-down' : 'chevron-up'}
+            icon={this.state.opened ? 'chevron-down' : 'chevron-up'}
             style={{color: style.palette.grey4, width: 21}}/>
       </Toolbar>
       {content}
     </div>;
-  },
-});
-
-module.exports = AccordionTab;
+  }
+}
