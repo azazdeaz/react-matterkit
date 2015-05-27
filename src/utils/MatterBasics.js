@@ -15,7 +15,10 @@ export default function (Component) {
     var ret = styles.get(name, mod, style);
 
     forOwn(ret, (value, key) => {
-      if (typeof value === 'object') delete ret[key];
+      var pre = key[0];
+      if (pre !== ':' && pre !== '@' && typeof value === 'object') {
+        delete ret[key];
+      }
     });
 
     return ret;

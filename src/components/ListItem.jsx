@@ -17,18 +17,18 @@ export default class ListItem extends React.Component {
 
   render() {
 
-    var {mod, style, selected, label, children, value} = this.props;
+    var {mod, style, selected, label, children, value, onClick} = this.props;
 
     mod = assign({selected}, mod);
     value = value || label;
     label = label || children || value;
-
+console.log(this.getStyle('listItem', mod, style))
     return <div
       {...this.getBasics()}
       style={this.getStyle('listItem', mod, style)}
       onClick={() => {
-        if (this.props.onClick) {
-          this.props.onClick(value);
+        if (onClick) {
+          onClick(value);
         }
       }}>
       {label}

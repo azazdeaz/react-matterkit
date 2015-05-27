@@ -4,12 +4,14 @@ import assign from 'lodash/object/assign';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
+import ClickAway from '../utils/ClickAway';
 
 import Icon from './Icon';
 import ListItem from './ListItem';
 
 @Radium.Enhancer
 @pureRender
+@ClickAway
 @MatterBasics
 export default class Dropdown extends React.Component {
 
@@ -29,22 +31,12 @@ export default class Dropdown extends React.Component {
     };
   }
 
-  handleFocus = () => {
-    this.setState({open: true});
-    // setTimeout(() => {//!hack
-      var node = React.findDOMNode(this.refs.head);
-      node.addEventListener('mousedown', this.handleCloseClick);
-    // });
+  handleClickHead = () => {
+    this.setState({open: !this.state.open});
   }
 
-  handleBlur = () => {
+  handleClickAway = () => {
     this.setState({open: false});
-    var node = React.findDOMNode(this.refs.head);
-    node.removeEventListener('mousedown', this.handleCloseClick);
-  }
-
-  handleCloseClick = () => {
-    React.findDOMNode(this).blur();
   }
 
   renderItems() {
@@ -62,7 +54,7 @@ export default class Dropdown extends React.Component {
         return <ListItem
           key={option.label}
           label={option.label}
-          onClick={()=>{
+          onClick={() => {
 
             if (this.props.onChange) {
               this.props.onChange(value);
@@ -72,7 +64,7 @@ export default class Dropdown extends React.Component {
               option.onClick(value);
             }
 
-            React.findDOMNode(this).blur();
+            this.setState({open: false});
           }}/>;
       });
     }
@@ -81,7 +73,7 @@ export default class Dropdown extends React.Component {
   render() {
     var {mod, style, value, label} = this.props;
     var {open} = this.state;
-    var {itemHeight} = this.getStyle('config');
+    var {lineHeight} = this.getStyle('config');
 
     if (label === undefined) label = value;
 
@@ -89,19 +81,18 @@ export default class Dropdown extends React.Component {
 
     if (open) {
       style = assign({
-        height: itemHeight * (this.props.options.length + 1),
+        height: lineHeight * (this.props.options.length + 1),
       }, style);
     }
 
     return <div
       {...this.getBasics()}
-      style={this.getStyle('dropdown', mod, style)}
-      ref="head"
-      tabIndex = "0"
-      onBlur = {this.handleBlur}
-      onFocus = {this.handleFocus}>
+      style={this.getStyle('dropdown', mod, style)}>
 
-      <div style={{padding: '0 8px', display: 'flex'}}>
+      <div
+        style={{padding: '0 8px', display: 'flex'}}
+        onClick={this.handleClickHead}>
+
         <span style={{flex: 1}}>
           {label}
         </span>

@@ -2,5 +2,5 @@ import defaultStyles from '../defaultStyles';
 
 export default function getStyles(component) {
 
-  return component.context.matterStyles || defaultStyles.get();
+  return (component && component.context.matterStyles) || defaultStyles.get();
 }

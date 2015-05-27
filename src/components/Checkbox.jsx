@@ -49,16 +49,16 @@ export default class Checkbox extends React.Component {
       return null;
     }
 
-    var {start, end} = style.gardient;
+    var {start, end} = this.getStyle('config', {gardient: true});
 
     return <svg width="18" height="18" style={{position: 'absolute'}}>
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{stopColor: start, stopOpacity:1}} />
-          <stop offset="100%" style={{stopColor: end, stopOpacity:1}} />
+          <stop offset="0%" style={{stopColor: start, stopOpacity: 1}} />
+          <stop offset="100%" style={{stopColor: end, stopOpacity: 1}} />
         </linearGradient>
       </defs>
-      <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z"  fill="url(#grad1)"/>
+      <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z" fill="url(#grad1)"/>
     </svg>;
   }
 

@@ -6,8 +6,10 @@ export default function (styles, mod) {
     height: config.lineHeight,
     lineHeight: `${config.lineHeight}px`,
     padding: '0 8px',
+    color: config.fontColor.normal,
 
     ':hover': {
+      color: config.fontColor.hover,
       backgroundColor: 'rgba(226,231,235,.05)',
     },
 
