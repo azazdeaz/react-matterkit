@@ -2,7 +2,7 @@ import merge from 'lodash/object/merge';
 import assign from 'lodash/object/assign';
 import forOwn from 'lodash/object/forOwn';
 import cloneDeep from 'lodash/lang/cloneDeep';
-var sources = require.context('./sources', false, /^\.\/.*\.js$/);
+import * as sourceList from './sourceList';
 
 export default class Style {
 
@@ -10,9 +10,8 @@ export default class Style {
 
     this.src = src || {};
 
-    sources.keys().forEach(fileName => {
-      var name = /(\w+)\.js$/.exec(fileName)[1];
-      this.addSource(name, sources(fileName));
+    forOwn(sourceList, (styleSrc, name) => {
+      this.addSource(name, styleSrc);
     });
   }
 

@@ -13,8 +13,7 @@ module.exports = {
   entry: sources,
   output: {
     path: path.join( __dirname, '/lib'),
-    filename: '[name].js',
-    chunkFilename: '[id].js',
+    filename: 'index.js',
     libraryTarget: 'commonjs2'
   },
   resolve: config.resolve,
@@ -24,5 +23,6 @@ module.exports = {
     // react -> require("react")
     // /^[a-z\-0-9]+$/,
     // /^[^\.]/,
+    {react: true}
   ]
 };

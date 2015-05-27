@@ -49,7 +49,10 @@
     "webpack": "^1.9.2",
     "webpack-dev-server": "^1.8.2"
   },
-  "scripts": {},
+  "scripts": {
+    "lib": "babel ./src --out-dir lib  --source-maps",
+    "lib-watch": "npm run lib && babel ./src --out-dir lib  --source-maps --source-maps --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/azazdeaz/react-matterkit.git"
