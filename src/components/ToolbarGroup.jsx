@@ -1,14 +1,11 @@
 import React from 'react';
 import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
 import assign from 'lodash/object/assign';
 import MatterBasics from '../utils/MatterBasics';
 
 @Radium.Enhancer
-@pureRender
 @MatterBasics
 export default class Toolbar extends React.Component {
-
   constructor(props) {
     super(props);
   }

@@ -13,15 +13,14 @@ export default function (styles, mod) {
     lineHeight: `${config.lineHeight}px`,
     textAlign: 'center',
     cursor: 'default',
+    opacity: 0,
     side: {
       left: {
         marginLeft: knobWidth,
-        opacity: 0,
         transform: `translateX(${labelOffset})`,
       },
       right: {
         marginRight: knobWidth,
-        opacity: 0,
         transform: `translateX(-${labelOffset})`,
       }
     },

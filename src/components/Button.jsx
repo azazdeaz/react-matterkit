@@ -37,9 +37,12 @@ export default class Button extends React.Component {
 
     mod = assign({disabled}, mod);
 
+    if (typeof icon === 'string') {
+      icon = {icon};
+    }
+
     if (icon) {
-      icon = <Icon icon={this.props.icon}
-        style={{marginRight:this.props.text ? 4 : 0}}/>;
+      icon = <Icon {...icon} style={{marginRight: this.props.text ? 4 : 0}}/>;
     }
 
     return <div

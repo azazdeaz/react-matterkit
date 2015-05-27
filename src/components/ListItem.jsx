@@ -22,7 +22,7 @@ export default class ListItem extends React.Component {
     mod = assign({selected}, mod);
     value = value || label;
     label = label || children || value;
-console.log(this.getStyle('listItem', mod, style))
+
     return <div
       {...this.getBasics()}
       style={this.getStyle('listItem', mod, style)}
