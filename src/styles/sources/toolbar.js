@@ -6,11 +6,11 @@ export default function (styles, mod) {
     direction: {
       row: {
         height: config.lineHeight,
-        width: '100%',
+        // width: '100%',
       },
       column: {
         width: config.lineHeight,
-        height: '100%',
+        // height: '100%',
       }
     },
     display: 'flex'
