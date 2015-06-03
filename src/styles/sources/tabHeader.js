@@ -4,7 +4,7 @@ export default function (styles, mod) {
 
   return {
     position: 'relative',
-    top: 1,
+    // top: 1,
     width: '100%',
     height: `${config.lineHeight}px`,
     display: 'flex',

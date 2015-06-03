@@ -15,7 +15,7 @@ export default function () {
   return {
     palette,
 
-    lineHeight: 32,
+    lineHeight: 25,
     borderRadius: 3,
 
     anim: '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)',
