@@ -207,7 +207,7 @@ export default class Input extends React.Component {
       <input
         ref='input'
         {...this.getBasics()}
-        style = {this.getStyle('inputResetCss', mod)}
+        style = {this.getStyle('inputField', mod)}
         palceholder = {this.props.palceholder}
         value = {this.state.value}
         type = 'text'
@@ -236,14 +236,13 @@ export default class Input extends React.Component {
 class Addon extends React.Component {
 
   render() {
-
     var {label, icon, mod, onClick} = this.props;
 
     if (!label && !icon) {
       return <div hidden={true}/>;
     }
 
-    var icon = icon ? <Icon icon={icon}/> : undefined;
+    icon = icon ? <Icon icon={icon}/> : undefined;
 
     return <span
       {...this.getBasics()}

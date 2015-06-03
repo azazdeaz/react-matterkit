@@ -20,7 +20,7 @@ export default function (styles, mod) {
       color: '#6bb6c4',
       backgroundColor: config.grey.active,
     },
-    disabled:{
+    disabled: {
       color: '#96a6ad',
     },
     addonBackground: {

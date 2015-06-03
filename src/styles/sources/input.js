@@ -3,7 +3,9 @@ export default function (styles, mod) {
   var config = styles.get('config', mod);
 
   return {
-    display: 'inline-block',
+    mixins: ['roundedCorners', 'inputBorder'],
+
+    display: 'flex',
     position: 'relative',
     alignItems: 'stretch',
     color: '#96a6ad',

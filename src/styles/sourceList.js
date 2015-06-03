@@ -7,6 +7,7 @@ export { default as font } from './sources/font.js';
 export { default as icon } from './sources/icon.js';
 export { default as inputAddon } from './sources/inputAddon.js';
 export { default as inputBorder } from './sources/inputBorder.js';
+export { default as inputField } from './sources/inputField.js';
 export { default as input } from './sources/input.js';
 export { default as inputResetCss } from './sources/inputResetCss.js';
 export { default as itemGroupChild } from './sources/itemGroupChild.js';
