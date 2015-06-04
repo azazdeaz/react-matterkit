@@ -1,33 +1,38 @@
-var React = require('react/addons');
-var {PureRenderMixin} = React.addons;
-var has = require('lodash/object/has');
-var style = require('./style');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
+import React from 'react';
+import has from 'lodash/object/has';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-export default React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Checkbox extends React.Component {
 
-  mixins: [PureRenderMixin, StyleResolverMixin, BrowserStateMixin],
+  static propTypes = {
+    value: React.PropTypes.bool,
+    disabled: React.PropTypes.bool,
+  }
 
-  getDefaultProps() {
-    return {
-      value: false,
+  static defaultProps = {
+    value: false,
+    disabled: false,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value,
     };
-  },
-
-  getInitialState() {
-    return {
-      disabled: false,
-      value: this.props.value,
-    };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
-    if (has(nextProps, 'value')) {
-      this.setState({value: nextProps.value});
-    }
-  },
 
-  _onClick() {
+    this.setState({value: nextProps.value});
+  }
+
+  handleClick() {
 
     var value = !this.state.value;
 
@@ -36,7 +41,7 @@ export default React.createClass({
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }
 
   renderCheck() {
 
@@ -44,25 +49,29 @@ export default React.createClass({
       return null;
     }
 
-    var {start, end} = style.gardient;
+    var {start, end} = this.getStyle('config', {gardient: true});
 
     return <svg width="18" height="18" style={{position: 'absolute'}}>
       <defs>
         <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" style={{stopColor: start, stopOpacity:1}} />
-          <stop offset="100%" style={{stopColor: end, stopOpacity:1}} />
+          <stop offset="0%" style={{stopColor: start, stopOpacity: 1}} />
+          <stop offset="100%" style={{stopColor: end, stopOpacity: 1}} />
         </linearGradient>
       </defs>
-      <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z"  fill="url(#grad1)"/>
+      <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z" fill="url(#grad1)"/>
     </svg>;
-  },
+  }
 
   render() {
 
+    var {mod, style} = this.props;
+
     return <div
-      {...this.getBrowserStateEvents()}
-      style = {this.buildStyles(style.checkbox)}
-      onClick = {this._onClick}
-    >{this.renderCheck()}</div>;
+      {...this.getBasics()}
+      style={this.getStyle('checkbox', mod, style)}
+      onClick = {() => this.handleClick()}>
+
+      {this.renderCheck()}
+    </div>;
   }
-});
+}

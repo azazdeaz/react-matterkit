@@ -1,52 +1,56 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
-var Input = require('./Input');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import Input from './Input';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var MultiTypeInput = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class MultiTypeInput extends React.Component {
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+  static propTypes = {
+  }
 
-  getDefaultProps() {
-    return {
-      types: [],
-      typeIdx: 0,
+  static defaultProps = {
+    types: [],
+    typeIdx: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currTypeIdx: this.getCurrTypeIdx(),
     };
-  },
-
-  getInitialState() {
-
-    return {currTypeIdx: this.getCurrTypeIdx()};
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
     this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)});
-  },
+  }
 
   getCurrTypeIdx(props) {
 
     props = props || this.props;
 
     var {typeIdx, chooseType, value} = props;
-    return chooseType ? chooseType(value) : defaultTypeIdx;
-  },
+    return chooseType ? chooseType(value) : typeIdx;
+  }
 
-  handleAddonClick() {
+  handleAddonClick = () => {
     var {types} = this.props;
     var {currTypeIdx} = this.state;
     currTypeIdx = (currTypeIdx + 1) % types.length;
     this.setState({currTypeIdx});
-  },
+  }
 
-  handleChange(value) {
+  handleChange = (value) => {
 
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }
 
   render() {
 
@@ -56,8 +60,6 @@ var MultiTypeInput = React.createClass({
       {...this.props.types[this.state.currTypeIdx]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
-      addonOnClick={this.handleAddonClick}/>;
+      addonOnClick = {this.handleAddonClick}/>;
   }
-});
-
-module.exports = MultiTypeInput;
+}

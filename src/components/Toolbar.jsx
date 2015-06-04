@@ -1,20 +1,29 @@
-var React = require('react');
-var style = require('./style');
-var BasicMixin = require('../utils/BasicMixin');
-var assign = require('lodash/object/assign');
+import React from 'react';
+import Radium from 'radium';
+import assign from 'lodash/object/assign';
+import MatterBasics from '../utils/MatterBasics';
 
-var Toolbar = React.createClass({
+@Radium.Enhancer
+@MatterBasics
+export default class Toolbar extends React.Component {
+  static defaultProps = {
+    direction: 'row'
+  }
 
-  mixins: [BasicMixin],
+  constructor(props) {
+    super(props);
+  }
 
   render() {
+    var {mod, style, direction} = this.props;
+
+    mod = assign({direction}, mod);
+
     return <div
       {...this.getBasics()}
-      style={assign({}, style.toolbar, this.props.style)}
+      style={this.getStyle('toolbar', mod, style)}
       onClick={this.props.onClick}>
       {this.props.children}
     </div>;
   }
-});
-
-module.exports = Toolbar;
+}

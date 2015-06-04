@@ -1,22 +1,24 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('./style');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Panel = React.createClass({
+@Radium.Enhancer
+@MatterBasics
+export default class Panel extends React.Component {
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+  constructor(props) {
+    super(props);
+  }
 
   render() {
+    var {mod, style} = this.props;
 
     return <div
       {...this.getBasics()}
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.panel)}>
+      style = {this.getStyle('panel', mod, style)}>
 
       {this.props.children}
     </div>;
   }
-});
-
-module.exports = Panel;
+}

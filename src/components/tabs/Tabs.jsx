@@ -1,24 +1,29 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var TabHeader = require('./TabHeader');
+import React from 'react';
+import TabHeader from './TabHeader';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
 
-var Tabs = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Tabs extends React.Component {
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  static propTypes = {
+  }
 
-  getDefaultProps() {
-    return {
-      stretchLabels: true,
-      defaultTabIdx: 0,
+  static defaultProps = {
+    stretchLabels: true,
+    defaultTabIdx: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currTabIdx: props.defaultTabIdx,
     };
-  },
-
-  getInitialState() {
-    return {
-      currTabIdx: this.props.defaultTabIdx,
-    };
-  },
+  }
 
   _selectTab(idx) {
     this.setState({currTabIdx: idx});
@@ -27,13 +32,14 @@ var Tabs = React.createClass({
 
       this.props.onChangeTabIdx(idx);
     }
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({currTabIdx: nextProps.defaultTabIdx});
-  },
+  }
 
   render() {
+    var {mod, style} = this.props;
 
     var currTab;
 
@@ -46,17 +52,19 @@ var Tabs = React.createClass({
       }
     });
 
-    return <div style={this.buildStyles(style.tabBase)}>
+    return <div
+      {...this.getBasics()}
+      style = {this.getStyle('tabBase', mod, style)}>
+
       <TabHeader
         currTabIdx = {this.state.currTabIdx}
         onSelectTab = {idx => this._selectTab(idx)}
         children = {this.props.children}
         stretchLabels = {this.props.stretchLabels}/>
-      <div style={style.tabCont}>
+
+      <div style={this.getStyle('tabCont', mod)}>
         {currTab}
       </div>
     </div>;
   }
-});
-
-module.exports = Tabs;
+}

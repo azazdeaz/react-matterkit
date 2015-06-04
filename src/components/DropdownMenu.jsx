@@ -1,18 +1,27 @@
-var style = require('./style');
-var assign = require('lodash');
-var React = require('react');
-var List = require('./List');
-var _ = require('lodash');
+import assign from 'lodash/object/assign';
+import React from 'react';
+import List from './List';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class DropdownMenu extends React.Component {
 
-var DropdownMenu = React.createClass({
+  static propTypes = {
+  }
 
-  getInitialState() {
-    return {show: false, style: {}};
-  },
+  constructor(props) {
+    super(props);
+
+    this.state = {show: false, style: {}};
+  }
+
   show() {
 
-    var domNode = this.getDOMNode(),
+    var domNode = React.findDOMNode(this),
       parent = domNode.parentNode,
       br = parent.getBoundingClientRect();
 
@@ -23,20 +32,20 @@ var DropdownMenu = React.createClass({
         top: br.top + br.height,
       }
     });
-  },
+  }
   hide() {
     clearTimeout(this._showSetT);
     this.setState({show: false});
-  },
+  }
   onSelect(e) {
     if (this.props.onSelect) this.props.onSelect(e);
     this.hide();
-  },
+  }
   componentDidMount() {
 
-    var parent = this.getDOMNode().parentNode;
+    var parent = React.findDOMNode(this).parentNode;
     parent.addEventListener('click', this.show);
-  },
+  }
   render () {
 
     if (!this.state.show) return <div style={{display:'none'}}/>;
@@ -47,6 +56,4 @@ var DropdownMenu = React.createClass({
         <List {...this.props} onSelect={this.onSelect}/>
       </div>;
   }
-});
-
-module.exports = DropdownMenu;
+}

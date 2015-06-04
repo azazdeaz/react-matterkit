@@ -1,19 +1,23 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('./style');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Icon = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Icon extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
-  render: function () {
+  render() {
+    var {mod, style} = this.props;
+
     return <i
+      {...this.getBasics()}
+      style = {this.getStyle('icon', mod, style)}
       className = {this.props.className || `fa fa-${this.props.icon}`}
-      style = {_.assign({
-        lineHeight: this.props.lineHeight || style.itemHeightPX,
-        width: '12px',
-        textAlign: 'center'
-      }, this.props.style)}
-      onClick = {this.props.onClick}/>
-  },
-});
-
-module.exports = Icon;
+      onClick = {this.props.onClick}/>;
+  }
+}

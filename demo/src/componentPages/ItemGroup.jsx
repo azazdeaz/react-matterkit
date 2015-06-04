@@ -5,27 +5,27 @@ var description = `
 label: String`;
 
 var codes = [
-`<ButtonGroup>
+`<ItemGroup>
   <Button label='first'/>
   <Button label='second'/>
   <Button label='third' kind='colored'/>
   <Button label='fourth'/>
-</ButtonGroup>`,
+</ItemGroup>`,
 
-`<ButtonGroup>
+`<ItemGroup>
   <Button
-  	icon='github'
+    icon='github'
     disabled={true}/>
   <Input placeholder='type here'/>
   <Button label='second'/>
-</ButtonGroup>`,
+</ItemGroup>`,
 ];
 
 module.exports = React.createClass({
   render() {
 
     return <Template
-      title='ButtonGroup'
+      title='ItemGroup'
       description={description}
       codes={codes}/>;
   },

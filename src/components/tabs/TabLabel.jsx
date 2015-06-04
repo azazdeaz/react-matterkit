@@ -1,42 +1,51 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var Icon = require('../Icon');
+import React from 'react';
+import Icon from '../Icon';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
+import assign from 'lodash/object/assign';
 
-var Button = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class TabLabel extends React.Component {
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  static propTypes = {
+  }
 
-  getDefaultProps() {
-    return {
-      selected: false,
-    };
-  },
+  static defaultProps = {
+    selected: false,
+  }
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
+    var {mod, style} = this.props;
+
+    mod = assign({
+      selected: this.props.selected,
+      stretch: this.props.stretch,
+      first: this.props.first,
+      notFirst: !this.props.first,
+      last: this.props.last,
+    }, mod);
 
     var icon;
     if (this.props.icon) {
       icon = <Icon icon={this.props.icon}
-        style={{marginRight:this.props.text ? 4 : 0}}/>;
+        style={{marginRight: this.props.text ? 4 : 0}}/>;
     }
 
     return <div
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.tabLabel, {
-        selected: this.props.selected,
-        stretch: this.props.stretch,
-        first: this.props.first,
-        notFirst: !this.props.first,
-        last: this.props.last,
-      })}
+      {...this.getBasics()}
+      style = {this.getStyle('tabLabel', mod, style)}
       onClick={this.props.onSelect}
       onDragEnter={this.props.onSelect}>
-      
+
       {icon}
       {this.props.label}
     </div>;
   }
-});
-
-module.exports = Button;
+}

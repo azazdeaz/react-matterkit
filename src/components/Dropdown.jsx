@@ -1,61 +1,51 @@
-var React = require('react');
-var Input = require('./Input');
-var Icon = require('./Icon');
-var ListItem = require('./ListItem');
-var style = require('./style');
-var has = require('lodash/object/has');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
+import React from 'react';
+import has from 'lodash/object/has';
+import assign from 'lodash/object/assign';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
+import ClickAway from '../utils/ClickAway';
 
-var Dropdown = React.createClass({
+import Icon from './Icon';
+import ListItem from './ListItem';
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+@Radium.Enhancer
+@pureRender
+@ClickAway
+@MatterBasics
+export default class Dropdown extends React.Component {
 
-  getInitialState() {
-    return {
+  static propTypes = {
+
+  }
+
+  static defaultProps = {
+    options: [],
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
       open: false,
     };
-  },
-  onFocus() {
-    this.setState({open: true});
-    // setTimeout(() => {//!hack
-      this.refs.head.getDOMNode().addEventListener('mousedown', this.onCloseClick);
-    // });
-  },
-  onBlur() {
+  }
+
+  handleClickHead = () => {
+    this.setState({open: !this.state.open});
+  }
+
+  handleClickAway = () => {
     this.setState({open: false});
-    this.refs.head.getDOMNode().removeEventListener('mousedown', this.onCloseClick);
-  },
-  onCloseClick(e) {
-    this.getDOMNode().blur();
-  },
-  render() {
+  }
 
-    var s = this.buildStyles(style.dropdown);
+  renderItems() {
+
     if (this.state.open) {
-      s.height = style.itemHeight * (this.props.options.length + 1);
-    }
 
-    return <div
-      {...this.getBrowserStateEvents()}
-      style={s}
-      ref="head"
-      tabIndex = "0"
-      onBlur = {this.onBlur}
-      onFocus = {this.onFocus}
-    >
-      <div style={{padding: '0 8px', display: 'flex'}}>
-        <span style={{flex: 1}}>
-          {this.props.value}
-        </span>
-        <Icon
-          style={{marginLeft: 4}}
-          lineHeight={style.itemHeightPX}
-          icon={this.state.open ? 'chevron-up' : 'chevron-down'}/>
-      </div>
+      return this.props.options.map(option => {
 
-      {this.props.options.map(option => {
-
-        if (typeof(option) === 'string') {
+        if (typeof option === 'string') {
           option = {label: option};
         }
 
@@ -64,7 +54,7 @@ var Dropdown = React.createClass({
         return <ListItem
           key={option.label}
           label={option.label}
-          onClick={()=>{
+          onClick={() => {
 
             if (this.props.onChange) {
               this.props.onChange(value);
@@ -74,11 +64,44 @@ var Dropdown = React.createClass({
               option.onClick(value);
             }
 
-            this.getDOMNode().blur();
+            this.setState({open: false});
           }}/>;
-      })}
+      });
+    }
+  }
+
+  render() {
+    var {mod, style, value, label} = this.props;
+    var {open} = this.state;
+    var {lineHeight} = this.getStyle('config');
+
+    if (label === undefined) label = value;
+
+    mod = assign({open}, mod);
+
+    if (open) {
+      style = assign({
+        height: lineHeight * (this.props.options.length + 1),
+      }, style);
+    }
+
+    return <div
+      {...this.getBasics()}
+      style={this.getStyle('dropdown', mod, style)}>
+
+      <div
+        style={{padding: '0 8px', display: 'flex'}}
+        onClick={this.handleClickHead}>
+
+        <span style={{flex: 1}}>
+          {label}
+        </span>
+        <Icon
+          style={{marginLeft: 4}}
+          icon={open ? 'chevron-up' : 'chevron-down'}/>
+      </div>
+
+      {this.renderItems()}
     </div>;
   }
-});
-
-module.exports = Dropdown;
+}

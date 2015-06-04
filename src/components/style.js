@@ -1,6 +1,6 @@
-var _ = require('lodash');
-var merge = require('lodash/object/merge');
-// var datauri = require('datauri');
+
+import merge from 'lodash/object/merge';
+// import datauri from 'datauri';
 var uriBorder = '';//datauri(__dirname+'/assets/border.png');
 var uriCheck = '';//datauri(__dirname+'/assets/check.png');
 

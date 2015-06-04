@@ -1,25 +1,35 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('./style');
-var CustomDrag = require('../utils/CustomDrag');
+import React from 'react';
+import CustomDrag from '../utils/CustomDrag';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Slider = React.createClass({
-  getDefaultProps() {
-    return {
-      min: -100,
-      max: 100,
-      value: 0,
-    };
-  },
-  getInitialState() {
-    return {dragging: false};
-  },
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Slider extends React.Component {
+
+  static propTypes = {
+  }
+
+  static defaultProps = {
+    min: -100,
+    max: 100,
+    value: 0,
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {dragging: false};
+  }
+
   componentDidMount() {
     new CustomDrag({
-      deTarget: this.refs.handle.getDOMNode(),
+      deTarget: React.findDOMNode(this.refs.handle),
       onDown: () => ({
         value: this.props.value,
-        width: this.getDOMNode().offsetWidth,
+        width: React.findDOMNode(this).offsetWidth,
       }),
       onDrag: md => {
 
@@ -34,10 +44,10 @@ var Slider = React.createClass({
         this.setState({dragging: false});
       }
     });
-  },
+  }
   render() {
 
-    var width = this.isMounted() ? this.getDOMNode().offsetWidth : 0,
+    var width = this.isMounted() ? React.findDOMNode(this).offsetWidth : 0,
       range = this.props.max - this.props.min,
       progress = (this.props.value - this.props.min) / range,
       percent = Math.max(0, Math.min(1, progress))*100 + '%';
@@ -49,26 +59,26 @@ var Slider = React.createClass({
         <div ref='progress' style={_.defaults({width: percent}, style.sliderBarProgress)}/>
       </div>
     </div>;
-  },
-});
+  }
+}
 
-var Handle = React.createClass({
+export default class Handle extends React.Component {
 
   getInitialState() {
     return {
       hover: false,
       down: false,
     };
-  },
+  }
   onMouseUp() {
     this.setState({down: false});
-  },
+  }
   componentDidMount() {
     window.addEventListener('mouseup', this.onMouseUp);
-  },
+  }
   componentWillUnmount() {
     window.removeEventListener('mouseup', this.onMouseUp);
-  },
+  }
   render() {
 
     var s;
@@ -83,6 +93,4 @@ var Handle = React.createClass({
       onMouseDown={() => this.setState({down: true})}>
     </div>;
   }
-});
-
-module.exports = Slider;
+}

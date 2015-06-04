@@ -1,23 +1,28 @@
-var React = require('react');
-var _ = require('lodash');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('../style');
-var Icon = require('../Icon');
-var Label = require('../Label');
-var Toolbar = require('../Toolbar');
-var ToolbarGroup = require('../ToolbarGroup');
+import React from 'react';;
+import Icon from '../Icon';
+import Label from '../Label';
+import Toolbar from '../Toolbar';
+import ToolbarGroup from '../ToolbarGroup';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';;
 
-var AccordionTab = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class AccordionTab extends React.Component {
 
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+  constructor(props) {
+    super(props);
 
-  getInitialState() {
-    return {opened: true};
-  },
+    this.state = {opened: true};
+  }
+
   onClick() {
     this.setState({opened: !this.state.opened});
-  },
-  render: function () {
+  }
+  render() {
+    var {mod, style} = this.props;
 
     // var sBase = {};
     // if (this.state.opened) sBase.backgroundColor = style.grey.active;
@@ -41,12 +46,10 @@ var AccordionTab = React.createClass({
           <Label>{this.props.label}</Label>
         </ToolbarGroup>
           <Icon
-            icon={this.state.opened ?  'chevron-down' : 'chevron-up'}
+            icon={this.state.opened ? 'chevron-down' : 'chevron-up'}
             style={{color: style.palette.grey4, width: 21}}/>
       </Toolbar>
       {content}
     </div>;
-  },
-});
-
-module.exports = AccordionTab;
+  }
+}

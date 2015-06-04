@@ -1,21 +1,25 @@
-var React = require('react/addons');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var ListItem = require('./ListItem');
-var style = require('./style');
-var has = require('lodash/object/has');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import ListItem from './ListItem';
+import has from 'lodash/object/has';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var List = React.createClass({
+@Radium.Enhancer
+@MatterBasics
+export default class List extends React.Component {
 
-  mixins: [ BasicMixin, StyleResolverMixin, BrowserStateMixin ],
+  constructor(props) {
+    super(props);
+  }
 
   render() {
-
+    var {mod, style, items} = this.props;
     var children;
 
-    if (this.props.items) {
+    if (items) {
 
-      children = this.props.items.map((item, idx) => {
+      children = items.map((item, idx) => {
 
         if (typeof(item) === 'string') {
             item = {label: item};
@@ -39,12 +43,10 @@ var List = React.createClass({
     }
 
     return <div
-      style={this.buildStyles(style.list)}
-      {...this.getBasics()}>
+      {...this.getBasics()}
+      style={this.getStyle('list', mod, style)}>
 
       {children}
     </div>;
   }
-});
-
-module.exports = List;
+}

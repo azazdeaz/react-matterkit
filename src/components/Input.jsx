@@ -1,52 +1,54 @@
-var React = require('react/addons');
-var { PureRenderMixin } = React;
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var merge = require('lodash/object/merge');
-var has = require('lodash/object/has');
-var _isFinite = require('lodash/lang/isFinite');
-var isArray = require('lodash/lang/isArray');
-var style = require('./style');
-var Icon = require('./Icon');
-var List = require('./List');
-var CustomDrag = require('../utils/CustomDrag');
-var fuzzy = require('fuzzy');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import _isFinite from 'lodash/lang/isFinite';
+import Icon from './Icon';
+import List from './List';
+import CustomDrag from '../utils/CustomDrag';
+import fuzzy from 'fuzzy';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Input = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Input extends React.Component {
 
-  mixins: [BasicMixin, PureRenderMixin, StyleResolverMixin, BrowserStateMixin],
+  static propTypes = {
+  }
 
-  getDefaultProps() {
-    return {
-      disabled: false,
-      draggable: true,
-      precision: 12,
-      dragSpeed: 1,
-      value: '',
-      type: 'text',
-      min: undefined,
-      max: undefined,
-      hints: undefined,
-      maxVisibleHints: 12,
-    };
-  },
+  static defaultProps = {
+    disabled: false,
+    draggable: true,
+    precision: 12,
+    dragSpeed: 1,
+    value: '',
+    type: 'text',
+    min: undefined,
+    max: undefined,
+    hints: undefined,
+    maxVisibleHints: 12,
+  }
 
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       value: undefined,
       error: false,
     };
-  },
+  }
 
   componentWillMount() {
     this.handleValue(this.props.value);
-  },
+  }
 
   componentDidMount() {
 
-    new CustomDrag({
-      deTarget: this.getDOMNode(),
-      onDown: (e) => {
+    var deTarget = React.findDOMNode(this);
+
+    this._customDrag = new CustomDrag({
+      deTarget,
+      onDown: () => {
 
         if (this.props.type !== 'number' || !this.props.draggable) {
 
@@ -67,18 +69,18 @@ var Input = React.createClass({
       onUp: (md) => {
         if (!md.moved) {
 
-          let node = this.refs.input.getDOMNode();
+          let node = React.findDOMNode(this.refs.input);
           node.focus();
           node.select();
         }
       }
     });
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
     this.handleValue(nextProps.value, nextProps);
-  },
+  }
 
   componentDidUpdate(prevProps, prevState) {
 
@@ -90,7 +92,7 @@ var Input = React.createClass({
 
       this.props.onChange(exportValue);
     }
-  },
+  }
 
   handleValue(value, props) {
 
@@ -104,7 +106,7 @@ var Input = React.createClass({
     this.setState({value, exportValue});
 
     this._validate(value);
-  },
+  }
 
   _formatValue(value, props) {
 
@@ -122,7 +124,7 @@ var Input = React.createClass({
     }
 
     return value;
-  },
+  }
 
   _formatNumber(value) {
 
@@ -138,7 +140,7 @@ var Input = React.createClass({
     value = parseFloat(value.toFixed(precision));
 
     return _isFinite(value) ? value : 0;
-  },
+  }
 
   _validate(value) {
 
@@ -146,7 +148,7 @@ var Input = React.createClass({
 
       this.setState({error: !this.props.validate(value)});
     }
-  },
+  }
 
   renderHints() {
 
@@ -185,27 +187,27 @@ var Input = React.createClass({
       left: 0,
       width: '100%',
     }}/>;
-  },
+  }
 
-  render: function () {
+  render() {
+    var {mod, style} = this.props;
 
     return <div
+      style = {this.getStyle('input', mod, style)}
       onMouseDown = {e=>{
-        var inputNode = this.refs.input.getDOMNode();
+        var inputNode = React.findDOMNode(this.refs.input);
         if (inputNode.ownerDocument.activeElement === inputNode &&
           e.target !== inputNode)
         {
           e.stopPropagation();
           e.preventDefault();
         }
-      }}
-      style = {this.buildStyles(style.input)}>
+      }}>
 
       <input
         ref='input'
         {...this.getBasics()}
-        {...this.getBrowserStateEvents()}
-        style = {style.inputReset}
+        style = {this.getStyle('inputField', mod)}
         palceholder = {this.props.palceholder}
         value = {this.state.value}
         type = 'text'
@@ -215,44 +217,40 @@ var Input = React.createClass({
         disabled = {this.props.disabled}/>
 
       <Addon
+        mod={this.props.mod}
         icon={this.props.addonIcon}
         label={this.props.addonLabel}
         background={this.props.addonBackground}
         onClick={this.props.addonOnClick}/>
 
-
       {this.renderHints()}
     </div>;
   }
-});
+}
 
 
 
-
-var Addon = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+class Addon extends React.Component {
 
   render() {
+    var {label, icon, mod, onClick} = this.props;
 
-    if (!this.props.label && !this.props.icon) {
+    if (!label && !icon) {
       return <div hidden={true}/>;
     }
 
-    var icon = this.props.icon ? <Icon icon={this.props.icon}/> : undefined;
-
-    var s = this.buildStyles(style.inputAddon);
+    icon = icon ? <Icon icon={icon}/> : undefined;
 
     return <span
-      {...this.getBrowserStateEvents()}
-      style = {s}
-      onClick = {this.props.onClick}>
+      {...this.getBasics()}
+      style = {this.getStyle('inputAddon', mod)}
+      onClick = {onClick}>
 
-      {this.props.label}
+      {label}
       {icon}
-
     </span>;
-  },
-});
-
-module.exports = Input;
+  }
+}

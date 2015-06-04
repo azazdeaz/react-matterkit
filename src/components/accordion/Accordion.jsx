@@ -1,19 +1,25 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('../style');
-var AccordionTab = require('./AccordionTab');
+import React from 'react';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../../utils/MatterBasics';
 
-var Accordion = React.createClass({
-  selecteds: [],
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Accordion extends React.Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   onSelect(index) {
     console.log('select tab', index);
-  },
+  }
   render() {
+    var {mod, style} = this.props;
 
     return <div style={style.accordion}>
       {this.props.children}
     </div>;
-  },
-});
-
-module.exports = Accordion;
+  }
+}

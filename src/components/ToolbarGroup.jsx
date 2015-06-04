@@ -1,21 +1,28 @@
-var React = require('react');
-var _ = require('lodash');
-var style = require('./style');
+import React from 'react';
+import Radium from 'radium';
+import assign from 'lodash/object/assign';
+import MatterBasics from '../utils/MatterBasics';
 
-var Toolbar = React.createClass({
+@Radium.Enhancer
+@MatterBasics
+export default class Toolbar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
+    var {mod, style} = this.props;
 
-    var s = _.assign({}, style.toolbarGroup, {
+    style = assign({
       flex: this.props.flex,
       width: this.props.width,
       justifyContent: this.props.justifyContent,
-    });
+    }, style);
 
-    return <div style={s}>
+    return <div
+      {...this.getBasics()}
+      style={this.getStyle('toolbarGroup', mod, style)}>
       {this.props.children}
     </div>;
   }
-});
-
-module.exports = Toolbar;
+}

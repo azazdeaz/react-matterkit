@@ -1,30 +1,38 @@
-var React = require('react/addons');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var style = require('./style');
-var has = require('lodash/object/has');
-var assign = require('lodash/object/assign');
+import React from 'react';
+import has from 'lodash/object/has';
+import assign from 'lodash/object/assign';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Toggle = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Toggle extends React.Component {
 
-  mixins: [ StyleResolverMixin ],
+  static propTypes = {
+    labelLeft: React.PropTypes.string,
+    valueLeft: React.PropTypes.any,
+    labelRight: React.PropTypes.string,
+    valueRight: React.PropTypes.any,
+  }
 
-  getDefaultProps() {
-    return {
-      labelLeft: 'ON',
-      valueLeft: true,
-      labelRight: 'OFF',
-      valueRight: false,
-    };
-  },
+  static defaultProps = {
+    valueLeft: true,
+    valueRight: false,
+    labelLeft: 'ON',
+    labelRight: 'OFF',
+  }
 
-  getInitialState() {
+  constructor(props) {
+    super(props);
 
-    var {defaultValue, valueRight} = this.props;
+    var {defaultValue, valueRight} = props;
 
-    return {
+    this.state = {
       left: defaultValue === valueRight ? false : true,
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
@@ -40,9 +48,35 @@ var Toggle = React.createClass({
         this.setState({left});
       }
     }
-  },
+  }
 
-  onClick() {
+  renderSide(label, on, side) {
+    var mod = assign({on, side}, this.props.mod);
+
+    return <div style={this.getStyle('toggleSide', mod)}>
+      {label}
+    </div>;
+  }
+
+  renderKnob(left) {
+    var mod = assign({onLeft: left ? 'true' : 'false'}, this.props.mod);
+
+    return <div style={this.getStyle('toggleKnob', mod)}>
+      {this.renderGrip()}
+    </div>;
+  }
+
+  renderGrip() {
+    var grey = 'white';
+
+    return <svg width='32' height='32'>
+      <line x1='13.5' y1='12' x2='13.5' y2='20' stroke={grey} strokeWidth='1'/>
+      <line x1='15.5' y1='12' x2='15.5' y2='20' stroke={grey} strokeWidth='1'/>
+      <line x1='17.5' y1='12' x2='17.5' y2='20' stroke={grey} strokeWidth='1'/>
+    </svg>;
+  }
+
+  handleClick() {
 
     var left = !this.state.left;
 
@@ -52,62 +86,18 @@ var Toggle = React.createClass({
     }
 
     this.setState({left});
-  },
+  }
 
   render() {
+    var {mod, style, labelLeft, labelRight} = this.props;
 
     return <div
-      style={this.buildStyles(style.toggleBase)}
-      onClick={this.onClick}>
+      style = {this.getStyle('toggleBase', mod, style)}
+      onClick = {() => this.handleClick()}>
 
-      <Side side='left' label={this.props.labelLeft} on={this.state.left}/>
-      <Side side='right' label={this.props.labelRight} on={!this.state.left}/>
-      <Knob left={this.state.left}/>
+      {this.renderSide(labelLeft, this.state.left, 'left')}
+      {this.renderSide(labelRight, !this.state.left, 'right')}
+      {this.renderKnob(this.state.left)}
     </div>;
   }
-});
-
-
-
-
-var Side = React.createClass({
-
-  mixins: [StyleResolverMixin, BrowserStateMixin],
-
-  render() {
-    return <div style={this.buildStyles(style.toggleSide)}>
-      {this.props.label}
-    </div>;
-  },
-});
-
-
-var Knob = React.createClass({
-
-  mixins: [ StyleResolverMixin, BrowserStateMixin ],
-
-  renderGrip() {
-
-    var grey = style.grey.hover;
-
-    return <svg width='32' height='32'>
-      <line x1='13.5' y1='12' x2='13.5' y2='20' stroke={grey} strokeWidth='1'/>
-      <line x1='15.5' y1='12' x2='15.5' y2='20' stroke={grey} strokeWidth='1'/>
-      <line x1='17.5' y1='12' x2='17.5' y2='20' stroke={grey} strokeWidth='1'/>
-    </svg>;
-  },
-
-  render() {
-
-    return <div
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.toggleKnob)}>
-
-      {this.renderGrip()}
-    </div>;
-  },
-});
-
-
-
-module.exports = Toggle;
+}

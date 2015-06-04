@@ -1,49 +1,56 @@
-var React = require('react/addons');
-var {PureRenderMixin} = React;
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var _ = require('lodash');
-var style = require('./style');
-var Icon = require('./Icon');
-var BasicMixin = require('../utils/BasicMixin');
+import React from 'react';
+import assign from 'lodash/object/assign';
+import Icon from './Icon';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
-var Button = React.createClass({
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class Button extends React.Component {
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+  constructor(props) {
+    super(props);
 
-  getDefaultProps() {
-    return {
-      label: '',
-      kind: 'normal',
-      disabled: false,
-    };
-  },
-
-  getInitialState() {
-    return {
+    this.state = {
       toggled: false,
     };
-  },
+  }
+
+  static propTypes = {
+    label: React.PropTypes.string,
+    disabled: React.PropTypes.bool,
+  }
+
+  static defaultProps = {
+    label: '',
+    disabled: false,
+    mod: {
+      kind: 'normal',
+    }
+  }
 
   render() {
+    var {mod, style, icon, onClick, label, disabled} = this.props;
 
-    var icon;
-    if (this.props.icon || this.props.iconClassName) {
-      icon = <Icon
-        icon={this.props.icon}
-        className={this.props.iconClassName}
-        style={{marginRight:this.props.text ? 4 : 0}}/>;
+    mod = assign({disabled}, mod);
+
+    if (typeof icon === 'string') {
+      icon = {icon};
+    }
+
+    if (icon) {
+      icon = <Icon {...icon} style={{marginRight: this.props.text ? 4 : 0}}/>;
     }
 
     return <div
       {...this.getBasics()}
-      {...this.getBrowserStateEvents()}
-      style={this.buildStyles(style.button)}
+      style={this.getStyle('button', mod, style)}
+      onClick={onClick}>
 
-      onClick={this.props.onClick}>
       {icon}
-      {this.props.label}
+      {label}
     </div>;
   }
-});
-
-module.exports = Button;
+}

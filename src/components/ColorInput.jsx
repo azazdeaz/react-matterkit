@@ -1,32 +1,36 @@
-var React = require('react');
-var { StyleResolverMixin, BrowserStateMixin } = require('radium');
-var tinycolor = require('tinycolor2');
-var style = require('./style');
-var Input = require('./Input');
-var BasicMixin = require('../utils/BasicMixin');
-var ColorCircle = require('../utils/ColorCircle');
+import React from 'react';
+import tinycolor from 'tinycolor2';
+import Input from './Input';
+import ColorCircle from '../utils/ColorCircle';
+import Radium from 'radium';
+import pureRender from 'pure-render-decorator';
+import MatterBasics from '../utils/MatterBasics';
 
 var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
 //TODO customiseable formats
-var MultiTypeInput = React.createClass({
 
-  mixins: [BasicMixin, StyleResolverMixin, BrowserStateMixin],
+@Radium.Enhancer
+@pureRender
+@MatterBasics
+export default class ColorInput extends React.Component {
 
-  getDefaultProps() {
-    return {
-      value: '#000000',
-    };
-  },
+  static propTypes = {
+  }
 
-  getInitialState() {
+  static defaultProps ={
+    value: '#000000',
+  }
 
-    var {value} = this.props;
+  constructor(props) {
+    super(props);
 
-    return {
+    var {value} = props;
+
+    this.state = {
       value,
       format: tinycolor(value).getFormat(),
     };
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
 
@@ -35,7 +39,7 @@ var MultiTypeInput = React.createClass({
       value,
       format: tinycolor(value).getFormat(),
     });
-  },
+  }
 
   getCurrTypeIdx(props) {
 
@@ -43,7 +47,7 @@ var MultiTypeInput = React.createClass({
 
     var {typeIdx, chooseType, value} = props;
     return chooseType ? chooseType(value) : defaultTypeIdx;
-  },
+  }
 
   handleChange(value) {
 
@@ -55,7 +59,7 @@ var MultiTypeInput = React.createClass({
     if (this.props.onChange) {
       this.props.onChange(value);
     }
-  },
+  }
 
   stepFormat() {
 
@@ -66,7 +70,7 @@ var MultiTypeInput = React.createClass({
     var value = tinycolor(this.state.value).toString(format);
 
     this.setState({value, format});
-  },
+  }
 
   renderSelector() {
 
@@ -86,7 +90,7 @@ var MultiTypeInput = React.createClass({
         width={28}
         radius={64}/>
     </div>;
-  },
+  }
 
   render() {
 
@@ -101,6 +105,4 @@ var MultiTypeInput = React.createClass({
       {this.renderSelector()}
     </span>;
   }
-});
-
-module.exports = MultiTypeInput;
+}
