@@ -4,24 +4,21 @@ import forOwn from 'lodash/object/forOwn';
 import cloneDeep from 'lodash/lang/cloneDeep';
 import * as sourceList from './sourceList';
 
-export default class Style {
-
+export default class Styles {
   constructor(src) {
-
     this.src = src || {};
 
     forOwn(sourceList, (styleSrc, name) => {
-      this.addSource(name, styleSrc);
+      this.setSource(name, styleSrc);
     });
   }
 
   clone() {
 
-    return new Style(cloneDeep(this.src));
+    return new Styles(cloneDeep(this.src));
   }
 
-  addSource(name, source) {
-
+  setSource(name, source) {
     this.src[name] = source;
   }
 
@@ -31,13 +28,13 @@ export default class Style {
 
     if (oriSource) {
 
-      this.addSource(name, (...args) => {
+      this.setSource(name, (...args) => {
 
         return merge(source(...args), oriSource(...args));
       });
     }
     else {
-      this.addSource(name, source);
+      this.setSource(name, source);
     }
   }
 

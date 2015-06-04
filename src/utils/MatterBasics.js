@@ -1,7 +1,12 @@
+import React from 'react';
 import getStyles from './getStyles';
 import forOwn from 'lodash/object/forOwn';
 
 export default function (Component) {
+
+  Component.contextTypes = {
+    matterStyles: React.PropTypes.object,
+  };
 
   Component.prototype.getBasics = function () {
     return {

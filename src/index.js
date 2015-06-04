@@ -6,6 +6,7 @@ module.exports = global.Matter = {
     getStyles: require('./utils/getStyles'),
     MatterBasics: require('./utils/MatterBasics'),
   },
+  Styles: require('./styles/Styles'),
 
   // Accordion: require('./components/accordion/Accordion'),
   // AccordionTab: require('./components/accordion/AccordionTab'),
