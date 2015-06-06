@@ -49,11 +49,10 @@ export default class Dropdown extends React.Component {
           option = {label: option};
         }
 
-        var value = has(option, 'value') ? option.value : option.label;
-
         return <ListItem
-          key={option.label}
+          key={option.label || option.value}
           label={option.label}
+          value={option.value}
           onClick={() => {
 
             if (this.props.onChange) {
