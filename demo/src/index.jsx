@@ -2,7 +2,7 @@ require('./index.html');//for the webpack build
 
 var React = require('react');
 var Matter = require('matterkit');
-var {List, ListItem} = Matter;
+var {List, ListItem, utils} = Matter;
 var merge = require('lodash/object/merge');
 var kebabCase = require('lodash/string/kebabCase');
 
@@ -16,12 +16,12 @@ var Redirect = Router.Redirect;
 
 
 var componentPages = {
-  Button: require('./componentPages/Button.jsx'),
+  Tests: require('./componentPages/Button.jsx'),
   // Checkbox: require('./componentPages/Checkbox.jsx'),
   // ColorInput: require('./componentPages/ColorInput.jsx'),
   // Icon: require('./componentPages/Icon.jsx'),
   // Input: require('./componentPages/Input.jsx'),
-  ItemGroup: require('./componentPages/ItemGroup.jsx'),
+  // ItemGroup: require('./componentPages/ItemGroup.jsx'),
   // MultiTypeInput: require('./componentPages/MultiTypeInput.jsx'),
   // Toggle: require('./componentPages/Toggle.jsx'),
 };
@@ -35,7 +35,7 @@ merge(global, Matter);
 
 
 
-/*var App = React.createClass({
+var App = React.createClass({
   contextTypes: {
     router: React.PropTypes.func,
   },
@@ -43,18 +43,21 @@ merge(global, Matter);
 
     var {router} = this.context;
 
-    var styleCont = merge({}, style.font, {
+    var theme = utils.getStyles(this);
+    var config = theme.get('config');
+    var font = theme.get('font');
+
+    var styleCont = merge({}, font, {
       width: 920,
       padding: '0 20px',
       margin: '12px auto',
       display: 'flex',
-      color: style.fontColor.normal,
+      color: config.fontColor.normal,
     });
 
     return (
       <div style={styleCont}>
         <div style={{width: 270}}>
-            <Matter.Button label='dasist'/>
           <List style={{width: 210}}>
             {Object.keys(componentPages).map(name => {
 
@@ -84,12 +87,12 @@ var routes = (
         path={kebabCase(name)}
         handler={componentPages[name]}/>;
     })}
-    <Redirect from='' to='Button' />
+    <Redirect from='' to='Tests' />
   </Route>
-);*/
+);
 
-// Router.run(routes, function (Handler) {
-//   React.render(<Handler/>, document.querySelector('#react-mount'));
-// });
-import ColorCircle from '../../src/utils/ColorCircle'
-React.render(<ColorCircle/>, document.querySelector('#react-mount'));
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.querySelector('#react-mount'));
+});
+// import ColorCircle from '../../src/utils/ColorCircle'
+// React.render(<ColorCircle/>, document.querySelector('#react-mount'));

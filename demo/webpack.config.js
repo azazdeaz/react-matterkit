@@ -1,7 +1,7 @@
 var path = require('path');
 
 module.exports = {
-  context: path.join(__dirname, '/demo'),
+  context: __dirname,
   entry: './src/index.jsx',
   output: {
     publicPath: '/dist/',
@@ -12,7 +12,7 @@ module.exports = {
     packageMains: ['main'],
     extensions: ['', '.js', '.jsx'],
     alias: {
-      matterkit: path.join(__dirname, '/src/index.js'),
+      matterkit: path.join(__dirname, '../src/index.js'),
     }
   },
   module: {
