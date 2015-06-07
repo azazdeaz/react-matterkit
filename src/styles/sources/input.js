@@ -1,6 +1,7 @@
 export default function (styles, mod) {
 
   var config = styles.get('config', mod);
+  var colors = styles.get('colors', mod);
 
   return {
     mixins: ['roundedCorners', 'inputBorder'],
@@ -9,7 +10,7 @@ export default function (styles, mod) {
     position: 'relative',
     alignItems: 'stretch',
     color: '#96a6ad',
-    backgroundColor: config.palette.grey4,
+    backgroundColor: colors.grey4,
     padding: '0',
     paddingLeft: '2px',
     height: config.lineHeight,

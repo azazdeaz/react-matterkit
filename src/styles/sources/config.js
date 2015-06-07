@@ -1,19 +1,9 @@
-const palette = {
-  purple: '#8091c6',
-  blue: '#6bb6c4',
-  right: '#43aa81',
-  wrong: '#b64d65',
-  grey1: '#e2e7eb',
-  grey2: '#96a6ad',
-  grey3: '#3b424a',
-  grey4: '#1a1d21',
-  bg: '#262A2E',
-};
+export default function (styles, mod) {
 
-export default function () {
+  var colors = styles.get('colors', mod);
 
   return {
-    palette,
+    palette: colors,
 
     lineHeight: 25,
     borderRadius: 3,
@@ -42,9 +32,9 @@ export default function () {
     },
 
     fontColor: {
-      normal: palette.grey2,
-      hover: palette.grey1,
-      active: palette.blue,
+      normal: colors.grey2,
+      hover: colors.grey1,
+      active: colors.blue,
     },
   };
 }

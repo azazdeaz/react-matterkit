@@ -2,6 +2,7 @@ export default function (styles, mod) {
 
   var config = styles.get('config', mod);
   var {knobWidth} = styles.get('toggleConfig', mod);
+  var colors = styles.get('colors', mod);
 
   return {
     mixins: ['font'],
@@ -12,7 +13,7 @@ export default function (styles, mod) {
     height: config.lineHeight,
     width: knobWidth,
     display: 'inline-block',
-    backgroundColor: config.palette.grey3,
+    backgroundColor: colors.grey3,
     onLeft: {
       'true': {left: 0},
       'false': {left: `calc(100% - ${knobWidth - 2}px)`}

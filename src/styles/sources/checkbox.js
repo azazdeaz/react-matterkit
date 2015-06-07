@@ -1,6 +1,7 @@
 export default function (styles, mod) {
 
   var config = styles.get('config', mod);
+  var colors = styles.get('colors', mod);
 
   return {
     position: 'relative',
@@ -10,7 +11,7 @@ export default function (styles, mod) {
     marginBottom: (config.lineHeight - 18) / 2,
     marginLeft: 3,
     marginRight: 3,
-    backgroundColor: config.palette.grey4,
+    backgroundColor: colors.grey4,
     backgroundPosition: '1px 1px',
     backgroundRepeat: 'no-repeat',
   }

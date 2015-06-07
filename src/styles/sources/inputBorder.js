@@ -1,6 +1,7 @@
 export default function (styles, mod) {
 
   var config = styles.get('config', mod);
+  var colors = styles.get('colors', mod);
 
   return {
     border: 'solid 1px transparent',
@@ -20,7 +21,7 @@ export default function (styles, mod) {
       backgroundColor: 'rgba(26,29,33,.6)',
     },
     error: {
-      border: `solid 1px ${config.palette.wrong}`,
+      border: `solid 1px ${colors.wrong}`,
     }
   };
 }

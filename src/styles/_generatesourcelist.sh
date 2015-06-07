@@ -10,3 +10,4 @@ do
     name="${BASH_REMATCH[1]}"
     echo "export { default as ${name} } from './${f}';" >> $target
 done
+echo "done"

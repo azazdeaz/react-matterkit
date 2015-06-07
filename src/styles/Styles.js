@@ -24,13 +24,15 @@ export default class Styles {
 
   extendSource(name, source) {
 
-    var oriSource = this.src[name];
+    var originalSource = this.src[name];
 
-    if (oriSource) {
+    if (originalSource) {
 
       this.setSource(name, (...args) => {
+        var extension = source(...args);
+        var original = originalSource(...args);
 
-        return merge(source(...args), oriSource(...args));
+        return merge(original, extension);
       });
     }
     else {

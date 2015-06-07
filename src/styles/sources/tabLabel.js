@@ -1,6 +1,7 @@
 export default function (styles, mod) {
 
   var config = styles.get('config', mod);
+  var colors = styles.get('colors', mod);
 
   return {
     mixins: ['font'],
@@ -13,10 +14,10 @@ export default function (styles, mod) {
     color: config.fontColor.normal,
     backgroundColor: config.grey.normal,
     backgroundImage: 'none',
-    borderTop: 'solid 1px ' + config.palette.grey4,
-    borderLeft: 'solid 1px ' + config.palette.grey4,
-    borderBottom: 'solid 1px ' + config.palette.grey4,
-    borderRight: 'solid 1px ' + config.palette.grey4,
+    borderTop: 'solid 1px ' + colors.grey4,
+    borderLeft: 'solid 1px ' + colors.grey4,
+    borderBottom: 'solid 1px ' + colors.grey4,
+    borderRight: 'solid 1px ' + colors.grey4,
     padding: '0 8px',
     margin: 0,
 

@@ -1,6 +1,7 @@
 export { default as buttonBase } from './sources/buttonBase.js';
 export { default as button } from './sources/button.js';
 export { default as checkbox } from './sources/checkbox.js';
+export { default as colors } from './sources/colors.js';
 export { default as config } from './sources/config.js';
 export { default as dropdown } from './sources/dropdown.js';
 export { default as font } from './sources/font.js';
