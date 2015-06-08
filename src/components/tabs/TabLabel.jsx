@@ -5,7 +5,7 @@ import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';
 import assign from 'lodash/object/assign';
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @MatterBasics
 export default class TabLabel extends React.Component {

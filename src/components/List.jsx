@@ -5,7 +5,7 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
 
-@Radium.Enhancer
+@Radium
 @MatterBasics
 export default class List extends React.Component {
 

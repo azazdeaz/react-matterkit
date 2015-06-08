@@ -9,7 +9,7 @@ import MatterBasics from '../utils/MatterBasics';
 var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
 //TODO customiseable formats
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @MatterBasics
 export default class ColorInput extends React.Component {

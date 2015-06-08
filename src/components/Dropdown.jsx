@@ -9,7 +9,7 @@ import ClickAway from '../utils/ClickAway';
 import Icon from './Icon';
 import ListItem from './ListItem';
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @ClickAway
 @MatterBasics

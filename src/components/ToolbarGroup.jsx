@@ -3,7 +3,7 @@ import Radium from 'radium';
 import assign from 'lodash/object/assign';
 import MatterBasics from '../utils/MatterBasics';
 
-@Radium.Enhancer
+@Radium
 @MatterBasics
 export default class Toolbar extends React.Component {
   constructor(props) {

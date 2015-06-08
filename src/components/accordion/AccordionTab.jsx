@@ -7,7 +7,7 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../../utils/MatterBasics';;
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @MatterBasics
 export default class AccordionTab extends React.Component {

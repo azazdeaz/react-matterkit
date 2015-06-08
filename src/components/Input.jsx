@@ -8,7 +8,7 @@ import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
 import MatterBasics from '../utils/MatterBasics';
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @MatterBasics
 export default class Input extends React.Component {
@@ -230,7 +230,7 @@ export default class Input extends React.Component {
 
 
 
-@Radium.Enhancer
+@Radium
 @pureRender
 @MatterBasics
 class Addon extends React.Component {
