@@ -59,7 +59,7 @@ module.exports = React.createClass({
   render() {
 
     return <Template
-      title='Button'
+      title='Tests'
       Class={Matter.Button}
       description={description}
       demos={demos}
