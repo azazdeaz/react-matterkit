@@ -27783,11 +27783,11 @@
 	            onClick: function () {
 
 	              if (_this2.props.onChange) {
-	                _this2.props.onChange(value);
+	                _this2.props.onChange(option.value);
 	              }
 
 	              if (option.onClick) {
-	                option.onClick(value);
+	                option.onClick(option.value);
 	              }
 
 	              _this2.setState({ open: false });
