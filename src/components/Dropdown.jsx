@@ -56,11 +56,11 @@ export default class Dropdown extends React.Component {
           onClick={() => {
 
             if (this.props.onChange) {
-              this.props.onChange(value);
+              this.props.onChange(option.value);
             }
 
             if (option.onClick) {
-              option.onClick(value);
+              option.onClick(option.value);
             }
 
             this.setState({open: false});
