@@ -43,14 +43,14 @@ export default class Dropdown extends React.Component {
 
     if (this.state.open) {
 
-      return this.props.options.map(option => {
+      return this.props.options.map((option, idx) => {
 
         if (typeof option === 'string') {
           option = {label: option, value: option};
         }
 
         return <ListItem
-          key={option.label}
+          key={idx}
           label={option.label}
           value={option.value}
           onClick={() => {

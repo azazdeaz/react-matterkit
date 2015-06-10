@@ -7,6 +7,9 @@ export default function (styles, mod) {
     lineHeight: `${config.lineHeight}px`,
     padding: '0 8px',
     color: config.fontColor.normal,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
 
     ':hover': {
       color: config.fontColor.hover,
