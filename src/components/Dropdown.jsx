@@ -1,5 +1,5 @@
 import React from 'react';
-import has from 'lodash/object/has';
+import find from 'lodash/collection/find';
 import assign from 'lodash/object/assign';
 import Radium from 'radium';
 import pureRender from 'pure-render-decorator';
@@ -46,15 +46,14 @@ export default class Dropdown extends React.Component {
       return this.props.options.map(option => {
 
         if (typeof option === 'string') {
-          option = {label: option};
+          option = {label: option, value: option};
         }
 
         return <ListItem
-          key={option.label || option.value}
+          key={option.label}
           label={option.label}
           value={option.value}
           onClick={() => {
-
             if (this.props.onChange) {
               this.props.onChange(option.value);
             }
@@ -70,11 +69,14 @@ export default class Dropdown extends React.Component {
   }
 
   render() {
-    var {mod, style, value, label} = this.props;
+    var {mod, style, value, label, options} = this.props;
     var {open} = this.state;
     var {lineHeight} = this.getStyle('config');
 
-    if (label === undefined) label = value;
+    if (label === undefined) {
+      let currentOption = find(options, 'value', value);
+      label = currentOption && currentOption.label;
+    }
 
     mod = assign({open}, mod);
 
