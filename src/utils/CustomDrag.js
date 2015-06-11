@@ -42,7 +42,7 @@ function CustomDrag(opt) {
         // e.stopPropagation();//ex. prevent to drag the parent if that's draggable too
         // - prevent to set the down state on the dragged item
 
-        e.preventDefault();//ex. prevent selecting text
+        e.preventDefault();//ex. prevent selecting text, focusing input
 
         md = custom || {};
 

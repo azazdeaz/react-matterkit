@@ -39,7 +39,7 @@ export default class Input extends React.Component {
   }
 
   componentWillMount() {
-    this.handleValue(this.props.value);
+    this.editValue(this.props.value);
   }
 
   componentDidMount() {
@@ -51,35 +51,33 @@ export default class Input extends React.Component {
       onDown: () => {
 
         if (this.props.type !== 'number' || !this.props.draggable) {
-
           return false;
         }
 
         return {
-          value: this.state.value,
-          moved: false,
+          value: this.state.draftValue,
         };
       },
       onDrag: (md) => {
-        md.moved = true;
-
         var value = md.value + md.dx * this.props.dragSpeed;
-        this.handleValue(value);
+        this.editValue(value);
+      },
+      onClick: (md) => {
+        let node = React.findDOMNode(this.refs.input);
+        node.focus();
+        node.select();
       },
       onUp: (md) => {
-        if (!md.moved) {
-
-          let node = React.findDOMNode(this.refs.input);
-          node.focus();
-          node.select();
-        }
+        let node = React.findDOMNode(this.refs.input);
+        node.focus();
+        // node.select();
       }
     });
   }
 
   componentWillReceiveProps(nextProps) {
 
-    this.handleValue(nextProps.value, nextProps);
+    this.editValue(nextProps.value, nextProps);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -94,26 +92,26 @@ export default class Input extends React.Component {
     }
   }
 
-  handleValue(value, props) {
+  editValue(draftValue, props) {
 
     props = props || this.props;
 
-    value = this._formatValue(value, props);
+    var value = this.formatValue(draftValue, props);
 
     var {prepareExportValue} = props;
     var exportValue = prepareExportValue ? prepareExportValue(value) : value;
 
-    this.setState({value, exportValue});
+    this.setState({value, exportValue, draftValue});
 
     this._validate(value);
   }
 
-  _formatValue(value, props) {
+  formatValue(value, props) {
 
     props = props || this.props;
 
     if (props.type === 'number') {
-      value =  this._formatNumber(value);
+      value =  this.formatNumber(value);
     }
     else if (props.type === 'text') {
       value += '';
@@ -126,11 +124,9 @@ export default class Input extends React.Component {
     return value;
   }
 
-  _formatNumber(value) {
+  formatNumber(value) {
 
-    var min = this.props.min,
-      max = this.props.max,
-      precision = this.props.precision;
+    var {min, max, precision} = this.props;
 
     value = parseFloat(value);
 
@@ -143,11 +139,65 @@ export default class Input extends React.Component {
   }
 
   _validate(value) {
-
     if (typeof(this.props.validate) === 'function') {
-
       this.setState({error: !this.props.validate(value)});
     }
+  }
+
+
+  handleMouseDown = (e) => {
+    //prevent to toolse focus by clicking on a child
+    var inputNode = React.findDOMNode(this.refs.input);
+    if (inputNode.ownerDocument.activeElement === inputNode &&
+      e.target !== inputNode)
+    {
+      e.stopPropagation();
+      e.preventDefault();
+    }
+  }
+
+  handleFocus = () => {
+    this.setState({focus: true});
+  }
+
+  handleBlur = () => {
+    this.setState({
+      focus: false,
+      draftValue: this.state.value,
+    });
+
+  }
+
+  render() {
+    var {mod, style} = this.props;
+
+    return <div
+      style = {this.getStyle('input', mod, style)}
+      onMouseDown = {this.handleMouseDown}>
+
+      <input
+        ref='input'
+        {...this.getBasics()}
+        style = {this.getStyle('inputField', mod)}
+        palceholder = {this.props.palceholder}
+        value = {this.state.draftValue}
+        type = 'text'
+        name = {this.props.name}
+        pattern = {this.props.pattern}
+        onFocus = {this.handleFocus}
+        onBlur = {this.handleBlur}
+        onChange = {e => this.editValue(e.target.value)}
+        disabled = {this.props.disabled}/>
+
+      <Addon
+        mod = {this.props.mod}
+        icon = {this.props.addonIcon}
+        label = {this.props.addonLabel}
+        background = {this.props.addonBackground}
+        onClick = {this.props.addonOnClick}/>
+
+      {this.renderHints()}
+    </div>;
   }
 
   renderHints() {
@@ -172,7 +222,7 @@ export default class Input extends React.Component {
 
           var value = hint.original;
           this.setState({lastlySelectedHint: value});
-          this.handleValue(value);
+          this.editValue(value);
         },
       };
     });
@@ -187,44 +237,6 @@ export default class Input extends React.Component {
       left: 0,
       width: '100%',
     }}/>;
-  }
-
-  render() {
-    var {mod, style} = this.props;
-
-    return <div
-      style = {this.getStyle('input', mod, style)}
-      onMouseDown = {e=>{
-        var inputNode = React.findDOMNode(this.refs.input);
-        if (inputNode.ownerDocument.activeElement === inputNode &&
-          e.target !== inputNode)
-        {
-          e.stopPropagation();
-          e.preventDefault();
-        }
-      }}>
-
-      <input
-        ref='input'
-        {...this.getBasics()}
-        style = {this.getStyle('inputField', mod)}
-        palceholder = {this.props.palceholder}
-        value = {this.state.value}
-        type = 'text'
-        name = {this.props.name}
-        pattern = {this.props.pattern}
-        onChange = {e => this.handleValue(e.target.value)}
-        disabled = {this.props.disabled}/>
-
-      <Addon
-        mod={this.props.mod}
-        icon={this.props.addonIcon}
-        label={this.props.addonLabel}
-        background={this.props.addonBackground}
-        onClick={this.props.addonOnClick}/>
-
-      {this.renderHints()}
-    </div>;
   }
 }
 

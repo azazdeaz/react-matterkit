@@ -7,7 +7,7 @@ label: String`;
 
 var demos = [
   {code: `<Label label="i'm da label!"/>`, docClass: Matter.Label},
-  {code: `<Input value={32} addonLabel='px'/>`, docClass: Matter.Input},
+  {code: `<Input value={32} addonLabel='px' min={0} type='number'/>`, docClass: Matter.Input},
   {code: `<Toggle value={false}/>`, docClass: Matter.Toggle},
   {code: `<Icon icon='github'/>`, docClass: Matter.Icon},
   {code: `<Checkbox value={false}/>`, docClass: Matter.Checkbox},
