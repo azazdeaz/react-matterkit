@@ -1,6 +1,6 @@
-export default function (styles, mod) {
+export default function (theme, mod) {
 
-  var config = styles.get('config', mod);
+  var config = theme.get('config', mod);
   var {borderRadius} = config;
 
   return {

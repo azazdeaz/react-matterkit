@@ -1,7 +1,7 @@
-export default function (styles, mod) {
+export default function (theme, mod) {
 
-  var config = styles.get('config', mod);
-  var colors = styles.get('colors', mod);
+  var config = theme.get('config', mod);
+  var colors = theme.get('colors', mod);
 
   return {
     border: 'solid 1px transparent',

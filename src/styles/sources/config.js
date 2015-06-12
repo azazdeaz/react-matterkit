@@ -1,6 +1,6 @@
-export default function (styles, mod) {
+export default function (theme, mod) {
 
-  var colors = styles.get('colors', mod);
+  var colors = theme.get('colors', mod);
 
   return {
     palette: colors,

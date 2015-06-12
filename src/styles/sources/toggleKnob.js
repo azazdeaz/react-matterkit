@@ -1,8 +1,8 @@
-export default function (styles, mod) {
+export default function (theme, mod) {
 
-  var config = styles.get('config', mod);
-  var {knobWidth} = styles.get('toggleConfig', mod);
-  var colors = styles.get('colors', mod);
+  var config = theme.get('config', mod);
+  var {knobWidth} = theme.get('toggleConfig', mod);
+  var colors = theme.get('colors', mod);
 
   return {
     mixins: ['font'],

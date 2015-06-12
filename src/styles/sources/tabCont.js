@@ -1,4 +1,4 @@
-export default function (styles, mod) {
+export default function (theme, mod) {
 
   return {
     mixins: ['panel'],
