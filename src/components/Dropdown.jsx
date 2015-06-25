@@ -1,13 +1,13 @@
-import React from 'react';
-import find from 'lodash/collection/find';
-import assign from 'lodash/object/assign';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
-import ClickAway from '../utils/ClickAway';
+import React from 'react'
+import find from 'lodash/collection/find'
+import assign from 'lodash/object/assign'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
+import ClickAway from '../utils/ClickAway'
 
-import Icon from './Icon';
-import ListItem from './ListItem';
+import Icon from './Icon'
+import ListItem from './ListItem'
 
 @Radium
 @pureRender
@@ -24,19 +24,19 @@ export default class Dropdown extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       open: false,
-    };
+    }
   }
 
   handleClickHead = () => {
-    this.setState({open: !this.state.open});
+    this.setState({open: !this.state.open})
   }
 
   handleClickAway = () => {
-    this.setState({open: false});
+    this.setState({open: false})
   }
 
   renderItems() {
@@ -46,7 +46,7 @@ export default class Dropdown extends React.Component {
       return this.props.options.map((option, idx) => {
 
         if (typeof option === 'string') {
-          option = {label: option, value: option};
+          option = {label: option, value: option}
         }
 
         return <ListItem
@@ -55,35 +55,35 @@ export default class Dropdown extends React.Component {
           value={option.value}
           onClick={() => {
             if (this.props.onChange) {
-              this.props.onChange(option.value);
+              this.props.onChange(option.value)
             }
 
             if (option.onClick) {
-              option.onClick(option.value);
+              option.onClick(option.value)
             }
 
-            this.setState({open: false});
-          }}/>;
-      });
+            this.setState({open: false})
+          }}/>
+      })
     }
   }
 
   render() {
-    var {mod, style, value, label, options} = this.props;
-    var {open} = this.state;
-    var {lineHeight} = this.getStyle('config');
+    var {mod, style, value, label, options} = this.props
+    var {open} = this.state
+    var {lineHeight} = this.getStyle('config')
 
     if (label === undefined) {
-      let currentOption = find(options, 'value', value);
-      label = currentOption && currentOption.label;
+      let currentOption = find(options, 'value', value)
+      label = currentOption && currentOption.label
     }
 
-    mod = assign({open}, mod);
+    mod = assign({open}, mod)
 
     if (open) {
       style = assign({
         height: lineHeight * (this.props.options.length + 1),
-      }, style);
+      }, style)
     }
 
     return <div
@@ -103,6 +103,6 @@ export default class Dropdown extends React.Component {
       </div>
 
       {this.renderItems()}
-    </div>;
+    </div>
   }
 }

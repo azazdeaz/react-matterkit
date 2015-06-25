@@ -10,5 +10,5 @@ export default function () {
     grey3: '#3b424a',
     grey4: '#1a1d21',
     bg: '#262A2E',
-  };
+  }
 }

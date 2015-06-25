@@ -4,5 +4,5 @@ export default function () {
     mixins: ['inputResetCss'],
 
     flex: 1,
-  };
+  }
 }

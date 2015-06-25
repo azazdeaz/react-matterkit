@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
     height: config.lineHeight,
@@ -19,5 +19,5 @@ export default function (theme, mod) {
     selected: {
       color: config.fontColor.active,
     }
-  };
+  }
 }

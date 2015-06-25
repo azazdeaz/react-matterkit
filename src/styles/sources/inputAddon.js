@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
     userSelect: 'none',
@@ -30,5 +30,5 @@ export default function (theme, mod) {
         ':active': {backgroundColor: 'none'},
       },
     }
-  };
+  }
 }

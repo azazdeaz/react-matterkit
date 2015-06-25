@@ -1,7 +1,7 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
-  var colors = theme.get('colors', mod);
+  var config = theme.get('config', mod)
+  var colors = theme.get('colors', mod)
 
   return {
     border: 'solid 1px transparent',
@@ -23,5 +23,5 @@ export default function (theme, mod) {
     error: {
       border: `solid 1px ${colors.wrong}`,
     }
-  };
+  }
 }

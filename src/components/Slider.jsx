@@ -1,8 +1,8 @@
-import React from 'react';
-import CustomDrag from '../utils/CustomDrag';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
+import React from 'react'
+import CustomDrag from '../utils/CustomDrag'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -19,9 +19,9 @@ export default class Slider extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = {dragging: false};
+    this.state = {dragging: false}
   }
 
   componentDidMount() {
@@ -33,24 +33,24 @@ export default class Slider extends React.Component {
       }),
       onDrag: md => {
 
-        this.setState({dragging: true});
+        this.setState({dragging: true})
 
         var range = this.props.max - this.props.min,
-          value = md.value + (md.dx / md.width) * range;
+          value = md.value + (md.dx / md.width) * range
 
-        this.props.onChange(value);
+        this.props.onChange(value)
       },
       onUp: () => {
-        this.setState({dragging: false});
+        this.setState({dragging: false})
       }
-    });
+    })
   }
   render() {
 
     var width = this.isMounted() ? React.findDOMNode(this).offsetWidth : 0,
       range = this.props.max - this.props.min,
       progress = (this.props.value - this.props.min) / range,
-      percent = Math.max(0, Math.min(1, progress))*100 + '%';
+      percent = Math.max(0, Math.min(1, progress))*100 + '%'
 
     return <div style={style.slider}
       onMouseDown={e => e.preventDefault()}>
@@ -58,7 +58,7 @@ export default class Slider extends React.Component {
       <div style={style.sliderBarBg}>
         <div ref='progress' style={_.defaults({width: percent}, style.sliderBarProgress)}/>
       </div>
-    </div>;
+    </div>
   }
 }
 
@@ -68,29 +68,29 @@ export default class Handle extends React.Component {
     return {
       hover: false,
       down: false,
-    };
+    }
   }
   onMouseUp() {
-    this.setState({down: false});
+    this.setState({down: false})
   }
   componentDidMount() {
-    window.addEventListener('mouseup', this.onMouseUp);
+    window.addEventListener('mouseup', this.onMouseUp)
   }
   componentWillUnmount() {
-    window.removeEventListener('mouseup', this.onMouseUp);
+    window.removeEventListener('mouseup', this.onMouseUp)
   }
   render() {
 
-    var s;
+    var s
 
-  if (this.state.down || this.props.dragging) s = style.sliderHandleActive;
-    else if (this.state.hover) s = style.sliderHandleHover;
-    else s = style.sliderHandle;
+  if (this.state.down || this.props.dragging) s = style.sliderHandleActive
+    else if (this.state.hover) s = style.sliderHandleHover
+    else s = style.sliderHandle
 
     return <div style={_.defaults({left: this.props.left}, s)}
       onMouseEnter={() => this.setState({hover: true})}
       onMouseLeave={() => this.setState({hover: false})}
       onMouseDown={() => this.setState({down: true})}>
-    </div>;
+    </div>
   }
 }

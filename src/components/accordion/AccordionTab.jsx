@@ -1,11 +1,11 @@
-import React from 'react';;
-import Icon from '../Icon';
-import Label from '../Label';
-import Toolbar from '../Toolbar';
-import ToolbarGroup from '../ToolbarGroup';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../../utils/MatterBasics';;
+import React from 'react'
+import Icon from '../Icon'
+import Label from '../Label'
+import Toolbar from '../Toolbar'
+import ToolbarGroup from '../ToolbarGroup'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -13,25 +13,25 @@ import MatterBasics from '../../utils/MatterBasics';;
 export default class AccordionTab extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    this.state = {opened: true};
+    this.state = {opened: true}
   }
 
   onClick() {
-    this.setState({opened: !this.state.opened});
+    this.setState({opened: !this.state.opened})
   }
   render() {
-    var {mod, style} = this.props;
+    var {mod, style} = this.props
 
-    // var sBase = {};
-    // if (this.state.opened) sBase.backgroundColor = style.grey.active;
-    // else if (this.state.hover) sBase.backgroundColor = style.grey.hover;
-    // else sBase.backgroundColor = style.grey.normal;
+    // var sBase = {}
+    // if (this.state.opened) sBase.backgroundColor = style.grey.active
+    // else if (this.state.hover) sBase.backgroundColor = style.grey.hover
+    // else sBase.backgroundColor = style.grey.normal
 
-    var sHead = {height: style.lineHeight};
+    var sHead = {height: style.lineHeight}
 
-    var content = this.state.opened ? <div>{this.props.children}</div> : '';
+    var content = this.state.opened ? <div>{this.props.children}</div> : ''
 
     return <div
       {...this.getBrowserStateEvents()}
@@ -50,6 +50,6 @@ export default class AccordionTab extends React.Component {
             style={{color: style.palette.grey4, width: 21}}/>
       </Toolbar>
       {content}
-    </div>;
+    </div>
   }
 }

@@ -10,5 +10,5 @@ export default function (theme, mod) {
     stretchLabels: {
       borderTopRightRadius: 0,
     }
-  };
+  }
 }

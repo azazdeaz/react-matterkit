@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
     mixins: ['font', 'roundedCorners'],
@@ -28,5 +28,5 @@ export default function (theme, mod) {
       backgroundColor: '#3b424a',
       backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
     }
-  };
+  }
 }

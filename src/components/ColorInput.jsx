@@ -1,12 +1,12 @@
-import React from 'react';
-import tinycolor from 'tinycolor2';
-import Input from './Input';
-import ColorCircle from '../utils/ColorCircle';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
+import React from 'react'
+import tinycolor from 'tinycolor2'
+import Input from './Input'
+import ColorCircle from '../utils/ColorCircle'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
 
-var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv'];
+var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv']
 //TODO customiseable formats
 
 @Radium
@@ -22,31 +22,31 @@ export default class ColorInput extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
-    var {value} = props;
+    var {value} = props
 
     this.state = {
       value,
       format: tinycolor(value).getFormat(),
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
 
-    var {value} = nextProps;
+    var {value} = nextProps
     this.setState({
       value,
       format: tinycolor(value).getFormat(),
-    });
+    })
   }
 
   getCurrTypeIdx(props) {
 
-    props = props || this.props;
+    props = props || this.props
 
-    var {typeIdx, chooseType, value} = props;
-    return chooseType ? chooseType(value) : defaultTypeIdx;
+    var {typeIdx, chooseType, value} = props
+    return chooseType ? chooseType(value) : defaultTypeIdx
   }
 
   handleChange(value) {
@@ -54,29 +54,29 @@ export default class ColorInput extends React.Component {
     this.setState({
       value,
       format: tinycolor(value).getFormat(),
-    });
+    })
 
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(value)
     }
   }
 
   stepFormat() {
 
-    var idx = FORMATS.indexOf(this.state.format) + 1;
-    idx %= FORMATS.length;
+    var idx = FORMATS.indexOf(this.state.format) + 1
+    idx %= FORMATS.length
 
-    var format = FORMATS[idx];
-    var value = tinycolor(this.state.value).toString(format);
+    var format = FORMATS[idx]
+    var value = tinycolor(this.state.value).toString(format)
 
-    this.setState({value, format});
+    this.setState({value, format})
   }
 
   renderSelector() {
 
-    // if (!this.state.focus) return null;
+    // if (!this.state.focus) return null
 
-    var hsl = tinycolor(this.state.value).toHsl();
+    var hsl = tinycolor(this.state.value).toHsl()
 
     return <div style={{
       position: 'absolute',
@@ -89,7 +89,7 @@ export default class ColorInput extends React.Component {
         {...hsl}
         width={28}
         radius={64}/>
-    </div>;
+    </div>
   }
 
   render() {
@@ -103,6 +103,6 @@ export default class ColorInput extends React.Component {
         onChange = {this.handleChange}
         onInitialFormat = {this.handleChange}/>
       {this.renderSelector()}
-    </span>;
+    </span>
   }
 }

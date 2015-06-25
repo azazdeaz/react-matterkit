@@ -1,8 +1,8 @@
-import React from 'react';
-import TabHeader from './TabHeader';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../../utils/MatterBasics';
+import React from 'react'
+import TabHeader from './TabHeader'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -18,39 +18,39 @@ export default class Tabs extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       currTabIdx: props.defaultTabIdx,
-    };
+    }
   }
 
   _selectTab(idx) {
-    this.setState({currTabIdx: idx});
+    this.setState({currTabIdx: idx})
 
     if (this.props.onChangeTabIdx) {
 
-      this.props.onChangeTabIdx(idx);
+      this.props.onChangeTabIdx(idx)
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({currTabIdx: nextProps.defaultTabIdx});
+    this.setState({currTabIdx: nextProps.defaultTabIdx})
   }
 
   render() {
-    var {mod, style} = this.props;
+    var {mod, style} = this.props
 
-    var currTab;
+    var currTab
 
 
     React.Children.forEach(this.props.children, (child, idx) => {
 
       if(this.state.currTabIdx === idx) {
 
-        currTab = child;
+        currTab = child
       }
-    });
+    })
 
     return <div
       {...this.getBasics()}
@@ -65,6 +65,6 @@ export default class Tabs extends React.Component {
       <div style={this.getStyle('tabCont', mod)}>
         {currTab}
       </div>
-    </div>;
+    </div>
   }
 }

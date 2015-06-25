@@ -1,9 +1,9 @@
-import React from 'react';
-import assign from 'lodash/object/assign';
-import Icon from './Icon';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
+import React from 'react'
+import assign from 'lodash/object/assign'
+import Icon from './Icon'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -11,11 +11,11 @@ import MatterBasics from '../utils/MatterBasics';
 export default class Button extends React.Component {
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       toggled: false,
-    };
+    }
   }
 
   static propTypes = {
@@ -32,16 +32,16 @@ export default class Button extends React.Component {
   }
 
   render() {
-    var {mod, style, icon, onClick, label, disabled} = this.props;
+    var {mod, style, icon, onClick, label, disabled} = this.props
 
-    mod = assign({disabled}, mod);
+    mod = assign({disabled}, mod)
 
     if (typeof icon === 'string') {
-      icon = {icon};
+      icon = {icon}
     }
 
     if (icon) {
-      icon = <Icon {...icon} style={{marginRight: this.props.text ? 4 : 0}}/>;
+      icon = <Icon {...icon} style={{marginRight: this.props.text ? 4 : 0}}/>
     }
 
     return <div
@@ -51,6 +51,6 @@ export default class Button extends React.Component {
 
       {icon}
       {label}
-    </div>;
+    </div>
   }
 }

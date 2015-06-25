@@ -19,5 +19,5 @@ export default function () {
       backgroundColor: '#2c3136',
       border: 'solid 1px rgba(26,29,33,.32)',
     }
-  };
+  }
 }

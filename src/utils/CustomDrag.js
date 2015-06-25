@@ -1,42 +1,42 @@
-import has from 'lodash/object/has';
+import has from 'lodash/object/has'
 
-'use strict';
+'use strict'
 
 function CustomDrag(opt) {
 
-    opt = opt || {};
+    opt = opt || {}
 
     var md, isOver, isDrag,
-        waitingMoveEvent, waitingMoveRaf;
+        waitingMoveEvent, waitingMoveRaf
 
     if (opt.deTarget) {
 
-        opt.deTarget.addEventListener('mousedown', onDown);
-        opt.deTarget.addEventListener('mouseover', onEnter);
-        opt.deTarget.addEventListener('mouseleave', onLeave);
+        opt.deTarget.addEventListener('mousedown', onDown)
+        opt.deTarget.addEventListener('mouseover', onEnter)
+        opt.deTarget.addEventListener('mouseleave', onLeave)
     }
 
     this.emitDown = function (e) {
 
-        onDown(e);
-    };
+        onDown(e)
+    }
 
     function onDown(e) {
 
         if (e.button !== 0) {
 
-            return;
+            return
         }
 
-        isDrag = true;
+        isDrag = true
 
-        var custom = call('onDown', [e]);
+        var custom = call('onDown', [e])
 
         if (custom === false) {//prevent dragging
 
-            window.addEventListener('mouseup', onUpWithoutDrag);
+            window.addEventListener('mouseup', onUpWithoutDrag)
 
-            return;
+            return
         }
 
         // e.stopPropagation();//ex. prevent to drag the parent if that's draggable too
@@ -44,92 +44,92 @@ function CustomDrag(opt) {
 
         e.preventDefault();//ex. prevent selecting text, focusing input
 
-        md = custom || {};
+        md = custom || {}
 
-        md.mx = e.clientX;
-        md.my = e.clientY;
-        md.dx = 0;
-        md.dy = 0;
+        md.mx = e.clientX
+        md.my = e.clientY
+        md.dx = 0
+        md.dy = 0
 
-        window.addEventListener('mousemove', onMove);
-        window.addEventListener('mouseup', onUp);
-        window.addEventListener('mouseleave', onUp);
+        window.addEventListener('mousemove', onMove)
+        window.addEventListener('mouseup', onUp)
+        window.addEventListener('mouseleave', onUp)
     }
 
     function onMove(e) {
 
-        md.__moved = true;
+        md.__moved = true
 
-        waitingMoveEvent = e;
+        waitingMoveEvent = e
 
         if (!waitingMoveRaf) {
 
-            waitingMoveRaf = window.requestAnimationFrame(rafOnMove);
+            waitingMoveRaf = window.requestAnimationFrame(rafOnMove)
         }
     }
 
     function rafOnMove() {
 
-        window.cancelAnimationFrame(waitingMoveRaf);
+        window.cancelAnimationFrame(waitingMoveRaf)
 
-        var wme = waitingMoveEvent;
-        waitingMoveRaf = undefined;
-        waitingMoveEvent = undefined;
+        var wme = waitingMoveEvent
+        waitingMoveRaf = undefined
+        waitingMoveEvent = undefined
 
         var mx = wme.clientX,
-            my = wme.clientY;
+            my = wme.clientY
 
-        md.dx = mx - md.mx;
-        md.dy = my - md.my;
+        md.dx = mx - md.mx
+        md.dy = my - md.my
 
-        call(['onMove', 'onDrag'], [md, mx, my]);
+        call(['onMove', 'onDrag'], [md, mx, my])
     }
 
     function onUp(e) {
 
-        window.removeEventListener('mousemove', onMove);
-        window.removeEventListener('mouseup', onUp);
-        window.removeEventListener('mouseleave', onUp);
+        window.removeEventListener('mousemove', onMove)
+        window.removeEventListener('mouseup', onUp)
+        window.removeEventListener('mouseleave', onUp)
 
         if (waitingMoveEvent) {
-            rafOnMove();
+            rafOnMove()
         }
 
-        isDrag = false;
+        isDrag = false
         if (!isOver) {
-            onLeave();
+            onLeave()
         }
 
-        call('onUp', [md, e.clientX, e.clientY, e]);
+        call('onUp', [md, e.clientX, e.clientY, e])
 
         if (!md.__moved) {
 
-          call('onClick', [e]);
+          call('onClick', [e])
         }
     }
 
     function onUpWithoutDrag(e) {
 
-        window.removeEventListener('mouseup', onUpWithoutDrag);
+        window.removeEventListener('mouseup', onUpWithoutDrag)
 
-        call('onClick', [e]);
+        call('onClick', [e])
     }
 
     function onEnter() {
 
-        isOver = true;
+        isOver = true
 
         if (!isDrag) {
-            call('onEnter');
+            call('onEnter')
         }
     }
 
     function onLeave() {
 
-        isOver = false;
+        isOver = false
 
         if (!isDrag) {
-            call('onLeave');
+            call('onLeave')
         }
     }
 
@@ -139,22 +139,22 @@ function CustomDrag(opt) {
 
             name.forEach(function (name) {
 
-                call(name, args);
-            });
+                call(name, args)
+            })
 
-            return;
+            return
         }
 
         if (name in opt) {
 
-            return opt[name].apply(opt.thisArg, args);
+            return opt[name].apply(opt.thisArg, args)
         }
     }
 }
 
-module.exports = CustomDrag;
-var p = CustomDrag.prototype;
+module.exports = CustomDrag
+var p = CustomDrag.prototype
 
 p.destroy = function () {
     //TODO
-};
+}

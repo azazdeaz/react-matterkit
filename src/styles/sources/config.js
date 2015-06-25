@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var colors = theme.get('colors', mod);
+  var colors = theme.get('colors', mod)
 
   return {
     palette: colors,
@@ -11,15 +11,15 @@ export default function (theme, mod) {
     anim: '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)',
 
     gardient: (()=>{
-      var start = '#6bb6c4';
-      var end = '#6b9ad3';
+      var start = '#6bb6c4'
+      var end = '#6b9ad3'
 
       return {
         start,
         end,
         normal: `linear-gradient(135deg, ${start} 0%, ${end} 100%)`,
         backward: `linear-gradient(-45deg, ${start} 0%, ${end} 100%)`,
-      };
+      }
     })(),
 
     fontFamily: 'Open Sans',
@@ -36,5 +36,5 @@ export default function (theme, mod) {
       hover: colors.grey1,
       active: colors.blue,
     },
-  };
+  }
 }

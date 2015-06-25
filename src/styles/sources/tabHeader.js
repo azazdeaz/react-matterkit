@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
     position: 'relative',
@@ -9,5 +9,5 @@ export default function (theme, mod) {
     height: `${config.lineHeight}px`,
     display: 'flex',
     flexShrink: 0,
-  };
+  }
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import Icon from '../Icon';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../../utils/MatterBasics';
-import assign from 'lodash/object/assign';
+import React from 'react'
+import Icon from '../Icon'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../../utils/MatterBasics'
+import assign from 'lodash/object/assign'
 
 @Radium
 @pureRender
@@ -18,11 +18,11 @@ export default class TabLabel extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
-    var {mod, style} = this.props;
+    var {mod, style} = this.props
 
     mod = assign({
       selected: this.props.selected,
@@ -30,12 +30,12 @@ export default class TabLabel extends React.Component {
       first: this.props.first,
       notFirst: !this.props.first,
       last: this.props.last,
-    }, mod);
+    }, mod)
 
-    var icon;
+    var icon
     if (this.props.icon) {
       icon = <Icon icon={this.props.icon}
-        style={{marginRight: this.props.text ? 4 : 0}}/>;
+        style={{marginRight: this.props.text ? 4 : 0}}/>
     }
 
     return <div
@@ -46,6 +46,6 @@ export default class TabLabel extends React.Component {
 
       {icon}
       {this.props.label}
-    </div>;
+    </div>
   }
 }

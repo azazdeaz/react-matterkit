@@ -1,7 +1,7 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
-  var {knobWidth, labelOffset} = theme.get('toggleConfig', mod);
+  var config = theme.get('config', mod)
+  var {knobWidth, labelOffset} = theme.get('toggleConfig', mod)
 
   return {
     mixins: ['font'],
@@ -28,5 +28,5 @@ export default function (theme, mod) {
       opacity: 1,
       transform: 'translateX(0px)',
     }
-  };
+  }
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import TabLabel from './TabLabel';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../../utils/MatterBasics';
+import React from 'react'
+import TabLabel from './TabLabel'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -17,13 +17,13 @@ export default class TabHeader extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
   }
 
   render() {
-    var {mod, style} = this.props;
+    var {mod, style} = this.props
 
-    var childCount = React.Children.count(this.props.children);
+    var childCount = React.Children.count(this.props.children)
 
     return <div
       {...this.getBasics()}
@@ -38,8 +38,8 @@ export default class TabHeader extends React.Component {
           selected = {this.props.currTabIdx === idx}
           icon = {child.props.icon}
           label = {child.props.label}
-          onSelect = {() => this.props.onSelectTab(idx)}/>;
+          onSelect = {() => this.props.onSelectTab(idx)}/>
       })}
-    </div>;
+    </div>
   }
 }

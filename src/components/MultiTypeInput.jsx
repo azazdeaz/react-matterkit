@@ -1,8 +1,8 @@
-import React from 'react';
-import Input from './Input';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
+import React from 'react'
+import Input from './Input'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -18,37 +18,37 @@ export default class MultiTypeInput extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       currTypeIdx: this.getCurrTypeIdx(),
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
 
-    this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)});
+    this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)})
   }
 
   getCurrTypeIdx(props) {
 
-    props = props || this.props;
+    props = props || this.props
 
-    var {typeIdx, chooseType, value} = props;
-    return chooseType ? chooseType(value) : typeIdx;
+    var {typeIdx, chooseType, value} = props
+    return chooseType ? chooseType(value) : typeIdx
   }
 
   handleAddonClick = () => {
-    var {types} = this.props;
-    var {currTypeIdx} = this.state;
-    currTypeIdx = (currTypeIdx + 1) % types.length;
-    this.setState({currTypeIdx});
+    var {types} = this.props
+    var {currTypeIdx} = this.state
+    currTypeIdx = (currTypeIdx + 1) % types.length
+    this.setState({currTypeIdx})
   }
 
   handleChange = (value) => {
 
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(value)
     }
   }
 
@@ -60,6 +60,6 @@ export default class MultiTypeInput extends React.Component {
       {...this.props.types[this.state.currTypeIdx]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
-      addonOnClick = {this.handleAddonClick}/>;
+      addonOnClick = {this.handleAddonClick}/>
   }
 }

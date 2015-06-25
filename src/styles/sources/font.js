@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
 
@@ -8,5 +8,5 @@ export default function (theme, mod) {
     fontWeight: config.fontWeight,
     fontSize: '12.9px',
     color: config.fontColor.normal,
-  };
+  }
 }

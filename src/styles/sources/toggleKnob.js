@@ -1,8 +1,8 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
-  var {knobWidth} = theme.get('toggleConfig', mod);
-  var colors = theme.get('colors', mod);
+  var config = theme.get('config', mod)
+  var {knobWidth} = theme.get('toggleConfig', mod)
+  var colors = theme.get('colors', mod)
 
   return {
     mixins: ['font'],
@@ -18,5 +18,5 @@ export default function (theme, mod) {
       'true': {left: 0},
       'false': {left: `calc(100% - ${knobWidth - 2}px)`}
     },
-  };
+  }
 }

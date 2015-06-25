@@ -1,18 +1,18 @@
-export default function (theme, mod) {
+import has from 'lodash/object/has'
 
-  var config = theme.get('config', mod);
+export default function (theme, mod) {
+  var config = theme.get('config', mod)
+  var size = has(mod, 'size') ? mod.size : config.lineHeight
 
   return {
     direction: {
       row: {
-        height: config.lineHeight,
-        // width: '100%',
+        height: size,
       },
       column: {
-        width: config.lineHeight,
-        // height: '100%',
+        width: size,
       }
     },
     display: 'flex'
-  };
+  }
 }

@@ -1,8 +1,8 @@
-import React from 'react';
-import has from 'lodash/object/has';
-import Radium from 'radium';
-import pureRender from 'pure-render-decorator';
-import MatterBasics from '../utils/MatterBasics';
+import React from 'react'
+import has from 'lodash/object/has'
+import Radium from 'radium'
+import pureRender from 'pure-render-decorator'
+import MatterBasics from '../utils/MatterBasics'
 
 @Radium
 @pureRender
@@ -20,36 +20,36 @@ export default class Checkbox extends React.Component {
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       value: props.value,
-    };
+    }
   }
 
   componentWillReceiveProps(nextProps) {
 
-    this.setState({value: nextProps.value});
+    this.setState({value: nextProps.value})
   }
 
   handleClick() {
 
-    var value = !this.state.value;
+    var value = !this.state.value
 
-    this.setState({value});
+    this.setState({value})
 
     if (this.props.onChange) {
-      this.props.onChange(value);
+      this.props.onChange(value)
     }
   }
 
   renderCheck() {
 
     if (!this.state.value) {
-      return null;
+      return null
     }
 
-    var {start, end} = this.getStyle('config', {gardient: true});
+    var {start, end} = this.getStyle('config', {gardient: true})
 
     return <svg width="18" height="18" style={{position: 'absolute'}}>
       <defs>
@@ -59,12 +59,12 @@ export default class Checkbox extends React.Component {
         </linearGradient>
       </defs>
       <path d="M3.5 9 L5.5 9 L7.5 11 L12.5 3 L 14.5 3 L8.5 13 L7 13 Z" fill="url(#grad1)"/>
-    </svg>;
+    </svg>
   }
 
   render() {
 
-    var {mod, style} = this.props;
+    var {mod, style} = this.props
 
     return <div
       {...this.getBasics()}
@@ -72,6 +72,6 @@ export default class Checkbox extends React.Component {
       onClick = {() => this.handleClick()}>
 
       {this.renderCheck()}
-    </div>;
+    </div>
   }
 }

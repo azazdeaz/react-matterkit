@@ -1,8 +1,8 @@
 
-import merge from 'lodash/object/merge';
-// import datauri from 'datauri';
-var uriBorder = '';//datauri(__dirname+'/assets/border.png');
-var uriCheck = '';//datauri(__dirname+'/assets/check.png');
+import merge from 'lodash/object/merge'
+// import datauri from 'datauri'
+var uriBorder = '';//datauri(__dirname+'/assets/border.png')
+var uriCheck = '';//datauri(__dirname+'/assets/check.png')
 
 var style = {
     lineHeight: 32,
@@ -19,15 +19,15 @@ var style = {
     anim: '0.23s cubic-bezier(0.445, 0.050, 0.550, 0.950)',
 
     gardient: (()=>{
-      var start = '#6bb6c4';
-      var end = '#6b9ad3';
+      var start = '#6bb6c4'
+      var end = '#6b9ad3'
 
       return {
         start,
         end,
         normal: `linear-gradient(135deg, ${start} 0%, ${end} 100%)`,
         backward: `linear-gradient(-45deg, ${start} 0%, ${end} 100%)`,
-      };
+      }
     })(),
 
     fontFamily: 'Open Sans',
@@ -49,40 +49,40 @@ var style = {
       hover: '#2a3035',
       active: '#2c3034'
     },
-};
+}
 
-export default style;
+export default style
 
 var noSelect = {
   userSelect: 'none',
   WebkitUserSelect: 'none',
   MozUserSelect: 'none',
   msUserSelect: 'none',
-};
+}
 
 style.fontColor = {
   normal: style.palette.grey2,
   hover: style.palette.grey1,
   active: style.palette.blue,
-};
+}
 
 style.font = {
   fontFamily: style.fontFamily,
   fontWeight: style.fontWeight,
   fontSize: '12.9px',
   color: style.fontColor.normal,
-};
+}
 
 style.roundedCorners = {
   borderTopLeftRadius: style.borderRadius,
   borderTopRightRadius: style.borderRadius,
   borderBottomLeftRadius: style.borderRadius,
   borderBottomRightRadius: style.borderRadius,
-};
+}
 
 
 
-module.exports = style;
+module.exports = style
 
 
 style.line = {
@@ -94,13 +94,13 @@ style.line = {
   backgroundColor: '#262a2e',
   borderBottom: 'solid 1px #1a1d21',
   boxSizing: 'border-box',
-};
+}
 
 style.lineGroup = _.defaults({
   color: '#e2e7eb',
   backgroundColor: '#3b424a',
   // borderBottom: 'none',
-}, style.line);
+}, style.line)
 
 
 //Button
@@ -129,7 +129,7 @@ style.buttonBg = merge({}, style.roundedCorners, {
       }
     },
   ],
-});
+})
 
 style.button = merge({}, style.roundedCorners, style.font, noSelect, {
 
@@ -200,19 +200,19 @@ style.button = merge({}, style.roundedCorners, style.font, noSelect, {
       },
     }
   ]
-});
+})
 
 //Label
 style.label = merge({}, style.font, {
   lineHeight: style.lineHeightPX,
-});
+})
 
 
 //Panel
 style.panel = merge({}, style.roundedCorners, {
   backgroundColor: style.grey.active,
   border: 'solid 1px ' + style.palette.grey4,
-});
+})
 
 //Input
 style.inputReset = {
@@ -223,7 +223,7 @@ style.inputReset = {
   outline: 'none',
   backgroundColor: 'transparent',
   border: 'none',
-};
+}
 
 style.inputAddon = merge({}, noSelect, {
   height: '100%',
@@ -261,7 +261,7 @@ style.inputAddon = merge({}, noSelect, {
       },
     }}
   ],
-});
+})
 
 style.inputBorder = merge({}, style.font, style.roundedCorners, {
   border: 'solid 1px transparent',
@@ -285,7 +285,7 @@ style.inputBorder = merge({}, style.font, style.roundedCorners, {
       border: 'solid 1px #aa4353',
     }}
   ],
-});
+})
 
 style.input = merge({}, style.inputBorder, style.font, style.roundedCorners, {
   position: 'relative',
@@ -337,7 +337,7 @@ style.input = merge({}, style.inputBorder, style.font, style.roundedCorners, {
       },
     }}
   ],
-});
+})
 
 style.checkbox = merge({}, style.inputBorder, style.roundedCorners, noSelect, {
   position: 'relative',
@@ -350,7 +350,7 @@ style.checkbox = merge({}, style.inputBorder, style.roundedCorners, noSelect, {
   backgroundColor: style.palette.grey4,
   backgroundPosition: '1px 1px',
   backgroundRepeat: 'no-repeat',
-});
+})
 
 //Tooltip
 style.tooltip = merge({}, style.roundedCorners, {
@@ -364,7 +364,7 @@ style.tooltip = merge({}, style.roundedCorners, {
   boxSizing: 'border-box',
   boxShadow: '0 0 3px rgba(86,83,136,.6), inset 0 0 4px rgba(86,83,136,.6)',
   border: 'solid 1px rgba(93,169,167,1)',
-});
+})
 
 style.tooltipTriangle = {
   position: 'absolute',
@@ -375,7 +375,7 @@ style.tooltipTriangle = {
   borderStyle: 'solid',
   borderWidth: '5px 0 5px 5px',
   borderColor: 'transparent transparent transparent ' + style.palette.blue,
-};
+}
 
 
 //Dropdown
@@ -404,13 +404,13 @@ style.dropdown = merge({}, style.font, style.roundedCorners, {
       backgroundImage: 'linear-gradient(to top, rgba(0,0,0,0), rgba(0,0,0,.1))',
     }}
   ],
-});
+})
 
 
 //List
 style.list = merge({} , style.panel, {
     borderColor: '#1a1d21',
-});
+})
 
 //ListItem
 style.listItem = merge({}, style.font, {
@@ -429,7 +429,7 @@ style.listItem = merge({}, style.font, {
         color: style.fontColor.active,
       }}
     ],
-});
+})
 
 
 
@@ -444,7 +444,7 @@ style.slider = {
   flex: 1,
   position: 'relative',
 	height: style.itemHeight,
-};
+}
 
 style.sliderHandle = {
   position: 'absolute',
@@ -458,16 +458,16 @@ style.sliderHandle = {
   borderStyle: 'solid',
   borderWidth: '2px',
   borderColor: '#96a6ad',
-};
+}
 
 style.sliderHandleHover = _.defaults({
 	borderColor: '#e2e7eb',
-}, style.sliderHandle);
+}, style.sliderHandle)
 
 style.sliderHandleActive = _.defaults({
 	borderColor: '#6bb6c4',
 	backgroundColor: '#6bb6c4',
-}, style.sliderHandle);
+}, style.sliderHandle)
 
 style.sliderBarBg = {
 	margin: '13px 5px',
@@ -475,7 +475,7 @@ style.sliderBarBg = {
 	height: 6,
 	borderRadius: 2,
 	backgroundColor: '#1a1d21',
-};
+}
 
 style.sliderBarProgress = {
   // width: '100%',
@@ -483,7 +483,7 @@ style.sliderBarProgress = {
 	height: 4,
 	borderRadius: 1,
 	backgroundColor: '#6bb6c4',
-};
+}
 
 
 //Tab
@@ -534,7 +534,7 @@ style.tabLabel = merge({}, style.font, {
       borderLeft: 'none',
     }},
   ],
-});
+})
 
 style.tabHeader = {
   position: 'relative',
@@ -542,12 +542,12 @@ style.tabHeader = {
   width: '100%',
   height: style.itemHeight,
   display: 'flex',
-};
+}
 
 style.tabBase = {
   display: 'flex',
   flexDirection: 'column',
-};
+}
 
 style.tabCont = _.merge({}, style.panel, {
   borderTopLeftRadius: 0,
@@ -558,7 +558,7 @@ style.tabCont = _.merge({}, style.panel, {
       borderTopRightRadius: 0,
     }}
   ],
-});
+})
 
 
 //Accordion
@@ -570,7 +570,7 @@ style.accordion = _.assign({}, style.font, style.roundedCorners, {
   overflow: 'hidden',
   display: 'flex',
   flexDirection: 'column',
-});
+})
 
 style.accordionTab = _.assign({}, style.font, {
   fontWeight: 600,
@@ -593,33 +593,33 @@ style.accordionTab = _.assign({}, style.font, {
     }},
     {states: [{hover:{}}]},
   ]
-});
+})
 
 //Toolbar
 style.toolbar = _.assign({}, {
   height: style.lineHeight,
   width: '100%',
   display: 'flex'
-});
+})
 
 style.toolbarGroup = _.assign({}, {
   height: style.lineHeight,
   display: 'flex',
-});
+})
 
 //Toggle
 
 (()=>{
 
-  const knobWidth = 32;
-  const labelOffset = '7px';
-  const anim = style.anim;
+  const knobWidth = 32
+  const labelOffset = '7px'
+  const anim = style.anim
 
   style.toggleBase = merge({}, style.roundedCorners, noSelect, {
     height: style.itemHeight,
     display: 'inline-block',
     backgroundColor: style.palette.grey4,
-  });
+  })
 
   style.toggleSide = merge({}, style.font, {
     transition: `all ${anim}`,
@@ -647,7 +647,7 @@ style.toolbarGroup = _.assign({}, {
         transform: 'translateX(0px)',
       }}
     ],
-  });
+  })
 
   style.toggleKnob = merge({}, style.buttonBg, {
     boxSizing: 'border-box',
@@ -659,5 +659,5 @@ style.toolbarGroup = _.assign({}, {
     backgroundColor: style.palette.grey3,
     left: `calc(100% - ${knobWidth-2}px)`,
     modifiers: [{left: {left: 0}}],
-  });
-})();
+  })
+})()

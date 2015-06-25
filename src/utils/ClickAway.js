@@ -1,34 +1,34 @@
-import React from 'react';
+import React from 'react'
 
 export default function (Component) {
 
-  var {componentDidMount, componentWillUnmount} = Component.prototype;
+  var {componentDidMount, componentWillUnmount} = Component.prototype
 
   Component.prototype.componentDidMount = function () {
     if (componentDidMount) {
-      componentDidMount.call(this);
+      componentDidMount.call(this)
     }
 
     this.__handleClickAway = (e) => {
 
       if (this.state.open) {
 
-        var node = React.findDOMNode(this);
+        var node = React.findDOMNode(this)
         if (!node.contains(e.target)) {
 
-          this.handleClickAway();
+          this.handleClickAway()
         }
       }
-    };
+    }
 
-    document.addEventListener('click', this.__handleClickAway);
-  };
+    document.addEventListener('click', this.__handleClickAway)
+  }
 
   Component.prototype.componentWillUnmount = function () {
     if (componentWillUnmount) {
-      componentWillUnmount.call(this);
+      componentWillUnmount.call(this)
     }
 
-    document.removeEventListener('click', this.__handleClickAway);
-  };
+    document.removeEventListener('click', this.__handleClickAway)
+  }
 }

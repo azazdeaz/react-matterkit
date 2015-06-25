@@ -29,4 +29,4 @@ module.exports = global.Matter = {
   Toolbar: require('./components/Toolbar'),
   ToolbarGroup: require('./components/ToolbarGroup'),
   // Tooltip: require('./components/Tooltip'),
-};
+}

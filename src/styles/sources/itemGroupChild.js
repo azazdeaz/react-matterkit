@@ -10,5 +10,5 @@ export default function () {
       borderBottomRightRadius: 0,
       marginRight: 0,
     }
-  };
+  }
 }

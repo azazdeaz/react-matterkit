@@ -1,9 +1,10 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
+  var size = has(mod, 'size') ? mod.size : config.lineHeight
 
   return {
-    height: config.lineHeight,
+    height: size,
     display: 'flex'
-  };
+  }
 }

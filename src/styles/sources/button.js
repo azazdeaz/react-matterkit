@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod);
+  var config = theme.get('config', mod)
 
   return {
 
@@ -51,5 +51,5 @@ export default function (theme, mod) {
         disabled:{backgroundImage: 'none', backgroundColor: 'none'},
       }
     },
-  };
+  }
 }
