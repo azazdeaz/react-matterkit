@@ -1,9 +1,9 @@
-var React = require('react');
-var Template = require('./utils/Template.jsx');
-var Matter = require('matterkit');
+var React = require('react')
+var Template = require('./utils/Template.jsx')
+var Matter = require('matterkit')
 
 var description = `
-label: String`;
+label: String`
 
 var demos = [
   {code: `<Label label="i'm da label!"/>`, docClass: Matter.Label},
@@ -43,9 +43,9 @@ var demos = [
 ]}
 value='32'
 chooseType = {value => {
-  if (_.isFinite(value) || _.endsWith(value, 'px')) return 0;
-  else if (_.endsWith(value, '%')) return 1;
-  else return 2;
+  if (_.isFinite(value) || _.endsWith(value, 'px')) return 0
+  else if (_.endsWith(value, '%')) return 1
+  else return 2
 }}
 onChange = {value => console.log(value, typeof(value))}/>`, docClass: Matter.ItemGroup},
   {code: `<Tabs>
@@ -53,7 +53,7 @@ onChange = {value => console.log(value, typeof(value))}/>`, docClass: Matter.Ite
   <div label='secound tab' icon='github'><p>secound tab content</p></div>
   <div icon='cog'><h1>third tab content</h1></div>
 </Tabs>`, docClass: Matter.Tabs},
-];
+]
 
 module.exports = React.createClass({
   render() {
@@ -70,6 +70,6 @@ module.exports = React.createClass({
           value: 'default: empty string',
           description: 'the label of the button'
         }
-      ]}/>;
+      ]}/>
   },
-});
+})

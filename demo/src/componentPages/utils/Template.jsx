@@ -1,7 +1,7 @@
-var React = require('react');
-var Playground = require('component-playground');
-var marked = require('marked');
-var scope = require('../../scope');
+var React = require('react')
+var Playground = require('component-playground')
+var marked = require('marked')
+var scope = require('../../scope')
 
 var Template = React.createClass({
   contextTypes: {
@@ -12,14 +12,14 @@ var Template = React.createClass({
         codes: ['<Button label="button"/>;'],
         description: '',
         title: 'Title',
-      };
+      }
   },
   renderProps(props) {
     // if (props instanceof Array) {
     //
     //   return props.map(prop => {
-    //     return <Prop {...prop} key={prop.name}/>;
-    //   });
+    //     return <Prop {...prop} key={prop.name}/>
+    //   })
     // }
     // else {
     //   return Object.keys(props).map(groupName => {
@@ -27,17 +27,17 @@ var Template = React.createClass({
     //     return <div>
     //       <h3>{groupName}</h3>
     //       {this.renderProps(props[groupName])}
-    //     </div>;
-    //   });
+    //     </div>
+    //   })
     // }
   },
   renderCode() {
 
-    var {demos} = this.props;
+    var {demos} = this.props
 
     return demos.map((demo, idx) => {
 
-      var {code, docClass} = demo;
+      var {code, docClass} = demo
 
       return <div key={idx} style={{marginBottom: 12}}>
         <Playground
@@ -46,13 +46,13 @@ var Template = React.createClass({
           docClass = {docClass}
           es6Console = {false}
           noRender = {true}/>
-      </div>;
-    });
+      </div>
+    })
   },
 
   render() {
 
-    var rawMarkup = marked(this.props.description);
+    var rawMarkup = marked(this.props.description)
 
     return <div>
 
@@ -65,8 +65,8 @@ var Template = React.createClass({
       {this.renderProps(this.props.props)}
 
       {this.props.children}
-    </div>;
+    </div>
   },
-});
+})
 
-module.exports = Template;
+module.exports = Template

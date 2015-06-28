@@ -1,7 +1,7 @@
-var React = require('react');
-var {style} = require('../../../../');
-var LiveEditor = require('./react-live-edit/live-editor.jsx');
-var marked = require('marked');
+var React = require('react')
+var {style} = require('../../../../')
+var LiveEditor = require('./react-live-edit/live-editor.jsx')
+var marked = require('marked')
 
 module.exports = React.createClass({
   getDefaultProps() {
@@ -10,24 +10,24 @@ module.exports = React.createClass({
         type: '',
         value: '',
         description: '',
-      };
+      }
   },
   render() {
 
-    var rawMarkup = marked(this.props.description);
+    var rawMarkup = marked(this.props.description)
 
     var sName = {
       fontWeight: 500,
-    };
+    }
     var sType = {
       color: style.palette.blue,
-    };
+    }
     var sValue = {
       margin: 12,
-    };
+    }
     var sDescription = {
       marginTop: 21,
-    };
+    }
 
     return <div style={{display: 'flex'}}>
       <div style={{minWidth: 130}}>
@@ -42,6 +42,6 @@ module.exports = React.createClass({
           <span>{this.props.description}</span>
         </div>
       </div>
-    </div>;
+    </div>
   },
-});
+})

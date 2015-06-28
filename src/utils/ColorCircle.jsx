@@ -1,8 +1,10 @@
 import React from 'react'
 import tinycolor from 'tinycolor2'
 import pureRender from 'pure-render-decorator'
-import CustomDrag from '../utils/CustomDrag'
+import {CustomDrag} from '../custom-drag'
 
+@CustomDrag
+@pureRender
 export default class ColorCircle extends React.Component {
 
   static defaultProps = {
@@ -24,55 +26,49 @@ export default class ColorCircle extends React.Component {
   }
 
   componentDidMount() {
-
-    var node = React.findDOMNode(this)
-
-    this._customDrag = new CustomDrag({
-      deTarget: node,
-      onDown: (e) => {
-
-        var {radius, width} = this.props
-        var md = {
-          centerX: e.clientX - e.offsetX + radius,
-          centerY: e.clientY - e.offsetY + radius,
-        }
-        var xFromCenter = e.offsetX - radius
-        var yFromCenter = e.offsetY - radius
-        var r = Math.sqrt(xFromCenter*xFromCenter + yFromCenter*yFromCenter)
-
-        if (r <= radius) {
-          if (r < radius - width) {
-            md.mode = 'tri'
-          }
-          else {
-            md.mode = 'range'
-          }
-        }
-        console.log(md)
-        return md
-      },
-      onMove(md, mx, my) {
-
-        var x = mx - md.centerX
-        var y = my - md.centerY
-        var rad = Math.atan2(y, x)
-        var deg = rad / Math.PI * 180
-
-        console.log(x, y, deg)
-      }
-    })
-
+    //
+    // var node = React.findDOMNode(this)
+    //
+    // this._customDrag = new CustomDrag({
+    //   deTarget: node,
+    //   onDown: (e) => {
+    //
+    //     var {radius, width} = this.props
+    //     var md = {
+    //       centerX: e.clientX - e.offsetX + radius,
+    //       centerY: e.clientY - e.offsetY + radius,
+    //     }
+    //     var xFromCenter = e.offsetX - radius
+    //     var yFromCenter = e.offsetY - radius
+    //     var r = Math.sqrt(xFromCenter*xFromCenter + yFromCenter*yFromCenter)
+    //
+    //     if (r <= radius) {
+    //       if (r < radius - width) {
+    //         md.mode = 'tri'
+    //       }
+    //       else {
+    //         md.mode = 'range'
+    //       }
+    //     }
+    //     console.log(md)
+    //     return md
+    //   },
+      // onMove(md, mx, my) {
+      //
+      //   var x = mx - md.centerX
+      //   var y = my - md.centerY
+      //   var rad = Math.atan2(y, x)
+      //   var deg = rad / Math.PI * 180
+      //
+      //   console.log(x, y, deg)
+      // }
+    // })
+    //
     this.renderRange()
     this.renderTri()
   }
 
-  componentWillUnmount() {
-
-    this._customDrag.destroy()
-  }
-
   componentWillReceiveProps(nextProps) {
-
     this.setState({
       h: nextProps.h,
       s: nextProps.s,
@@ -81,7 +77,6 @@ export default class ColorCircle extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-
     var {radius, width} = this.props
 
     if (prevProps.radius !== radius && prevProps.radius !== width) {
@@ -93,7 +88,6 @@ export default class ColorCircle extends React.Component {
   }
 
   renderRange() {
-
     function getChannel(stops, v) {
 
       var p = (v * 6) % 1,
@@ -134,7 +128,6 @@ export default class ColorCircle extends React.Component {
   }
 
   renderTri() {
-
     var canvas = React.findDOMNode(this.refs.tri),
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
@@ -178,12 +171,50 @@ export default class ColorCircle extends React.Component {
     </svg>
   }
 
-  render() {
+  onDown = (monitor) => {
+    var {radius, width} = this.props
+    var clientOffset = monitor.getClientOffset()
+    var sourceClientOffset = monitor.getSourceClientOffset()
+    var left = clientOffset.x - sourceClientOffset.x
+    var top = clientOffset.y - sourceClientOffset.y
+    var centerX = left + radius
+    var centerY = top + radius
+    var x = clientOffset.x - centerX
+    var y = clientOffset.y - centerY
+    var distanceFromCenter = Math.sqrt(x**2 + y**2)
 
-    return <div style={this.props.style}>
+    if (distanceFromCenter < radius && distanceFromCenter > radius - width) {
+      console.log('in')
+    }
+    else {
+      console.log('out')
+    }
+
+    monitor.setData({centerX, centerY})
+  }
+
+  onDrag = (monitor) => {
+    var {x, y} = monitor.getClientOffset()
+    var {centerX, centerY} = monitor.getData()
+    x -= centerX
+    y -= centerY
+    var rad = Math.atan2(y, x)
+    var deg = rad / Math.PI * 180
+
+    console.log(x, y, deg)
+  }
+
+  render() {
+    const {connectDrag} = this.props
+    const dragOptions = {
+      onDown: this.onDown,
+      onDrag: this.onDrag
+    }
+
+    return connectDrag(<div style={this.props.style}>
       <canvas ref='range'/>
       <canvas ref='tri' style={{position: 'absolute', left: 0}}/>
       {this.renderControlls()}
-    </div>
+    </div>, dragOptions)
   }
 }

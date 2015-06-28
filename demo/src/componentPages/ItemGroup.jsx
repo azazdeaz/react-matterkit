@@ -1,8 +1,8 @@
-var React = require('react');
-var Template = require('./utils/Template.jsx');
+var React = require('react')
+var Template = require('./utils/Template.jsx')
 
 var description = `
-label: String`;
+label: String`
 
 var codes = [
 `<ItemGroup>
@@ -19,7 +19,7 @@ var codes = [
   <Input placeholder='type here'/>
   <Button label='second'/>
 </ItemGroup>`,
-];
+]
 
 module.exports = React.createClass({
   render() {
@@ -27,6 +27,6 @@ module.exports = React.createClass({
     return <Template
       title='ItemGroup'
       description={description}
-      codes={codes}/>;
+      codes={codes}/>
   },
-});
+})

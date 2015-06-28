@@ -8,6 +8,7 @@
     "node": true
   },
   "rules": {
+    "space-infix-ops": [0],
     "modules": true,
     "quotes": [2, "single"],
     "semi": [2, "never"],

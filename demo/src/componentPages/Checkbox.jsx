@@ -1,12 +1,12 @@
-var React = require('react');
-var Template = require('./utils/Template.jsx');
+var React = require('react')
+var Template = require('./utils/Template.jsx')
 
 var description = `
-label: String`;
+label: String`
 
 var codes = [
   `<Checkbox/>`
-];
+]
 
 module.exports = React.createClass({
   render() {
@@ -22,6 +22,6 @@ module.exports = React.createClass({
           value: 'default: empty string',
           description: 'the label of the button'
         }
-      ]}/>;
+      ]}/>
   },
-});
+})
