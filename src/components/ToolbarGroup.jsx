@@ -21,7 +21,7 @@ export default class Toolbar extends React.Component {
 
     return <div
       {...this.getBasics()}
-      style={this.getStyle('toolbar', mod, style)}>
+      style={this.getStyle('toolbarGroup', mod, style)}>
       {this.props.children}
     </div>
   }

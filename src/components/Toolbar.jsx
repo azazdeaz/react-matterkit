@@ -15,9 +15,9 @@ export default class Toolbar extends React.Component {
   }
 
   render() {
-    var {mod, style, direction} = this.props
+    var {mod, style, direction, size} = this.props
 
-    mod = assign({direction}, mod)
+    mod = assign({direction, size}, mod)
 
     return <div
       {...this.getBasics()}

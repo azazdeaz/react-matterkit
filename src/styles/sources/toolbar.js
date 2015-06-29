@@ -13,6 +13,7 @@ export default function (theme, mod) {
         width: size,
       }
     },
+    flexDirection: mod.direction,
     display: 'flex'
   }
 }

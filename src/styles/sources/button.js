@@ -43,7 +43,7 @@ export default function (theme, mod) {
       },
       stamp: {
         backgroundImage: 'none',
-        backgroundColor: 'none',
+        backgroundColor: 'transparent',
         border: 'none',
         boxShadow: 'none',
         ':hover': {backgroundImage: 'none', backgroundColor: 'none'},
