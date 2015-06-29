@@ -173,6 +173,7 @@ export default class ColorCircle extends React.Component {
 
   onDown = (monitor) => {
     var {radius, width} = this.props
+    var {h} = this.state
     var clientOffset = monitor.getClientOffset()
     var sourceClientOffset = monitor.getSourceClientOffset()
     var left = clientOffset.x - sourceClientOffset.x
@@ -182,26 +183,50 @@ export default class ColorCircle extends React.Component {
     var x = clientOffset.x - centerX
     var y = clientOffset.y - centerY
     var distanceFromCenter = Math.sqrt(x**2 + y**2)
+    var edit
 
-    if (distanceFromCenter < radius && distanceFromCenter > radius - width) {
-      console.log('in')
-    }
-    else {
-      console.log('out')
+    if (distanceFromCenter < radius) {
+      edit = distanceFromCenter > radius - width ? 'h' : 'sv'
     }
 
-    monitor.setData({centerX, centerY})
+console.log({edit})
+    //no drag
+    if (!edit) {
+      return false
+    }
+
+    monitor.setData({
+      edit,
+      centerX,
+      centerY,
+      startH: h
+    })
+
+    if (edit === 'h') {
+      monitor.setData({startDeg: this.getMouseDeg(monitor)})
+    }
   }
 
   onDrag = (monitor) => {
+    var deg = this.getMouseDeg(monitor)
+    var {startDeg, startH, edit} = monitor.getData()
+
+    if (edit === 'h') {
+      this.setState({
+        h: startH + deg - startDeg
+      })
+    }
+
+    console.log(deg)
+  }
+
+  getMouseDeg(monitor) {
     var {x, y} = monitor.getClientOffset()
     var {centerX, centerY} = monitor.getData()
     x -= centerX
     y -= centerY
     var rad = Math.atan2(y, x)
-    var deg = rad / Math.PI * 180
-
-    console.log(x, y, deg)
+    return rad / Math.PI * 180
   }
 
   render() {
@@ -211,7 +236,7 @@ export default class ColorCircle extends React.Component {
       onDrag: this.onDrag
     }
 
-    return connectDrag(<div style={this.props.style}>
+    return connectDrag(<div key='cc' style={this.props.style}>
       <canvas ref='range'/>
       <canvas ref='tri' style={{position: 'absolute', left: 0}}/>
       {this.renderControlls()}

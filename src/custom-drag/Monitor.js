@@ -42,7 +42,7 @@ export default class Monitor {
   }
 
   setData(data) {
-    this._data = data
+    assign(this._data, data)
   }
 
   getData() {

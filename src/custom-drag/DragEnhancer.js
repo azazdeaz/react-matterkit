@@ -1,5 +1,4 @@
 import React from 'react'
-import assign from 'object-assign'
 import makeDraggable from './makeDraggable'
 import cloneWithRef from './utils/cloneWithRef'
 
