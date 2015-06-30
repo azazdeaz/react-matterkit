@@ -1,4 +1,4 @@
-require('./index.html');//for the webpack build
+require('./index.html') //for the webpack build
 
 var React = require('react')
 var Matter = require('matterkit')
@@ -92,8 +92,8 @@ var routes = (
 )
 
 
-// Router.run(routes, function (Handler) {
-//   React.render(<Handler/>, document.querySelector('#react-mount'))
-// })
-import ColorCircle from '../../src/utils/ColorCircle'
-React.render(<div><ColorCircle/></div>, document.querySelector('#react-mount'))
+Router.run(routes, function (Handler) {
+  React.render(<Handler/>, document.querySelector('#react-mount'))
+})
+// import ColorCircle from '../../src/utils/ColorCircle'
+// React.render(<div><ColorCircle/></div>, document.querySelector('#react-mount'))
