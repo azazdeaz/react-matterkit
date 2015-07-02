@@ -43,7 +43,6 @@ export default class Input extends React.Component {
   }
 
   componentDidMount() {
-
     var deTarget = React.findDOMNode(this)
 
     this._customDrag = new CustomDrag({
@@ -76,12 +75,10 @@ export default class Input extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     this.editValue(nextProps.value, nextProps)
   }
 
   componentDidUpdate(prevProps, prevState) {
-
     var {exportValue} = this.state
 
     if (exportValue !== prevState.exportValue &&
@@ -93,7 +90,6 @@ export default class Input extends React.Component {
   }
 
   editValue(draftValue, props) {
-
     props = props || this.props
 
     var value = this.formatValue(draftValue, props)
@@ -101,13 +97,16 @@ export default class Input extends React.Component {
     var {prepareExportValue} = props
     var exportValue = prepareExportValue ? prepareExportValue(value) : value
 
+    if (!this.state.focus) {
+      draftValue = value
+    }
+
     this.setState({value, exportValue, draftValue})
 
     this._validate(value)
   }
 
   formatValue(value, props) {
-
     props = props || this.props
 
     if (props.type === 'number') {
@@ -125,7 +124,6 @@ export default class Input extends React.Component {
   }
 
   formatNumber(value) {
-
     var {min, max, precision} = this.props
 
     value = parseFloat(value)
@@ -168,38 +166,6 @@ export default class Input extends React.Component {
 
   }
 
-  render() {
-    var {mod, style} = this.props
-
-    return <div
-      style = {this.getStyle('input', mod, style)}
-      onMouseDown = {this.handleMouseDown}>
-
-      <input
-        ref='input'
-        {...this.getBasics()}
-        style = {this.getStyle('inputField', mod)}
-        palceholder = {this.props.palceholder}
-        value = {this.state.draftValue}
-        type = 'text'
-        name = {this.props.name}
-        pattern = {this.props.pattern}
-        onFocus = {this.handleFocus}
-        onBlur = {this.handleBlur}
-        onChange = {e => this.editValue(e.target.value)}
-        disabled = {this.props.disabled}/>
-
-      <Addon
-        mod = {this.props.mod}
-        icon = {this.props.addonIcon}
-        label = {this.props.addonLabel}
-        background = {this.props.addonBackground}
-        onClick = {this.props.addonOnClick}/>
-
-      {this.renderHints()}
-    </div>
-  }
-
   renderHints() {
 
     var {value, lastlySelectedHint, focus} = this.state
@@ -237,6 +203,38 @@ export default class Input extends React.Component {
       left: 0,
       width: '100%',
     }}/>
+  }
+
+  render() {
+    var {mod, style} = this.props
+
+    return <div
+      style = {this.getStyle('input', mod, style)}
+      onMouseDown = {this.handleMouseDown}>
+
+      <input
+        ref='input'
+        {...this.getBasics()}
+        style = {this.getStyle('inputField', mod)}
+        palceholder = {this.props.palceholder}
+        value = {this.state.draftValue}
+        type = 'text'
+        name = {this.props.name}
+        pattern = {this.props.pattern}
+        onFocus = {this.handleFocus}
+        onBlur = {this.handleBlur}
+        onChange = {e => this.editValue(e.target.value)}
+        disabled = {this.props.disabled}/>
+
+      <Addon
+        mod = {this.props.mod}
+        icon = {this.props.addonIcon}
+        label = {this.props.addonLabel}
+        background = {this.props.addonBackground}
+        onClick = {this.props.addonOnClick}/>
+
+      {this.renderHints()}
+    </div>
   }
 }
 

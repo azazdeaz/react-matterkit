@@ -8,7 +8,6 @@ import MatterBasics from '../utils/MatterBasics'
 @pureRender
 @MatterBasics
 export default class MultiTypeInput extends React.Component {
-
   static propTypes = {
   }
 
@@ -26,12 +25,10 @@ export default class MultiTypeInput extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
     this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)})
   }
 
   getCurrTypeIdx(props) {
-
     props = props || this.props
 
     var {typeIdx, chooseType, value} = props
@@ -46,7 +43,6 @@ export default class MultiTypeInput extends React.Component {
   }
 
   handleChange = (value) => {
-
     if (this.props.onChange) {
       this.props.onChange(value)
     }
