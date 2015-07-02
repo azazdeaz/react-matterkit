@@ -1,6 +1,6 @@
 import React from 'react'
 import assign from 'lodash/object/assign'
-import Radium from 'radium'
+import Radium, {PropTypes} from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../utils/MatterBasics'
 
@@ -8,27 +8,26 @@ import MatterBasics from '../utils/MatterBasics'
 @pureRender
 @MatterBasics
 export default class ListItem extends React.Component {
+  static propTypes = {
+    label: PropTypes.string.isRequired,
+    value: PropTypes.any,
+  }
 
   constructor(props) {
     super(props)
-
-    this.state = {selected: false}
   }
 
   render() {
-
-    var {mod, style, selected, label, children, value, onClick} = this.props
+    var {mod, style, selected, label, value, onClick} = this.props
 
     mod = assign({selected}, mod)
-    value = value || label
-    label = label || children || value
 
     return <div
       {...this.getBasics()}
       style={this.getStyle('listItem', mod, style)}
       onClick={() => {
         if (onClick) {
-          onClick(value)
+          onClick()
         }
       }}>
       {label}
