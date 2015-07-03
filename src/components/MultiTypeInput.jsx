@@ -20,15 +20,15 @@ export default class MultiTypeInput extends React.Component {
     super(props)
 
     this.state = {
-      currTypeIdx: this.getCurrTypeIdx(),
+      currentTypeIdx: this.getcurrentTypeIdx(),
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({currTypeIdx: this.getCurrTypeIdx(nextProps)})
+    this.setState({currentTypeIdx: this.getcurrentTypeIdx(nextProps)})
   }
 
-  getCurrTypeIdx(props) {
+  getcurrentTypeIdx(props) {
     props = props || this.props
 
     var {typeIdx, chooseType, value} = props
@@ -36,10 +36,13 @@ export default class MultiTypeInput extends React.Component {
   }
 
   handleAddonClick = () => {
+    if (document.activeElement) {
+      document.activeElement.blur()
+    }
     var {types} = this.props
-    var {currTypeIdx} = this.state
-    currTypeIdx = (currTypeIdx + 1) % types.length
-    this.setState({currTypeIdx})
+    var {currentTypeIdx} = this.state
+    currentTypeIdx = (currentTypeIdx + 1) % types.length
+    this.setState({currentTypeIdx})
   }
 
   handleChange = (value) => {
@@ -49,11 +52,12 @@ export default class MultiTypeInput extends React.Component {
   }
 
   render() {
+    var {currentTypeIdx} = this.state
 
     return <Input
       {...this.getBasics()}
       {...this.props}
-      {...this.props.types[this.state.currTypeIdx]}
+      {...this.props.types[currentTypeIdx]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
       addonOnClick = {this.handleAddonClick}/>

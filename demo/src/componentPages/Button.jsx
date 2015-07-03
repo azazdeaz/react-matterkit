@@ -22,32 +22,35 @@ var demos = [
   <Input placeholder='type here'/>
   <Button label='second'/>
 </ItemGroup>`, docClass: Matter.InputGroup},
-  {code: `<MultiTypeInput types={[
-  {
-    type: 'number',
-    addonLabel: 'px',
-    precision: 0,
-  },
-  {
-    type: 'number',
-    addonLabel: '%',
-    prepareExportValue: value => value + '%',
-    dragSpeed: 0.25,
-    precision: 2,
-  },
-  {
-    type: 'string',
-    addonIcon: 'quote-right',
-    hints: ['auto', 'inherits'],
-  },
-]}
-value='32'
-chooseType = {value => {
-  if (_.isFinite(value) || _.endsWith(value, 'px')) return 0
-  else if (_.endsWith(value, '%')) return 1
-  else return 2
-}}
-onChange = {value => console.log(value, typeof(value))}/>`, docClass: Matter.ItemGroup},
+  {code: `<RefreshValuePropOfInput>
+  <MultiTypeInput types={[
+    {
+      type: 'number',
+      addonLabel: 'px',
+      prepareExportValue: value => value + 'px',
+      precision: 0,
+    },
+    {
+      type: 'number',
+      addonLabel: '%',
+      prepareExportValue: value => value + '%',
+      dragSpeed: 0.25,
+      precision: 2,
+    },
+    {
+      type: 'string',
+      addonIcon: 'quote-right',
+      hints: ['auto', 'inherits'],
+    },
+  ]}
+  value='32'
+  chooseType = {value => {
+    if (_.isFinite(value) || _.endsWith(value, 'px')) return 0
+    else if (_.endsWith(value, '%')) return 1
+    else return 2
+  }}
+  onChange = {value => console.log(value, typeof(value))}/>
+</RefreshValuePropOfInput>`, docClass: Matter.ItemGroup},
   {code: `<Tabs>
   <div label='first tab'><p>first tab content</p></div>
   <div label='secound tab' icon='github'><p>secound tab content</p></div>

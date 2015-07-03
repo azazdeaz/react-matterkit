@@ -5,6 +5,7 @@ var Matter = require('matterkit')
 var {List, ListItem, utils} = Matter
 var merge = require('lodash/object/merge')
 var kebabCase = require('lodash/string/kebabCase')
+var RefreshValuePropOfInput = require('./RefreshValuePropOfInput')
 
 var Router = require('react-router')
 
@@ -30,6 +31,7 @@ global.Matter = Matter
 global.React = React
 
 merge(global, Matter)
+global.RefreshValuePropOfInput = RefreshValuePropOfInput
 
 
 

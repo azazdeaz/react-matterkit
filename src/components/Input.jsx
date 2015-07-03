@@ -39,7 +39,7 @@ export default class Input extends React.Component {
   }
 
   componentWillMount() {
-    this.editValue(this.props.value)
+    this.setPropsValue(this.props)
   }
 
   componentDidMount() {
@@ -48,18 +48,19 @@ export default class Input extends React.Component {
     this._customDrag = new CustomDrag({
       deTarget,
       onDown: () => {
-
+        let node = React.findDOMNode(this.refs.input)
+        node.focus()
         if (this.props.type !== 'number' || !this.props.draggable) {
           return false
         }
 
         return {
-          value: this.state.draftValue,
+          value: this.state.formattedValue,
         }
       },
       onDrag: (md) => {
         var value = md.value + md.dx * this.props.dragSpeed
-        this.editValue(value)
+        this.setDraftValue(value)
       },
       onClick: (md) => {
         let node = React.findDOMNode(this.refs.input)
@@ -75,7 +76,7 @@ export default class Input extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.editValue(nextProps.value, nextProps)
+    this.setPropsValue(nextProps)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -89,21 +90,32 @@ export default class Input extends React.Component {
     }
   }
 
-  editValue(draftValue, props) {
+  setDraftValue(draftValue) {
+    if (this.state.focus) {
+      this.editValue(draftValue)
+    }
+  }
+
+  setPropsValue(props) {
+    if (!this.state.focus) {
+      this.editValue(props.value, props)
+    }
+  }
+
+  editValue(value, props) {
     props = props || this.props
 
-    var value = this.formatValue(draftValue, props)
+    var formattedValue = this.formatValue(value, props)
 
     var {prepareExportValue} = props
-    var exportValue = prepareExportValue ? prepareExportValue(value) : value
+    var exportValue = prepareExportValue ?
+      prepareExportValue(formattedValue) : formattedValue
 
-    if (!this.state.focus) {
-      draftValue = value
-    }
+    var displayedValue = this.state.focus ? value : formattedValue
 
-    this.setState({value, exportValue, draftValue})
+    this.setState({formattedValue, exportValue, displayedValue})
 
-    this._validate(value)
+    this.validate(formattedValue)
   }
 
   formatValue(value, props) {
@@ -136,8 +148,8 @@ export default class Input extends React.Component {
     return _isFinite(value) ? value : 0
   }
 
-  _validate(value) {
-    if (typeof(this.props.validate) === 'function') {
+  validate(value) {
+    if (typeof this.props.validate === 'function') {
       this.setState({error: !this.props.validate(value)})
     }
   }
@@ -160,10 +172,10 @@ export default class Input extends React.Component {
 
   handleBlur = () => {
     this.setState({
-      focus: false,
-      draftValue: this.state.value,
+      focus: false
+    }, () => {
+      this.setPropsValue(this.props)
     })
-
   }
 
   renderHints() {
@@ -188,7 +200,7 @@ export default class Input extends React.Component {
 
           var value = hint.original
           this.setState({lastlySelectedHint: value})
-          this.editValue(value)
+          this.setDraftValue(value)
         },
       }
     })
@@ -206,7 +218,8 @@ export default class Input extends React.Component {
   }
 
   render() {
-    var {mod, style} = this.props
+    var {mod, style, pattern, placeholder, disabled} = this.props
+    var {displayedValue} = this.state
 
     return <div
       style = {this.getStyle('input', mod, style)}
@@ -216,15 +229,15 @@ export default class Input extends React.Component {
         ref='input'
         {...this.getBasics()}
         style = {this.getStyle('inputField', mod)}
-        palceholder = {this.props.palceholder}
-        value = {this.state.draftValue}
+        palceholder = {placeholder}
+        value = {displayedValue}
         type = 'text'
         name = {this.props.name}
-        pattern = {this.props.pattern}
+        pattern = {pattern}
         onFocus = {this.handleFocus}
         onBlur = {this.handleBlur}
-        onChange = {e => this.editValue(e.target.value)}
-        disabled = {this.props.disabled}/>
+        onChange = {e => this.setDraftValue(e.target.value)}
+        disabled = {disabled}/>
 
       <Addon
         mod = {this.props.mod}
@@ -244,7 +257,6 @@ export default class Input extends React.Component {
 @pureRender
 @MatterBasics
 class Addon extends React.Component {
-
   render() {
     var {label, icon, mod, onClick} = this.props
 
