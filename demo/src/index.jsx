@@ -42,7 +42,6 @@ var App = React.createClass({
     router: React.PropTypes.func,
   },
   render: function () {
-
     var {router} = this.context
 
     var theme = utils.getStyles(this)

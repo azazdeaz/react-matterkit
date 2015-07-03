@@ -3,6 +3,9 @@
   "plugins": [
     "react"
   ],
+  "ecmaFeatures": {
+    "jsx": true
+  },
   "env": {
     "browser": true,
     "node": true
