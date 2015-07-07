@@ -3,8 +3,67 @@ import tinycolor from 'tinycolor2'
 import pureRender from 'pure-render-decorator'
 import {CustomDrag} from '../custom-drag'
 
-@CustomDrag
+function getMouseDeg(monitor) {
+  var {x, y} = monitor.getClientOffset()
+  var {centerX, centerY} = monitor.getData()
+  x -= centerX
+  y -= centerY
+  var rad = Math.atan2(y, x)
+  return rad / Math.PI * 180
+}
+
+const customDragOptions = {
+  onDown(props, monitor, component) {
+    var {radius, width} = props
+    var {h} = component.state
+    var clientOffset = monitor.getClientOffset()
+    var sourceClientOffset = monitor.getSourceClientOffset()
+    var left = clientOffset.x - sourceClientOffset.x
+    var top = clientOffset.y - sourceClientOffset.y
+    var centerX = left + radius
+    var centerY = top + radius
+    var x = clientOffset.x - centerX
+    var y = clientOffset.y - centerY
+    var distanceFromCenter = Math.sqrt(x**2 + y**2)
+    var edit
+
+    if (distanceFromCenter < radius) {
+      edit = distanceFromCenter > radius - width ? 'h' : 'sv'
+    }
+
+    //no drag
+    if (!edit) {
+      return false
+    }
+
+    monitor.setData({
+      edit,
+      centerX,
+      centerY,
+      startH: h
+    })
+
+    if (edit === 'h') {
+      monitor.setData({startDeg: getMouseDeg(monitor)})
+    }
+  },
+
+  onDrag(props, monitor, component) {
+    var deg = getMouseDeg(monitor)
+    var {startDeg, startH, edit} = monitor.getData()
+
+    if (edit === 'h') {
+      component.setState({
+        h: startH + deg - startDeg
+      })
+    }
+
+    console.log(deg)
+  }
+}
+
 @pureRender
+@CustomDrag(customDragOptions)
 export default class ColorCircle extends React.Component {
 
   static defaultProps = {
@@ -171,75 +230,13 @@ export default class ColorCircle extends React.Component {
     </svg>
   }
 
-  onDown = (monitor) => {
-    var {radius, width} = this.props
-    var {h} = this.state
-    var clientOffset = monitor.getClientOffset()
-    var sourceClientOffset = monitor.getSourceClientOffset()
-    var left = clientOffset.x - sourceClientOffset.x
-    var top = clientOffset.y - sourceClientOffset.y
-    var centerX = left + radius
-    var centerY = top + radius
-    var x = clientOffset.x - centerX
-    var y = clientOffset.y - centerY
-    var distanceFromCenter = Math.sqrt(x**2 + y**2)
-    var edit
-
-    if (distanceFromCenter < radius) {
-      edit = distanceFromCenter > radius - width ? 'h' : 'sv'
-    }
-
-console.log({edit})
-    //no drag
-    if (!edit) {
-      return false
-    }
-
-    monitor.setData({
-      edit,
-      centerX,
-      centerY,
-      startH: h
-    })
-
-    if (edit === 'h') {
-      monitor.setData({startDeg: this.getMouseDeg(monitor)})
-    }
-  }
-
-  onDrag = (monitor) => {
-    var deg = this.getMouseDeg(monitor)
-    var {startDeg, startH, edit} = monitor.getData()
-
-    if (edit === 'h') {
-      this.setState({
-        h: startH + deg - startDeg
-      })
-    }
-
-    console.log(deg)
-  }
-
-  getMouseDeg(monitor) {
-    var {x, y} = monitor.getClientOffset()
-    var {centerX, centerY} = monitor.getData()
-    x -= centerX
-    y -= centerY
-    var rad = Math.atan2(y, x)
-    return rad / Math.PI * 180
-  }
-
   render() {
-    const {connectDrag} = this.props
-    const dragOptions = {
-      onDown: this.onDown,
-      onDrag: this.onDrag
-    }
+    const {customDragReference} = this.props
 
-    return connectDrag(<div key='cc' style={this.props.style}>
+    return <div ref={customDragReference} style={this.props.style}>
       <canvas ref='range'/>
       <canvas ref='tri' style={{position: 'absolute', left: 0}}/>
       {this.renderControlls()}
-    </div>, dragOptions)
+    </div>
   }
 }

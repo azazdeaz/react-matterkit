@@ -1,8 +1,10 @@
+import React from 'react'
 import Monitor from './Monitor'
 
-export default function makeDraggable(node, opt = {}) {
+export default function makeDraggable(component, opt = {}) {
   var waitingMoveEvent, waitingMoveRaf
-  var monitor = new Monitor()
+  const monitor = new Monitor()
+  const node = React.findDOMNode(component)
 
   node.addEventListener('mousedown', onDown)
   node.addEventListener('mouseover', onEnter)
@@ -15,18 +17,20 @@ export default function makeDraggable(node, opt = {}) {
   }
 
   function onDown(e) {
+    //drag only with the left button
     if (e.button !== 0) {
         return
     }
+
     monitor.reset()
     monitor.startDrag()
     monitor.addEvent(e)
 
-    var custom = call('onDown')
+    const onDownReturn = call('onDown')
 
-    if (custom === false) {//prevent dragging
-        window.addEventListener('mouseup', onUpWithoutDrag)
-        return
+    if (onDownReturn === false) {//prevent dragging
+      window.addEventListener('mouseup', onUpWithoutDrag)
+      return
     }
 
     // e.stopPropagation();//ex. prevent to drag the parent if that's draggable too
@@ -98,7 +102,8 @@ export default function makeDraggable(node, opt = {}) {
 
   function call(name) {
     if (name in opt) {
-      return opt[name].call(opt.thisArg, monitor)
+      debugger
+      return opt[name].call(null, component.props, monitor, component)
     }
   }
 }

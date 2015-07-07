@@ -1,34 +1,32 @@
 import React from 'react'
 import makeDraggable from './makeDraggable'
-import cloneWithRef from './utils/cloneWithRef'
 
-export default ComposedComponent => class extends React.Component {
-  constructor(props) {
-    super(props)
-    this.disposables = new Map()
-  }
+export default options => {
+  return ComposedComponent => class CustomDrag extends React.Component {
+    constructor(props) {
+      super(props)
 
-  componentWillUnmount() {
-    this.disposables.forEach(dispose => dispose())
-  }
+      var dispose
 
-  connectDrag(connectElement, options) {
-    return cloneWithRef(connectElement, (element) => {
-      const node = React.findDOMNode(element)
-      if (node) {
-        const dispose = makeDraggable(node, options)
-        this.disposables.set(element, dispose)
+      this.connectReference = component => {
+        debugger
+        if (component) {
+          dispose = makeDraggable(component, options)
+        }
+        else {
+          dispose()
+        }
       }
-      else {
-        const dispose = this.disposables.get(element)
-        dispose()
-      }
-    })
-  }
+    }
 
-  render() {
-    return <ComposedComponent
-      {...this.props}
-      connectDrag={this.connectDrag.bind(this)} />
+    render() {
+      const refName = options.connectReferenceName || 'customDragReference'
+      const props = {
+        ...this.props,
+        [refName]: this.connectReference
+      }
+
+      return <ComposedComponent {...props}/>
+    }
   }
 }
