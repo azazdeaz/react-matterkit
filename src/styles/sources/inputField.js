@@ -4,5 +4,9 @@ export default function () {
     mixins: ['inputResetCss'],
 
     flex: 1,
+
+    draggable: {
+      cursor: 'ew-resize'
+    }
   }
 }

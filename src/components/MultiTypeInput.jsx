@@ -36,9 +36,6 @@ export default class MultiTypeInput extends React.Component {
   }
 
   handleAddonClick = () => {
-    if (document.activeElement) {
-      document.activeElement.blur()
-    }
     var {types} = this.props
     var {currentTypeIdx} = this.state
     currentTypeIdx = (currentTypeIdx + 1) % types.length

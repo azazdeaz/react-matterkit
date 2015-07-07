@@ -43,16 +43,18 @@ export default class Input extends React.Component {
   }
 
   componentDidMount() {
-    var deTarget = React.findDOMNode(this)
+    var deTarget = React.findDOMNode(this.refs.input)
 
     this._customDrag = new CustomDrag({
       deTarget,
-      onDown: () => {
-        let node = React.findDOMNode(this.refs.input)
-        node.focus()
-        if (this.props.type !== 'number' || !this.props.draggable) {
+      onDown: (e) => {
+        // let node = React.findDOMNode(this.refs.input)
+        // node.focus()
+        if (!this.isDraggable()) {
           return false
         }
+
+        e.stopPropagation()
 
         return {
           value: this.state.formattedValue,
@@ -60,7 +62,7 @@ export default class Input extends React.Component {
       },
       onDrag: (md) => {
         var value = md.value + md.dx * this.props.dragSpeed
-        this.setDraftValue(value)
+        this.editValue(value)
       },
       onClick: (md) => {
         let node = React.findDOMNode(this.refs.input)
@@ -68,8 +70,8 @@ export default class Input extends React.Component {
         node.select()
       },
       onUp: (md) => {
-        let node = React.findDOMNode(this.refs.input)
-        node.focus()
+        // let node = React.findDOMNode(this.refs.input)
+        // node.focus()
         // node.select()
       }
     })
@@ -88,6 +90,12 @@ export default class Input extends React.Component {
 
       this.props.onChange(exportValue)
     }
+  }
+
+  isDraggable() {
+    return this.props.type === 'number' &&
+           this.props.draggable &&
+           !this.state.focus
   }
 
   setDraftValue(draftValue) {
@@ -111,9 +119,7 @@ export default class Input extends React.Component {
     var exportValue = prepareExportValue ?
       prepareExportValue(formattedValue) : formattedValue
 
-    var displayedValue = this.state.focus ? value : formattedValue
-
-    this.setState({formattedValue, exportValue, displayedValue})
+    this.setState({formattedValue, exportValue})
 
     this.validate(formattedValue)
   }
@@ -122,7 +128,7 @@ export default class Input extends React.Component {
     props = props || this.props
 
     if (props.type === 'number') {
-      value =  this.formatNumber(value)
+      value = this.formatNumber(value)
     }
     else if (props.type === 'text') {
       value += ''
@@ -157,24 +163,33 @@ export default class Input extends React.Component {
 
   handleMouseDown = (e) => {
     //prevent to toolse focus by clicking on a child
-    var inputNode = React.findDOMNode(this.refs.input)
-    if (inputNode.ownerDocument.activeElement === inputNode &&
-      e.target !== inputNode)
-    {
-      e.stopPropagation()
-      e.preventDefault()
-    }
+    // var inputNode = React.findDOMNode(this.refs.input)
+    // if (inputNode.ownerDocument.activeElement === inputNode &&
+    //   e.target !== inputNode)
+    // {
+    //   e.stopPropagation()
+    //   e.preventDefault()
+    // }
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      inputValue: e.target.value
+    })
   }
 
   handleFocus = () => {
-    this.setState({focus: true})
+    this.setState({
+      inputValue: this.state.formattedValue,
+      focus: true
+    })
   }
 
   handleBlur = () => {
+    this.editValue(this.state.inputValue)
+
     this.setState({
       focus: false
-    }, () => {
-      this.setPropsValue(this.props)
     })
   }
 
@@ -200,7 +215,7 @@ export default class Input extends React.Component {
 
           var value = hint.original
           this.setState({lastlySelectedHint: value})
-          this.setDraftValue(value)
+          this.editValue(value)
         },
       }
     })
@@ -219,24 +234,25 @@ export default class Input extends React.Component {
 
   render() {
     var {mod, style, pattern, placeholder, disabled} = this.props
-    var {displayedValue} = this.state
+    var {focus, inputValue, formattedValue} = this.state
+    var draggable = this.isDraggable()
 
     return <div
       style = {this.getStyle('input', mod, style)}
       onMouseDown = {this.handleMouseDown}>
 
       <input
-        ref='input'
+        ref = 'input'
         {...this.getBasics()}
-        style = {this.getStyle('inputField', mod)}
+        style = {this.getStyle('inputField', {draggable, ...mod})}
         palceholder = {placeholder}
-        value = {displayedValue}
+        value = {focus ? inputValue : formattedValue}
         type = 'text'
         name = {this.props.name}
         pattern = {pattern}
         onFocus = {this.handleFocus}
         onBlur = {this.handleBlur}
-        onChange = {e => this.setDraftValue(e.target.value)}
+        onChange = {this.handleChange}
         disabled = {disabled}/>
 
       <Addon
