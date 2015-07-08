@@ -1,19 +1,23 @@
 import React from 'react'
 import Monitor from './Monitor'
 
-export default function makeDraggable(component, opt = {}) {
+export default function makeDraggable(node, opt = {}, component) {
   var waitingMoveEvent, waitingMoveRaf
   const monitor = new Monitor()
-  const node = React.findDOMNode(component)
 
   node.addEventListener('mousedown', onDown)
   node.addEventListener('mouseover', onEnter)
   node.addEventListener('mouseleave', onLeave)
 
-  return function dispose() {
-    node.removeEventListener('mousedown', onDown)
-    node.removeEventListener('mouseover', onEnter)
-    node.removeEventListener('mouseleave', onLeave)
+  return {
+    dispose() {
+      node.removeEventListener('mousedown', onDown)
+      node.removeEventListener('mouseover', onEnter)
+      node.removeEventListener('mouseleave', onLeave)
+    },
+    receiveComponent(_component) {
+      component = _component
+    }
   }
 
   function onDown(e) {
@@ -102,7 +106,6 @@ export default function makeDraggable(component, opt = {}) {
 
   function call(name) {
     if (name in opt) {
-      debugger
       return opt[name].call(null, component.props, monitor, component)
     }
   }

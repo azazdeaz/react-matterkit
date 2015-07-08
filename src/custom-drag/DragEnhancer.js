@@ -6,17 +6,18 @@ export default options => {
     constructor(props) {
       super(props)
 
-      var dispose
-
       this.connectReference = component => {
-        debugger
         if (component) {
-          dispose = makeDraggable(component, options)
+          this.dragger = makeDraggable(React.findDOMNode(component), options)
         }
         else {
-          dispose()
+          this.dragger.dispose()
         }
       }
+    }
+
+    handleChildRef = (component) => {
+      this.dragger.receiveComponent(component)
     }
 
     render() {
@@ -26,7 +27,9 @@ export default options => {
         [refName]: this.connectReference
       }
 
-      return <ComposedComponent {...props}/>
+      return <ComposedComponent
+        {...props}
+        ref = {this.handleChildRef}/>
     }
   }
 }
