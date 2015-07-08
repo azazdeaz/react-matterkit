@@ -4,7 +4,9 @@ React GUI component kit based on [matterkit.io](https://www.matterkit.io/) desig
 
 Managing inline styles with [react-theme] and [Radium] so every [default style](https://github.com/azazdeaz/react-matterkit/tree/master/src/styles/sources) is easily customizable.
 
-Inspirations: 
+Developed as part of the [animachine project](https://github.com/animachine/animachine).
+
+Inspirations:
 [react-widgets](https://github.com/jquense/react-widgets)
 [material-ui](https://github.com/callemall/material-ui)
 [react-bootstrap](https://github.com/react-bootstrap/react-bootstrap)
