@@ -210,12 +210,9 @@ export default class ColorCircle extends React.Component {
 
     var {radius, width} = this.props
     var {h, s, l} = this.state
-    var rad = h / 180 * Math.PI
-    var hRadius = radius - (width / 2)
-    var hx = radius + (Math.cos(rad) * hRadius)
-    var hy = radius + (Math.sin(rad) * hRadius)
+    var rad = -h / 180 * Math.PI
 
-    var slRadius = radius - width
+    var innerRadius = radius - width
 
     return <svg style={{
         position: 'absolute',
@@ -223,10 +220,13 @@ export default class ColorCircle extends React.Component {
         overflow: 'visible',
         pointerEvents: 'none',
       }}>
-      <circle
-        cx = {hx}
-        cy = {hy}
-        r = {width/2}/>
+      <line
+        x1 = {radius + Math.cos(rad) * innerRadius}
+        y1 = {radius + Math.sin(rad) * innerRadius}
+        x2 = {radius + Math.cos(rad) * radius}
+        y2 = {radius + Math.sin(rad) * radius}
+        stroke = '#fff'
+        strokeWidth = {2}/>
     </svg>
   }
 
