@@ -1,7 +1,7 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod)
-  var {knobWidth, labelOffset} = theme.get('toggleConfig', mod)
+  var config = theme.getStyle('config', mod)
+  var {knobWidth, labelOffset} = theme.getStyle('toggleConfig', mod)
 
   return {
     mixins: ['font'],

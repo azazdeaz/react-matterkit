@@ -17,7 +17,7 @@ export default function (Component) {
 
   Component.prototype.getStyle = function (name, mod, style) {
     var styles = getStyles(this)
-    var ret = styles.get(name, mod, style)
+    var ret = styles.getStyle(name, mod, style)
 
     forOwn(ret, (value, key) => {
       var pre = key[0]

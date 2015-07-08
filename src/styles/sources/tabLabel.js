@@ -1,7 +1,7 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod)
-  var colors = theme.get('colors', mod)
+  var config = theme.getStyle('config', mod)
+  var colors = theme.getStyle('colors', mod)
 
   return {
     mixins: ['font'],

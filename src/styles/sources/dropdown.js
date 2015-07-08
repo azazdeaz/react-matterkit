@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var config = theme.get('config', mod)
+  var config = theme.getStyle('config', mod)
 
   return {
     mixins: ['font', 'roundedCorners'],

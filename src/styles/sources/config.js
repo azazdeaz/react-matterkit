@@ -1,6 +1,6 @@
 export default function (theme, mod) {
 
-  var colors = theme.get('colors', mod)
+  var colors = theme.getStyle('colors', mod)
 
   return {
     palette: colors,
