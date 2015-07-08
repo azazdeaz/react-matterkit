@@ -1,2 +1,1 @@
-export {default as CustomDrag} from './DragEnhancer'
-export {default as makeDraggable} from './makeDraggable'
+export {default as Dragger} from './DragEnhancer'

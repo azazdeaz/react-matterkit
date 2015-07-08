@@ -1,5 +1,5 @@
 import React from 'react'
-import makeDraggable from './makeDraggable'
+import createDragger from './createDragger'
 
 export default options => {
   return ComposedComponent => class CustomDrag extends React.Component {
@@ -7,8 +7,9 @@ export default options => {
       super(props)
 
       this.connectReference = component => {
+        console.log('connectReference', component)
         if (component) {
-          this.dragger = makeDraggable(React.findDOMNode(component), options)
+          this.dragger = createDragger(React.findDOMNode(component), options)
         }
         else {
           this.dragger.dispose()
@@ -17,19 +18,24 @@ export default options => {
     }
 
     handleChildRef = (component) => {
-      this.dragger.receiveComponent(component)
-    }
-
-    render() {
-      const refName = options.connectReferenceName || 'customDragReference'
-      const props = {
-        ...this.props,
-        [refName]: this.connectReference
+      if (this.dragger) {
+        this.dragger.receiveComponent(component)
       }
-
-      return <ComposedComponent
-        {...props}
-        ref = {this.handleChildRef}/>
+      else {
+        console.warn('Dragger: no item connected!')
+      }
     }
+
+        render() {
+          const refName = options.connectReferenceName || 'draggerRef'
+          const props = {
+            ...this.props,
+            [refName]: this.connectReference
+          }
+
+          return <ComposedComponent
+            {...props}
+            ref = {this.handleChildRef}/>
+        }
   }
 }

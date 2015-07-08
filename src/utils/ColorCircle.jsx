@@ -1,21 +1,22 @@
 import React from 'react'
-import tinycolor from 'tinycolor2'
+// import tinycolor from 'tinycolor2'
 import pureRender from 'pure-render-decorator'
-import {CustomDrag} from '../custom-drag'
+import {Dragger} from '../custom-drag'
 
-function getMouseDeg(monitor) {
+function setHue(monitor, component) {
   var {x, y} = monitor.getClientOffset()
   var {centerX, centerY} = monitor.getData()
   x -= centerX
   y -= centerY
   var rad = Math.atan2(y, x)
-  return rad / Math.PI * 180
+  var deg = rad / Math.PI * 180
+
+  component.setState({h: -deg})
 }
 
 const customDragOptions = {
   onDown(props, monitor, component) {
     var {radius, width} = props
-    var {h} = component.state
     var clientOffset = monitor.getClientOffset()
     var sourceClientOffset = monitor.getSourceClientOffset()
     var left = clientOffset.x - sourceClientOffset.x
@@ -35,35 +36,36 @@ const customDragOptions = {
     if (!edit) {
       return false
     }
-
+    console.log('clientOffset', clientOffset)
+    console.log('sourceClientOffset', sourceClientOffset)
+console.log(({
+  edit,
+  centerX,
+  centerY
+}))
     monitor.setData({
       edit,
       centerX,
-      centerY,
-      startH: h
+      centerY
     })
 
     if (edit === 'h') {
-      monitor.setData({startDeg: getMouseDeg(monitor)})
+      setHue(monitor, component)
     }
   },
 
   onDrag(props, monitor, component) {
-    var deg = getMouseDeg(monitor)
-    var {startDeg, startH, edit} = monitor.getData()
+    // var deg = getMouseDeg(monitor)
+    var {edit} = monitor.getData()
 
     if (edit === 'h') {
-      component.setState({
-        h: startH + deg - startDeg
-      })
+      setHue(monitor, component)
     }
-
-    console.log(deg)
   }
 }
 
 @pureRender
-@CustomDrag(customDragOptions)
+@Dragger(customDragOptions)
 export default class ColorCircle extends React.Component {
 
   static defaultProps = {
@@ -203,7 +205,7 @@ export default class ColorCircle extends React.Component {
     ctx.fillStyle = `hsl(${h},100%,50%)`
     ctx.fill()
 
-    canvas.style.transform = `rotate(${h}deg)`
+    canvas.style.transform = `rotate(${-h}deg)`
   }
 
   renderControlls() {
@@ -211,6 +213,12 @@ export default class ColorCircle extends React.Component {
     var {radius, width} = this.props
     var {h, s, l} = this.state
     var rad = -h / 180 * Math.PI
+<<<<<<< HEAD
+=======
+    var hRadius = radius - (width / 2)
+    var hx = radius + (Math.cos(rad) * hRadius)
+    var hy = radius + (Math.sin(rad) * hRadius)
+>>>>>>> wip: react-dragger
 
     var innerRadius = radius - width
 
@@ -231,9 +239,9 @@ export default class ColorCircle extends React.Component {
   }
 
   render() {
-    const {customDragReference} = this.props
+    const {draggerRef} = this.props
 
-    return <div ref={customDragReference} style={this.props.style}>
+    return <div ref={draggerRef} style={this.props.style}>
       <canvas ref='range'/>
       <canvas ref='tri' style={{position: 'absolute', left: 0}}/>
       {this.renderControlls()}
