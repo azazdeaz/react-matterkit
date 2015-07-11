@@ -10,11 +10,16 @@ export default function (theme, mod) {
     lineHeight: `${config.lineHeight}px`,
     backgroundColor: '#363c43',
     boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
-    border: 'solid 1px rgba(26,29,33,.75)',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: 'rgba(26,29,33,.75)',
     backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
     overflow: 'hidden',
     boxSizing: 'border-box',
-    margin: '1px 0',
+    marginTop: 1,
+    marginBottom: 0,
+    marginLeft: 1,
+    marginRight: 0,
 
     ':hover': {
       color: '#e2e7eb',

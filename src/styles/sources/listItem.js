@@ -5,7 +5,10 @@ export default function (theme, mod) {
   return {
     height: config.lineHeight,
     lineHeight: `${config.lineHeight}px`,
-    padding: '0 8px',
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 8,
+    paddingRight: 8,
     color: config.fontColor.normal,
     overflow: 'hidden',
     textOverflow: 'ellipsis',

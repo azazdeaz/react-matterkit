@@ -6,6 +6,8 @@ export default function (theme, mod) {
   return {
     mixins: ['font'],
     backgroundColor: config.grey.active,
-    border: 'solid 1px ' + colors.grey4,
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: colors.grey4,
   }
 }

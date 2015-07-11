@@ -7,6 +7,6 @@ export default function () {
     lineHeight: 'inherit',
     outline: 'none',
     backgroundColor: 'transparent',
-    border: 'none',
+    borderStyle: 'none',
   }
 }

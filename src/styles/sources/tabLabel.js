@@ -14,12 +14,20 @@ export default function (theme, mod) {
     color: config.fontColor.normal,
     backgroundColor: config.grey.normal,
     backgroundImage: 'none',
-    borderTop: 'solid 1px ' + colors.grey4,
-    borderLeft: 'solid 1px ' + colors.grey4,
-    borderBottom: 'solid 1px ' + colors.grey4,
-    borderRight: 'solid 1px ' + colors.grey4,
-    padding: '0 8px',
-    margin: 0,
+    borderWidth: '1px',
+    borderColor: colors.grey4,
+    borderTopStyle: 'solid',
+    borderLeftStyle: 'solid',
+    borderBottomStyle: 'solid',
+    borderRightStyle: 'solid',
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 8,
+    paddingRight: 8,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
 
     ':hover': {
       color: config.fontColor.hover,
@@ -33,7 +41,7 @@ export default function (theme, mod) {
     selected: {
       color: config.fontColor.active,
       backgroundColor: config.grey.active,
-      borderBottom: 'none',
+      borderBottomStyle: 'none',
     },
     stretch: {
       flex: 1,
@@ -45,7 +53,7 @@ export default function (theme, mod) {
       borderTopRightRadius: 2,
     },
     notFirst: {
-      borderLeft: 'none',
+      borderLeftStyle: 'none',
     },
   }
 }

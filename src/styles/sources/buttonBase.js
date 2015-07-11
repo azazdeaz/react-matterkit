@@ -1,11 +1,12 @@
 export default function () {
 
   return {
-
     backgroundColor: '#363c43',
     backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
-    border: 'solid 1px rgba(26,29,33,.75)',
-    boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+    borderColor: 'rgba(26,29,33,.32)',
+    boxShadow: 'inset 0 1px rgba(26,29,33,.75)',
 
     ':hover': {
       backgroundColor: '#3b424a',
@@ -17,7 +18,9 @@ export default function () {
     },
     disabled: {
       backgroundColor: '#2c3136',
-      border: 'solid 1px rgba(26,29,33,.32)',
+      borderStyle: 'solid',
+      borderWidth: '1px',
+      borderColor: 'rgba(26,29,33,.32)',
     }
   }
 }

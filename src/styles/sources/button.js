@@ -28,7 +28,9 @@ export default function (theme, mod) {
     kind: {
       colored: {
         color: '#191c1f',
-        border: 'solid 1px rgba(26,29,33,.75)',
+        borderStyle: 'solid',
+        borderWidth: '1px',
+        borderColor: 'rgba(26,29,33,.75)',
         // boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
         backgroundColor: '#262a2e',
         backgroundImage: 'linear-gradient(135deg, rgba(107,182,196,.75) 0%,rgba(107,154,211,.75) 100%)',
@@ -44,7 +46,7 @@ export default function (theme, mod) {
       stamp: {
         backgroundImage: 'none',
         backgroundColor: 'transparent',
-        border: 'none',
+        borderStyle: 'none',
         boxShadow: 'none',
         ':hover': {backgroundImage: 'none', backgroundColor: 'none'},
         ':active': {backgroundImage: 'none', backgroundColor: 'none'},
