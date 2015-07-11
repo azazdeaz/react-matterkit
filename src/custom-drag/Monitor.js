@@ -55,8 +55,12 @@ export default class Monitor {
   }
 
   getSourceClientOffset() {
-    var {offsetX, offsetY} = this.getLastEvent()
-    return {x: offsetX, y: offsetY}
+    var event = this.getLastEvent()
+    var {left, top} = event.currentTarget.getBoundingClientRect()
+    return {
+      x: event.clientX - left,
+      y: event.clientY - top
+    }
   }
 
   startDrag() {

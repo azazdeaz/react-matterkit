@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint",
   "plugins": [
-    "react"
+    "react",
+    "babel"
   ],
   "ecmaFeatures": {
     "jsx": true
@@ -21,6 +22,8 @@
     "comma-dangle": [0],
     "curly": [0],
     "strict": [0],
-    "no-use-before-define": "nofunc"
+    "no-use-before-define": "nofunc",
+    "babel/new-cap": [1],
+    "new-cap": [0]
   }
 }
