@@ -11,7 +11,7 @@
     "pure-render-decorator": "^0.1.0",
     "radium": "^0.13.0",
     "react": "^0.13.3",
-    "react-theme": "^0.1.1",
+    "react-theme": "^0.1.2",
     "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
   },

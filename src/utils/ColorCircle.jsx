@@ -1,7 +1,7 @@
 import React from 'react'
 // import tinycolor from 'tinycolor2'
 import pureRender from 'pure-render-decorator'
-import {Dragger} from '../custom-drag'
+import Dragger from '../custom-drag'
 
 function setHue(monitor, component) {
   var {x, y} = monitor.getClientOffset()
@@ -31,18 +31,14 @@ const customDragOptions = {
     if (distanceFromCenter < radius) {
       edit = distanceFromCenter > radius - width ? 'h' : 'sv'
     }
-console.log({sourceClientOffset})
+
     //no drag
     if (!edit) {
       return false
     }
     console.log('clientOffset', clientOffset)
     console.log('sourceClientOffset', sourceClientOffset)
-console.log(({
-  edit,
-  centerX,
-  centerY
-}))
+
     monitor.setData({
       edit,
       centerX,
@@ -64,8 +60,8 @@ console.log(({
   }
 }
 
-@pureRender
 @Dragger(customDragOptions)
+@pureRender
 export default class ColorCircle extends React.Component {
 
   static defaultProps = {

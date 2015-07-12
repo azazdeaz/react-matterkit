@@ -1,7 +1,8 @@
 import assign from 'object-assign'
 
 export default class Monitor {
-  constructor() {
+  constructor(deTarget) {
+    this._deTarget = deTarget
     this.reset()
   }
 
@@ -15,12 +16,19 @@ export default class Monitor {
   }
 
   addEvent(event) {
+    var {type} = event
+    event = {
+      clientX: event.clientX,
+      clientY: event.clientY
+    }
+    console.log('ct', type, event.currentTarget)
+
     if (!this._firstEvent) {
-      this.firstEvent = event
+      this._firstEvent = event
     }
     this._lastEvent = event
 
-    switch(event.type) {
+    switch(type) {
       case 'mousemove':
         this._moved = true
         break
@@ -50,16 +58,28 @@ export default class Monitor {
   }
 
   getClientOffset() {
-    var {clientX, clientY} = this.getLastEvent()
-    return {x: clientX, y: clientY}
+    getClientOffsetByEvent(this.getLastEvent())
   }
 
   getSourceClientOffset() {
-    var event = this.getLastEvent()
-    var {left, top} = event.currentTarget.getBoundingClientRect()
+    getSourceClientOffsetByEvent(this.getLastEvent())
+  }
+
+  getInitialClientOffset() {
+    getClientOffsetByEvent(this.getFirstEvent())
+  }
+
+  getInitialSourceClientOffset() {
+    getSourceClientOffsetByEvent(this.getFirstEvent())
+  }
+
+  getDifferenceFromInitialOffset() {
+    var first = this.getInitialSourceClientOffset()
+    var last = this.getSourceClientOffset()
+
     return {
-      x: event.clientX - left,
-      y: event.clientY - top
+      x: last.x - first.x,
+      y: last.y - first.y
     }
   }
 
@@ -81,5 +101,18 @@ export default class Monitor {
 
   isDrag() {
     return !!this._drag
+  }
+}
+
+function getClientOffsetByEvent(event) {
+  var {clientX, clientY} = event
+  return {x: clientX, y: clientY}
+}
+
+function getSourceClientOffsetByEvent(event) {
+  var {left, top} = this.deTarget.getBoundingClientRect()
+  return {
+    x: event.clientX - left,
+    y: event.clientY - top
   }
 }

@@ -6,10 +6,11 @@ export default options => {
     constructor(props) {
       super(props)
 
-      this.connectReference = component => {
-        console.log('connectReference', component)
+      this.dragItemRef = dragComponent => {
+        //TODO handle custom ref functions
         if (component) {
-          this.dragger = createDragger(React.findDOMNode(component), options)
+          let dragNode = React.findDOMNode(dragComponent)
+          this.dragger = createDragger(dragNode, options)
         }
         else {
           this.dragger.dispose()
@@ -17,7 +18,7 @@ export default options => {
       }
     }
 
-    handleChildRef = (component) => {
+    handleComposedComonentRef = (component) => {
       if (this.dragger) {
         this.dragger.receiveComponent(component)
       }
@@ -26,16 +27,16 @@ export default options => {
       }
     }
 
-        render() {
-          const refName = options.connectReferenceName || 'draggerRef'
-          const props = {
-            ...this.props,
-            [refName]: this.connectReference
-          }
+    render() {
+      const refName = options.connectReferenceName || 'draggerRef'
+      const props = {
+        ...this.props,
+        [refName]: this.dragItemRef
+      }
 
-          return <ComposedComponent
-            {...props}
-            ref = {this.handleChildRef}/>
-        }
+      return <ComposedComponent
+        {...props}
+        ref = {this.handleComposedComonentRef}/>
+    }
   }
 }

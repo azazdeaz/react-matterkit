@@ -2,12 +2,37 @@ import React from 'react'
 import _isFinite from 'lodash/lang/isFinite'
 import Icon from './Icon'
 import List from './List'
-import CustomDrag from '../utils/CustomDrag'
+import customDrag from '../custom-drag'
 import fuzzy from 'fuzzy'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../utils/MatterBasics'
 
+const dragOptions = {
+  onDown: (props, monitor, component) => {
+    // monitor.getLastEvent().stopPropagation()
+    if (!component.isDraggable()) {
+      return false
+    }
+
+    monitor.setData({
+      onDown: component.state.formattedValue,
+    })
+  },
+  onDrag: (props, monitor, component) => {
+    var {onDownValue} = monitor.getData()
+    var {x} = monitor.getDifferenceFromInitialOffset()
+    var value = onDownValue + (x * props.dragSpeed)
+    component.editValue(value)
+  },
+  onClick: (ptops, monitor, component) => {
+    let node = React.findDOMNode(component).querySelector('input')
+    node.focus()
+    node.select()
+  }
+}
+
+@customDrag(dragOptions)
 @Radium
 @pureRender
 @MatterBasics
@@ -42,40 +67,40 @@ export default class Input extends React.Component {
     this.setPropsValue(this.props)
   }
 
-  componentDidMount() {
-    var deTarget = React.findDOMNode(this.refs.input)
-
-    this._customDrag = new CustomDrag({
-      deTarget,
-      onDown: (e) => {
-        // let node = React.findDOMNode(this.refs.input)
-        // node.focus()
-        if (!this.isDraggable()) {
-          return false
-        }
-
-        e.stopPropagation()
-
-        return {
-          value: this.state.formattedValue,
-        }
-      },
-      onDrag: (md) => {
-        var value = md.value + md.dx * this.props.dragSpeed
-        this.editValue(value)
-      },
-      onClick: (md) => {
-        let node = React.findDOMNode(this.refs.input)
-        node.focus()
-        node.select()
-      },
-      onUp: (md) => {
-        // let node = React.findDOMNode(this.refs.input)
-        // node.focus()
-        // node.select()
-      }
-    })
-  }
+  // componentDidMount() {
+  //   var deTarget = React.findDOMNode(this.refs.input)
+  //
+  //   this._customDrag = new CustomDrag({
+  //     deTarget,
+  //     onDown: (e) => {
+  //       // let node = React.findDOMNode(this.refs.input)
+  //       // node.focus()
+  //       if (!this.isDraggable()) {
+  //         return false
+  //       }
+  //
+  //       e.stopPropagation()
+  //
+  //       return {
+  //         value: this.state.formattedValue,
+  //       }
+  //     },
+  //     onDrag: (md) => {
+  //       var value = md.value + md.dx * this.props.dragSpeed
+  //       this.editValue(value)
+  //     },
+  //     onClick: (md) => {
+  //       let node = React.findDOMNode(this.refs.input)
+  //       node.focus()
+  //       node.select()
+  //     },
+  //     onUp: (md) => {
+  //       // let node = React.findDOMNode(this.refs.input)
+  //       // node.focus()
+  //       // node.select()
+  //     }
+  //   })
+  // }
 
   componentWillReceiveProps(nextProps) {
     this.setPropsValue(nextProps)
@@ -233,7 +258,7 @@ export default class Input extends React.Component {
   }
 
   render() {
-    var {mod, style, pattern, placeholder, disabled} = this.props
+    var {mod, style, pattern, placeholder, disabled, draggerRef} = this.props
     var {focus, inputValue, formattedValue} = this.state
     var draggable = this.isDraggable()
 
@@ -242,7 +267,7 @@ export default class Input extends React.Component {
       onMouseDown = {this.handleMouseDown}>
 
       <input
-        ref = 'input'
+        ref = {draggerRef}
         {...this.getBasics()}
         style = {this.getStyle('inputField', {draggable, ...mod})}
         palceholder = {placeholder}

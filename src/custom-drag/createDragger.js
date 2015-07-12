@@ -3,7 +3,7 @@ import Monitor from './Monitor'
 
 export default function makeDraggable(node, opt = {}, component) {
   var waitingMoveEvent, waitingMoveRaf
-  const monitor = new Monitor()
+  const monitor = new Monitor(node)
 
   node.addEventListener('mousedown', onDown)
   node.addEventListener('mouseover', onEnter)

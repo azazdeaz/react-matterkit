@@ -1,1 +1,1 @@
-export {default as Dragger} from './DragEnhancer'
+export default from './DragEnhancer'

@@ -45,8 +45,8 @@ var App = React.createClass({
     var {router} = this.context
 
     var theme = utils.getStyles(this)
-    var config = theme.get('config')
-    var font = theme.get('font')
+    var config = theme.getStyle('config')
+    var font = theme.getStyle('font')
 
     var styleCont = merge({}, font, {
       width: 920,
