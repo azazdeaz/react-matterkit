@@ -3,43 +3,59 @@ import Input from './Input'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../utils/MatterBasics'
+import findIndex from 'lodash/array/findIndex'
 
 @Radium
-@pureRender
+// @pureRender
 @MatterBasics
 export default class MultiTypeInput extends React.Component {
   static propTypes = {
   }
 
   static defaultProps = {
-    types: [],
-    typeIdx: 0,
+    types: []
   }
 
   constructor(props) {
     super(props)
-
     this.state = {
-      currentTypeIdx: this.getcurrentTypeIdx(),
+      currentTypeIndex: 0,
     }
+    this.state.currentTypeIndex = this.getCurrentTypeIndex()
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({currentTypeIdx: this.getcurrentTypeIdx(nextProps)})
+    this.setState({currentTypeIndex: this.getCurrentTypeIndex(nextProps)})
   }
 
-  getcurrentTypeIdx(props) {
+  getCurrentTypeIndex(props) {
     props = props || this.props
 
-    var {typeIdx, chooseType, value} = props
-    return chooseType ? chooseType(value) : typeIdx
+    var {types, value} = props
+    var {currentTypeIndex} = this.state
+
+    function isAccept(type) {
+      return !type.acceptValue || type.acceptValue(value)
+    }
+
+    if (isAccept(types[currentTypeIndex])) {
+      return currentTypeIndex
+    }
+
+    var nextTypeIdx = findIndex(types, type => isAccept(type))
+
+    if (nextTypeIdx === -1) {
+      nextTypeIdx = currentTypeIndex
+    }
+
+    return nextTypeIdx
   }
 
   handleAddonClick = () => {
     var {types} = this.props
-    var {currentTypeIdx} = this.state
-    currentTypeIdx = (currentTypeIdx + 1) % types.length
-    this.setState({currentTypeIdx})
+    var {currentTypeIndex} = this.state
+    currentTypeIndex = (currentTypeIndex + 1) % types.length
+    this.setState({currentTypeIndex})
   }
 
   handleChange = (value) => {
@@ -49,12 +65,12 @@ export default class MultiTypeInput extends React.Component {
   }
 
   render() {
-    var {currentTypeIdx} = this.state
+    var {currentTypeIndex} = this.state
 
     return <Input
       {...this.getBasics()}
       {...this.props}
-      {...this.props.types[currentTypeIdx]}
+      {...this.props.types[currentTypeIndex]}
       onChange = {this.handleChange}
       onInitialFormat = {this.handleChange}
       addonOnClick = {this.handleAddonClick}/>

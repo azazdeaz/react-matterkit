@@ -37,7 +37,6 @@ const dragOptions = {
 @pureRender
 @MatterBasics
 export default class Input extends React.Component {
-
   static propTypes = {
   }
 
@@ -52,6 +51,8 @@ export default class Input extends React.Component {
     max: undefined,
     hints: undefined,
     maxVisibleHints: 12,
+    prepareExportValue: undefined,
+    formatValue: undefined,
   }
 
   constructor(props) {
@@ -107,12 +108,14 @@ export default class Input extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    var {exportValue} = this.state
+    var {exportValue, focus} = this.state
 
-    if (exportValue !== prevState.exportValue &&
+    if (
+      !focus &&
+      exportValue !== prevState.exportValue &&
       exportValue !== this.props.value &&
-      this.props.onChange) {
-
+      this.props.onChange
+    ) {
       this.props.onChange(exportValue)
     }
   }
@@ -121,12 +124,6 @@ export default class Input extends React.Component {
     return this.props.type === 'number' &&
            this.props.draggable &&
            !this.state.focus
-  }
-
-  setDraftValue(draftValue) {
-    if (this.state.focus) {
-      this.editValue(draftValue)
-    }
   }
 
   setPropsValue(props) {
@@ -185,18 +182,6 @@ export default class Input extends React.Component {
     }
   }
 
-
-  handleMouseDown = (e) => {
-    //prevent to toolse focus by clicking on a child
-    // var inputNode = React.findDOMNode(this.refs.input)
-    // if (inputNode.ownerDocument.activeElement === inputNode &&
-    //   e.target !== inputNode)
-    // {
-    //   e.stopPropagation()
-    //   e.preventDefault()
-    // }
-  }
-
   handleChange = (e) => {
     this.setState({
       inputValue: e.target.value
@@ -219,7 +204,6 @@ export default class Input extends React.Component {
   }
 
   renderHints() {
-
     var {value, lastlySelectedHint, focus} = this.state
 
     if (!focus || value === lastlySelectedHint || !value || !this.props.hints) {
@@ -228,7 +212,7 @@ export default class Input extends React.Component {
 
     var hints = fuzzy.filter(value, this.props.hints, {
       pre: '<strong>',
-      post:'</strong>',
+      post: '</strong>',
     })
 
     hints.splice(12)
