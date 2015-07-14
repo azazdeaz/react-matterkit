@@ -21,7 +21,6 @@ export default class Monitor {
       clientX: event.clientX,
       clientY: event.clientY
     }
-    console.log('ct', type, event.currentTarget)
 
     if (!this._firstEvent) {
       this._firstEvent = event
@@ -58,19 +57,19 @@ export default class Monitor {
   }
 
   getClientOffset() {
-    getClientOffsetByEvent(this.getLastEvent())
+    return this._getClientOffsetByEvent(this.getLastEvent())
   }
 
   getSourceClientOffset() {
-    getSourceClientOffsetByEvent(this.getLastEvent())
+    return this._getSourceClientOffsetByEvent(this.getLastEvent())
   }
 
   getInitialClientOffset() {
-    getClientOffsetByEvent(this.getFirstEvent())
+    return this._getClientOffsetByEvent(this.getFirstEvent())
   }
 
   getInitialSourceClientOffset() {
-    getSourceClientOffsetByEvent(this.getFirstEvent())
+    return this._getSourceClientOffsetByEvent(this.getFirstEvent())
   }
 
   getDifferenceFromInitialOffset() {
@@ -102,17 +101,17 @@ export default class Monitor {
   isDrag() {
     return !!this._drag
   }
-}
 
-function getClientOffsetByEvent(event) {
-  var {clientX, clientY} = event
-  return {x: clientX, y: clientY}
-}
+  _getClientOffsetByEvent(event) {
+    var {clientX, clientY} = event
+    return {x: clientX, y: clientY}
+  }
 
-function getSourceClientOffsetByEvent(event) {
-  var {left, top} = this.deTarget.getBoundingClientRect()
-  return {
-    x: event.clientX - left,
-    y: event.clientY - top
+  _getSourceClientOffsetByEvent(event) {
+    var {left, top} = this._deTarget.getBoundingClientRect()
+    return {
+      x: event.clientX - left,
+      y: event.clientY - top
+    }
   }
 }

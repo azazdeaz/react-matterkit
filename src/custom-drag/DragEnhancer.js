@@ -8,7 +8,7 @@ export default options => {
 
       this.dragItemRef = dragComponent => {
         //TODO handle custom ref functions
-        if (component) {
+        if (dragComponent) {
           let dragNode = React.findDOMNode(dragComponent)
           this.dragger = createDragger(dragNode, options)
         }

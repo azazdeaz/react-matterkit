@@ -3,6 +3,13 @@ import React from 'react'
 import pureRender from 'pure-render-decorator'
 import Dragger from '../custom-drag'
 
+function radDiff(a, b) {
+  var {PI} = Math
+  var diff = b - a
+  diff = ((diff + PI) % PI*2) - PI
+  return diff
+}
+
 function setHue(monitor, component) {
   var {x, y} = monitor.getClientOffset()
   var {centerX, centerY} = monitor.getData()
@@ -12,6 +19,22 @@ function setHue(monitor, component) {
   var deg = rad / Math.PI * 180
 
   component.setState({h: -deg})
+}
+
+function setSaturationLight(monitor, component) {
+  var {x, y} = monitor.getClientOffset()
+  var {h} = component.state
+  var {centerX, centerY} = monitor.getData()
+  x -= centerX
+  y -= centerY
+  var dist = Math.sqrt(x*x, y*y)
+  var baseRad = h / 180 * Math.PI
+  var mouseRad = Math.atan2(y, x)
+  var diffRad = radDiff(baseRad, mouseRad)
+  x = dist * Math.cos(diffRad)
+  y = dist * Math.sin(diffRad)
+
+  console.log({x, y, baseRad, mouseRad, diffRad})
 }
 
 const customDragOptions = {
@@ -32,8 +55,8 @@ const customDragOptions = {
       edit = distanceFromCenter > radius - width ? 'h' : 'sv'
     }
 
-    //no drag
     if (!edit) {
+      //bail dragging
       return false
     }
     console.log('clientOffset', clientOffset)
@@ -48,6 +71,9 @@ const customDragOptions = {
     if (edit === 'h') {
       setHue(monitor, component)
     }
+    else {
+      setSaturationLight(monitor, component)
+    }
   },
 
   onDrag(props, monitor, component) {
@@ -56,6 +82,9 @@ const customDragOptions = {
 
     if (edit === 'h') {
       setHue(monitor, component)
+    }
+    else {
+      setSaturationLight(monitor, component)
     }
   }
 }
