@@ -15,9 +15,6 @@
     "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
   },
-  "peerDependencies": {
-    "react": "^0.13.2"
-  },
   "scripts": {
     "lib": "babel ./src --out-dir lib  --source-maps",
     "lib-watch": "npm run lib && babel ./src --out-dir lib  --source-maps --source-maps --watch"
@@ -45,6 +42,7 @@
     "gulp": "^3.9.0",
     "gulp-gh-pages": "^0.5.2",
     "gulp-util": "^3.0.5",
+    "react": "^0.13.2",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   }
