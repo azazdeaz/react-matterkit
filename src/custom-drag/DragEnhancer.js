@@ -2,6 +2,7 @@ import React from 'react'
 import createDragger from './createDragger'
 
 export default options => {
+  //TODO warn for missing options
   return ComposedComponent => class CustomDrag extends React.Component {
     constructor(props) {
       super(props)

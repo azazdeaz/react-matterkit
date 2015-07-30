@@ -7,7 +7,7 @@ export default class Monitor {
   }
 
   reset() {
-    this._data = {}
+    this.data = Object.freeze({})
     this._lastEvent = undefined
     this._firstEvent = undefined
     this._moved = false
@@ -48,12 +48,12 @@ export default class Monitor {
     return this._lastEvent
   }
 
-  setData(data) {
-    assign(this._data, data)
+  setData(newData) {
+    this.data = Object.freeze(assign({}, this.data, newData))
   }
 
   getData() {
-    return this._data
+    return this.data
   }
 
   getClientOffset() {
