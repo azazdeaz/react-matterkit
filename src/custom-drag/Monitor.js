@@ -16,6 +16,10 @@ export default class Monitor {
   }
 
   addEvent(event) {
+    if (!event) {
+      return
+    }
+
     var {type} = event
     event = {
       clientX: event.clientX,
@@ -27,16 +31,8 @@ export default class Monitor {
     }
     this._lastEvent = event
 
-    switch(type) {
-      case 'mousemove':
-        this._moved = true
-        break
-      case 'mouseenter':
-        this._over = true
-        break
-      case 'mouseleave':
-        this._over = false
-        break
+    if(type === 'mousemove') {
+      this._moved = true
     }
   }
 
@@ -84,6 +80,10 @@ export default class Monitor {
 
   startDrag() {
     this._drag = true
+  }
+
+  setOver(over) {
+    this._over = over
   }
 
   stopDrag() {

@@ -76,7 +76,7 @@ export default function makeDraggable(node, opt = {}, component) {
 
     monitor.stopDrag()
     monitor.addEvent(e)
-
+debugger
     if (monitor.isOver()) {
         onLeave()
     }
@@ -96,12 +96,18 @@ export default function makeDraggable(node, opt = {}, component) {
 
   function onEnter(e) {
     monitor.addEvent(e)
-    if (!monitor.isDrag()) call('onEnter')
+    if (!monitor.isDrag()) {
+      monitor.setOver(true)
+      call('onEnter')
+    }
   }
 
   function onLeave(e) {
     monitor.addEvent(e)
-    if (!monitor.isDrag()) call('onLeave')
+    if (!monitor.isDrag()) {
+      monitor.setOver(false)
+      call('onLeave')
+    }
   }
 
   function call(name) {

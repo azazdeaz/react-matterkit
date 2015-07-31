@@ -17,9 +17,16 @@ export default options => {
           this.dragger.dispose()
         }
       }
+
+      this.id = Math.random()
     }
 
     handleComposedComonentRef = (component) => {
+      if (component && component.enhancedComponent) {
+        component = component.enhancedComponent
+      }
+      this.enhancedComponent = component
+
       if (this.dragger) {
         this.dragger.receiveComponent(component)
       }
