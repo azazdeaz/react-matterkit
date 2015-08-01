@@ -1,6 +1,5 @@
 var React = require('react')
-var {style} = require('../../../../')
-var LiveEditor = require('./react-live-edit/live-editor.jsx')
+var {getTheme} = require('react-matterkit')
 var marked = require('marked')
 
 module.exports = React.createClass({
@@ -20,7 +19,7 @@ module.exports = React.createClass({
       fontWeight: 500,
     }
     var sType = {
-      color: style.palette.blue,
+      color: getTheme().getStyle('palette').blue,
     }
     var sValue = {
       margin: 12,

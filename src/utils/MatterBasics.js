@@ -1,11 +1,10 @@
 import React from 'react'
-import getStyles from './getStyles'
+import getTheme from '../theme/getTheme'
 import forOwn from 'lodash/object/forOwn'
 
 export default function (Component) {
-
   Component.contextTypes = {
-    matterStyles: React.PropTypes.object,
+    matterkitTheme: React.PropTypes.object,
   }
 
   Component.prototype.getBasics = function () {
@@ -16,7 +15,7 @@ export default function (Component) {
   }
 
   Component.prototype.getStyle = function (name, mod, style) {
-    var styles = getStyles(this)
+    var styles = getTheme(this)
     var ret = styles.getStyle(name, mod, style)
 
     forOwn(ret, (value, key) => {

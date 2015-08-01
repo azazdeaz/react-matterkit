@@ -2,8 +2,8 @@
 require('./index.html') //for the webpack build
 
 var React = require('react')
-var Matter = require('matterkit')
-var {List, ListItem, utils} = Matter
+var Matter = require('react-matterkit')
+var {List, ListItem, getTheme} = Matter
 var merge = require('lodash/object/merge')
 var kebabCase = require('lodash/string/kebabCase')
 var RefreshValuePropOfInput = require('./RefreshValuePropOfInput')
@@ -45,7 +45,7 @@ var App = React.createClass({
   render: function () {
     var {router} = this.context
 
-    var theme = utils.getStyles(this)
+    var theme = getTheme(this)
     var config = theme.getStyle('config')
     var font = theme.getStyle('font')
 

@@ -1,6 +1,6 @@
 var React = require('react')
 var Template = require('./utils/Template.jsx')
-var Matter = require('matterkit')
+var Matter = require('react-matterkit')
 
 var description = `
 label: String`
