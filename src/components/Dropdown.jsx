@@ -91,7 +91,7 @@ export default class Dropdown extends React.Component {
       style={this.getStyle('dropdown', mod, style)}>
 
       <div
-        style={{padding: '0 8px', display: 'flex'}}
+        style={{paddingLeft: 8, paddingRight: 8, display: 'flex'}}
         onClick={this.handleClickHead}>
 
         <span style={{flex: 1}}>
