@@ -1,7 +1,8 @@
 import React from 'react'
 import createDragger from './createDragger'
+import Monitor from './Monitor'
 
-export default options => {
+export default (options, collect) => {
   //TODO warn for missing options
   return ComposedComponent => class CustomDrag extends React.Component {
     constructor(props) {
@@ -17,15 +18,13 @@ export default options => {
           this.dragger.dispose()
         }
       }
-
-      this.id = Math.random()
     }
 
     handleComposedComonentRef = (component) => {
-      if (component && component.enhancedComponent) {
-        component = component.enhancedComponent
+      if (component && component.composedComponent) {
+        component = component.composedComponent
       }
-      this.enhancedComponent = component
+      this.composedComponent = component
 
       if (this.dragger) {
         this.dragger.receiveComponent(component)
@@ -35,15 +34,25 @@ export default options => {
       }
     }
 
-    render() {
-      const refName = options.connectReferenceName || 'draggerRef'
-      const props = {
-        ...this.props,
-        [refName]: this.dragItemRef
+    getConnect() {
+      return {
+        getDragRef: () => this.dragItemRef,
+        getFakeDownFunc: () => this.dragger && this.dragger.fakeDown
       }
+    }
+
+    getMonitor() {
+      return this.dragger ? this.dragger.getMonitor() : new Monitor()
+    }
+
+    render() {
+      var collectedProps = typeof collect === 'function' ?
+        collect(this.getConnect(), this.getMonitor()) :
+        {draggerRef: this.dragItemRef}
 
       return <ComposedComponent
-        {...props}
+        {...this.props}
+        {...collectedProps}
         ref = {this.handleComposedComonentRef}/>
     }
   }

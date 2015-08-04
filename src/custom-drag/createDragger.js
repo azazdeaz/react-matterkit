@@ -17,13 +17,19 @@ export default function makeDraggable(node, opt = {}, component) {
     },
     receiveComponent(_component) {
       component = _component
+    },
+    fakeDown(e) {
+      onDown(e)
+    },
+    getMonitor() {
+      return monitor
     }
   }
 
   function onDown(e) {
     //drag only with the left button
     if (e.button !== 0) {
-        return
+      return
     }
 
     monitor.reset()
@@ -71,14 +77,14 @@ export default function makeDraggable(node, opt = {}, component) {
     window.removeEventListener('mouseleave', onUp)
 
     if (waitingMoveEvent) {
-        rafOnMove()
+      rafOnMove()
     }
 
     monitor.stopDrag()
     monitor.addEvent(e)
-debugger
+
     if (monitor.isOver()) {
-        onLeave()
+      onLeave()
     }
 
     call('onUp')
