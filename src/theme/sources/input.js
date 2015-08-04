@@ -4,7 +4,7 @@ export default function (theme, mod) {
   var colors = theme.getStyle('colors', mod)
 
   return {
-    mixins: ['roundedCorners', 'inputBorder'],
+    mixins: ['roundedCorners', 'inputBorder', 'font'],
 
     display: 'flex',
     position: 'relative',
@@ -17,9 +17,9 @@ export default function (theme, mod) {
     paddingRight: '0',
     height: config.lineHeight,
     lineHeight: `${config.lineHeight}px`,
-    marginTop: 1,
-    marginBottom: 3,
-    marginLeft: 1,
+    // marginTop: 1,
+    // marginBottom: 3,
+    marginLeft: 3,
     marginRight: 3,
     boxSizing: 'border-box',
 
