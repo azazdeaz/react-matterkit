@@ -15,15 +15,16 @@ export default class Monitor {
     this._drag = false
   }
 
-  addEvent(event) {
-    if (!event) {
+  addEvent(nativeEvent) {
+    if (!nativeEvent) {
       return
     }
 
-    var {type} = event
-    event = {
-      clientX: event.clientX,
-      clientY: event.clientY
+    const {type} = nativeEvent
+    const event = {
+      nativeEvent,
+      clientX: nativeEvent.clientX,
+      clientY: nativeEvent.clientY,
     }
 
     if (!this._firstEvent) {

@@ -118,7 +118,12 @@ export default function makeDraggable(node, opt = {}, component) {
 
   function call(name) {
     if (name in opt) {
-      return opt[name].call(null, component.props, monitor, component)
+      return opt[name].call(
+        undefined,
+        component ? component.props : undefined,
+        monitor,
+        component
+      )
     }
   }
 }
