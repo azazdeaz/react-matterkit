@@ -8,5 +8,6 @@ export default function (theme, mod) {
     borderTopRightRadius: borderRadius,
     borderBottomLeftRadius: borderRadius,
     borderBottomRightRadius: borderRadius,
+    fontWeight: '400'
   }
 }

@@ -16,7 +16,7 @@ const dragOptions = {
     }
 
     monitor.setData({
-      onDown: component.state.formattedValue,
+      onDownValue: component.state.formattedValue,
     })
   },
   onDrag: (props, monitor, component) => {
@@ -32,7 +32,9 @@ const dragOptions = {
   }
 }
 
-@customDrag(dragOptions)
+@customDrag(dragOptions, connect => ({
+  dragRef: connect.getDragRef()
+}))
 @Radium
 @pureRender
 @MatterBasics
@@ -242,7 +244,7 @@ export default class Input extends React.Component {
   }
 
   render() {
-    var {mod, style, pattern, placeholder, disabled, draggerRef} = this.props
+    var {mod, style, pattern, placeholder, disabled, dragRef} = this.props
     var {focus, inputValue, formattedValue} = this.state
     var draggable = this.isDraggable()
 
@@ -251,7 +253,7 @@ export default class Input extends React.Component {
       onMouseDown = {this.handleMouseDown}>
 
       <input
-        ref = {draggerRef}
+        ref = {dragRef}
         {...this.getBasics()}
         style = {this.getStyle('inputField', {draggable, ...mod})}
         palceholder = {placeholder}
