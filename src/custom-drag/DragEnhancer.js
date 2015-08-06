@@ -12,7 +12,7 @@ export default (options, collect) => {
         //TODO handle custom ref functions
         if (dragComponent) {
           let dragNode = React.findDOMNode(dragComponent)
-          this.dragger = createDragger(dragNode, options)
+          this.dragger = createDragger(dragNode, options, this.composedComponent)
         }
         else {
           this.dragger.dispose()
@@ -28,9 +28,6 @@ export default (options, collect) => {
 
       if (this.dragger) {
         this.dragger.receiveComponent(component)
-      }
-      else {
-        console.warn('Dragger: no item connected!')
       }
     }
 
