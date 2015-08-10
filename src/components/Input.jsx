@@ -70,41 +70,6 @@ export default class Input extends React.Component {
     this.setPropsValue(this.props)
   }
 
-  // componentDidMount() {
-  //   var deTarget = React.findDOMNode(this.refs.input)
-  //
-  //   this._customDrag = new CustomDrag({
-  //     deTarget,
-  //     onDown: (e) => {
-  //       // let node = React.findDOMNode(this.refs.input)
-  //       // node.focus()
-  //       if (!this.isDraggable()) {
-  //         return false
-  //       }
-  //
-  //       e.stopPropagation()
-  //
-  //       return {
-  //         value: this.state.formattedValue,
-  //       }
-  //     },
-  //     onDrag: (md) => {
-  //       var value = md.value + md.dx * this.props.dragSpeed
-  //       this.editValue(value)
-  //     },
-  //     onClick: (md) => {
-  //       let node = React.findDOMNode(this.refs.input)
-  //       node.focus()
-  //       node.select()
-  //     },
-  //     onUp: (md) => {
-  //       // let node = React.findDOMNode(this.refs.input)
-  //       // node.focus()
-  //       // node.select()
-  //     }
-  //   })
-  // }
-
   componentWillReceiveProps(nextProps) {
     this.setPropsValue(nextProps)
   }
@@ -136,14 +101,14 @@ export default class Input extends React.Component {
 
   editValue(value, props) {
     props = props || this.props
+    const {prepareExportValue} = props
 
-    var formattedValue = this.formatValue(value, props)
-
-    var {prepareExportValue} = props
-    var exportValue = prepareExportValue ?
+    const formattedValue = this.formatValue(value, props)
+    const prettifiedValue = this.prettifyValue(formattedValue, props)
+    const exportValue = prepareExportValue ?
       prepareExportValue(formattedValue) : formattedValue
 
-    this.setState({formattedValue, exportValue})
+    this.setState({formattedValue, prettifiedValue, exportValue})
 
     this.validate(formattedValue)
   }
@@ -166,16 +131,33 @@ export default class Input extends React.Component {
   }
 
   formatNumber(value) {
-    var {min, max, precision} = this.props
+    var {min, max} = this.props
 
     value = parseFloat(value)
-
     if (_isFinite(min)) value = Math.max(min, value)
     if (_isFinite(max)) value = Math.min(max, value)
 
-    value = parseFloat(value.toFixed(precision))
-
     return _isFinite(value) ? value : 0
+  }
+
+  prettifyValue(value, props) {
+    props = props || this.props
+
+    if (props.type === 'number') {
+      value = this.prettifyNumber(value)
+    }
+
+    if (props.prettifyValue) {
+      value = props.prettifyValue(value)
+    }
+
+    return value
+  }
+
+  prettifyNumber(value) {
+    var {precision} = this.props
+    value = parseFloat(value.toFixed(precision))
+    return value
   }
 
   validate(value) {
@@ -245,7 +227,7 @@ export default class Input extends React.Component {
 
   render() {
     var {mod, style, pattern, placeholder, disabled, dragRef} = this.props
-    var {focus, inputValue, formattedValue} = this.state
+    var {focus, inputValue, prettifiedValue} = this.state
     var draggable = this.isDraggable()
 
     return <div
@@ -257,7 +239,7 @@ export default class Input extends React.Component {
         {...this.getBasics()}
         style = {this.getStyle('inputField', {draggable, ...mod})}
         palceholder = {placeholder}
-        value = {focus ? inputValue : formattedValue}
+        value = {focus ? inputValue : prettifiedValue}
         type = 'text'
         name = {this.props.name}
         pattern = {pattern}
