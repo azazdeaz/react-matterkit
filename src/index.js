@@ -1,6 +1,7 @@
 module.exports = global.Matter = {
   getTheme: require('./theme/getTheme'),
   createTheme: require('./theme/createTheme'),
+  defaultTheme: require('./theme/defaultTheme'),
 
   // Accordion: require('./components/accordion/Accordion'),
   // AccordionTab: require('./components/accordion/AccordionTab'),

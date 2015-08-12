@@ -25,7 +25,7 @@ var codes = [
     {
       type: 'string',
       addonIcon: 'quote-right',
-      hints: ['auto', 'inherits'],
+      hints: ['auto', 'inherit'],
     },
   ]}
   value='32'
