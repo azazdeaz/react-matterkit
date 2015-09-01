@@ -7,6 +7,14 @@ import MatterBasics from '../utils/MatterBasics'
 @pureRender
 @MatterBasics
 export default class Icon extends React.Component {
+  static propTypes = {
+    icon: PropTypes.string,
+    className: PropTypes.string,
+    onClick: propTypes.func,
+    disabled: PropTypes.bool,
+    style: PropTypes.object,
+  }
+
   constructor(props) {
     super(props)
   }

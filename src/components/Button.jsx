@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import assign from 'lodash/object/assign'
 import Icon from './Icon'
 import Radium from 'radium'
@@ -9,18 +9,15 @@ import MatterBasics from '../utils/MatterBasics'
 @pureRender
 @MatterBasics
 export default class Button extends React.Component {
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      toggled: false,
-    }
-  }
-
   static propTypes = {
-    label: React.PropTypes.string,
-    disabled: React.PropTypes.bool,
+    label: PropTypes.string,
+    icon: Icon.propTypes,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    mod: PropTypes.shape({
+      kind: PropTypes.oneOf(['normal', 'stamp', 'colored'])
+    }),
+    style: PropTypes.object
   }
 
   static defaultProps = {
@@ -31,17 +28,26 @@ export default class Button extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      toggled: false,
+    }
+  }
+
   render() {
     var {mod, style, icon, onClick, label, disabled} = this.props
 
-    mod = assign({disabled}, mod)
+    mod = {disabled, ...mod}
 
     if (typeof icon === 'string') {
       icon = {icon}
     }
 
     if (icon) {
-      icon = <Icon {...icon} style={{marginRight: this.props.text ? 4 : 0}}/>
+      let iconStyle = {...icon.style, marginRight: label ? 4 : 0}
+      icon = <Icon {...icon} style={iconStyle}/>
     }
 
     return <div

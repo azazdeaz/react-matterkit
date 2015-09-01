@@ -13,6 +13,8 @@ var demos = [
   {code: `<Checkbox value={false}/>`, docClass: Matter.Checkbox},
   {code: `<Button label="button"/>`, docClass: Matter.Button},
   {code: `<Button label="button" mod={{kind: 'colored'}}/>`, docClass: Matter.Button},
+  {code: `<Button label="button" icon="github"/>`, docClass: Matter.Button},
+  {code: `<Button icon="github"/>`, docClass: Matter.Button},
   {code: `<Panel/>`, docClass: Matter.Panel},
   {code: `<Dropdown options={['foo', 'bar', 'qux']} label='Dropdown'/>`, docClass: Matter.Panel},
   {code: `<ItemGroup>
