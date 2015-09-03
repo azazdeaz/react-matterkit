@@ -11,10 +11,8 @@ import ListItem from './ListItem'
 
 @Radium
 @pureRender
-@ClickAway
 @MatterBasics
 export default class Dropdown extends React.Component {
-
   static propTypes = {
 
   }
@@ -36,7 +34,9 @@ export default class Dropdown extends React.Component {
   }
 
   handleClickAway = () => {
-    this.setState({open: false})
+    if (this.state.open) {
+      this.setState({open: false})
+    }
   }
 
   renderItems() {
@@ -86,23 +86,25 @@ export default class Dropdown extends React.Component {
       }, style)
     }
 
-    return <div
-      {...this.getBasics()}
-      style={this.getStyle('dropdown', mod, style)}>
-
+    return <ClickAway onClickAway={this.handleClickAway}>
       <div
-        style={{paddingLeft: 8, paddingRight: 8, display: 'flex'}}
-        onClick={this.handleClickHead}>
+        {...this.getBasics()}
+        style={this.getStyle('dropdown', mod, style)}>
 
-        <span style={{flex: 1}}>
-          {label}
-        </span>
-        <Icon
-          style={{marginLeft: 4}}
-          icon={open ? 'chevron-up' : 'chevron-down'}/>
+        <div
+          style={{paddingLeft: 8, paddingRight: 8, display: 'flex'}}
+          onClick={this.handleClickHead}>
+
+          <span style={{flex: 1}}>
+            {label}
+          </span>
+          <Icon
+            style={{marginLeft: 4}}
+            icon={open ? 'chevron-up' : 'chevron-down'}/>
+        </div>
+
+        {this.renderItems()}
       </div>
-
-      {this.renderItems()}
-    </div>
+    </ClickAway>
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../utils/MatterBasics'
@@ -10,7 +10,7 @@ export default class Icon extends React.Component {
   static propTypes = {
     icon: PropTypes.string,
     className: PropTypes.string,
-    onClick: propTypes.func,
+    onClick: PropTypes.func,
     disabled: PropTypes.bool,
     style: PropTypes.object,
   }

@@ -1,34 +1,29 @@
-import React from 'react'
+var React = require('react')
 
-export default function (Component) {
+var ClickAway = React.createClass({
+  propTypes: {
+    children: React.PropTypes.element.isRequired,
+    onClickAway: React.PropTypes.func,
+  },
 
-  var {componentDidMount, componentWillUnmount} = Component.prototype
-
-  Component.prototype.componentDidMount = function () {
-    if (componentDidMount) {
-      componentDidMount.call(this)
-    }
-
-    this.__handleClickAway = (e) => {
-
-      if (this.state.open) {
-
-        var node = React.findDOMNode(this)
-        if (!node.contains(e.target)) {
-
-          this.handleClickAway()
-        }
+  componentDidMount: function() {
+    this.__handleClickAway = function (e) {
+      var node = React.findDOMNode(this)
+      if (!node.contains(e.target) && this.props.onClickAway) {
+        this.props.onClickAway()
       }
-    }
+    }.bind(this)
 
     document.addEventListener('click', this.__handleClickAway)
-  }
+  },
 
-  Component.prototype.componentWillUnmount = function () {
-    if (componentWillUnmount) {
-      componentWillUnmount.call(this)
-    }
-
+  componentWillUnmount: function() {
     document.removeEventListener('click', this.__handleClickAway)
+  },
+
+  render: function() {
+    return this.props.children
   }
-}
+})
+
+module.exports = ClickAway
