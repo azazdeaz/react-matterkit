@@ -1,5 +1,5 @@
 #use for regenerate the sourceList.js
-#cd src/styles && bash _generatesourcelist.sh && cd ../..
+#cd src/theme && bash _generatesourcelist.sh && cd ../..
 target="sourceList.js"
 files="sources/*"
 regex="(\w+)\.js"

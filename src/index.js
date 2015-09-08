@@ -18,6 +18,7 @@ module.exports = global.Matter = {
   ListItem: require('./components/ListItem'),
   MultiTypeInput: require('./components/MultiTypeInput'),
   Panel: require('./components/Panel'),
+  Scrollable: require('./components/scrollable/Scrollable'),
   // Slider: require('./components/Slider'),
   Tabs: require('./components/tabs/Tabs'),
   Toggle: require('./components/Toggle'),

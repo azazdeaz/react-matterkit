@@ -58,6 +58,9 @@ var demos = [
   <div label='secound tab' icon='github'><p>secound tab content</p></div>
   <div icon='cog'><h1>third tab content</h1></div>
 </Tabs>`, docClass: Matter.Tabs},
+  {code: `<Scrollable style={{width: 200, height: 300}}>
+  <List items={fakeNames.map(label => ({label}))}/>
+</Scrollable>`, docClass: Matter.Scrollable}
 ]
 
 module.exports = React.createClass({

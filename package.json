@@ -25,7 +25,7 @@
     "gulp-gh-pages": "^0.5.2",
     "gulp-util": "^3.0.5",
     "marked": "^0.3.5",
-    "react": ">=0.13 <0.15.0",
+    "react": "^0.13.3",
     "react-router": "^0.13.3",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
