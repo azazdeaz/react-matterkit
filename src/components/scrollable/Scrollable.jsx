@@ -59,7 +59,7 @@ export default class Scrollable extends React.Component {
 
   renderChildren(top) {
     return React.Children.map(this.props.children, child => {
-      const style = {...this.props.style, transform: `translateY(${top}px)`}
+      const style = {...child.props.style, transform: `translateY(${top}px)`}
       return React.cloneElement(child, {style})
     })
   }
@@ -70,6 +70,7 @@ export default class Scrollable extends React.Component {
     const verticalScroll = this.props.verticalScroll === undefined
       ? this.state.verticalScroll
       : this.props.verticalScroll
+    const maxVerticalScroll = this.getMaxVerticalScroll()
 
     return <div
       {...this.getBasics(verticalScroll)}
@@ -77,12 +78,12 @@ export default class Scrollable extends React.Component {
       style = {{...style, overflow: 'hidden', position: 'relative'}}>
 
       {this.renderChildren(-verticalScroll)}
-      <Scrollbar
+      {maxVerticalScroll > 0 && <Scrollbar
         type = 'vertical'
         scroll = {verticalScroll}
         height = {containerHeight}
-        maxScroll = {this.getMaxVerticalScroll()}
-        onChange = {this.handleVerticalScroll}/>
+        maxScroll = {maxVerticalScroll}
+        onChange = {this.handleVerticalScroll}/>}
     </div>
   }
 

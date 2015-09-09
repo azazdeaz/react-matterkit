@@ -42,7 +42,7 @@ export default class Scrollbar extends React.Component {
   getThumbStyle() {
     const {maxScroll, height, scroll} = this.props
     const display = maxScroll > 0 ? 'hidden' : 'visible'
-    const thumbHeight = Math.max(17, height * (height / maxScroll)) || 0
+    const thumbHeight = Math.max(17, height * (height / (maxScroll + height))) || 0
     const top = (height - thumbHeight) * (scroll / maxScroll) || 0
     console.log({top, height, thumbHeight, scroll, maxScroll})
     return {display, height: thumbHeight, top}
