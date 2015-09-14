@@ -95,9 +95,9 @@ export default class Dropdown extends React.Component {
           style={{paddingLeft: 8, paddingRight: 8, display: 'flex'}}
           onClick={this.handleClickHead}>
 
-          <span style={{flex: 1}}>
+          <Label style={{flex: 1}}>
             {label}
-          </span>
+          </Label>
           <Icon
             style={{marginLeft: 4}}
             icon={open ? 'chevron-up' : 'chevron-down'}/>

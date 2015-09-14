@@ -16,7 +16,7 @@ var demos = [
   {code: `<Button label="button" icon="github"/>`, docClass: Matter.Button},
   {code: `<Button icon="github"/>`, docClass: Matter.Button},
   {code: `<Panel/>`, docClass: Matter.Panel},
-  {code: `<Dropdown options={['foo', 'bar', 'qux']} label='Dropdown'/>`, docClass: Matter.Panel},
+  {code: `<Dropdown options={['foo', 'bar', 'Loooooooooooooooooooooooooooooooong label', 'qux']} label='Dropdown loooooooooooooooooooooooooooooooong' style={{width: 200}}/>`, docClass: Matter.Dropdown},
   {code: `<ItemGroup>
   <Button
     icon='github'

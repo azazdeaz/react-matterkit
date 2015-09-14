@@ -4,7 +4,9 @@ export default function (theme, mod) {
 
   return {
     mixins: ['font'],
-
     lineHeight: `${config.lineHeight}px`,
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   }
 }
