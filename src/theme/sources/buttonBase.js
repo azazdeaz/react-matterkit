@@ -6,9 +6,10 @@ export default function () {
     borderStyle: 'solid',
     borderWidth: '1px',
     borderColor: 'rgba(26,29,33,.32)',
-    boxShadow: 'inset 0 1px rgba(26,29,33,.75)',
+    boxShadow: 'inset 0 1px rgba(255,255,255,.01)',
 
     ':hover': {
+      boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
       backgroundColor: '#3b424a',
     },
     ':active': {

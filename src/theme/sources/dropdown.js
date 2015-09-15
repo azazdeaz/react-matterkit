@@ -6,8 +6,8 @@ export default function (theme, mod) {
     mixins: ['font', 'roundedCorners'],
 
     display: 'inline-block',
-    height: config.lineHeight,
-    lineHeight: `${config.lineHeight}px`,
+    height: config.lineHeight - 2,
+    lineHeight: `${config.lineHeight - 2}px`,
     backgroundColor: '#363c43',
     boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
     borderStyle: 'solid',
@@ -17,8 +17,8 @@ export default function (theme, mod) {
     overflow: 'hidden',
     boxSizing: 'border-box',
     marginTop: 1,
-    marginBottom: 0,
-    marginLeft: 1,
+    marginLeft: 0,
+    marginBottom: 1,
     marginRight: 0,
 
     ':hover': {

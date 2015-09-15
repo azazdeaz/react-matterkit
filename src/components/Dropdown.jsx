@@ -8,6 +8,7 @@ import ClickAway from '../utils/ClickAway'
 
 import Icon from './Icon'
 import ListItem from './ListItem'
+import Label from './Label'
 
 @Radium
 @pureRender

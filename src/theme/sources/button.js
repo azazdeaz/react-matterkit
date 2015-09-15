@@ -5,8 +5,8 @@ export default function (theme, mod) {
   return {
     mixins: ['buttonBase', 'roundedCorners', 'font'],
 
-    height: config.lineHeight,
-    lineHeight: `${config.lineHeight}px`,
+    height: config.lineHeight - 2,
+    lineHeight: `${config.lineHeight - 2}px`,
     boxSizing: 'border-box',
     display: 'inline-block',
     textAlign: 'center',
