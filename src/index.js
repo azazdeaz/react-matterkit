@@ -3,6 +3,9 @@ module.exports = global.Matter = {
   createTheme: require('./theme/createTheme'),
   defaultTheme: require('./theme/defaultTheme'),
 
+  ClickAway: require('./utils/ClickAway'),
+  ContextMenu: require('./utils/ContextMenu'),
+
   // Accordion: require('./components/accordion/Accordion'),
   // AccordionTab: require('./components/accordion/AccordionTab'),
   Button: require('./components/Button'),
