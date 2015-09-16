@@ -1,5 +1,5 @@
 var React = require('react')
-var Playground = require('component-playground')
+var Playground = require('@azazdeaz/component-playground')
 var marked = require('marked')
 var scope = require('../../scope')
 

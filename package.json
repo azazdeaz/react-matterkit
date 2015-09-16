@@ -15,8 +15,8 @@
     "tinycolor2": "^1.1.2"
   },
   "devDependencies": {
+    "@azazdeaz/component-playground": "^0.1.2",
     "babel-loader": "^5.3.2",
-    "component-playground": "0.0.13",
     "eslint": "^1.0.0",
     "eslint-plugin-babel": "^1.1.0",
     "eslint-plugin-react": "^3.1.0",
