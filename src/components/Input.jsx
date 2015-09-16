@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import _isFinite from 'lodash/lang/isFinite'
 import Icon from './Icon'
 import List from './List'
@@ -40,6 +40,7 @@ const dragOptions = {
 @MatterBasics
 export default class Input extends React.Component {
   static propTypes = {
+    value: PropTypes.oneOf(PropTypes.number, PropTypes.string),
   }
 
   static defaultProps = {
@@ -61,7 +62,6 @@ export default class Input extends React.Component {
     super(props)
 
     this.state = {
-      value: undefined,
       error: false,
     }
   }
@@ -188,35 +188,34 @@ export default class Input extends React.Component {
   }
 
   renderHints() {
-    var {value, lastlySelectedHint, focus} = this.state
+    const {hints} = this.props
+    const {inputValue, lastlySelectedHint, focus} = this.state
 
-    if (!focus || value === lastlySelectedHint || !value || !this.props.hints) {
+    if (!focus || inputValue === lastlySelectedHint || !inputValue || !hints) {
       return null
     }
 
-    var hints = fuzzy.filter(value, this.props.hints, {
-      pre: '<strong>',
-      post: '</strong>',
-    })
+    const selectedHints = fuzzy.filter(inputValue, hints, {
+        pre: '<strong>',
+        post: '</strong>',
+      })
+      .slice(0, 12)
+      .map(hint => {
+        return {
+          label: <span dangerouslySetInnerHTML={{__html: hint.string}}/>,
+          onClick: (e) => {
+            var value = hint.original
+            this.setState({lastlySelectedHint: value})
+            this.editValue(value)
+          },
+        }
+      })
 
-    hints.splice(12)
-
-    hints = hints.map(hint => {
-      return {
-        label: <span dangerouslySetInnerHTML={{__html: hint.string}}/>,
-        onClick: () => {
-
-          var value = hint.original
-          this.setState({lastlySelectedHint: value})
-          this.editValue(value)
-        },
-      }
-    })
-
-    if (hints.length === 0) {
+    if (selectedHints.length === 0) {
       return null
     }
-    return <List items={hints} style={{
+
+    return <List items={selectedHints} style={{
       position: 'absolute',
       zIndex: 1,
       top: '100%',

@@ -8,6 +8,7 @@ label: String`
 var demos = [
   {code: `<Label label="i'm da label!"/>`, docClass: Matter.Label},
   {code: `<Input value={32} addonLabel='px' min={0} type='number'/>`, docClass: Matter.Input},
+  {code: `<Input type='string' hints={fakeNames}/>`, docClass: Matter.Input},
   {code: `<Toggle value={false}/>`, docClass: Matter.Toggle},
   {code: `<Icon icon='github'/>`, docClass: Matter.Icon},
   {code: `<Checkbox value={false}/>`, docClass: Matter.Checkbox},
@@ -60,7 +61,16 @@ var demos = [
 </Tabs>`, docClass: Matter.Tabs},
   {code: `<Scrollable style={{width: 200, height: 300}}>
   <List items={fakeNames.map(label => ({label}))}/>
-</Scrollable>`, docClass: Matter.Scrollable}
+</Scrollable>`, docClass: Matter.Scrollable},
+
+  {code: `
+<ContextMenu items={[
+  {label: 'one'},
+  {label: 'two'},
+  {label: 'three'},
+]}>
+  <Button label='I have a context menu!'/>
+</ContextMenu>`, docClass: Matter.ContextMenu}
 ]
 
 module.exports = React.createClass({
