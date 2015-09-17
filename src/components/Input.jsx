@@ -52,10 +52,11 @@ export default class Input extends React.Component {
     type: 'text',
     min: undefined,
     max: undefined,
-    hints: undefined,
-    maxVisibleHints: 12,
     prepareExportValue: undefined,
     formatValue: undefined,
+
+    hints: undefined,
+    maxVisibleHints: 12,
   }
 
   constructor(props) {
@@ -177,6 +178,7 @@ export default class Input extends React.Component {
       inputValue: this.state.formattedValue,
       focus: true
     })
+    this.showDropdown()
   }
 
   handleBlur = () => {
@@ -185,17 +187,41 @@ export default class Input extends React.Component {
     this.setState({
       focus: false
     })
+    this.hideDropdown()
+  }
+
+  forceShowDropdown() {
+    this.setState({
+      forceShowDropdown: true,
+      showDropdown: true
+    })
+  }
+
+  showDropdown() {
+    this.setState({
+      showDropdown: true
+    })
+  }
+
+  hideDropdown() {
+    this.setState({
+      forceShowDropdown: false,
+      showDropdown: false
+    })
   }
 
   renderHints() {
     const {hints} = this.props
-    const {inputValue, lastlySelectedHint, focus} = this.state
+    const {inputValue, lastlySelectedHint, forceShowDropdown} = this.state
 
-    if (!focus || inputValue === lastlySelectedHint || !inputValue || !hints) {
+    if (
+      !forceShowDropdown &&
+      (inputValue === lastlySelectedHint || !inputValue || !hints)
+    ) {
       return null
     }
 
-    const selectedHints = fuzzy.filter(inputValue, hints, {
+    const selectedHints = fuzzy.filter(inputValue || '', hints, {
         pre: '<strong>',
         post: '</strong>',
       })
@@ -205,8 +231,12 @@ export default class Input extends React.Component {
           label: <span dangerouslySetInnerHTML={{__html: hint.string}}/>,
           onClick: (e) => {
             var value = hint.original
-            this.setState({lastlySelectedHint: value})
+            this.setState({
+              inputValue: value,
+              lastlySelectedHint: value
+            })
             this.editValue(value)
+            this.hideDropdown()
           },
         }
       })
@@ -215,13 +245,55 @@ export default class Input extends React.Component {
       return null
     }
 
-    return <List items={selectedHints} style={{
-      position: 'absolute',
-      zIndex: 1,
-      top: '100%',
-      left: 0,
-      width: '100%',
-    }}/>
+    return <List items={selectedHints}/>
+  }
+
+  renderDropdown() {
+    if (!this.state.showDropdown) {
+      return null
+    }
+
+    const {type} = this.props
+    const content = type === 'string'
+      ? this.renderHints()
+      : type === 'color'
+      ? this.renderColorCircle()
+      : null
+
+    if (!content) {
+      return null
+    }
+
+    return <Panel
+      style = {{
+        position: 'absolute',
+        zIndex: 1000,
+        top: '100%',
+        left: 0,
+        width: '100%',
+      }}
+      onMouseDown = {e => {
+        e.preventDefault()
+        e.stopPropagation()
+      }}>
+      {content}
+    </Panel>
+  }
+
+  renderAddon() {
+    const {mod, addonIcon, addonLabel, addonBackground, addonOnClick} =
+      this.props
+
+    return <Addon
+      mod = {mod}
+      icon = {addonIcon}
+      label = {addonLabel}
+      background = {addonBackground}
+      onClick = {
+        addonOnClick === 'show-dropdown'
+          ? () => this.forceShowDropdown()
+          : addonOnClick
+      }/>
   }
 
   render() {
@@ -246,15 +318,8 @@ export default class Input extends React.Component {
         onBlur = {this.handleBlur}
         onChange = {this.handleChange}
         disabled = {disabled}/>
-
-      <Addon
-        mod = {this.props.mod}
-        icon = {this.props.addonIcon}
-        label = {this.props.addonLabel}
-        background = {this.props.addonBackground}
-        onClick = {this.props.addonOnClick}/>
-
-      {this.renderHints()}
+      {this.renderAddon()}
+      {this.renderDropdown()}
     </div>
   }
 }

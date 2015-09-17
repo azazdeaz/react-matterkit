@@ -1,6 +1,7 @@
 import React from 'react'
 import getTheme from '../theme/getTheme'
 import forOwn from 'lodash/object/forOwn'
+import pick from 'lodash/object/pick'
 
 export default function (Component) {
   Component.contextTypes = {
@@ -8,10 +9,18 @@ export default function (Component) {
   }
 
   Component.prototype.getBasics = function () {
-    return {
-      id: this.props.id,
-      className: this.props.className,
-    }
+    return pick(
+      this.props,
+      'id',
+      'className',
+      'onClick',
+      'onMouseEnter',
+      'onMouseLeave',
+      'onMouseOver',
+      'onMouseOut',
+      'onMouseDown',
+      'onMouseUp',
+    )
   }
 
   Component.prototype.getStyle = function (name, mod, style) {
