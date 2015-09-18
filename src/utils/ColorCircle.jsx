@@ -1,23 +1,25 @@
 import React from 'react'
-// import tinycolor from 'tinycolor2'
 import pureRender from 'pure-render-decorator'
 import Dragger from '../custom-drag'
+const PI = Math.PI
+const PI2 = PI * 2
 
 function radDiff(a, b) {
-  var {PI} = Math
-  var diff = b - a
+  const {PI} = Math
+  let diff = b - a
   diff = ((diff + PI) % PI*2) - PI
   return diff
 }
 
 function setHue(monitor, component) {
-  var {x, y} = monitor.getClientOffset()
-  var {centerX, centerY} = monitor.getData()
+  let {x, y} = monitor.getClientOffset()
+  const {centerX, centerY} = monitor.getData()
   x -= centerX
   y -= centerY
-  var rad = Math.atan2(y, x)
-
-  component.setState({h: -rad})
+  let rad = Math.atan2(y, x)
+  rad = rad < 0 ? -rad : PI2 - rad
+  const h = rad / PI2
+  component.setState({h})
 }
 
 function setSaturationLight(props, monitor, component) {
@@ -27,7 +29,7 @@ function setSaturationLight(props, monitor, component) {
   x -= centerX
   y -= centerY
   const dist = Math.sqrt(x*x + y*y)
-  const baseRad = -h
+  const baseRad = -h * PI2
   const mouseRad = Math.atan2(y, x)
   const diffRad = mouseRad - baseRad//radDiff(baseRad, mouseRad)
   x = dist * Math.cos(diffRad)
@@ -49,17 +51,17 @@ function setSaturationLight(props, monitor, component) {
 
 const customDragOptions = {
   onDown(props, monitor, component) {
-    var {radius, width} = props
-    var clientOffset = monitor.getClientOffset()
-    var sourceClientOffset = monitor.getSourceClientOffset()
-    var left = clientOffset.x - sourceClientOffset.x
-    var top = clientOffset.y - sourceClientOffset.y
-    var centerX = left + radius
-    var centerY = top + radius
-    var x = clientOffset.x - centerX
-    var y = clientOffset.y - centerY
-    var distanceFromCenter = Math.sqrt(x**2 + y**2)
-    var edit
+    const {radius, width} = props
+    const clientOffset = monitor.getClientOffset()
+    const sourceClientOffset = monitor.getSourceClientOffset()
+    const left = clientOffset.x - sourceClientOffset.x
+    const top = clientOffset.y - sourceClientOffset.y
+    const centerX = left + radius
+    const centerY = top + radius
+    const x = clientOffset.x - centerX
+    const y = clientOffset.y - centerY
+    const distanceFromCenter = Math.sqrt(x**2 + y**2)
+    let edit
 
     if (distanceFromCenter < radius) {
       edit = distanceFromCenter > radius - width ? 'h' : 'sv'
@@ -69,6 +71,8 @@ const customDragOptions = {
       //bail dragging
       return false
     }
+
+    component.setState({focus: true})
 
     monitor.setData({
       edit,
@@ -94,15 +98,32 @@ const customDragOptions = {
     else {
       setSaturationLight(props, monitor, component)
     }
+  },
+
+  onUp(props, monitor, component) {
+    component.setState({
+      h: props.h,
+      s: props.s,
+      l: props.l,
+      focus: false
+    })
   }
 }
 
 @Dragger(customDragOptions)
 @pureRender
 export default class ColorCircle extends React.Component {
+  static propsTypes = {
+    radius: PropsTypes.number,
+    width: PropsTypes.number,
+    h: PropsTypes.number,
+    s: PropsTypes.number,
+    l: PropsTypes.number,
+    onChange: PropsTypes.func,
+  }
 
   static defaultProps = {
-    radius: 234,
+    radius: 134,
     width: 32,
     h: 0,
     s: 0.5,
@@ -126,11 +147,13 @@ export default class ColorCircle extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      h: nextProps.h,
-      s: nextProps.s,
-      l: nextProps.l,
-    })
+    if (!this.state.focus) {
+      this.setState({
+        h: nextProps.h,
+        s: nextProps.s,
+        l: nextProps.l,
+      })
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -179,8 +202,7 @@ export default class ColorCircle extends React.Component {
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,
-      PI2 = Math.PI * 2,
-      step = PI2 / (2 * r1 * Math.PI)
+      step = PI2 / (2 * r1 * PI)
 
     canvas.width = r1 * 2
     canvas.height = r1 * 2
@@ -188,10 +210,10 @@ export default class ColorCircle extends React.Component {
     ctx.translate(r1, r1)
     ctx.lineWidth = 2
 
-    for (var rad = 0; rad < PI2; rad += step) {
+    for (let rad = 0; rad < PI2; rad += step) {
 
-      var v = rad / PI2,
-        color = 'rgb(' + getR(v) + ',' + getG(v) + ',' + getB(v) + ')'
+      const v = rad / PI2
+      const color = 'rgb(' + getR(v) + ',' + getG(v) + ',' + getB(v) + ')'
 
       ctx.beginPath()
       ctx.strokeStyle = color
@@ -202,59 +224,57 @@ export default class ColorCircle extends React.Component {
   }
 
   renderTri() {
-    var canvas = React.findDOMNode(this.refs.tri),
-      ctx = canvas.getContext('2d'),
-      r0 = this.props.radius - this.props.width,
-      r1 = this.props.radius,
-      {h} = this.state
+    const canvas = React.findDOMNode(this.refs.tri)
+    const ctx = canvas.getContext('2d')
+    const r0 = this.props.radius - this.props.width
+    const r1 = this.props.radius
+    const {h} = this.state
 
     canvas.width = r1 * 2
     canvas.height = r1 * 2
     ctx.translate(r1, r1)
-    ctx.moveTo(Math.cos(Math.PI * -2 / 3) * r0, Math.sin(Math.PI * -2 / 3) * r0)
+    ctx.moveTo(Math.cos(-PI2 / 3) * r0, Math.sin(-PI2 / 3) * r0)
     ctx.lineTo(Math.cos(0) * r0, Math.sin(0) * r0)
-    ctx.lineTo(Math.cos(Math.PI * 2 / 3) * r0, Math.sin(Math.PI * 2 / 3) * r0)
+    ctx.lineTo(Math.cos(PI2 / 3) * r0, Math.sin(PI2 / 3) * r0)
     ctx.closePath()
-    ctx.fillStyle = `hsl(${h / Math.PI * 180},100%,50%)`
+    ctx.fillStyle = `hsl(${h*360},100%,50%)`
     ctx.fill()
   }
 
   renderShadow() {
     const canvas =  React.findDOMNode(this.refs.shadow)
     const ctx = canvas.getContext('2d')
-    const {radius} = this.props
-    const r0 = this.props.radius - this.props.width
-    const r1 = this.props.radius
-    const {h} = this.state
+    const {radius, width} = this.props
+    const innerRadius = radius - width
     const a = {
-      x: Math.cos(Math.PI * -2 / 3) * r0,
-      y: Math.sin(Math.PI * -2 / 3) * r0
+      x: Math.cos(-PI2 / 3) * innerRadius,
+      y: Math.sin(-PI2 / 3) * innerRadius
     }
     const b = {
-      x: Math.cos(0) * r0,
-      y: Math.sin(0) * r0
+      x: Math.cos(0) * innerRadius,
+      y: Math.sin(0) * innerRadius
     }
     const c = {
-      x: Math.cos(Math.PI * 2 / 3) * r0,
-      y: Math.sin(Math.PI * 2 / 3) * r0
+      x: Math.cos(PI2 / 3) * innerRadius,
+      y: Math.sin(PI2 / 3) * innerRadius
     }
-    const height = c.y - a.y
-    const width = b.x - a.x
+    const triangleHeight = c.y - a.y
+    const triangleWidth = b.x - a.x
 
     canvas.width = radius * 2
     canvas.height = radius * 2
     ctx.translate(radius + a.x, radius + a.y)
-    for (let i = 0; i < width; i += 1) {
-      const pos = i / width
+    for (let i = 0; i < triangleWidth; i += 1) {
+      const pos = i / triangleWidth
       const alpha = 1 - pos
-      const gap = (height * pos) / 2
-      const grd = ctx.createLinearGradient(0, gap, 0, height - gap)
+      const gap = (triangleHeight * pos) / 2
+      const grd = ctx.createLinearGradient(0, gap, 0, triangleHeight - gap)
       grd.addColorStop(0, `rgba(255, 255, 255, ${alpha})`)
       grd.addColorStop(1, `rgba(0, 0, 0, ${alpha})`)
 
       ctx.beginPath()
       ctx.moveTo(i - 0.5, gap)
-      ctx.lineTo(i - 0.5, height - gap + 0.23)
+      ctx.lineTo(i - 0.5, triangleHeight - gap + 0.23)
       ctx.strokeStyle = grd
       ctx.stroke()
       ctx.closePath()
@@ -264,9 +284,9 @@ export default class ColorCircle extends React.Component {
   renderControlls() {
     const {radius, width} = this.props
     const {h, s, l} = this.state
-    const rad = -h
+    const rad = (-h * PI2)
     const innerRadius = radius - width
-    const smallAltitude = Math.sin(Math.PI/6) * innerRadius
+    const smallAltitude = Math.sin(PI/6) * innerRadius
     const edge = Math.sqrt(innerRadius**2 - smallAltitude**2) * 2
     const altitude = innerRadius + smallAltitude
     let cx = (altitude * s) - smallAltitude
@@ -289,19 +309,20 @@ export default class ColorCircle extends React.Component {
         fill = 'none'
         stroke = '#fff'
         strokeWidth = {2}/>
-      {/*<line //TODO make this optional
+      <line
         x1 = {radius + Math.cos(rad) * innerRadius}
         y1 = {radius + Math.sin(rad) * innerRadius}
         x2 = {radius + Math.cos(rad) * radius}
         y2 = {radius + Math.sin(rad) * radius}
         stroke = '#fff'
-        strokeWidth = {2}/>*/}
+        strokeWidth = {2}/>
     </svg>
   }
 
   renderTriangle() {
     const {radius} = this.props
-    const rotate = `rotate(${-this.state.h / Math.PI * 180}deg)`
+    const {h} = this.state
+    const rotate = `rotate(${-h * 360}deg)`
 
     return <div style =   {{
         position: 'absolute',
@@ -316,9 +337,9 @@ export default class ColorCircle extends React.Component {
   }
 
   render() {
-    const {draggerRef} = this.props
+    const {draggerRef, style} = this.props
 
-    return <div ref={draggerRef} style={this.props.style}>
+    return <div ref={draggerRef} style={style}>
       <canvas ref='range'/>
       {this.renderTriangle()}
       {this.renderControlls()}
