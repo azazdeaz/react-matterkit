@@ -6,16 +6,27 @@ export default class ContextMenu extends React.Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
     items: PropTypes.arrayOf(PropTypes.object),
+    triggerEvent: PropTypes.string,
+    renderContent: PropTypes.func,
+  }
+
+  static defaultProps = {
+    triggerEvent: 'contextmenu',
+    renderContent: props => <Panel><List items={props.items}/></Panel>
   }
 
   componentDidMount() {
     const node = React.findDOMNode(this)
-    node.addEventListener('contextmenu', this.handleContextMenu)
+    const {triggerEvent} = this.props
+
+    node.addEventListener(triggerEvent, this.handleContextMenu)
+    this.dispose = () => {
+      node.removeEventListener(triggerEvent, this.handleContextMenu)
+    }
   }
 
   componentWillUnmount() {
-    const node = React.findDOMNode(this)
-    node.removeEventListener('contextmenu', this.handleContextMenu)
+    this.dispose()
   }
 
   handleContextMenu = (e) => {
@@ -51,9 +62,9 @@ export default class ContextMenu extends React.Component {
   }
 
   renderContextMenu() {
-    const {items} = this.props
+    const {renderContent} = this.props
     return <ClickAway onClickAway={this.handleClickAway}>
-      <List items={items}/>
+      {renderContent(this.props)}
     </ClickAway>
   }
 
