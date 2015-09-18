@@ -10,6 +10,7 @@ var demos = [
   {code: `<Input value={32} addonLabel='px' min={0} type='number'/>`, docClass: Matter.Input},
   {code: `<Input type='string' hints={fakeNames}/>`, docClass: Matter.Input},
   {code: `<Input type='string' hints={fakeNames} addonIcon='chevron-down' addonOnClick='show-dropdown'/>`, docClass: Matter.Input},
+  {code: `<Input type='color'/>`, docClass: Matter.Input},
   {code: `<Toggle value={false}/>`, docClass: Matter.Toggle},
   {code: `<Icon icon='github'/>`, docClass: Matter.Icon},
   {code: `<Checkbox value={false}/>`, docClass: Matter.Checkbox},

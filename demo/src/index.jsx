@@ -95,9 +95,9 @@ var routes = (
   </Route>
 )
 
-
-Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.querySelector('#react-mount'))
-})
-// import ColorCircle from '../../src/utils/ColorCircle'
-// React.render(<div><ColorCircle onChange={c=>console.log(c)}/></div>, document.querySelector('#react-mount'))
+//
+// Router.run(routes, function (Handler) {
+//   React.render(<Handler/>, document.querySelector('#react-mount'))
+// })
+import ColorCircle from '../../src/utils/ColorCircle'
+React.render(<div><ColorCircle onChange={c=>console.log(c)}/></div>, document.querySelector('#react-mount'))

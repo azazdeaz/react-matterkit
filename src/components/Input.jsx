@@ -6,7 +6,9 @@ import customDrag from '../custom-drag'
 import fuzzy from 'fuzzy'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
+import tinycolor from 'tinycolor2'
 import MatterBasics from '../utils/MatterBasics'
+import ColorCircle from '../utils/ColorCircle'
 
 const dragOptions = {
   onDown: (props, monitor, component) => {
@@ -40,7 +42,8 @@ const dragOptions = {
 @MatterBasics
 export default class Input extends React.Component {
   static propTypes = {
-    value: PropTypes.oneOf(PropTypes.number, PropTypes.string),
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    type: PropTypes.oneOf(['string', 'number', 'color']),
   }
 
   static defaultProps = {
@@ -120,7 +123,7 @@ export default class Input extends React.Component {
     if (props.type === 'number') {
       value = this.formatNumber(value)
     }
-    else if (props.type === 'text') {
+    else if (props.type === 'string') {
       value += ''
     }
 
@@ -162,8 +165,12 @@ export default class Input extends React.Component {
   }
 
   validate(value) {
-    if (typeof this.props.validate === 'function') {
+    const {validate, type} = this.props
+    if (typeof validate === 'function') {
       this.setState({error: !this.props.validate(value)})
+    }
+    else if (type === 'color') {
+      this.setState({error: !tinycolor(value).isValid()})
     }
   }
 
@@ -187,7 +194,7 @@ export default class Input extends React.Component {
     this.setState({
       focus: false
     })
-    this.hideDropdown()
+    // this.hideDropdown()
   }
 
   forceShowDropdown() {
@@ -248,6 +255,34 @@ export default class Input extends React.Component {
     return <List items={selectedHints}/>
   }
 
+  renderColorCircle() {
+    const handleChange = hsl => {
+      hsl = {...hsl, h: 360 * hsl.h}
+      const color = tinycolor(this.state.inputValue)
+      const format = color.getFormat()
+      const alpha = color.getAlpha()
+      const value = tinycolor(hsl).setAlpha(alpha).toString(format)
+      this.setState({
+        inputValue: value
+      })
+      this.editValue(value)
+    }
+
+    const inputColor = tinycolor(this.state.inputValue)
+    const hsl = inputColor.isValid()
+      ? inputColor.toHsl()
+      : {h: 0, s: 0.5, l: 0.5}
+    const radius = 234
+
+    return <ColorCircle
+      h = {hsl.h / 360}
+      s = {hsl.s}
+      l = {hsl.l}
+      radius = {radius}
+      width = {radius * 0.16}
+      onChange = {handleChange}/>
+  }
+
   renderDropdown() {
     if (!this.state.showDropdown) {
       return null
@@ -298,11 +333,11 @@ export default class Input extends React.Component {
 
   render() {
     var {mod, style, pattern, placeholder, disabled, dragRef} = this.props
-    var {focus, inputValue, prettifiedValue} = this.state
+    var {focus, inputValue, prettifiedValue, error} = this.state
     var draggable = this.isDraggable()
 
     return <div
-      style = {this.getStyle('input', mod, style)}
+      style = {this.getStyle('input', {error, ...mod}, style)}
       onMouseDown = {this.handleMouseDown}>
 
       <input
