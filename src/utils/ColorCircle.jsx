@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import pureRender from 'pure-render-decorator'
 import Dragger from '../custom-drag'
 const PI = Math.PI
@@ -114,12 +114,12 @@ const customDragOptions = {
 @pureRender
 export default class ColorCircle extends React.Component {
   static propsTypes = {
-    radius: PropsTypes.number,
-    width: PropsTypes.number,
-    h: PropsTypes.number,
-    s: PropsTypes.number,
-    l: PropsTypes.number,
-    onChange: PropsTypes.func,
+    radius: PropTypes.number,
+    width: PropTypes.number,
+    h: PropTypes.number,
+    s: PropTypes.number,
+    l: PropTypes.number,
+    onChange: PropTypes.func,
   }
 
   static defaultProps = {

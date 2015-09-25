@@ -11,7 +11,7 @@ import MatterBasics from '../utils/MatterBasics'
 export default class Button extends React.Component {
   static propTypes = {
     label: PropTypes.string,
-    icon: Icon.propTypes,
+    icon: PropTypes.shape(Icon.propTypes),
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
     mod: PropTypes.shape({
