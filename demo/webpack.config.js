@@ -12,6 +12,7 @@ module.exports = {
     packageMains: ['main'],
     extensions: ['', '.js', '.jsx'],
     alias: {
+      'react': path.join(__dirname, '../node_modules/react'),
       'react-matterkit': path.join(__dirname, '../src/index.js'),
     }
   },

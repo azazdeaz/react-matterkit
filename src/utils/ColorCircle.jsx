@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import pureRender from 'pure-render-decorator'
-import Dragger from '../custom-drag'
+import Dragger from 'custom-drag'
 const PI = Math.PI
 const PI2 = PI * 2
 

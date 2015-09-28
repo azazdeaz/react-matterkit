@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import CustomDrag from '../../custom-drag'
+import CustomDrag from 'custom-drag'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../../utils/MatterBasics'
