@@ -2,7 +2,8 @@ import React, {PropTypes} from 'react'
 import _isFinite from 'lodash/lang/isFinite'
 import Icon from './Icon'
 import List from './List'
-import customDrag from '../custom-drag'
+import Panel from './Panel'
+import customDrag from 'custom-drag'
 import fuzzy from 'fuzzy'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
@@ -52,7 +53,7 @@ export default class Input extends React.Component {
     precision: 12,
     dragSpeed: 1,
     value: '',
-    type: 'text',
+    type: 'string',
     min: undefined,
     max: undefined,
     prepareExportValue: undefined,
@@ -174,6 +175,14 @@ export default class Input extends React.Component {
     }
   }
 
+  handleInputRef = (component) => {
+    this.inputNode = React.findDOMNode(component)
+  }
+
+  triggerBlur = () => {
+    this.inputNode.blur()
+  }
+
   handleChange = (e) => {
     this.setState({
       inputValue: e.target.value
@@ -194,7 +203,7 @@ export default class Input extends React.Component {
     this.setState({
       focus: false
     })
-    // this.hideDropdown()
+    this.hideDropdown()
   }
 
   forceShowDropdown() {
@@ -241,8 +250,8 @@ export default class Input extends React.Component {
             this.setState({
               inputValue: value,
               lastlySelectedHint: value
-            })
-            this.editValue(value)
+            }, this.triggerBlur)
+            // this.editValue(value)
             this.hideDropdown()
           },
         }
@@ -341,7 +350,7 @@ export default class Input extends React.Component {
       onMouseDown = {this.handleMouseDown}>
 
       <input
-        ref = {dragRef}
+        ref = {dragRef(this.handleInputRef)}
         {...this.getBasics()}
         style = {this.getStyle('inputField', {draggable, ...mod})}
         palceholder = {placeholder}
