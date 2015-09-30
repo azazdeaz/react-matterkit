@@ -11,7 +11,10 @@ import MatterBasics from '../utils/MatterBasics'
 export default class Button extends React.Component {
   static propTypes = {
     label: PropTypes.string,
-    icon: PropTypes.shape(Icon.propTypes),
+    icon: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape(Icon.propTypes)
+    ]),
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
     mod: PropTypes.shape({
@@ -39,7 +42,7 @@ export default class Button extends React.Component {
   render() {
     var {mod, style, icon, onClick, label, disabled} = this.props
 
-    mod = {disabled, ...mod}
+    mod = {...mod, disabled, onlyIcon: icon && !label}
 
     if (typeof icon === 'string') {
       icon = {icon}
@@ -52,8 +55,8 @@ export default class Button extends React.Component {
 
     return <div
       {...this.getBasics()}
-      style={this.getStyle('button', mod, style)}
-      onClick={onClick}>
+      style = {this.getStyle('button', mod, style)}
+      onClick = {onClick}>
 
       {icon}
       {label}

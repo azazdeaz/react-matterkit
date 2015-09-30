@@ -17,6 +17,10 @@ export default function (theme, mod) {
     marginRight: 3,
     paddingLeft: 8,
     paddingRight: 8,
+    onlyIcon: {
+      paddingLeft: 2,
+      paddingRight: 2,
+    },
     ':hover': {
       color: '#e2e7eb',
     },

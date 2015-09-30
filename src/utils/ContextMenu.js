@@ -1,6 +1,7 @@
 import React, {PropTypes} from 'react'
 import ClickAway from './ClickAway'
 import List from '../components/List'
+import Panel from '../components/Panel'
 
 export default class ContextMenu extends React.Component {
   static propTypes = {
@@ -40,7 +41,7 @@ export default class ContextMenu extends React.Component {
     }
   }
 
-  handleClickAway() {
+  handleClickAway = () => {
     this.hide()
   }
 
@@ -55,10 +56,11 @@ export default class ContextMenu extends React.Component {
 
   hide() {
     React.unmountComponentAtNode(this.mountNode)
-    const {parentNode} = this.mountNode
+    const parentNode = this.mountNode && this.mountNode.parentNode
     if (parentNode) {
       parentNode.removeChild(this.mountNode)
     }
+    this.mountNode = undefined
   }
 
   renderContextMenu() {
