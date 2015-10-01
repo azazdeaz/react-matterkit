@@ -3,6 +3,7 @@ import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../../utils/MatterBasics'
 import Scrollbar from './Scrollbar'
+import toArray from 'lodash/lang/toArray'
 
 @Radium
 @pureRender
@@ -48,12 +49,14 @@ export default class Scrollable extends React.Component {
 
   setSizes = () => {
     const containerNode = React.findDOMNode(this)
-    const contentNode = containerNode.firstChild
     const containerBr = containerNode.getBoundingClientRect()
-    const contentBr = contentNode.getBoundingClientRect()
+    const childNodes = toArray(containerNode.children)
+    const getHeight = node => node.getBoundingClientRect().height
+    const contentHeight = Math.max(...childNodes.map(getHeight))
+
     this.setState({
       containerHeight: containerBr.height,
-      contentHeight: contentBr.height,
+      contentHeight
     })
   }
 
@@ -75,7 +78,14 @@ export default class Scrollable extends React.Component {
     return <div
       {...this.getBasics(verticalScroll)}
       onWheel = {this.handleWheel}
-      style = {{...style, overflow: 'hidden', position: 'relative'}}>
+      style = {{
+        ...style,
+        overflow: 'hidden',
+        position: 'relative',
+        //the basic is stretch for display:flex but it's needs the children
+        // in they original size
+        alignItems: 'flex-start'
+      }}>
 
       {this.renderChildren(-verticalScroll)}
       {maxVerticalScroll > 0 && <Scrollbar
