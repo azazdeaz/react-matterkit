@@ -8,7 +8,6 @@ import MatterBasics from '../utils/MatterBasics'
 @Radium
 @MatterBasics
 export default class List extends React.Component {
-
   constructor(props) {
     super(props)
   }
@@ -18,11 +17,9 @@ export default class List extends React.Component {
     var children
 
     if (items) {
-
       children = items.map((item, idx) => {
-
         if (typeof(item) === 'string') {
-            item = {label: item}
+          item = {label: item}
         }
 
         return <ListItem
@@ -32,7 +29,6 @@ export default class List extends React.Component {
     }
     else {
       children = React.Children.map(this.props.children, (child, idx) => {
-
         if (has(child.props, 'key')) {
           return child
         }
