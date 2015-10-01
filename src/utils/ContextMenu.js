@@ -13,7 +13,25 @@ export default class ContextMenu extends React.Component {
 
   static defaultProps = {
     triggerEvent: 'contextmenu',
-    renderContent: props => <Panel><List items={props.items}/></Panel>
+    renderContent: (props, hide) => {
+      const items = (props.items || []).map(item => {
+        const originalClickHandler = item.onClick
+        if (typeof item === 'string') {
+          item = {label: item}
+        }
+        return {
+          ...item,
+          onClick() {
+            if (originalClickHandler) {
+              originalClickHandler()
+            }
+            hide()
+          }
+        }
+      })
+
+      return <Panel><List items={items}/></Panel>
+    }
   }
 
   componentDidMount() {
@@ -66,7 +84,7 @@ export default class ContextMenu extends React.Component {
   renderContextMenu() {
     const {renderContent} = this.props
     return <ClickAway onClickAway={this.handleClickAway}>
-      {renderContent(this.props)}
+      {renderContent(this.props, () => this.hide())}
     </ClickAway>
   }
 
