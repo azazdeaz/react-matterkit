@@ -7,18 +7,24 @@ var ClickAway = React.createClass({
   },
 
   componentDidMount: function() {
+    this.__mountTimeStamp = Date.now()
     this.__handleClickAway = function (e) {
-      var node = React.findDOMNode(this)
-      if (!node.contains(e.target) && this.props.onClickAway) {
-        this.props.onClickAway()
+//prevent to catch the same initialiser mouse event when it reaches the document
+      if (this.__mountTimeStamp < e.timeStamp) {
+        var node = React.findDOMNode(this)
+        if (!node.contains(e.target) && this.props.onClickAway) {
+          this.props.onClickAway()
+        }
       }
     }.bind(this)
 
     document.addEventListener('click', this.__handleClickAway)
+    document.addEventListener('contextmenu', this.__handleClickAway)
   },
 
   componentWillUnmount: function() {
     document.removeEventListener('click', this.__handleClickAway)
+    document.removeEventListener('contextmenu', this.__handleClickAway)
   },
 
   render: function() {
