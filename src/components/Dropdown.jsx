@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import find from 'lodash/collection/find'
 import assign from 'lodash/object/assign'
 import Radium from 'radium'
@@ -15,11 +15,19 @@ import Label from './Label'
 @MatterBasics
 export default class Dropdown extends React.Component {
   static propTypes = {
-
+    options: PropsTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.any,
+      })
+    ])),
+    renderContent: PropsTypes.func
   }
 
   static defaultProps = {
     options: [],
+    renderContent: this.renderContent
   }
 
   constructor(props) {
@@ -40,37 +48,33 @@ export default class Dropdown extends React.Component {
     }
   }
 
-  renderItems() {
+  renderItems({options, onChange}) {
+    return options.map((option, idx) => {
 
-    if (this.state.open) {
+      if (typeof option === 'string') {
+        option = {label: option, value: option}
+      }
 
-      return this.props.options.map((option, idx) => {
+      return <ListItem
+        key={idx}
+        label={option.label}
+        value={option.value}
+        onClick={() => {
+          if (onChange) {
+            onChange(option.value)
+          }
 
-        if (typeof option === 'string') {
-          option = {label: option, value: option}
-        }
+          if (option.onClick) {
+            option.onClick(option.value)
+          }
 
-        return <ListItem
-          key={idx}
-          label={option.label}
-          value={option.value}
-          onClick={() => {
-            if (this.props.onChange) {
-              this.props.onChange(option.value)
-            }
-
-            if (option.onClick) {
-              option.onClick(option.value)
-            }
-
-            this.setState({open: false})
-          }}/>
-      })
-    }
+          this.setState({open: false})
+        }}/>
+    })
   }
 
   render() {
-    var {mod, style, value, label, options} = this.props
+    var {mod, style, value, label, options, onChange} = this.props
     var {open} = this.state
     var {lineHeight} = this.getStyle('config')
 
@@ -104,7 +108,7 @@ export default class Dropdown extends React.Component {
             icon={open ? 'chevron-up' : 'chevron-down'}/>
         </div>
 
-        {this.renderItems()}
+        {open && renderContent({options, onChange})}
       </div>
     </ClickAway>
   }
