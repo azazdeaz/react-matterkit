@@ -15,14 +15,14 @@ import Label from './Label'
 @MatterBasics
 export default class Dropdown extends React.Component {
   static propTypes = {
-    options: PropsTypes.arrayOf(PropTypes.oneOfType([
+    options: PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.shape({
         label: PropTypes.string.isRequired,
         value: PropTypes.any,
       })
     ])),
-    renderContent: PropsTypes.func
+    renderContent: PropTypes.func
   }
 
   static defaultProps = {
