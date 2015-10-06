@@ -14,7 +14,7 @@ var demos = [
   {code: `<Toggle value={false}/>`, docClass: Matter.Toggle},
   {code: `<Icon icon='github'/>`, docClass: Matter.Icon},
   {code: `<Checkbox value={false}/>`, docClass: Matter.Checkbox},
-  {code: `<Button label="button"/>`, docClass: Matter.Button},
+  {code: `<Button label="button" tooltip="i'm a tooltip"/>`, docClass: Matter.Button},
   {code: `<Button label="button" mod={{kind: 'colored'}}/>`, docClass: Matter.Button},
   {code: `<Button label="button" icon="github"/>`, docClass: Matter.Button},
   {code: `<Button icon="github"/>`, docClass: Matter.Button},
@@ -72,7 +72,10 @@ var demos = [
   {label: 'three'},
 ]}>
   <Button label='I have a context menu!'/>
-</ContextMenu>`, docClass: Matter.ContextMenu}
+</ContextMenu>`, docClass: Matter.ContextMenu},
+{code: `<Tooltip content='Now you know!'>
+  <Label label="I have a tooltip!"/>
+</Tooltip>`, docClass: Matter.Label},
 ]
 
 module.exports = React.createClass({

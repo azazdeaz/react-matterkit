@@ -8,6 +8,6 @@ for f in $files
 do
     [[ $f =~ $regex ]]
     name="${BASH_REMATCH[1]}"
-    echo "export { default as ${name} } from './${f}';" >> $target
+    echo "export { default as ${name} } from './${f}'" >> $target
 done
 echo "done"

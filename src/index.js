@@ -27,5 +27,6 @@ module.exports = global.Matter = {
   Toggle: require('./components/Toggle'),
   Toolbar: require('./components/Toolbar'),
   ToolbarGroup: require('./components/ToolbarGroup'),
-  // Tooltip: require('./components/Tooltip'),
+  Tooltip: require('./components/Tooltip'),
+  TooltipHOC: require('./components/TooltipHOC'),
 }

@@ -4,7 +4,9 @@ import Icon from './Icon'
 import Radium from 'radium'
 import pureRender from 'pure-render-decorator'
 import MatterBasics from '../utils/MatterBasics'
+import TooltipHOC from './TooltipHOC'
 
+@TooltipHOC
 @Radium
 @pureRender
 @MatterBasics
