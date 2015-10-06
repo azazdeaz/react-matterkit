@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import ClickAway from './ClickAway'
 import List from '../components/List'
 import Panel from '../components/Panel'
+import flyer from './flyer'
 
 export default class ContextMenu extends React.Component {
   static propTypes = {
@@ -64,21 +65,19 @@ export default class ContextMenu extends React.Component {
   }
 
   show(x, y) {
-    this.mountNode = document.createElement('div')
-    this.mountNode.style.position = 'fixed'
-    this.mountNode.style.left = `${x}px`
-    this.mountNode.style.top   = `${y}px`
-    document.body.appendChild(this.mountNode)
-    React.render(this.renderContextMenu(), this.mountNode)
+    this.hide()
+    this.disposeLast = flyer({
+      x,
+      y,
+      renderElement: () => this.renderContextMenu()
+    })
   }
 
   hide() {
-    React.unmountComponentAtNode(this.mountNode)
-    const parentNode = this.mountNode && this.mountNode.parentNode
-    if (parentNode) {
-      parentNode.removeChild(this.mountNode)
+    if (this.disposeLast) {
+      this.disposeLast()
+      this.disposeLast = undefined
     }
-    this.mountNode = undefined
   }
 
   renderContextMenu() {
