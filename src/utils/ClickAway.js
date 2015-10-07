@@ -18,12 +18,12 @@ var ClickAway = React.createClass({
       }
     }.bind(this)
 
-    document.addEventListener('click', this.__handleClickAway)
+    document.addEventListener('mousedown', this.__handleClickAway)
     document.addEventListener('contextmenu', this.__handleClickAway)
   },
 
   componentWillUnmount: function() {
-    document.removeEventListener('click', this.__handleClickAway)
+    document.removeEventListener('mousedown', this.__handleClickAway)
     document.removeEventListener('contextmenu', this.__handleClickAway)
   },
 
