@@ -10,7 +10,6 @@ import toArray from 'lodash/lang/toArray'
 @MatterBasics
 export default class Scrollable extends React.Component {
   static propTypes = {
-    // children: React.PropTypes.element.isRequired,
     verticalScroll: React.PropTypes.number,
     onChangeVerticalScroll: React.PropTypes.func,
   }

@@ -2,8 +2,7 @@ var React = require('react')
 var Template = require('./utils/Template.jsx')
 var Matter = require('react-matterkit')
 
-var description = `
-label: String`
+var description = `label: String`
 
 var demos = [
   {code: `<Label label="i'm da label!"/>`, docClass: Matter.Label},
@@ -19,7 +18,14 @@ var demos = [
   {code: `<Button label="button" icon="github"/>`, docClass: Matter.Button},
   {code: `<Button icon="github"/>`, docClass: Matter.Button},
   {code: `<Panel/>`, docClass: Matter.Panel},
-  {code: `<Dropdown options={['foo', 'bar', 'Loooooooooooooooooooooooooooooooong label', 'qux']} label='Dropdown loooooooooooooooooooooooooooooooong' style={{width: 200}}/>`, docClass: Matter.Dropdown},
+  {code: `<Dropdown
+    options = {['foo', 'bar', 'qux']}
+    label = 'Dropdown'
+    style = {{width: 200}}/>`, docClass: Matter.Dropdown},
+  {code: `<Dropdown
+    options = {['foo', 'bar', 'Loooooooooooooooooooooooooooooooong label', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux', 'qux']}
+    label = 'Dropdown loooooooooooooooooooooooooooooooong'
+    style = {{width: 200}}/>`, docClass: Matter.Dropdown},
   {code: `<ItemGroup>
   <Button
     icon='github'

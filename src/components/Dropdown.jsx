@@ -9,6 +9,36 @@ import ClickAway from '../utils/ClickAway'
 import Icon from './Icon'
 import ListItem from './ListItem'
 import Label from './Label'
+import Scrollable from './scrollable/Scrollable'
+
+function renderItems({options, onChange}) {
+  return <Scrollable>
+    <div>
+      {options.map((option, idx) => {
+
+        if (typeof option === 'string') {
+          option = {label: option, value: option}
+        }
+
+        return <ListItem
+          key={idx}
+          label={option.label}
+          value={option.value}
+          onClick={() => {
+            if (onChange) {
+              onChange(option.value)
+            }
+
+            if (option.onClick) {
+              option.onClick(option.value)
+            }
+
+            this.setState({open: false})
+          }}/>
+      })}
+    </div>
+  </Scrollable>
+}
 
 @Radium
 @pureRender
@@ -27,7 +57,7 @@ export default class Dropdown extends React.Component {
 
   static defaultProps = {
     options: [],
-    renderContent: this.renderContent
+    renderContent: renderItems
   }
 
   constructor(props) {
@@ -48,33 +78,8 @@ export default class Dropdown extends React.Component {
     }
   }
 
-  renderItems({options, onChange}) {
-    return options.map((option, idx) => {
-
-      if (typeof option === 'string') {
-        option = {label: option, value: option}
-      }
-
-      return <ListItem
-        key={idx}
-        label={option.label}
-        value={option.value}
-        onClick={() => {
-          if (onChange) {
-            onChange(option.value)
-          }
-
-          if (option.onClick) {
-            option.onClick(option.value)
-          }
-
-          this.setState({open: false})
-        }}/>
-    })
-  }
-
   render() {
-    var {mod, style, value, label, options, onChange} = this.props
+    var {mod, style, value, label, options, onChange, renderContent} = this.props
     var {open} = this.state
     var {lineHeight} = this.getStyle('config')
 
@@ -94,7 +99,7 @@ export default class Dropdown extends React.Component {
     return <ClickAway onClickAway={this.handleClickAway}>
       <div
         {...this.getBasics()}
-        style={this.getStyle('dropdown', mod, style)}>
+        style={this.getStyle('dropdown', mod, {maxHeight: 246, ...style})}>
 
         <div
           style={{paddingLeft: 8, paddingRight: 8, display: 'flex'}}

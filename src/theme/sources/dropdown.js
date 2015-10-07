@@ -5,8 +5,10 @@ export default function (theme, mod) {
   return {
     mixins: ['font', 'roundedCorners'],
 
-    display: 'inline-block',
+    display: 'flex',
+    flexDirection: 'column',
     height: config.lineHeight - 2,
+    boxSizing: 'content-box',
     lineHeight: `${config.lineHeight - 2}px`,
     backgroundColor: '#363c43',
     boxShadow: 'inset 0 1px rgba(255,255,255,.02)',
@@ -15,7 +17,6 @@ export default function (theme, mod) {
     borderColor: 'rgba(26,29,33,.75)',
     backgroundImage: 'linear-gradient(to top, rgba(255,255,255,0), rgba(255,255,255,.05))',
     overflow: 'hidden',
-    boxSizing: 'border-box',
     marginTop: 1,
     marginLeft: 0,
     marginBottom: 1,

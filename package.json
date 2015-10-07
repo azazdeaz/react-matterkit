@@ -4,7 +4,7 @@
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
-    "custom-drag": "0.0.1",
+    "custom-drag": "0.0.2",
     "fuzzy": "^0.1.0",
     "invariant": "^2.1.0",
     "lodash": "^3.6.0",
