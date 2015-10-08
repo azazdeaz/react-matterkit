@@ -206,6 +206,12 @@ export default class Input extends React.Component {
     this.hideDropdown()
   }
 
+  handleKeyPress = (e) => {
+    if (e.which === 13) {
+      this.triggerBlur()
+    }
+  }
+
   forceShowDropdown() {
     this.setState({
       forceShowDropdown: true,
@@ -361,6 +367,7 @@ export default class Input extends React.Component {
         onFocus = {this.handleFocus}
         onBlur = {this.handleBlur}
         onChange = {this.handleChange}
+        onKeyPress = {this.handleKeyPress}
         disabled = {disabled}/>
       {this.renderAddon()}
       {this.renderDropdown()}
