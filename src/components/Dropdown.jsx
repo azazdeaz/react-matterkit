@@ -100,6 +100,7 @@ export default class Dropdown extends React.Component {
 
     return <ClickAway onClickAway={this.handleClickAway}>
       <div
+        title = {label}
         {...this.getBasics()}
         style={this.getStyle('dropdown', mod, {maxHeight: 246, ...style})}>
 

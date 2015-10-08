@@ -16,9 +16,10 @@ export default class ListItem extends React.Component {
   }
 
   render() {
-    let {mod, style, selected, label, value, onClick} = this.props
+    const {mod, style, selected, label, value, onClick} = this.props
 
     return <div
+      title = {label}
       {...this.getBasics()}
       style={this.getStyle('listItem', {mod, ...selected}, style)}
       onClick={() => {
