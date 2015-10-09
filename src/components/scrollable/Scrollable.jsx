@@ -1,14 +1,15 @@
 import React, {PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../../utils/MatterBasics'
 import Scrollbar from './Scrollbar'
 import toArray from 'lodash/lang/toArray'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Scrollable extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
     verticalScroll: React.PropTypes.number,
     onChangeVerticalScroll: React.PropTypes.func,
@@ -47,7 +48,7 @@ export default class Scrollable extends React.Component {
   }
 
   setSizes = () => {
-    const containerNode = React.findDOMNode(this)
+    const containerNode = ReactDOM.findDOMNode(this)
     const containerBr = containerNode.getBoundingClientRect()
     const childNodes = toArray(containerNode.children)
     const getHeight = node => node.getBoundingClientRect().height

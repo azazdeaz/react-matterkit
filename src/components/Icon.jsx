@@ -1,12 +1,12 @@
 import React, {PropTypes} from 'react'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Icon extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
     icon: PropTypes.string,
     className: PropTypes.string,

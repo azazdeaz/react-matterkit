@@ -1,13 +1,13 @@
 import React from 'react'
 import has from 'lodash/object/has'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class ItemGroup extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   constructor(props) {
     super(props)
   }
@@ -21,7 +21,7 @@ export default class ItemGroup extends React.Component {
       var style = this.getStyle('itemGroupChild', {last}, child.props.style)
       var key = has(child.props, 'key') ? child.props.key : idx
 
-      return React.addons.cloneWithProps(child, {style, key})
+      return React.cloneElement(child, {style, key})
     })
 
     return <div style={{display: 'flex'}}>

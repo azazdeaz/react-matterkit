@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react'
-import pureRender from 'pure-render-decorator'
+import ReactDOM from 'react-dom'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import Dragger from 'custom-drag'
 const PI = Math.PI
 const PI2 = PI * 2
@@ -111,8 +112,8 @@ const customDragOptions = {
 }
 
 @Dragger(customDragOptions)
-@pureRender
 export default class ColorCircle extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propsTypes = {
     radius: PropTypes.number,
     width: PropTypes.number,
@@ -198,7 +199,7 @@ export default class ColorCircle extends React.Component {
     var getG = getChannel.bind(null, [0, 0, 0, 1, 1, 1, 0])
     var getB = getChannel.bind(null, [0, 1, 1, 1, 0, 0, 0])
 
-    var canvas = React.findDOMNode(this.refs.range),
+    var canvas = ReactDOM.findDOMNode(this.refs.range),
       ctx = canvas.getContext('2d'),
       r0 = this.props.radius - this.props.width,
       r1 = this.props.radius,
@@ -224,7 +225,7 @@ export default class ColorCircle extends React.Component {
   }
 
   renderTri() {
-    const canvas = React.findDOMNode(this.refs.tri)
+    const canvas = ReactDOM.findDOMNode(this.refs.tri)
     const ctx = canvas.getContext('2d')
     const r0 = this.props.radius - this.props.width
     const r1 = this.props.radius
@@ -242,7 +243,7 @@ export default class ColorCircle extends React.Component {
   }
 
   renderShadow() {
-    const canvas =  React.findDOMNode(this.refs.shadow)
+    const canvas =  ReactDOM.findDOMNode(this.refs.shadow)
     const ctx = canvas.getContext('2d')
     const {radius, width} = this.props
     const innerRadius = radius - width

@@ -2,7 +2,7 @@ import React from 'react'
 import ListItem from './ListItem'
 import has from 'lodash/object/has'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
@@ -33,7 +33,7 @@ export default class List extends React.Component {
           return child
         }
         else {
-          return React.addons.cloneWithProps(child, {key: idx})
+          return React.cloneElement(child, {key: idx})
         }
       })
     }

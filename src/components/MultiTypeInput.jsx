@@ -1,12 +1,11 @@
 import React from 'react'
 import Input from './Input'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 import findIndex from 'lodash/array/findIndex'
 
 @Radium
-// @pureRender
 @MatterBasics
 export default class MultiTypeInput extends React.Component {
   static propTypes = {

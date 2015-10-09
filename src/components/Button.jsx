@@ -2,15 +2,15 @@ import React, {PropTypes} from 'react'
 import assign from 'lodash/object/assign'
 import Icon from './Icon'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 import TooltipHOC from './TooltipHOC'
 
 @TooltipHOC
 @Radium
-@pureRender
 @MatterBasics
 export default class Button extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
     label: PropTypes.string,
     icon: PropTypes.oneOfType([

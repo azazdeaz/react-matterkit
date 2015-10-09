@@ -1,12 +1,12 @@
 import React from 'react'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Label extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   constructor(props) {
     super(props)
   }

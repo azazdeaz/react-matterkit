@@ -1,15 +1,14 @@
 import React from 'react'
 import Icon from '../Icon'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../../utils/MatterBasics'
 import assign from 'lodash/object/assign'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class TabLabel extends React.Component {
-
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
   }
 
