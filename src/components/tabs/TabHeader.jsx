@@ -1,13 +1,13 @@
 import React from 'react'
 import TabLabel from './TabLabel'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class TabHeader extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
 
   static propTypes = {
   }

@@ -4,13 +4,13 @@ import Label from '../Label'
 import Toolbar from '../Toolbar'
 import ToolbarGroup from '../ToolbarGroup'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class AccordionTab extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
 
   constructor(props) {
     super(props)

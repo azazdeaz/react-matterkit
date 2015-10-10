@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import find from 'lodash/collection/find'
 import assign from 'lodash/object/assign'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 import ClickAway from '../utils/ClickAway'
 
@@ -11,7 +11,7 @@ import ListItem from './ListItem'
 import Label from './Label'
 import Scrollable from './scrollable/Scrollable'
 
-function renderItems({options, onChange}) {
+function renderItems({options, onChange, collapse}) {
   return <Scrollable>
     <div>
       {options.map((option, idx) => {
@@ -33,7 +33,7 @@ function renderItems({options, onChange}) {
               option.onClick(option.value)
             }
 
-            this.setState({open: false})
+            collapse()
           }}/>
       })}
     </div>
@@ -41,9 +41,9 @@ function renderItems({options, onChange}) {
 }
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Dropdown extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
     options: PropTypes.arrayOf(PropTypes.oneOfType([
       PropTypes.string,
@@ -79,16 +79,18 @@ export default class Dropdown extends React.Component {
   }
 
   render() {
-    var {mod, style, value, label, options, onChange, renderContent} = this.props
-    var {open} = this.state
-    var {lineHeight} = this.getStyle('config')
+    const {value, options, onChange, renderContent} = this.props
+    let {label, mod, style} = this.props
+    const {open} = this.state
+    const {lineHeight} = this.getStyle('config')
+    const collapse = () => this.setState({open: false})
 
     if (label === undefined) {
-      let currentOption = find(options, 'value', value)
+      let currentOption = find(options, {value})
       label = currentOption && currentOption.label
     }
 
-    mod = assign({open}, mod)
+    mod = {...mod, open}
 
     if (open) {
       style = assign({
@@ -98,6 +100,7 @@ export default class Dropdown extends React.Component {
 
     return <ClickAway onClickAway={this.handleClickAway}>
       <div
+        title = {label}
         {...this.getBasics()}
         style={this.getStyle('dropdown', mod, {maxHeight: 246, ...style})}>
 
@@ -113,7 +116,7 @@ export default class Dropdown extends React.Component {
             icon={open ? 'chevron-up' : 'chevron-down'}/>
         </div>
 
-        {open && renderContent({options, onChange})}
+        {open && renderContent({options, onChange, collapse})}
       </div>
     </ClickAway>
   }

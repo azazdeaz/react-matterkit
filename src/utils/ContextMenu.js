@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import ClickAway from './ClickAway'
 import List from '../components/List'
 import Panel from '../components/Panel'
@@ -7,7 +8,10 @@ import flyer from './flyer'
 export default class ContextMenu extends React.Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    items: PropTypes.arrayOf(PropTypes.object),
+    items: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.object)
+    ]),
     triggerEvent: PropTypes.string,
     renderContent: PropTypes.func,
   }
@@ -22,7 +26,7 @@ export default class ContextMenu extends React.Component {
         }
         return {
           ...item,
-          onClick() {
+          onClick() {z
             if (originalClickHandler) {
               originalClickHandler()
             }
@@ -36,7 +40,7 @@ export default class ContextMenu extends React.Component {
   }
 
   componentDidMount() {
-    const node = React.findDOMNode(this)
+    const node = ReactDOM.findDOMNode(this)
     const {triggerEvent} = this.props
 
     node.addEventListener(triggerEvent, this.handleContextMenu)

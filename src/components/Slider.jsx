@@ -1,13 +1,14 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import CustomDrag from '../utils/CustomDrag'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Slider extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
 
   static propTypes = {
   }
@@ -26,10 +27,10 @@ export default class Slider extends React.Component {
 
   componentDidMount() {
     new CustomDrag({
-      deTarget: React.findDOMNode(this.refs.handle),
+      deTarget: ReactDOM.findDOMNode(this.refs.handle),
       onDown: () => ({
         value: this.props.value,
-        width: React.findDOMNode(this).offsetWidth,
+        width: ReactDOM.findDOMNode(this).offsetWidth,
       }),
       onDrag: md => {
 
@@ -47,7 +48,7 @@ export default class Slider extends React.Component {
   }
   render() {
 
-    var width = this.isMounted() ? React.findDOMNode(this).offsetWidth : 0,
+    var width = this.isMounted() ? ReactDOM.findDOMNode(this).offsetWidth : 0,
       range = this.props.max - this.props.min,
       progress = (this.props.value - this.props.min) / range,
       percent = Math.max(0, Math.min(1, progress))*100 + '%'

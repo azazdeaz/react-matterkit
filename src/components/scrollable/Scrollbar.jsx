@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import CustomDrag from 'custom-drag'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../../utils/MatterBasics'
 
 const dragOptions = {

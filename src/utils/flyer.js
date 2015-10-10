@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 
 export default function flyer({x, y, renderElement, wrapperStyle}) {
   const mountNode = document.createElement('div')
@@ -25,7 +26,7 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
 }
 
 // show = () => {
-//   var domNode = React.findDOMNode(this)
+//   var domNode = ReactDOM.findDOMNode(this)
 //   var parent = domNode.parentNode
 //   var br = parent.getBoundingClientRect()
 //
@@ -44,7 +45,7 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
 // }
 //
 // componentDidMount() {
-//   this.targetNode = React.findDOMNode(this).parentNode
+//   this.targetNode = ReactDOM.findDOMNode(this).parentNode
 //   this.targetNode.addEventListener('mouseover', this.showDelayed)
 //   this.targetNode.addEventListener('mouseleave', this.hide)
 // }
@@ -69,7 +70,7 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
 //   full.right = full.width
 //   full.bottom = full.height
 //   var target = this.targetNode.getBoundingClientRect()
-//   var content = React.findDOMNode(this).getBoundingClientRect()
+//   var content = ReactDOM.findDOMNode(this).getBoundingClientRect()
 //   var position = {}
 //
 //   changePlaceIfNeeded()

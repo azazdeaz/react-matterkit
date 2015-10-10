@@ -1,6 +1,6 @@
 {
   "name": "react-matterkit",
-  "version": "0.0.37",
+  "version": "0.0.39",
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
@@ -10,7 +10,9 @@
     "lodash": "^3.6.0",
     "object-assign": "^3.0.0",
     "pure-render-decorator": "^0.1.0",
-    "radium": "^0.13.0",
+    "radium": "^0.14.1",
+    "react-dom": "^0.14.0",
+    "react-pure-render": "^1.0.2",
     "react-theme": "^0.1.2",
     "shallow-equals": "0.0.0",
     "tinycolor2": "^1.1.2"
@@ -26,13 +28,14 @@
     "gulp-gh-pages": "^0.5.2",
     "gulp-util": "^3.0.5",
     "marked": "^0.3.5",
-    "react": "^0.13.3",
-    "react-router": "^0.13.3",
+    "material-ui": "^0.12.3",
+    "react": "^0.14.0",
+    "react-router": "^1.0.0-rc3",
     "webpack": "^1.9.10",
     "webpack-dev-server": "^1.9.0"
   },
   "scripts": {
-    "lib": "babel ./src --out-dir lib  --source-maps",
+    "lib": "rm -rf lib && babel ./src --out-dir lib  --source-maps",
     "lib-watch": "npm run lib && babel ./src --out-dir lib  --source-maps --source-maps --watch"
   },
   "repository": {

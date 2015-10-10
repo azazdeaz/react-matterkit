@@ -3,16 +3,16 @@ import tinycolor from 'tinycolor2'
 import Input from './Input'
 import ColorCircle from '../utils/ColorCircle'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 var FORMATS = ['prgb', 'hex6', 'hex3', 'hex8', 'name', 'hsl', 'hsv']
 //TODO customiseable formats
 
 @Radium
-@pureRender
 @MatterBasics
 export default class ColorInput extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
 
   static propTypes = {
   }

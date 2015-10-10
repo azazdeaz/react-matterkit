@@ -1,4 +1,5 @@
 var React = require('react')
+var ReactDOM = require('react-dom')
 
 var ClickAway = React.createClass({
   propTypes: {
@@ -11,7 +12,7 @@ var ClickAway = React.createClass({
     this.__handleClickAway = function (e) {
 //prevent to catch the same initialiser mouse event when it reaches the document
       if (this.__mountTimeStamp < e.timeStamp) {
-        var node = React.findDOMNode(this)
+        var node = ReactDOM.findDOMNode(this)
         if (!node.contains(e.target) && this.props.onClickAway) {
           this.props.onClickAway()
         }

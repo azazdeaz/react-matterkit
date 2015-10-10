@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import _isFinite from 'lodash/lang/isFinite'
 import Icon from './Icon'
 import List from './List'
@@ -6,7 +7,7 @@ import Panel from './Panel'
 import customDrag from 'custom-drag'
 import fuzzy from 'fuzzy'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import tinycolor from 'tinycolor2'
 import MatterBasics from '../utils/MatterBasics'
 import ColorCircle from '../utils/ColorCircle'
@@ -29,7 +30,7 @@ const dragOptions = {
     component.editValue(value)
   },
   onClick: (ptops, monitor, component) => {
-    let node = React.findDOMNode(component).querySelector('input')
+    let node = ReactDOM.findDOMNode(component).querySelector('input')
     node.focus()
     node.select()
   }
@@ -39,9 +40,9 @@ const dragOptions = {
   dragRef: connect.getDragRef()
 }))
 @Radium
-@pureRender
 @MatterBasics
 export default class Input extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   static propTypes = {
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     type: PropTypes.oneOf(['string', 'number', 'color']),
@@ -176,7 +177,7 @@ export default class Input extends React.Component {
   }
 
   handleInputRef = (component) => {
-    this.inputNode = React.findDOMNode(component)
+    this.inputNode = ReactDOM.findDOMNode(component)
   }
 
   triggerBlur = () => {
@@ -204,6 +205,12 @@ export default class Input extends React.Component {
       focus: false
     })
     this.hideDropdown()
+  }
+
+  handleKeyPress = (e) => {
+    if (e.which === 13) {
+      this.triggerBlur()
+    }
   }
 
   forceShowDropdown() {
@@ -361,6 +368,7 @@ export default class Input extends React.Component {
         onFocus = {this.handleFocus}
         onBlur = {this.handleBlur}
         onChange = {this.handleChange}
+        onKeyPress = {this.handleKeyPress}
         disabled = {disabled}/>
       {this.renderAddon()}
       {this.renderDropdown()}
@@ -371,9 +379,9 @@ export default class Input extends React.Component {
 
 
 @Radium
-@pureRender
 @MatterBasics
 class Addon extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
   render() {
     var {label, icon, mod, onClick} = this.props
 

@@ -1,13 +1,13 @@
 import React from 'react'
 import has from 'lodash/object/has'
 import Radium from 'radium'
-import pureRender from 'pure-render-decorator'
+import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
 
 @Radium
-@pureRender
 @MatterBasics
 export default class Checkbox extends React.Component {
+  shouldComponentUpdate = shouldPureComponentUpdate
 
   static propTypes = {
     value: React.PropTypes.bool,

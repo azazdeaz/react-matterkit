@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import Radium from 'radium'
 import MatterBasics from '../utils/MatterBasics'
 import flyer from '../utils/flyer'
@@ -47,13 +48,13 @@ export default class Tooltip extends React.Component {
   }
 
   componentDidMount() {
-    const node = React.findDOMNode(this)
+    const node = ReactDOM.findDOMNode(this)
     node.addEventListener('mousemove', this.handleMouseMove)
     node.addEventListener('mouseleave', this.hide)
   }
 
   componentWillUnmount() {
-    const node = React.findDOMNode(this)
+    const node = ReactDOM.findDOMNode(this)
     node.removeEventListener('mousemove', this.handleMouseMove)
     node.removeEventListener('mouseleave', this.hide)
   }
