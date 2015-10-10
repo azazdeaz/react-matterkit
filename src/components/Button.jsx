@@ -41,8 +41,15 @@ export default class Button extends React.Component {
     }
   }
 
+  handleClick = () => {
+    const {onClick, disabled} = this.props
+    if (onClick && !disabled) {
+      onClick()
+    }
+  }
+
   render() {
-    var {mod, style, icon, onClick, label, disabled} = this.props
+    var {mod, style, icon, label, disabled} = this.props
 
     mod = {...mod, disabled, onlyIcon: icon && !label}
 
@@ -58,7 +65,7 @@ export default class Button extends React.Component {
     return <div
       {...this.getBasics()}
       style = {this.getStyle('button', mod, style)}
-      onClick = {onClick}>
+      onClick = {this.handleClick}>
 
       {icon}
       {label}

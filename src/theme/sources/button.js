@@ -1,6 +1,5 @@
 export default function (theme, mod) {
-
-  var config = theme.getStyle('config', mod)
+  const config = theme.getStyle('config', mod)
 
   return {
     mixins: ['buttonBase', 'roundedCorners', 'font'],
@@ -11,6 +10,7 @@ export default function (theme, mod) {
     display: 'inline-block',
     textAlign: 'center',
     color: '#96a6ad',
+    cursor: 'default',
     marginTop: 1,
     marginLeft: 3,
     marginBottom: 1,
