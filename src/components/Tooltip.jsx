@@ -57,6 +57,7 @@ export default class Tooltip extends React.Component {
     const node = ReactDOM.findDOMNode(this)
     node.removeEventListener('mousemove', this.handleMouseMove)
     node.removeEventListener('mouseleave', this.hide)
+    this.hide()
   }
 
   renderTooltip() {
