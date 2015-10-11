@@ -9,7 +9,7 @@ export default class ContextMenu extends React.Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
     items: PropTypes.oneOfType([
-      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
       PropTypes.arrayOf(PropTypes.object)
     ]),
     triggerEvent: PropTypes.string,
@@ -26,7 +26,7 @@ export default class ContextMenu extends React.Component {
         }
         return {
           ...item,
-          onClick() {z
+          onClick() {
             if (originalClickHandler) {
               originalClickHandler()
             }
