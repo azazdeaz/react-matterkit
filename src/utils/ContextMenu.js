@@ -8,10 +8,10 @@ import flyer from './flyer'
 export default class ContextMenu extends React.Component {
   static propTypes = {
     children: PropTypes.element.isRequired,
-    items: PropTypes.oneOfType([
-      PropTypes.arrayOf(PropTypes.string),
-      PropTypes.arrayOf(PropTypes.object)
-    ]),
+    items: PropTypes.arrayOf(PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ])),
     triggerEvent: PropTypes.string,
     renderContent: PropTypes.func,
   }
