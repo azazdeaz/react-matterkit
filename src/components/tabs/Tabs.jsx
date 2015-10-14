@@ -15,18 +15,19 @@ export default class Tabs extends React.Component {
   static defaultProps = {
     stretchLabels: true,
     defaultTabIdx: 0,
+    currentTabIdx: undefined,
   }
 
   constructor(props) {
     super(props)
 
     this.state = {
-      currTabIdx: props.defaultTabIdx,
+      currentTabIdx: props.defaultTabIdx,
     }
   }
 
-  _selectTab(idx) {
-    this.setState({currTabIdx: idx})
+  handleSelectTab(idx) {
+    this.setState({currentTabIdx: idx})
 
     if (this.props.onChangeTabIdx) {
 
@@ -35,20 +36,18 @@ export default class Tabs extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({currTabIdx: nextProps.defaultTabIdx})
+    if (nextProps.currentTabIdx !== undefined) {
+      this.setState({currentTabIdx: nextProps.currentTabIdx})
+    }
   }
 
   render() {
     var {mod, style} = this.props
-
-    var currTab
-
+    var currentTab
 
     React.Children.forEach(this.props.children, (child, idx) => {
-
-      if(this.state.currTabIdx === idx) {
-
-        currTab = child
+      if(this.state.currentTabIdx === idx) {
+        currentTab = child
       }
     })
 
@@ -57,13 +56,13 @@ export default class Tabs extends React.Component {
       style = {this.getStyle('tabBase', mod, style)}>
 
       <TabHeader
-        currTabIdx = {this.state.currTabIdx}
-        onSelectTab = {idx => this._selectTab(idx)}
+        currentTabIdx = {this.state.currentTabIdx}
+        onSelectTab = {idx => this.handleSelectTab(idx)}
         children = {this.props.children}
         stretchLabels = {this.props.stretchLabels}/>
 
       <div style={this.getStyle('tabCont', mod)}>
-        {currTab}
+        {currentTab}
       </div>
     </div>
   }
