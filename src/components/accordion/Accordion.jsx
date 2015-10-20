@@ -13,7 +13,6 @@ export default class Accordion extends React.Component {
   }
 
   onSelect(index) {
-    console.log('select tab', index)
   }
   render() {
     var {mod, style} = this.props
