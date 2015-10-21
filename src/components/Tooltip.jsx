@@ -18,7 +18,7 @@ export default class Tooltip extends React.Component {
 
   deleayedShow = () => {
     this.hide()
-    this._showSetT = setTimeout(() => this.show(), 2134)
+    this._showSetT = setTimeout(() => this.show(), 500)
   }
 
   show() {
