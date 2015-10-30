@@ -3,8 +3,8 @@ import Tooltip from './Tooltip'
 
 export default ComposedComponent => class extends Component {
   render() {
-    const {tooltip, ...otherProps} = this.props
-    if (tooltip) {
+    if (this.props.tooltip) {
+      const {tooltip, ...otherProps} = this.props
       const tooltipProps = typeof tooltip === 'string'
         ? {content: tooltip}
         : tooltip
@@ -13,6 +13,8 @@ export default ComposedComponent => class extends Component {
         <ComposedComponent {...otherProps}/>
       </Tooltip>
     }
-    return <ComposedComponent {...otherProps}/>
+    else {
+      return <ComposedComponent {...this.props}/>
+    }
   }
 };
