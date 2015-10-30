@@ -11,7 +11,7 @@
     "lodash": "^3.6.0",
     "object-assign": "^3.0.0",
     "pure-render-decorator": "^0.1.0",
-    "radium": "^0.14.1",
+    "radium": "^0.14.3",
     "react-dom": "^0.14.0",
     "react-pure-render": "^1.0.2",
     "react-theme": "^0.1.2",
