@@ -13,7 +13,17 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
   }
 
   document.body.appendChild(mountNode)
-  ReactDOM.render(renderElement(), mountNode)
+  ReactDOM.render(renderElement(), mountNode, place)
+
+  function place() {
+    const {right, bottom} = mountNode.getBoundingClientRect()
+    if (right > window.innerWidth) {
+      mountNode.style.left = `${x - (right - window.innerWidth)}px`
+    }
+    if (bottom > window.innerHeight) {
+      mountNode.style.top = `${y - (bottom - window.innerHeight)}px`
+    }
+  }
 
   return () => {
     ReactDOM.unmountComponentAtNode(mountNode)
@@ -58,7 +68,7 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
 //   this.placeContent()
 // }
 //
-// placeContent() {
+// placeContent(node) {
 //   var {place} = this.props
 //   var full = {
 //     top: 0,
