@@ -22,6 +22,7 @@ export default function (theme, mod) {
     marginLeft: 3,
     marginRight: 3,
     boxSizing: 'border-box',
+    overflow: 'hidden',
 
     ':hover': {
       color: '#e2e7eb',
