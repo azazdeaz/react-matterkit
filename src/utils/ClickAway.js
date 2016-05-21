@@ -8,7 +8,7 @@ var ClickAway = React.createClass({
   },
 
   componentDidMount: function() {
-    this.__mountTimeStamp = Date.now()
+    this.__mountTimeStamp = performance.now()
     this.__handleClickAway = function (e) {
 //prevent to catch the same initialiser mouse event when it reaches the document
       if (this.__mountTimeStamp < e.timeStamp) {
