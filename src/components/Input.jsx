@@ -91,6 +91,18 @@ export default class Input extends React.Component {
     ) {
       this.props.onChange(exportValue)
     }
+
+    if (this.props.forceFocus) {
+      this.inputNode.focus()
+    }
+
+    if (
+      this.props.onBlur
+      && prevState.focus
+      && !this.state.focus
+    ) {
+      this.props.onBlur()
+    }
   }
 
   isDraggable() {
