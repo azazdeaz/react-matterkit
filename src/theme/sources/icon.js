@@ -5,6 +5,7 @@ export default function (theme, mod) {
   return {
     lineHeight: `${config.lineHeight}px`,
     width: '12px',
-    textAlign: 'center'
+    textAlign: 'center',
+    color: '#96a6ad',
   }
 }

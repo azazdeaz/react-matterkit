@@ -3,6 +3,7 @@ import assign from 'lodash/object/assign'
 import Radium from 'radium'
 import shouldPureComponentUpdate from 'react-pure-render/function'
 import MatterBasics from '../utils/MatterBasics'
+import Icon from './Icon'
 
 @Radium
 @MatterBasics
@@ -16,7 +17,7 @@ export default class ListItem extends React.Component {
   }
 
   render() {
-    const {mod, style, selected, label, value, onClick} = this.props
+    const {mod, style, selected, label, icon, value, onClick} = this.props
 
     return <div
       title = {label}
@@ -27,6 +28,10 @@ export default class ListItem extends React.Component {
           onClick(value)
         }
       }}>
+      {icon
+        ? <Icon icon={icon} style={{marginRight: 6}}/>
+        : null
+      }
       {label}
     </div>
   }
