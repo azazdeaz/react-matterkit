@@ -21,6 +21,7 @@ const dragOptions = {
 
     monitor.setData({
       onDownValue: component.state.formattedValue,
+      onEndDragInfo: props.onStartDrag()
     })
   },
   onDrag: (props, monitor, component) => {
@@ -29,11 +30,15 @@ const dragOptions = {
     var value = onDownValue + (x * props.dragSpeed)
     component.editValue(value)
   },
-  onClick: (ptops, monitor, component) => {
+  onClick: (props, monitor, component) => {
     let node = ReactDOM.findDOMNode(component).querySelector('input')
     node.focus()
     node.select()
-  }
+  },
+  onUp(props, monitor) {
+    var {onEndDragInfo} = monitor.getData()
+    props.onEndDrag(onEndDragInfo)
+  },
 }
 
 @customDrag(dragOptions, connect => ({
@@ -62,6 +67,9 @@ export default class Input extends React.Component {
 
     hints: undefined,
     maxVisibleHints: 12,
+
+    onStartDrag: () => {},
+    onEndDrag: () => {},
   }
 
   constructor(props) {
