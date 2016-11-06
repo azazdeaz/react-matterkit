@@ -1,6 +1,6 @@
 {
   "name": "react-matterkit",
-  "version": "0.0.47",
+  "version": "0.0.48",
   "description": "React GUI component kit based on matterkit.io design and focusing on input fields.",
   "main": "./lib/index.js",
   "dependencies": {
