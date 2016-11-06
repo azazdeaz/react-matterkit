@@ -5,6 +5,7 @@ export default function flyer({x, y, renderElement, wrapperStyle}) {
   mountNode.style.position = 'fixed'
   mountNode.style.left = `${x}px`
   mountNode.style.top   = `${y}px`
+  mountNode.style.zIndex = 999999999999//TODO do something better
 
   if (wrapperStyle) {
     Object.keys(wrapperStyle).forEach(name => {
